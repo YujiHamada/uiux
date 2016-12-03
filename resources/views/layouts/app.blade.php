@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="ja">
     <head>
-        <script type="text/javascript" src = "/js/app.js"></script>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
         <link rel="stylesheet" type="text/css" href="/css/app.css">
+        <link rel="stylesheet" type="text/css" href="/css/default.css">
         <title>@yield('title')</title>
     </head>
-    <body>
-    <nav class="navbar navbar-default">
+<body>
+<nav class="navbar navbar-default">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
@@ -34,28 +36,79 @@
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<div class = "col-xs-2">
-<ul class="nav nav-pills nav-stacked">
-  <li class="nav-item">
-    <a class="nav-link active" href="#">Active</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Link</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link disabled" href="#">Disabled</a>
-  </li>
-</ul>
-</div>
+<!-- /.nav -->
 
+<div class="container-fluid">
+<!-- <div class="row"> -->
+  <div class = "col-sm-2 col-xs-12">
+    <div class="side-menu">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+      </ul>
+    </div>
+    <div class="side-menu">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">カテゴリー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">カテゴリー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">カテゴリー</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">カテゴリー</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class = "col-sm-8 col-xs-12">
+    <p>contents</p>
+  </div>
+
+  <div class="col-sm-2 col-xs-12">
+    <div class="side-menu">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">ユーザー情報</a>
+        </li>
+      </ul>
+    </div>
+    <div class="side-menu">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">Twitter</a>
+        </li>
+      </ul>
+    </div>
+    <div class="side-menu">
+      <ul class="nav nav-pills nav-stacked">
+        <li class="nav-item">
+          <a class="nav-link active" href="#">ランキング</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+<!-- </div> -->
         @section('sidebar')
         @show
 
-        <div class="container">
+        
             @yield('content')
         </div>
+        <script type="text/javascript" src = "/js/app.js"></script>
     </body>
 </html>
