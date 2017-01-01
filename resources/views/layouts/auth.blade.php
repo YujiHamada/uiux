@@ -18,7 +18,7 @@
     window.Laravel = <?php echo json_encode([
       'csrfToken' => csrf_token(),
       ]); ?>
-    </script>
+  </script>
   </head>
   <body>
     <div id="app">
@@ -73,71 +73,12 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class = "col-sm-2 col-xs-12">
-      <div class="side-menu">
-        <ul class="nav nav-pills nav-stacked">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-      <div class="side-menu">
-        <ul class="nav nav-pills nav-stacked">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class = "col-sm-8 col-xs-12">
 
       @yield('content')
-    </div>
-  </div>
-  <div class="col-sm-2 col-xs-12">
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">ユーザー情報</a>
-        </li>
-      </ul>
-    </div>
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Twitter</a>
-        </li>
-      </ul>
-    </div>
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">ランキング</a>
-        </li>
-      </ul>
     </div>
   </div>
 
   <!-- Scripts -->
   <script src="/js/app.js"></script>
-  @yield('js')
 </body>
 </html>

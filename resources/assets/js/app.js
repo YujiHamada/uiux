@@ -13,8 +13,15 @@ require('./bootstrap');
  * the application, or feel free to tweak this setup for your needs.
  */
 
+// var React = require('react');
+// var ReactDOM = require('react-dom');
+
 Vue.component('example', require('./components/Example.vue'));
 
 const app = new Vue({
     el: '#app'
 });
+
+// ReactDOM.render(
+//     <h1>Hello, world!</h1>, document.getElementById('example')
+// );

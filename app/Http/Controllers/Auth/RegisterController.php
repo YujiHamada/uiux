@@ -68,4 +68,8 @@ class RegisterController extends Controller
             'password' => bcrypt($data['password']),
         ]);
     }
+
+    // protected function guard(){
+    //    return Auth::guard('guard-name');
+    // }
 }

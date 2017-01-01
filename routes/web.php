@@ -12,5 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    return view('home/home');
 });
+
+Auth::routes();
+
+Route::get('/home/homge', 'HomeController@index');
+Route::get('/post', 'PostController@index');
+Route::post('/postConfirmation', 'PostController@postConfirmation');
+Route::post('/postCompletion', 'PostController@postCompletion');
