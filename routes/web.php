@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home/homge', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
 Route::get('/post', 'PostController@index');
 Route::post('/postConfirmation', 'PostController@postConfirmation');
 Route::post('/postCompletion', 'PostController@postCompletion');

@@ -23,9 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        echo "hoge";
-
-        exit;
-        return view('home');
+        return view('home/home');
     }
 }
