@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Input;
+
 use App\Post;
 
 class PostController extends Controller
@@ -74,5 +76,13 @@ class PostController extends Controller
         $post->save();
 
         return view('post/postCompletion');
+    }
+
+    public function viewPost(){
+        $id = Input::get('id');
+
+        $post = Post::find($id);
+
+        return view('post/viewPost', compact('post'));
     }
 }

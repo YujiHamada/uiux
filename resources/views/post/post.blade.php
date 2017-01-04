@@ -3,7 +3,7 @@
 @section('content')
 <div id="example"></div>
     
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/postConfirmation') }}" enctype="multipart/form-data">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('post/confirmation') }}" enctype="multipart/form-data">
             	{{ csrf_field() }}
             	タイトル：<input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
             	詳細：<input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}">

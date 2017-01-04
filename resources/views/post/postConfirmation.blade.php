@@ -2,12 +2,12 @@
 
 @section('content')
 <div class = "posted_image">
-	<img src="<?= $fileDirectory . $fileName ?>" alt=""　class="img-responsive">
+	<img src="/<?= $fileDirectory . $fileName ?>" alt=""　class="img-responsive">
 </div>
 <p>タイトル：<?php echo $title ?></p>
 <p>概要：<?php echo $description ?></p>
 
-<form class="form-horizontal" role="form" method="POST" action="{{ url('/postCompletion') }}" enctype="multipart/form-data">
+<form class="form-horizontal" role="form" method="POST" action="{{ url('post/completion') }}" enctype="multipart/form-data">
 	{{ csrf_field() }}
 	<input type="hidden" name="title" value="<?= $title ?>">
 	<input type="hidden" name="description" value="<?= $description ?>">

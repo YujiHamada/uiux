@@ -11,13 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home/home');
-});
+Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
 Route::get('/post', 'PostController@index');
-Route::post('/postConfirmation', 'PostController@postConfirmation');
-Route::post('/postCompletion', 'PostController@postCompletion');
+Route::post('/post/confirmation', 'PostController@postConfirmation');
+Route::post('/post/completion', 'PostController@postCompletion');
+Route::get('/post/viewPost', 'PostController@viewPost');

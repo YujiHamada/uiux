@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Post;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,16 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home/home');
+
+        // $posts = DB::table('posts')->limit(30)->get();
+
+        $posts = Post::all();
+
+        // echo "<pre>";
+        // print_r($posts);
+        // echo "</pre>";
+
+        // exit;
+        return view('home/home', compact('posts'));
     }
 }
