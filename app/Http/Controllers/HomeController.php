@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Post;
+use App\Review;
 
 class HomeController extends Controller
 {
@@ -28,13 +28,8 @@ class HomeController extends Controller
 
         // $posts = DB::table('posts')->limit(30)->get();
 
-        $posts = Post::all();
+        $reviews = Review::all();
 
-        // echo "<pre>";
-        // print_r($posts);
-        // echo "</pre>";
-
-        // exit;
-        return view('home/home', compact('posts'));
+        return view('home/home', compact('reviews'));
     }
 }

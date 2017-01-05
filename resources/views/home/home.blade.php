@@ -3,18 +3,18 @@
 @section('content')
     
             <div class="panel panel-default">
-                <div class="panel-heading"><a href="{{ url('/post') }}">UIUXレビューを投稿する</a></div>
+                <div class="panel-heading"><a href="{{ url('/review') }}">UIUXレビューを投稿する</a></div>
             </div>
 
             <div class = "timeline">
-            	<?php foreach($posts as $post): ?>
+            	<?php foreach($reviews as $review): ?>
                     <div class = "media">
-                        <a class="media-left" href="post/viewPost?id=<?php echo $post->id ?>">
-                		<img class="media-object" src="<?php echo $post['image_url'] ?>" alt="がぞう">
+                        <a class="media-left" href="review/viewReview?id=<?php echo $review->id ?>">
+                		<img class="media-object" src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}<?php echo $review->image_name ?>" alt="がぞう">
                         </a>
                 		<div class="media-body">
-                            <h4 class="media-heading"><?php echo $post->title ?></h4>
-                            <p><?php echo $post->description ?></p>
+                            <h4 class="media-heading"><?php echo $review->title ?></h4>
+                            <p><?php echo $review->description ?></p>
                         </div>
                     </div>
 	            <?php endforeach; ?>

@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 
-use App\Post;
+use App\Review;
 
-class PostController extends Controller
+class ReviewController extends Controller
 {
+    // public $temporaryImageFileDirectory = 'images/temporary/review_image/';
+    // public $imageFileDirectory = 'images/review_image/';
     /**
      * Create a new controller instance.
      *
@@ -30,11 +32,11 @@ class PostController extends Controller
     public function index(){
         
         
-        return view('post/post');
+        return view('review/review');
     }
 
     //投稿確認画面表示用
-    public function postConfirmation(Request $request){
+    public function reviewConfirmation(Request $request){
         // $path = $request->uiImage->store('images/post');
         $description = $request->input('description');
         $title = $request->input('title');
@@ -42,47 +44,48 @@ class PostController extends Controller
 
         $file = $request->file('uiImage');
 
+        //ファイル名はmd5で暗号化したものに元の拡張子をつける
         $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension(); 
         // echo "<pre>";
         // print_r(md5($file->getClientOriginalName()));
         // echo "</pre>";
 
-        $fileDirectory = 'images/temporary/post/' ;
+        // $fileDirectory = 'images/temporary/review_image/' ;
 
-        $file->move($fileDirectory, $fileName);
+        $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
 
-        $filePath = $fileDirectory . $fileName;
+        $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
-        return view('post/postConfirmation', compact('title', 'description', 'filePath', 'fileDirectory', 'fileName'));
+        return view('review/reviewConfirmation', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
     }
 
     //投稿完了画面表示用
-    public function postCompletion(Request $request){
+    public function reviewCompletion(Request $request){
         //リクエストから値の取得
         $description = $request->input('description');
         $title = $request->input('title');
         $fileName = $request->input('fileName');
-        $fileDirectory = $request->input('fileDirectory');
+        // $fileDirectory = $request->input('fileDirectory');
 
         //画像を一時フォルダから保存用フォルダに移動
-        File::move($fileDirectory . $fileName, 'images/post/' . $fileName);
+        File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
 
         //DB保存用データの作成・保存
-        $post = new Post;
-        $post->title = $title;
-        $post->description = $description;
-        $post->image_url = 'images/post/' . $fileName;
+        $review = new Review;
+        $review->title = $title;
+        $review->description = $description;
+        $review->image_name = $fileName;
 
-        $post->save();
+        $review->save();
 
-        return view('post/postCompletion');
+        return view('review/reviewCompletion');
     }
 
-    public function viewPost(){
+    public function viewReview(){
         $id = Input::get('id');
 
-        $post = Post::find($id);
+        $review = Review::find($id);
 
-        return view('post/viewPost', compact('post'));
+        return view('review/viewReview', compact('review'));
     }
 }

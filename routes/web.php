@@ -16,7 +16,7 @@ Route::get('/', 'HomeController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index');
-Route::get('/post', 'PostController@index');
-Route::post('/post/confirmation', 'PostController@postConfirmation');
-Route::post('/post/completion', 'PostController@postCompletion');
-Route::get('/post/viewPost', 'PostController@viewPost');
+Route::get('/review', 'ReviewController@index');
+Route::post('/review/confirmation', 'ReviewController@reviewConfirmation');
+Route::post('/review/completion', 'ReviewController@reviewCompletion');
+Route::get('/review/viewReview', 'ReviewController@viewReview');
