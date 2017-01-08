@@ -30,30 +30,19 @@ class ReviewController extends Controller
      */
     //投稿画面表示用
     public function index(){
-        
-        
         return view('review/review');
     }
 
     //投稿確認画面表示用
     public function reviewConfirmation(Request $request){
-        // $path = $request->uiImage->store('images/post');
         $description = $request->input('description');
         $title = $request->input('title');
-        // $imageSrc = $request->input('imageSrc');
-
         $file = $request->file('uiImage');
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
-        $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension(); 
-        // echo "<pre>";
-        // print_r(md5($file->getClientOriginalName()));
-        // echo "</pre>";
-
-        // $fileDirectory = 'images/temporary/review_image/' ;
+        $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
 
         $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-
         $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
         return view('review/reviewConfirmation', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
@@ -65,7 +54,6 @@ class ReviewController extends Controller
         $description = $request->input('description');
         $title = $request->input('title');
         $fileName = $request->input('fileName');
-        // $fileDirectory = $request->input('fileDirectory');
 
         //画像を一時フォルダから保存用フォルダに移動
         File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
@@ -75,7 +63,6 @@ class ReviewController extends Controller
         $review->title = $title;
         $review->description = $description;
         $review->image_name = $fileName;
-
         $review->save();
 
         return view('review/reviewCompletion');
@@ -83,7 +70,6 @@ class ReviewController extends Controller
 
     public function viewReview(){
         $id = Input::get('id');
-
         $review = Review::find($id);
 
         return view('review/viewReview', compact('review'));

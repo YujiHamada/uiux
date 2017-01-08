@@ -25,9 +25,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-
-        // $posts = DB::table('posts')->limit(30)->get();
-
         $reviews = Review::all();
 
         return view('home/home', compact('reviews'));
