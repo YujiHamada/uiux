@@ -27,6 +27,6 @@ class HomeController extends Controller
     {
         $reviews = Review::all();
 
-        return view('home/home', compact('reviews'));
+        return view('home.home', compact('reviews'));
     }
 }
