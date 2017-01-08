@@ -11,11 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
 
 Auth::routes();
 
-// Route::get('/home', 'HomeController@index');
+Route::get('/', 'HomeController@index');
 Route::get('/review', 'ReviewController@index');
 Route::post('/review/confirmation', 'ReviewController@reviewConfirmation');
 Route::post('/review/completion', 'ReviewController@reviewCompletion');
