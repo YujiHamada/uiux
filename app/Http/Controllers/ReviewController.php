@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Support\Facades\Auth;
 
 use App\Review;
 
@@ -42,12 +40,10 @@ class ReviewController extends Controller
     }
 
     //投稿確認画面表示用
-    public function confirm(\App\Http\Requests\StoreReviewPost $request){
+    public function confirm(Request $request){
         $description = $request->input('description');
         $title = $request->input('title');
         $file = $request->file('uiImage');
-        $url = $request->input('url');
-        $good_or_bad = $request->input('good_or_bad');
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
         $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
@@ -55,7 +51,7 @@ class ReviewController extends Controller
         $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
         $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
-        return view('review/confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName', 'url', 'good_or_bad'));
+        return view('review.confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
     }
 
     //投稿完了画面表示用
@@ -64,14 +60,6 @@ class ReviewController extends Controller
         $description = $request->input('description');
         $title = $request->input('title');
         $fileName = $request->input('fileName');
-        $url = $request->input('url');
-        $good_or_bad = $request->input('good_or_bad');
-
-        $parseUrl = parse_url($url);
-        $domain = $parseUrl['host'];
-
-        $user = Auth::user();
-        $user_id = $user->id;
 
         //画像を一時フォルダから保存用フォルダに移動
         File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
@@ -81,11 +69,6 @@ class ReviewController extends Controller
         $review->title = $title;
         $review->description = $description;
         $review->image_name = $fileName;
-        $review->url = $url;
-        $review->domain = $domain;
-        $review->good_or_bad = $good_or_bad;
-        $review->user_id = $user_id;
-
         $review->save();
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
