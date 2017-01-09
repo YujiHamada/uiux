@@ -8,6 +8,22 @@
     <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
   	詳細：
     <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}">
+    URL：
+    <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
+    @if ($errors->has('url'))
+    <span class="help-block">
+        <strong>{{ $errors->first('url') }}</strong>
+    </span>
+    @endif
+    <label class="radio-inline">
+      <input type="radio" name="good_or_bad" value="1">Good
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="good_or_bad" value="0">BAD
+    </label>
+    <label class="radio-inline">
+      <input type="radio" name="good_or_bad" value="2">SoSo...
+    </label>
     <input type="file" name="uiImage">
     <button type="submit" class="btn btn-primary">投稿</button>
   </form>
