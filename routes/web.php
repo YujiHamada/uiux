@@ -21,3 +21,6 @@ Route::get('/review/create', 'ReviewController@create');
 Route::post('/review/create', 'ReviewController@confirm');
 Route::post('/review', 'ReviewController@store');
 Route::get('/review/{review}', 'ReviewController@show');
+
+// UserController
+Route::get('/{username}', 'UserController@show');

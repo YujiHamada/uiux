@@ -22,7 +22,7 @@
 </head>
 
 <body>
-  <div id="app">
+  <div id="user">
     <nav class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
@@ -37,7 +37,7 @@
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav navbar-right">
             <form class="navbar-form navbar-left">
               <div class="form-group">
@@ -76,66 +76,32 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class = "col-sm-2 col-xs-12">
-      <div class="side-menu">
-        <ul class="nav nav-pills nav-stacked">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-        </ul>
-      </div>
-      <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-      <?php foreach($categories as $category): ?>
-        <li class="nav-item">
-          <a class="nav-link active" href="#">{{$category->name}}</a>
-        </li>
-      <?php endforeach; ?>
-      </ul>
-      </div>
-    </div>
-    <div class = "col-sm-8 col-xs-12">
-      @if (session('flash_message'))
-          <div class="flash_message" onClick="this.classList.add('hidden')">
-              {{ session('flash_message') }}
-          </div>
-      @endif
-      @yield('content')
-    </div>
-  </div>
-  <div class="col-sm-2 col-xs-12">
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">ユーザー情報</a>
-        </li>
-      </ul>
-    </div>
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">Twitter</a>
-        </li>
-      </ul>
-    </div>
-    <div class="side-menu">
-      <ul class="nav nav-pills nav-stacked">
-        <li class="nav-item">
-          <a class="nav-link active" href="#">ランキング</a>
-        </li>
-      </ul>
-    </div>
-  </div>
 
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 col-xs-12 sidebar">
+          <ul class="nav nav-sidebar">
+            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
+            <li><a href="#">Reports</a></li>
+            <li><a href="#">Analytics</a></li>
+            <li><a href="#">Export</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <li><a href="">Nav item again</a></li>
+            <li><a href="">One more nav</a></li>
+            <li><a href="">Another nav item</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-8 col-xs-12">
+          @if (session('flash_message'))
+              <div class="flash_message" onClick="this.classList.add('hidden')">
+                  {{ session('flash_message') }}
+              </div>
+          @endif
+          @yield('content')
+        </div>
+      </div>
+    </div>
   <!-- Scripts -->
   <script src="/js/app.js"></script>
   @yield('js')
