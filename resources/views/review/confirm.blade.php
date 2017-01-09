@@ -9,6 +9,7 @@
 	</style>
 @endsection
 
+
 @section('content')
 	<div class = "posted_image">
 		<img src="/{{Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY')}}{{ $fileName }}" alt=""　class="img-responsive">
