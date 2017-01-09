@@ -51,7 +51,7 @@ class ReviewController extends Controller
         $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
         $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
-        return view('review/confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
+        return view('review.confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
     }
 
     //投稿完了画面表示用
