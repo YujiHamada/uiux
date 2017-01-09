@@ -92,20 +92,13 @@
         </ul>
       </div>
       <div class="side-menu">
-        <ul class="nav nav-pills nav-stacked">
-          <li class="nav-item">
-            <a class="nav-link active" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">カテゴリー</a>
-          </li>
-        </ul>
+      <ul class="nav nav-pills nav-stacked">
+      <?php foreach($categories as $category): ?>
+        <li class="nav-item">
+          <a class="nav-link active" href="#">{{$category->name}}</a>
+        </li>
+      <?php endforeach; ?>
+      </ul>
       </div>
     </div>
     <div class = "col-sm-8 col-xs-12">
