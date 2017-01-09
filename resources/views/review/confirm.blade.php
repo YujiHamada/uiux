@@ -16,7 +16,7 @@
 	<p>タイトル：{{ $title }}</p>
 	<p>概要：{{ $description }}</p>
 
-	<form class="form-horizontal" role="form" method="POST" action="{{ url('review/completion') }}" enctype="multipart/form-data">
+	<form class="form-horizontal" role="form" method="POST" action="{{ url('review') }}" enctype="multipart/form-data">
 		{{ csrf_field() }}
 		<input type="hidden" name="title" value="{{ $title }}">
 		<input type="hidden" name="description" value="{{ $description }}">

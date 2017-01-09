@@ -1,0 +1,9 @@
+.flash_message {
+    text-align: center;
+    color: green;
+    background: Lavender;
+}
+
+.hidden {
+    display: none;
+}
