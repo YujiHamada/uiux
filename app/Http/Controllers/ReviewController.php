@@ -28,13 +28,19 @@ class ReviewController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    //投稿画面表示用
-    public function index(){
-        return view('review/review');
+    //表示用
+    public function show($reviewId){
+        $review = Review::findOrFail($reviewId);
+        return view('review.show', compact('review'));
+    }
+
+    //投稿用
+    public function create() {
+      return view('review.create');
     }
 
     //投稿確認画面表示用
-    public function reviewConfirmation(Request $request){
+    public function confirm(Request $request){
         $description = $request->input('description');
         $title = $request->input('title');
         $file = $request->file('uiImage');
@@ -45,11 +51,11 @@ class ReviewController extends Controller
         $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
         $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
-        return view('review/reviewConfirmation', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
+        return view('review/confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName'));
     }
 
     //投稿完了画面表示用
-    public function reviewCompletion(Request $request){
+    public function store(Request $request){
         //リクエストから値の取得
         $description = $request->input('description');
         $title = $request->input('title');
@@ -65,13 +71,6 @@ class ReviewController extends Controller
         $review->image_name = $fileName;
         $review->save();
 
-        return view('review/reviewCompletion');
-    }
-
-    public function viewReview(){
-        $id = Input::get('id');
-        $review = Review::find($id);
-
-        return view('review/viewReview', compact('review'));
+        return redirect('/')->with('flash_message', '投稿が完了しました');
     }
 }

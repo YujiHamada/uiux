@@ -11,7 +11,8 @@
   <title>{{ config('app.name', 'Laravel') }}</title>
 
   <!-- Styles -->
-  <link href="/css/app.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/app.css">
+  <link rel="stylesheet" href="/css/styles.css">
   @yield('css')
 
   <!-- Scripts -->
@@ -108,6 +109,11 @@
       </div>
     </div>
     <div class = "col-sm-8 col-xs-12">
+      @if (session('flash_message'))
+          <div class="flash_message" onClick="this.classList.add('hidden')">
+              {{ session('flash_message') }}
+          </div>
+      @endif
       @yield('content')
     </div>
   </div>

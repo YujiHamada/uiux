@@ -11,11 +11,13 @@
 |
 */
 
-
 Auth::routes();
 
+// HomeController
 Route::get('/', 'HomeController@index');
-Route::get('/review', 'ReviewController@index');
-Route::post('/review/confirmation', 'ReviewController@reviewConfirmation');
-Route::post('/review/completion', 'ReviewController@reviewCompletion');
-Route::get('/review/viewReview', 'ReviewController@viewReview');
+
+// ReviewController
+Route::get('/review/create', 'ReviewController@create');
+Route::post('/review/create', 'ReviewController@confirm');
+Route::post('/review', 'ReviewController@store');
+Route::get('/review/{review}', 'ReviewController@show');
