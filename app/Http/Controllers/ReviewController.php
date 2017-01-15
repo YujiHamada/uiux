@@ -11,6 +11,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Support\Facades\Auth;
 
 use App\Review;
+use App\Category;
+use App\Review_Category;
 
 class ReviewController extends Controller
 {
@@ -38,7 +40,8 @@ class ReviewController extends Controller
 
     //投稿用
     public function create() {
-      return view('review.create');
+        $categories = Category::take(10)->get();
+        return view('review.create',compact('categories'));
     }
 
     //投稿確認画面表示用
@@ -48,14 +51,14 @@ class ReviewController extends Controller
         $file = $request->file('uiImage');
         $url = $request->input('url');
         $good_or_bad = $request->input('good_or_bad');
+        $category = $request->input('category');
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
         $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
 
         $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-        $filePath = \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName;
 
-        return view('review.confirm', compact('title', 'description', 'filePath', 'imageFileDirectory', 'fileName', 'url', 'good_or_bad'));
+        return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'category'));
     }
 
     //投稿完了画面表示用
@@ -87,6 +90,14 @@ class ReviewController extends Controller
         $review->user_id = $user_id;
 
         $review->save();
+
+        $review_category = new Review_Category;
+        $review_category->review_id = $review->id;
+
+        $category = $request->input('category');
+        $review_category->category_id = $category;
+
+        $review_category->save();
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
     }
