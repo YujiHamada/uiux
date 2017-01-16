@@ -77,7 +77,6 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
     <div class="container-fluid">
       <div class="col-sm-offset-1 col-sm-10 row">
 
