@@ -24,6 +24,7 @@
 		<input type="hidden" name="fileName" value = "{{ $fileName }}">
 		<input type="hidden" name="url" value = "{{ $url }}">
 		<input type="hidden" name="good_or_bad" value = "{{ $good_or_bad }}">
+		<input type="hidden" name="category" value="{{$category}}">
 		<button type="submit" class="btn btn-primary">投稿</button>
 	</form>
 @endsection

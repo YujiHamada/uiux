@@ -15,6 +15,13 @@
         <strong>{{ $errors->first('url') }}</strong>
     </span>
     @endif
+    カテゴリー：
+    <select name="category" class="form-control">
+      <?php foreach($categories as $category): ?>
+      <option value="{{$category->id}}">{{$category->name}}</option>
+      <?php endforeach; ?>
+    </select>
+
     <label class="radio-inline">
       <input type="radio" name="good_or_bad" value="1">Good
     </label>
