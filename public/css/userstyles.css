@@ -1,0 +1,38 @@
+
+
+#user .sidebar {
+  background-color: silver;
+  border-radius: 5px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  }
+
+  #user a:focus, #user a:hover {
+    background-color: silver;
+  }
+
+  #user .profile {
+    padding: 8px;
+    background-color: skyblue;
+    width: 100%;
+    height: auto;
+  }
+
+  #user .profile .media-body{
+    vertical-align: bottom;
+  }
+
+  #user .profileStatus {
+    margin-top: 8px;
+    background-color: pink;
+  }
+
+  #user .profile img {
+    width: 64px;
+    height: 64px;
+    display: block;
+    background-color: red;
+  }
+  #user .profile row {
+    padding: 5px;
+  }
