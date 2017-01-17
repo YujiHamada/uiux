@@ -14,8 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+      // 外部キー制約の関係上、テーブル削除処理を外だしして、
+      // 先に該当テーブルを削除。
+      // テーブルの消す順序に注意。
+      $this->call(DeleteTableSeeder::class);
+
+      // 初期データ作成
+      // (テストデータ含む)
+      $this->call(UsersTableSeeder::class);
       $this->call(CategoriesTableSeeder::class);
       $this->call(ReviewsTableSeeder::class);
-      $this->call(UsersTableSeeder::class);
+      $this->call(ReviewCategoryTableSeeder::class);
+
     }
 }
