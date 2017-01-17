@@ -13,6 +13,7 @@
   <!-- Styles -->
   <link rel="stylesheet" href="/css/app.css">
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/userstyles.css">
   @yield('css')
 
   <!-- Scripts -->
@@ -76,23 +77,50 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-
     <div class="container-fluid">
-      <div class="row">
-        <div class="col-sm-4 col-xs-12 sidebar">
+      <div class="col-sm-offset-1 col-sm-10 row">
+
+        <div class="col-sm-3 col-xs-12 sidebar">
+          <div class="profile">
+            <div class="media">
+              <a class="media-left" href="#">
+                <img class="media-object img-rounded img-responsive" src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}" alt="がぞう">
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">{{ $user->name }}</h4>
+                <p>{{ $user->name }}</p>
+              </div>
+            </div>
+            <div class="profileStatus">
+              <div class="row">
+                {{-- <div class="col-sm-6 col-xs-12">
+                  <button type="button" class="btn btn-primary">Primary</button>
+                </div> --}}
+                <div class="col-sm-12 col-xs-12">
+                  <p>投稿数</p>
+                  <p>10</p>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-6 col-xs-12">
+                  <p>フォロー数</p>
+                  <p>123</p>
+                </div>
+                <div class="col-sm-6 col-xs-12">
+                  <p>フォロー数</p>
+                  <p>987</p>
+                </div>
+              </div>
+            </div>
+          </div>
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="#">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="#">Reports</a></li>
-            <li><a href="#">Analytics</a></li>
-            <li><a href="#">Export</a></li>
-          </ul>
-          <ul class="nav nav-sidebar">
-            <li><a href="">Nav item again</a></li>
-            <li><a href="">One more nav</a></li>
-            <li><a href="">Another nav item</a></li>
+            <li><a href="#">アクティビティ</a></li>
+            <li><a href="#">プロフィールを編集</a></li>
+            <li><a href="#">パスワードを設定</a></li>
+            <li><a href="#">通知</a></li>
           </ul>
         </div>
-        <div class="col-sm-8 col-xs-12">
+        <div class="col-sm-9 col-xs-12">
           @if (session('flash_message'))
               <div class="flash_message" onClick="this.classList.add('hidden')">
                   {{ session('flash_message') }}
