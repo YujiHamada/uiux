@@ -4,6 +4,9 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
+
+  // Please enter "php artisan db:seed" on the bash
+
     /**
      * Run the database seeds.
      *
@@ -11,6 +14,8 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+      $this->call(CategoriesTableSeeder::class);
+      $this->call(ReviewsTableSeeder::class);
+      $this->call(UsersTableSeeder::class);
     }
 }

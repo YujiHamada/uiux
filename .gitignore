@@ -6,4 +6,4 @@ Homestead.yaml
 .env
 /public/images/review_images/*
 /public/images/temporary/review_images/*
-
+!/public/images/review_images/myimages/*
