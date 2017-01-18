@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use App\Review;
+
 
 class ReviewsTableSeeder extends Seeder
 {
