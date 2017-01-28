@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -12,6 +14,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/app.css">
+  {{-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"> --}}
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="stylesheet" href="/css/userstyles.css">
   @yield('css')
@@ -24,7 +27,7 @@
 
 <body>
   <div id="user">
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -77,7 +80,7 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <div class="container-fluid">
+    <div class="container-fluid" style="padding:100px 0">
       <div class="col-sm-offset-1 col-sm-10 row">
 
         <div class="col-sm-3 col-xs-12 sidebar">
@@ -132,6 +135,14 @@
     </div>
   <!-- Scripts -->
   <script src="/js/app.js"></script>
+  {{-- <script
+  src="https://code.jquery.com/jquery-3.1.1.min.js"
+  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+  crossorigin="anonymous"></script>
+  <script
+  src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+  integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+  crossorigin="anonymous"></script> --}}
   @yield('js')
 </body>
 </html>

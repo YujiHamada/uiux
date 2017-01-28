@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Review;
+use Auth;
 
 
 class UserController extends Controller
@@ -18,12 +19,9 @@ class UserController extends Controller
   }
 
   public function show() {
-    $user = \Auth::user();
+    $user = Auth::user();
 
-    // TODO:
-    // ユーザに紐づくレビューだけ表示したいところだが、
-    // 一旦、全てのレビュを投稿
-    $reviews = Review::All();
+    $reviews = Review::where('user_id', $user->id)->get();
     return view('user.show', compact('user', 'reviews'));
   }
 
