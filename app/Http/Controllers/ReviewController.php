@@ -54,10 +54,10 @@ class ReviewController extends Controller
         $category = $request->input('category');
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
-        $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-
-        $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-
+        if($file){
+            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();            
+            $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
+        }
         return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'category'));
     }
 
@@ -71,13 +71,19 @@ class ReviewController extends Controller
         $good_or_bad = $request->input('good_or_bad');
 
         $parseUrl = parse_url($url);
-        $domain = $parseUrl['host'];
+        $domain = "";
+        if(isset($parseUrl['host'])){
+            $domain = $parseUrl['host'];
+        }
+        
 
         $user = Auth::user();
         $user_id = $user->id;
 
         //画像を一時フォルダから保存用フォルダに移動
-        File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
+        if($fileName){
+            File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);       
+        }
 
         //DB保存用データの作成・保存
         $review = new Review;
