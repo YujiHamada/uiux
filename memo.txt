@@ -1,3 +1,21 @@
+【コマンドライン系】
+  ◆seederクラス作成
+    php artisan make:seeder クラス名
+    (./database/seeds/を参照)
+  ◆seeder実行
+    php artisan db:seed
+    個別実行の場合は
+    php artisan db:seed --class=クラス名
+  ◆./package.jsonに記載されているパッケージのインストール
+    npm install
+  ◆./gulpfile.jsに記載されているタスクの実行
+    gulp
+  ◆migrationファイル作成
+    php artisan make:migration ファイル名(拡張子なし)
+    (./database/migrations/を参照)
+  ◆migration実行
+    php artisan migrate
+
 【sass】
   CSSの拡張言語。変数使えたり、構造化して書ける。
 

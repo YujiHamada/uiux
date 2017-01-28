@@ -12,7 +12,7 @@
 
   <!-- Styles -->
   <link rel="stylesheet" href="/css/app.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/mystyles.css">
   @yield('css')
 
   <!-- Scripts -->
@@ -58,7 +58,7 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="{{ action('UserController@show', ['username' => Auth::user()->name]) }}">
+                  <a href="{{ action('UserController@show', ['username' => Auth::user()->id]) }}">
                     マイページ
                   </a>
                 </li>
