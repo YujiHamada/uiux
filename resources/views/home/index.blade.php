@@ -12,12 +12,16 @@
 @endsection
 
 @section('content')
+  @if (session('flash_message'))
+      <div class="flash_message" onClick="this.classList.add('hidden')">
+          {{ session('flash_message') }}
+      </div>
+  @endif
   <div class="panel panel-default">
     <div class="panel-heading">
       <a href="{{ url('/review/create') }}">UIUXレビューを投稿する</a>
     </div>
   </div>
-
   <div class="timeline">
   	@foreach($reviews as $review)
       <div class="media">
