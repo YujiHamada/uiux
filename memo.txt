@@ -1,0 +1,67 @@
+【sass】
+  CSSの拡張言語。変数使えたり、構造化して書ける。
+
+【npm】
+  node.jsのパッケージ管理ツール。
+  package.jsonはcomposerにとってのcomposer.jsonみたいなやつ。
+
+【gulp】
+  Node.jsをベースとしたビルドシステムヘルパー。
+  Node.jsのパッケージ（ライブラリ）のひとつ。
+  なので、npmでインストールできる。
+
+【Elixir】
+  gulpをLaravelで使いやすくするためにラッピングしたツールがElixir。
+
+【bootstrapの利用について】
+  bootstrapは./package.jsonに書いてある通り、
+  「4.0.0-alpha.6」のバージョンで利用中。
+  npm installで./node_modules/bootstrapにインストール。
+  cssは./resources/assets/sass/app.scss内に記載されている、
+  @importにより、コンパイル対象となる。
+  jsは./resources/assets/js/app.js内に記載されている、
+  「require('./bootstrap');」によりコンパイル対象となる。
+
+【bootstrap4の便利なクラス】
+  ◆display系
+    .d-block .d-inline .d-inline-block
+  ◆色系
+    テキストカラー:
+      .text-muted .text-primary .text-success
+      .text-info .text-warning .text-danger .text-white
+    バックグラウンドカラー:
+      .bg-primary .bg-success .bg-info .bg-warning
+      .bg-danger .bg-inverse .bg-faded
+  ◆margin、padding
+    marginはmt-3、paddingはpt-3のように使用する。
+    {property}{sides}-{breakpoint}-{size}
+    2文字目が方向を意味する。
+      t - top
+      b - bottom
+      l - left
+      r - right
+      x - both left and right
+      y - both top and bottom
+    数字は大きさを表す。
+      0 - 0
+      1 - $spacer-x * .25 or $spacer-y * .25
+      2 - $spacer-x * .5 or $spacer-y * .5
+      3 - $spacer-x or $spacer-y
+      4 - $spacer-x * 1.5 or $spacer-y * 1.5
+      5 - $spacer-x * 3 or $spacer-y * 3
+      なお
+      $spacer:   1rem !default; ← デフォルトだと16px
+      $spacer-x: $spacer !default;
+      $spacer-y: $spacer !default;
+  ◆上下左右の位置関係
+    .mx-auto 水平方向で中央に位置させる
+    .align-items-start 上寄せ
+    .align-items-center 中央寄せ
+    .align-items-end 下寄せ
+
+【コーディング規約】
+  メソッド名:キャメル
+  クラス名:アッパーキャメル
+  テーブル関係（テーブル名、属性名）:スネーク
+  cssクラス名:小文字とハイフン(bootstrapに合わせるため)
+  viewファイル名:キャメル
