@@ -24,7 +24,9 @@ class StoreReviewPost extends FormRequest
     public function rules()
     {
         return [
-            // 'title' => 'required|unique:posts|max:2',
+            'title' => 'required|max:50',
+            'description' => 'required|max:300',
+            'good_or_bad' => 'required',
             'url' => 'url',
         ];
     }

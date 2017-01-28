@@ -7,7 +7,17 @@
   	タイトル：
     <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
   	詳細：
-    <input id="description" type="text" class="form-control" name="description" value="{{ old('description') }}">
+    @if ($errors->has('title'))
+    <span class="help-block">
+        <strong>{{ $errors->first('title') }}</strong>
+    </span>
+    @endif
+    <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
+    @if ($errors->has('description'))
+    <span class="help-block">
+        <strong>{{ $errors->first('description') }}</strong>
+    </span>
+    @endif
     URL：
     <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
     @if ($errors->has('url'))
@@ -31,6 +41,11 @@
     <label class="radio-inline">
       <input type="radio" name="good_or_bad" value="2">SoSo...
     </label>
+    @if ($errors->has('good_or_bad'))
+    <span class="help-block">
+        <strong>{{ $errors->first('good_or_bad') }}</strong>
+    </span>
+    @endif
     <input type="file" name="uiImage">
     <button type="submit" class="btn btn-primary">投稿</button>
   </form>
