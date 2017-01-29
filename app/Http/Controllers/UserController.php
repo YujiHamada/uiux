@@ -25,7 +25,7 @@ class UserController extends Controller
     // 引数のidが認証ユーザではない場合、
     // 引数のidのユーザを$userに格納する。
     if($name != $user->name) {
-      $user = User::where('name', $name)->get();
+      $user = User::where('name', $name)->first();
     }
 
     $reviews = Review::where('user_id', $user->id)->get();
