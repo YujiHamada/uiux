@@ -20,12 +20,13 @@ require('laravel-elixir-vue-2');
 // メソッドチェーンで記載可能。
 elixir(mix => {
     mix.sass('app.scss')
-       .webpack('app.js');
+        .sass('mystyles.scss')
+        .webpack('app.js');
 });
 
 // 「バージョニング」で検索。
 // CSSやJavaScriptファイルを更新しても、ファイル名が同じ場合、
 // ブラウザがそれらををキャッシュしたままで、更新が反映されない問題を解決する。
 elixir(function(mix) {
-    mix.version(['css/app.css', 'js/app.js']);
+    mix.version(['css/app.css', 'css/mystyles.css', 'js/app.js']);
 });
