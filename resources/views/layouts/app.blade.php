@@ -58,7 +58,7 @@
               </a>
               <ul class="dropdown-menu" role="menu">
                 <li>
-                  <a href="{{ action('UserController@show', ['username' => Auth::user()->id]) }}">
+                  <a href="{{ action('UserController@show', Auth::user()->name) }}">
                     マイページ
                   </a>
                 </li>
@@ -79,58 +79,64 @@
     @show
     <!-- ナビゲーションバー以下 -->
     <div class="container-fluid m-3">
-      <div class="row">
-        <!-- 左サイドバー -->
-        @section('leftSideBar')
-          <nav class="col-2 bg-warning">
-            <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-            </ul>
-            <ul class="nav nav-pills flex-column">
-            <?php foreach($categories as $category): ?>
-              <li class="nav-item">
-                <a class="nav-link" href="#">{{$category->name}}</a>
-              </li>
-            <?php endforeach; ?>
-            </ul>
-          </nav>
-        @show
-        <!-- 中央メインコンテンツ -->
-        <div class="col">
-          @yield('content')
+      <div class="row justify-content-center">
+        <div class="col-9">
+          <div class="row">
+            <!-- 左サイドバー -->
+            @section('leftSideBar')
+              <nav class="col-2 bg-warning">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Link</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                <?php foreach($categories as $category): ?>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">{{$category->name}}</a>
+                  </li>
+                <?php endforeach; ?>
+                </ul>
+              </nav>
+            @show
+            <!-- 中央メインコンテンツ -->
+            <div class="col">
+              @yield('content')
+            </div>
+            <!-- 右サイドバー -->
+            @section('rightSideBar')
+              <nav class="col-2 bg-info">
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">ユーザー情報</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">Twitter</a>
+                  </li>
+                </ul>
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#">ランキング</a>
+                  </li>
+                </ul>
+              </nav>
+            @show
+          </div>
         </div>
-        <!-- 右サイドバー -->
-        @section('rightSideBar')
-          <nav class="col-2 bg-info">
-            <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">ユーザー情報</a>
-              </li>
-            </ul>
-            <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">Twitter</a>
-              </li>
-            </ul>
-            <ul class="nav nav-pills flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">ランキング</a>
-              </li>
-            </ul>
-          </nav>
-        @show
+
       </div>
+
     </div>
     <!-- フッター -->
     @section('footer')
