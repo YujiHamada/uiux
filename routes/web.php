@@ -25,3 +25,4 @@ Route::get('/review/{review}', 'ReviewController@show');
 // UserController
 Route::get('/{username}', 'UserController@show');
 Route::get('/{username}/edit', 'UserController@edit');
+Route::post('/{username}/edit', 'UserController@confirm');
