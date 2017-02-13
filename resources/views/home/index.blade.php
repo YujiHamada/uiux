@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('css')
+@section('head')
+  @parent
   <style>
     img {
         width: auto;
@@ -59,9 +60,4 @@
       </div>
     @endforeach
   </div>
-@endsection
-
-@section('js')
-  <script>
-  </script>
 @endsection

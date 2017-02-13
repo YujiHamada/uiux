@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('css')
+@section('head')
+	@parent
 	<style>
 		.posted_image{
 			max-height: 300px;
@@ -38,9 +39,4 @@
 		<input type="hidden" name="category" value="{{$category}}">
 		<button type="submit" class="btn btn-primary">投稿</button>
 	</form>
-@endsection
-
-@section('js')
-	<script>
-	</script>
 @endsection

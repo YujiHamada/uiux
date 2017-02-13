@@ -8,27 +8,27 @@
     <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
   	詳細：
     @if ($errors->has('title'))
-    <span class="help-block">
+      <span class="help-block">
         <strong>{{ $errors->first('title') }}</strong>
-    </span>
+      </span>
     @endif
-    <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
+      <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
     @if ($errors->has('description'))
-    <span class="help-block">
-        <strong>{{ $errors->first('description') }}</strong>
-    </span>
+      <span class="help-block">
+          <strong>{{ $errors->first('description') }}</strong>
+      </span>
     @endif
     URL：
     <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
     @if ($errors->has('url'))
-    <span class="help-block">
-        <strong>{{ $errors->first('url') }}</strong>
-    </span>
+      <span class="help-block">
+          <strong>{{ $errors->first('url') }}</strong>
+      </span>
     @endif
     カテゴリー：
     <select name="category" class="form-control">
       <?php foreach($categories as $category): ?>
-      <option value="{{$category->id}}">{{$category->name}}</option>
+        <option value="{{$category->id}}">{{$category->name}}</option>
       <?php endforeach; ?>
     </select>
 
@@ -42,9 +42,9 @@
       <input type="radio" name="good_or_bad" value="2">SoSo...
     </label>
     @if ($errors->has('good_or_bad'))
-    <span class="help-block">
-        <strong>{{ $errors->first('good_or_bad') }}</strong>
-    </span>
+      <span class="help-block">
+          <strong>{{ $errors->first('good_or_bad') }}</strong>
+      </span>
     @endif
     <input type="file" name="uiImage">
     <button type="submit" class="btn btn-primary">投稿</button>
@@ -53,7 +53,8 @@
   </div>
 @endsection
 
-@section('js')
+@section('foot')
+  @parent
   <script>
     $(function(){
       //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録

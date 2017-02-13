@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
-@section('css')
+@section('head')
+  @parent
   <style>
       img {
         width: auto;
@@ -15,9 +16,4 @@
   <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
   <h4>タイトル：{{ $review->title }}</h4>
   <p>詳細：{{ $review->description }}</p>
-@endsection
-
-@section('js')
-<scrit>
-</script>
 @endsection

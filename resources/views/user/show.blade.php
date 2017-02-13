@@ -1,6 +1,7 @@
 @extends('layouts.user')
 
-@section('css')
+@section('head')
+  @parent
   <style>
     img {
       width: auto;
@@ -63,9 +64,4 @@
         </p>
     @endforelse
 
-@endsection
-
-@section('js')
-<scrit>
-</script>
 @endsection

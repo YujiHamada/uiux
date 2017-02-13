@@ -7,7 +7,6 @@ use App\Review;
 use App\User;
 use Auth;
 
-
 class UserController extends Controller
 {
   /**
@@ -33,6 +32,12 @@ class UserController extends Controller
   }
 
   public function edit($name) {
+    $user = Auth::user();
+
+    return view('user.edit', compact('user'));
+  }
+
+  public function confirm($name) {
     $user = Auth::user();
 
     return view('user.edit', compact('user'));

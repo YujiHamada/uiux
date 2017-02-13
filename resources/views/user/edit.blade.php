@@ -1,6 +1,5 @@
 @extends('layouts.user')
 
-
 @section('content')
     <h4>プロフィールを編集</h4>
     <form>
@@ -21,21 +20,40 @@
       </div>
       <div class="row form-group">
         <label class="col-12">プロフィール画像</label>
-        <div class="col-12" >
-          <img class="img-fluid" style="height: 10rem;" src="{{asset('images/review_images/myimages/apple.png')}}" alt="..."/>
-          TODO : 未完成
+        <div class="col-6">
+          <div class="img-container">
+            <img id="cropperImg" src="{{asset('images/review_images/myimages/android.jpg')}}" alt="..."/>
+          </div>
+        </div>
+        <div class="col-6">
+          <div class="img-container-preview">
+          </div>
         </div>
         <div class="col-12">
           <input type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
-          <small id="fileHelp" class="form-text text-muted">This is some placeholder block-level help text for the above input. It's a bit lighter and easily wraps to a new line.</small>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
     </form>
-
 @endsection
 
-@section('js')
-<scrit>
-</script>
+@section('foot')
+  @parent
+  <script>
+    $('#cropperImg').cropper({
+      aspectRatio: 4 / 4,
+      preview: '.img-container-preview',
+      crop: function(e) {
+
+        // Output the result data for cropping image.
+        console.log(e.x);
+        console.log(e.y);
+        console.log(e.width);
+        console.log(e.height);
+        console.log(e.rotate);
+        console.log(e.scaleX);
+        console.log(e.scaleY);
+      }
+    });
+  </script>
 @endsection

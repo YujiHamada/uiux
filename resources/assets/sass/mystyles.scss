@@ -3,3 +3,23 @@
 
 // Variables
 @import "variables";
+
+.img-container > img,
+.img-container-preview > img {
+  height: auto;
+  max-width: 100%;
+}
+
+.img-container {
+  width: 100%;
+  height: 16rem;
+  text-align: center;
+  overflow: hidden;
+}
+.img-container-preview {
+  width: 12rem;
+  height: 12rem;
+  text-align: center;
+  overflow: hidden;
+  background-color: silver;
+}
