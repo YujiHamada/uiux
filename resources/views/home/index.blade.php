@@ -41,11 +41,11 @@
             <p><span class="badge badge-default">SOSO</span></p>
           @endif
           <p>コメント数：</p>
-          <p>イイね：</p>
-          <p>ワルいね：</p>
+          <p>賛成数：{{$review->agreeCount()->count()}}</p>
+          <p>反対数：{{$review->disagreeCount()->count()}}</p>
         </div>
         <div class="col">
-          <h5>{{$review->title}}</h5>
+          <a href="{{ action('ReviewController@show', $review->id) }}"><h5>{{$review->title}}</h5></a>
           <p>{{$review->description}}</p>
           @foreach($review->reviewCategory as $reviewCategory)
             <span class="badge badge-pill badge-default">{{$reviewCategory->category->name}}</span>

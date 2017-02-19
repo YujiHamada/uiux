@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Review;
+use App\Review_Agree;
 
 class HomeController extends Controller
 {
@@ -26,6 +27,12 @@ class HomeController extends Controller
     public function index()
     {
         $reviews = Review::all();
+
+        // $agreeCount = DB::table('review_agree')->select(DB::raw('count(*) as count'))->where('is_agree', '1')->groupBy('is_agree');
+
+        // echo "<pre>";
+        // print_r($agreeCount);
+        // echo "</pre>";
 
         return view('home.index', compact('reviews'));
     }
