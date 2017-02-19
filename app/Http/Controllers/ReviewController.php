@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Category;
 use App\Review_Category;
+use App\Review_Agree;
 
 class ReviewController extends Controller
 {
@@ -35,7 +36,10 @@ class ReviewController extends Controller
     //表示用
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        return view('review.show', compact('review'));
+        //賛成・飛散性を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
+        $agree = Review_Agree::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
+        
+        return view('review.show', compact('review', 'agree'));
     }
 
     //投稿用
@@ -106,5 +110,32 @@ class ReviewController extends Controller
         $review_category->save();
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
+    }
+
+    public function agree(Request $request){
+
+        $reviewAgree = Review_Agree::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
+
+        if($reviewAgree){
+            //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
+            Review_Agree::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
+            return response()->json([
+                'isDeleted' => '1'
+            ]);
+        }else{
+            //まだ未評価の場合、評価を保存する。    
+            $isAgree = $request->agree;
+        
+            $reviewAgree = new Review_Agree;
+            $reviewAgree->user_id = $request->user_id;
+            $reviewAgree->review_id = $request->review_id;
+            $reviewAgree->is_agree = $isAgree;
+
+            $reviewAgree->save();
+
+            return response()->json([
+                'isAgree' => $isAgree
+            ]);
+        }
     }
 }
