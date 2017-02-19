@@ -2,7 +2,7 @@
 
 @section('content')
     <h4>プロフィールを編集</h4>
-    <form>
+    {{-- <form>
       <div class="form-group row">
         <label class="col-2 col-form-label">ユーザーネーム</label>
         <div class="col-10">
@@ -34,26 +34,13 @@
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+    </form> --}}
+
+    @include('subs.cropper')
 @endsection
 
 @section('foot')
   @parent
   <script>
-    $('#cropperImg').cropper({
-      aspectRatio: 4 / 4,
-      preview: '.img-container-preview',
-      crop: function(e) {
-
-        // Output the result data for cropping image.
-        console.log(e.x);
-        console.log(e.y);
-        console.log(e.width);
-        console.log(e.height);
-        console.log(e.rotate);
-        console.log(e.scaleX);
-        console.log(e.scaleY);
-      }
-    });
   </script>
 @endsection

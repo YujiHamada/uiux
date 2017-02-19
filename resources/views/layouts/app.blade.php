@@ -12,8 +12,9 @@
 
   <!-- Styles -->
   @section('head')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.css">
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/cropper.css">
+    <link rel="stylesheet" href="/css/croppermain.css">
     <link rel="stylesheet" href="/css/mystyles.css">
   @show
 
@@ -147,10 +148,11 @@
   </div>
   <!-- Scripts -->
   @section('foot')
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
     <script src="/js/app.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.4/cropper.min.js"></script>
+    <script src="/js/cropper.js"></script>
+    <script src="/js/croppermain.js"></script>
     <script src="/js/myscripts.js"></script>
   @show
 </body>
