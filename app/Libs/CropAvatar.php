@@ -10,10 +10,10 @@ class CropAvatar {
   private $msg;
 
   function __construct($src, $data, $file) {
-    $this -> setSrc($src);
-    $this -> setData($data);
-    $this -> setFile($file);
-    $this -> crop($this -> src, $this -> dst, $this -> data);
+    $this->setSrc($src);
+    $this->setData($data);
+    $this->setFile($file);
+    $this->crop($this->src, $this->dst, $this->data);
   }
 
   private function setSrc($src) {
@@ -21,10 +21,10 @@ class CropAvatar {
       $type = exif_imagetype($src);
 
       if ($type) {
-        $this -> src = $src;
-        $this -> type = $type;
-        $this -> extension = image_type_to_extension($type);
-        $this -> setDst();
+        $this->src = $src;
+        $this->type = $type;
+        $this->extension = image_type_to_extension($type);
+        $this->setDst();
       }
     }
   }
@@ -43,7 +43,8 @@ class CropAvatar {
 
       if ($type) {
         $extension = image_type_to_extension($type);
-        $src = 'images/' . date('YmdHis') . '.original' . $extension;
+        $src = \Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . md5($file['tmp_name']) . $extension;
+
 
         if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG) {
 
@@ -73,7 +74,8 @@ class CropAvatar {
   }
 
   private function setDst() {
-    $this -> dst = 'images/' . date('YmdHis') . '.png';
+    $this -> dst = \Config::get('const.IMAGE_FILE_DIRECTORY') . pathinfo($this -> src, PATHINFO_FILENAME) . '.png';
+
   }
 
   private function crop($src, $dst, $data) {
@@ -180,6 +182,8 @@ class CropAvatar {
 
       imagedestroy($src_img);
       imagedestroy($dst_img);
+
+      \File::delete($this -> src);
     }
   }
 
@@ -202,24 +206,10 @@ class CropAvatar {
   }
 
   public function getResult() {
-    return !empty($this -> data) ? $this -> dst : $this -> src;
+    return !empty($this -> data) ? asset($this -> dst) : asset($this -> src);
   }
 
   public function getMsg() {
     return $this -> msg;
   }
 }
-
-$crop = new CropAvatar(
-  isset($_POST['avatar_src']) ? $_POST['avatar_src'] : null,
-  isset($_POST['avatar_data']) ? $_POST['avatar_data'] : null,
-  isset($_FILES['avatar_file']) ? $_FILES['avatar_file'] : null
-);
-
-$response = array(
-  'state'  => 200,
-  'message' => $crop -> getMsg(),
-  'result' => $crop -> getResult()
-);
-
-echo json_encode($response);
