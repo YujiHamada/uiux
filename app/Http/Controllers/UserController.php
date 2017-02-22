@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 use App\Review;
 use App\User;
 use Auth;
+use App\Libs\CropAvatar;
 
 class UserController extends Controller
 {
@@ -31,16 +33,36 @@ class UserController extends Controller
     return view('user.show', compact('user', 'reviews'));
   }
 
-  public function edit($name) {
+  public function edit() {
     $user = Auth::user();
 
-    return view('user.edit', compact('user'));
+    return view('user.edit');
   }
 
-  public function confirm($name) {
+  public function confirm() {
     $user = Auth::user();
 
-    return view('user.edit', compact('user'));
+    return view('user.edit');
+  }
+
+
+
+  public function crop(Request $request){
+    $crop = new CropAvatar(
+      Input::has('avatar_src') ? $request->input('avatar_src') : null,
+      Input::has('avatar_data') ? $request->input('avatar_data') : null,
+      Input::hasFile('avatar_file') ? $_FILES['avatar_file'] : null
+    );
+
+    $response = array(
+      'state'  => 200,
+      'message' => $crop->getMsg(),
+      'result' => $crop->getResult() // imageファイルの格納先
+    );
+
+    return response()->json($response);
+
+    // echo json_encode($response);
   }
 
 }

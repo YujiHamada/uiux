@@ -30,7 +30,7 @@
     反対数：{{$review->disagreeCount()->count()}}
     </p>
     <p>↓このレビューに↓</p>
-    <button id="agree" class="agree btn btn-primary @if(isset($agree)) clicked @endif" type="button" value="{{Config::get('enum.agree.AGREE')}}">賛成@if(isset($agree) && $agree->is_agree == 1)済@endif</button>
+    <button id="agree" class="agree btn btn-primary @if(isset($agree)) clicked @endif" ztype="button" value="{{Config::get('enum.agree.AGREE')}}">賛成@if(isset($agree) && $agree->is_agree == 1)済@endif</button>
     <button id="disagree" class="agree btn btn-warning @if(isset($agree)) clicked @endif" type="button" value="{{Config::get('enum.agree.DISAGREE')}}">反対@if(isset($agree) && $agree->is_agree == 0)済@endif</button>
   @endif
 @endsection

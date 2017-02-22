@@ -2,14 +2,15 @@
 
   <!-- Current avatar -->
   <div class="avatar-view" title="Change the avatar">
-    <img src="{{asset('images/review_images/myimages/android.jpg')}}" alt="Avatar">
+    <img src="{{asset('images/app_images/yyux.png')}}" alt="Avatar">
   </div>
 
   <!-- Cropping modal -->
   <div class="modal fade" id="avatar-modal" aria-hidden="true" aria-labelledby="avatar-modal-label" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
-        <form class="avatar-form" action="{{ app_path('Libs/crop.php') }}" enctype="multipart/form-data" method="post">
+        <form class="avatar-form" action="{{ action('UserController@crop') }}" enctype="multipart/form-data" method="post">
+          {{ csrf_field() }}
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <h4 class="modal-title" id="avatar-modal-label">Change Avatar</h4>
@@ -58,9 +59,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          </div> -->
         </form>
       </div>
     </div>

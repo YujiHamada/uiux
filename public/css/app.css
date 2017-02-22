@@ -2351,6 +2351,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
 .form-inline {
   display: -webkit-box;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
   flex-flow: row wrap;
   -webkit-box-align: center;
   align-items: center;
@@ -2375,6 +2377,8 @@ select.form-control-lg:not([size]):not([multiple]), .input-group-lg > select.for
     display: flex;
     -webkit-box-flex: 0;
     flex: 0 0 auto;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
     flex-flow: row wrap;
     -webkit-box-align: center;
     align-items: center;
@@ -4272,6 +4276,8 @@ tbody.collapse.show {
   .card-deck {
     display: -webkit-box;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
     flex-flow: row wrap;
   }
   .card-deck .card {
@@ -4295,6 +4301,8 @@ tbody.collapse.show {
   .card-group {
     display: -webkit-box;
     display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
     flex-flow: row wrap;
   }
   .card-group .card {
@@ -4747,6 +4755,8 @@ a.badge:focus, a.badge:hover {
   position: relative;
   display: -webkit-box;
   display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
   flex-flow: row wrap;
   -webkit-box-align: center;
   align-items: center;

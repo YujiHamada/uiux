@@ -232,7 +232,6 @@
 
     ajaxUpload: function () {
       var url = this.$avatarForm.attr('action');
-      // var url = '/app/Libs/crop.php';
 
       var data = new FormData(this.$avatarForm[0]);
       var _this = this;
