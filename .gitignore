@@ -8,3 +8,4 @@ Homestead.yaml
 !/public/images/review_images/myimages/
 !/public/images/review_images/myimages/*
 /public/images/temporary/review_images/*
+/public/build/*

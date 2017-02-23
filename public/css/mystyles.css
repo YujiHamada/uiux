@@ -1,23 +1,15 @@
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-.img-container > img,
-.img-container-preview > img {
-  height: auto;
-  max-width: 100%;
-}
-
-.img-container {
-  width: 100%;
-  height: 16rem;
-  text-align: center;
+img.user-avatar {
+  display: inline-block;
+  margin: 0 auto;
+  height: 220px;
+  width: auto;
+  max-width: 220px;
+  max-height: 220px;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   overflow: hidden;
-}
-
-.img-container-preview {
-  width: 12rem;
-  height: 12rem;
-  text-align: center;
-  overflow: hidden;
-  background-color: silver;
 }
 
 /*# sourceMappingURL=mystyles.css.map */

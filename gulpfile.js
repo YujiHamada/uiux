@@ -1,7 +1,6 @@
 const elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
-// require('laravel-elixir-vueify');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -23,11 +22,4 @@ elixir(mix => {
         .sass('mystyles.scss')
         .webpack('app.js')
         .webpack('myscripts.js');
-});
-
-// 「バージョニング」で検索。
-// CSSやJavaScriptファイルを更新しても、ファイル名が同じ場合、
-// ブラウザがそれらををキャッシュしたままで、更新が反映されない問題を解決する。
-elixir(function(mix) {
-    mix.version(['css/app.css', 'css/mystyles.css', 'js/app.js', 'js/myscripts.js']);
 });

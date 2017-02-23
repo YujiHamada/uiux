@@ -3,65 +3,50 @@
 @section('head')
   @parent
   <style>
-    img {
+  img {
       width: auto;
       height: auto;
-      max-width: 150px;
+      max-width: 120px;
       max-height: 150px;
-    }
+  }
+  div.review{
+    border-top: 1px solid #ddd;
+  }
   </style>
 @endsection
 
 @section('content')
     <h4>タイムライン</h4>
-    @forelse ($reviews as $review)
-    <div class="col-sm-6 col-xs-12">
-
-      <div class="media">
-        <div class="media-body">
-          <h4 class="media-heading">{{ $review->title }}</h4>
-          <p>{{ $review->description }}</p>
-        </div>
-      </div>
-      <div id="carousel-example-generic{{ $review->id }}" class="carousel slide" data-interval="false">
-        <!-- Indicators -->
-        <ol class="carousel-indicators">
-          <li data-target="#carousel-example-generic{{ $review->id }}" data-slide-to="0" class="active"></li>
-          <li data-target="#carousel-example-generic{{ $review->id }}" data-slide-to="1"></li>
-        </ol>
-
-        <!-- Wrapper for slides -->
-        <div class="carousel-inner" role="listbox">
-          <div class="item active">
-            <img src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{ $review->image_name }}" alt="..." style="display: inline-block; mergin: 0px auto;">
-            <div class="carousel-caption">
-              ...
-            </div>
+    <div class="timeline">
+    	@foreach($reviews as $review)
+        <div class="row review">
+          <div class="col-3">
+            @if(Config::get('enum.good_or_bad.GOOD') == $review->good_or_bad)
+              <p><span class="badge badge-success">GOOD!!</span></p>
+            @elseif(Config::get('enum.good_or_bad.BAD') == $review->good_or_bad)
+              <p><span class="badge badge-danger">BAD</span></p>
+            @elseif(Config::get('enum.good_or_bad.SOSO') == $review->good_or_bad)
+              <p><span class="badge badge-default">SOSO</span></p>
+            @endif
+            <p>コメント数：</p>
+            <p>賛成数：{{$review->agreeCount()->count()}}</p>
+            <p>反対数：{{$review->disagreeCount()->count()}}</p>
           </div>
-          <div class="item">
-            <img src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{ $review->image_name }}" alt="..." style="mergin: 0px auto;">
-            <div class="carousel-caption">
-              ...
-            </div>
+          <div class="col">
+            <a href="{{ action('ReviewController@show', $review->id) }}"><h5>{{$review->title}}</h5></a>
+            <p>{{$review->description}}</p>
+            @foreach($review->reviewCategory as $reviewCategory)
+              <span class="badge badge-pill badge-default">{{$reviewCategory->category->name}}</span>
+            @endforeach
           </div>
-          ...
+          <div class="col-2">
+          @if($review->image_name)
+            <img class="media-object" src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{ $review->image_name }}" alt="がぞう">
+          @endif
+            <a href="{{ action('UserController@show', ['username' => $review->user->name]) }}" title="">{{$review->user->name}}</a>
+          </div>
         </div>
-
-        <!-- Controls -->
-        <a class="left carousel-control" href="#carousel-example-generic{{ $review->id }}" role="button" data-slide="prev">
-          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="right carousel-control" href="#carousel-example-generic{{ $review->id }}" role="button" data-slide="next">
-          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
+      @endforeach
     </div>
-    @empty
-        <p>
-          投稿したレビューはありません。
-        </p>
-    @endforelse
 
 @endsection

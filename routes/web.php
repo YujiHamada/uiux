@@ -25,5 +25,6 @@ Route::post('/review/agree', 'ReviewController@agree');
 
 // UserController
 Route::get('/{username}', 'UserController@show');
-Route::get('/{username}/edit', 'UserController@edit');
-Route::post('/{username}/edit', 'UserController@confirm');
+Route::get('/settings/edit', 'UserController@edit');
+Route::post('/settings/edit', 'UserController@confirm');
+Route::post('/settings/crop', 'UserController@crop');
