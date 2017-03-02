@@ -45,9 +45,9 @@
               <a class="nav-link disabled" href="#">Disabled</a>
             </li>
           </ul>
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <form class="form-inline my-0">
+            <input class="form-control mr-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <!-- ログイン / ユーザネーム -->
           <ul class="navbar-nav form-inline mx-2">

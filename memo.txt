@@ -1,4 +1,9 @@
 【コマンドライン系】
+
+  ◆データベース更新
+    データベースをリフレッシュし、全データベースシードを実行
+    php artisan migrate:refresh --seed
+    
   ◆seederクラス作成
     php artisan make:seeder クラス名
     (./database/seeds/を参照)

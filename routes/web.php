@@ -28,3 +28,9 @@ Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@confirm');
 Route::post('/settings/crop', 'UserController@crop');
+
+
+//SocialController
+Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
+Route::get('/login/callback/twitter', 'Auth\SocialController@getTwitterAuthCallback');
+Route::post('/register/social', 'Auth\SocialController@register');

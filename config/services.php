@@ -35,4 +35,11 @@ return [
         'secret' => env('STRIPE_SECRET'),
     ],
 
+    'twitter' => [
+        'client_id'     => 'MrdQ6QOEI7mYT5Gm9DbaqFxoH',
+        'client_secret' => '31waOHOEai1CYslgdqB5mZXfvha5T8oeY4sxppcusl0V177I5s',
+        'redirect'      => 'http://uiux.com/login/callback/twitter',
+    ],
+
+
 ];

@@ -166,7 +166,7 @@ return [
         /*
          * Package Service Providers...
          */
-
+         Laravel\Socialite\SocialiteServiceProvider::class,
         //
 
         /*
@@ -193,6 +193,9 @@ return [
 
     'aliases' => [
 
+        /*
+         * Laravel Framework Aliases...
+         */
         'App' => Illuminate\Support\Facades\App::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,
         'Auth' => Illuminate\Support\Facades\Auth::class,
@@ -226,6 +229,10 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        /*
+         * Other Aliases...
+         */
+        'Socialite' => Laravel\Socialite\Facades\Socialite::class,
     ],
 
 ];
