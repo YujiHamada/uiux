@@ -30,4 +30,12 @@ class Review extends Model
     	return $this->agree()->selectRaw('count(*) as count')->where('is_agree','0')->groupBy('is_agree');
     }
 
+    public function comments(){
+        return $this->hasMany('App\Review_Comment', 'review_id', 'id')->orderBy('created_at', 'desc');
+    }
+
+    public function commentsCount(){
+        return $this->hasMany('App\Review_Comment', 'review_id', 'id')->selectRaw('count(*) as count');
+    }
+
 }
