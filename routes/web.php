@@ -31,6 +31,8 @@ Route::post('/settings/crop', 'UserController@crop');
 
 
 //SocialController
-Route::get('/login/twitter', 'Auth\SocialController@getTwitterAuth');
-Route::get('/login/callback/twitter', 'Auth\SocialController@getTwitterAuthCallback');
-Route::post('/register/social', 'Auth\SocialController@register');
+Route::get('/login/twitter', 'Auth\SocialController@redirectToTwitterAuth');
+Route::get('/login/callback/twitter', 'Auth\SocialController@handleTwitterCallback');
+Route::get('/login/callback', 'Auth\SocialController@handleError')->name('logincallback');
+
+Route::post('/register/social', 'Auth\SocialController@create');

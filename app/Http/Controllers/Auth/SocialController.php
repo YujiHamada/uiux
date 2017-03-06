@@ -29,12 +29,11 @@ class SocialController extends Controller
     $this->middleware('guest', ['except' => 'logout']);
   }
 
-
-  public function getTwitterAuth() {
+  public function redirectToTwitterAuth() {
     return Socialite::driver('twitter')->redirect();
   }
 
-  public function getTwitterAuthCallback() {
+  public function handleTwitterCallback() {
     try {
       $socialUser = Socialite::driver('twitter')->user();
     } catch (\Exception $e) {
@@ -56,9 +55,20 @@ class SocialController extends Controller
     }
   }
 
+  public function handleError() {
+    return view('auth.socialregister');
 
-  public function register(Request $request) {
-    // TODO: nameとemailが重複していないか確認する必要あり
+  }
+
+
+  public function create(\App\Http\Requests\SocialRequest $request) {
+    // dd(Socialite::with('twitter')->redirect()->getTargetUrl());
+    //
+    // $this->validate($request, [
+    //     'name' => 'required|max:255|unique:users',
+    //     'email' => 'required|email|max:255|unique:users',
+    // ]);
+
     $social = Session::get('social');
     $social_uid = Session::get('social_uid');
     $user = User::create([
