@@ -40,7 +40,7 @@
           @elseif(Config::get('enum.good_or_bad.SOSO') == $review->good_or_bad)
             <p><span class="badge badge-default">SOSO</span></p>
           @endif
-          <p>コメント数：</p>
+          <p>コメント数：{{$review->commentsCount()->count()}}</p>
           <p>賛成数：{{$review->agreeCount()->count()}}</p>
           <p>反対数：{{$review->disagreeCount()->count()}}</p>
         </div>
@@ -50,6 +50,7 @@
           @foreach($review->reviewCategory as $reviewCategory)
             <span class="badge badge-pill badge-default">{{$reviewCategory->category->name}}</span>
           @endforeach
+          <p>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</p>
         </div>
         <div class="col-2">
         @if($review->image_name)

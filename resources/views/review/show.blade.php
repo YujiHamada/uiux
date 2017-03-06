@@ -21,9 +21,20 @@
 @endsection
 
 @section('content')
-  <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
+  @if (session('flash_message'))
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      {{ session('flash_message') }}
+    </div>
+  @endif
+  @if($review->image_name)
+   <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
+  @endif
   <h4>タイトル：{{ $review->title }}</h4>
   <p>詳細：{{ $review->description }}</p>
+  <span>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</span>
   @if(Auth::user()->id != $review->user_id)
     <p>
     賛成数：{{$review->agreeCount()->count()}}
@@ -37,11 +48,55 @@
       {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
     </button>
   @endif
+
+  <div class="comments">
+    <h5 class="comment-header">コメント：{{$review->commentsCount()->count()}}件</h5>
+    @foreach($review->comments as $reviewComment)
+      <div class="comment">
+        <div>
+          <p>{{$reviewComment->comment}}</p>  
+        </div>
+        <div class="commented-user">
+          @if($reviewComment->user->id == Auth::user()->id)
+            <form action="destroy" method="post" accept-charset="utf-8">
+              {{ csrf_field() }}
+              <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
+              <input type="hidden" name="reviewId" value="{{$review->id}}">
+              <input class="btn btn-danger btn-sm" type="submit" name="deleteButton" value="削除">
+              <span>投稿者：{{$reviewComment->user->name}}</span>
+              <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
+            </form> 
+          @endif
+        </div>
+      </div>
+    @endforeach
+  </div>
+
+  <p>このレビューにコメントをする</p>
+  @if ($errors->has('comment'))
+    <span class="help-block">
+      <strong>{{ $errors->first('comment') }}</strong>
+    </span>
+  @endif
+  <form action="store" method="post">
+    {{ csrf_field() }}
+    <textarea class="comment-textarea" name="comment"></textarea>
+    <input type="hidden" name="reviewId" value="{{$review->id}}">
+    <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+    <input class="btn btn-primary" type="submit" name="commentSubmit" value="コメントする">
+  </form>
+  
 @endsection
 
 @section('foot')
   @parent
   <script>
+  $(function () {
+    $('form').submit(function () {
+      $(this).find(':submit').prop('disabled', true);
+    });
+  });
+
   $.ajaxSetup({
           headers: {
               'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

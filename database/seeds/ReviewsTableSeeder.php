@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Review;
+use Carbon\Carbon;
 
 
 class ReviewsTableSeeder extends Seeder
@@ -31,6 +32,7 @@ class ReviewsTableSeeder extends Seeder
       // For hamada
       $hamada = DB::table('users')->where('email', 'oc.yuji@gmail.com')->first();
       for($i = 0; $i < count($titles); $i++) {
+        $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $hamada->id,
           'good_or_bad' => $goodOrBads[$i],
@@ -38,12 +40,15 @@ class ReviewsTableSeeder extends Seeder
           'description' => $titles[$i] . ' description',
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
-          'image_name' => $imageNames[$i]
+          'image_name' => $imageNames[$i],
+          'created_at' => $date,
+          'updated_at' => $date
         ]);
       }
       // For yutamaro0405
       $yutamaro0405 = DB::table('users')->where('email', 'yutamaro0405@gmail.com')->first();
       for($i = 0; $i < count($titles); $i++) {
+        $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $yutamaro0405->id,
           'good_or_bad' => $goodOrBads[$i],
@@ -51,7 +56,9 @@ class ReviewsTableSeeder extends Seeder
           'description' => $titles[$i] . ' description',
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
-          'image_name' => $imageNames[$i]
+          'image_name' => $imageNames[$i],
+          'created_at' => $date,
+          'updated_at' => $date
         ]);
       }
     }
