@@ -23,6 +23,10 @@ Route::post('/review', 'ReviewController@store');
 Route::get('/review/{review}', 'ReviewController@show');
 Route::post('/review/agree', 'ReviewController@agree');
 
+//ReviewCommentContrller
+Route::post('/review/store', 'ReviewCommentController@store');
+Route::post('/review/destroy', 'ReviewCommentController@destroy');
+
 // UserController
 Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');

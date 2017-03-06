@@ -26,7 +26,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all();
+        $reviews = Review::all()->sortByDesc('created_at');
 
         // $agreeCount = DB::table('review_agree')->select(DB::raw('count(*) as count'))->where('is_agree', '1')->groupBy('is_agree');
 
