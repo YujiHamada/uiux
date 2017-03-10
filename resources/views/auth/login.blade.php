@@ -73,6 +73,9 @@
           <a class="btn btn-block btn-social btn-google"  href="login/google">
               <span class="fa fa-google"></span> Sign in with Google
           </a>
+          <a class="btn btn-block btn-social btn-github"  href="login/github">
+              <span class="fa fa-github"></span> Sign in with Github
+          </a>
         </div>
     </div>
 </div>

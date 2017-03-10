@@ -18,6 +18,8 @@
   function CropAvatar($element) {
     this.$container = $element;
 
+    this.$avatarImagePath = this.$container.find('.avatar-image-path'); // usersテーブルに設定するパス
+
     this.$avatarView = this.$container.find('.avatar-view');
     this.$avatar = this.$avatarView.find('img');
     this.$avatarModal = this.$container.find('#avatar-modal');
@@ -79,6 +81,7 @@
 
     initPreview: function () {
       var url = this.$avatar.attr('src');
+      var avatarImagePath = this.$avatarImagePath.val();
 
       this.$avatarPreview.html('<img src="' + url + '">');
     },
@@ -275,6 +278,7 @@
       if ($.isPlainObject(data) && data.state === 200) {
         if (data.result) {
           this.url = data.result;
+          this.avatarImagePath = data.avatarImagePath;
 
           if (this.support.datauri || this.uploaded) {
             this.uploaded = false;
@@ -305,6 +309,8 @@
     cropDone: function () {
       this.$avatarForm.get(0).reset();
       this.$avatar.attr('src', this.url);
+      this.$avatarImagePath.val(this.avatarImagePath);
+
       this.stopCropper();
       this.$avatarModal.modal('hide');
     },

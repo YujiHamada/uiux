@@ -17,10 +17,11 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->enum('social', ['twitter', 'facebook', 'google'])->nullable();
+            $table->enum('social', ['twitter', 'facebook', 'google', 'github'])->nullable();
             $table->string('social_uid')->nullable();
-            $table->string('avatar_name')->nullable();
             $table->string('password')->nullable();
+            $table->string('avatar_image_path')->nullable();
+            $table->string('biography')->nullable();
             $table->rememberToken();
             $table->timestamps();
 

@@ -2,9 +2,9 @@
 namespace App\Libs;
 
 class CropAvatar {
-  private $src;
+  private $src; // すでに設定されているファイルのパス
   private $data;
-  private $dst;
+  private $dst; // cropしたファイルのパス
   private $type;
   private $extension;
   private $msg;
@@ -43,7 +43,7 @@ class CropAvatar {
 
       if ($type) {
         $extension = image_type_to_extension($type);
-        $src = \Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . md5($file['tmp_name']) . $extension;
+        $src = \Config::get('const.TEMPORARY_USER_IMAGES_DIRECTORY') . md5($file['tmp_name']) . $extension;
 
 
         if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG) {
@@ -74,7 +74,7 @@ class CropAvatar {
   }
 
   private function setDst() {
-    $this -> dst = \Config::get('const.IMAGE_FILE_DIRECTORY') . pathinfo($this -> src, PATHINFO_FILENAME) . '.png';
+    $this -> dst = \Config::get('const.USER_IMAGES_DIRECTORY') . pathinfo($this -> src, PATHINFO_FILENAME) . '.jpeg';
 
   }
 
@@ -173,7 +173,7 @@ class CropAvatar {
       $result = imagecopyresampled($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
 
       if ($result) {
-        if (!imagepng($dst_img, $dst)) {
+        if (!imagejpeg($dst_img, $dst, 100)) {
           $this -> msg = "Failed to save the cropped image file";
         }
       } else {
@@ -207,6 +207,10 @@ class CropAvatar {
 
   public function getResult() {
     return !empty($this -> data) ? asset($this -> dst) : asset($this -> src);
+  }
+
+  public function getAvatarImagePath() {
+    return !empty($this -> data) ? $this -> dst : $this -> src;
   }
 
   public function getMsg() {

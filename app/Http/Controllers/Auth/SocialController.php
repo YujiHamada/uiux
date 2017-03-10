@@ -29,13 +29,14 @@ class SocialController extends Controller
     $this->middleware('guest', ['except' => 'logout']);
   }
 
-  public function redirectToTwitterAuth() {
-    return Socialite::driver('twitter')->redirect();
+  public function redirectToSocialAuth($provider) {
+    return Socialite::driver($provider)->redirect();
   }
 
-  public function handleTwitterCallback() {
+  public function handleSocialCallback($provider) {
     try {
-      $socialUser = Socialite::driver('twitter')->user();
+      $socialUser = Socialite::driver($provider)->user();
+      // dd($socialUser);
     } catch (\Exception $e) {
       return redirect($this->redirectTo);
     }
@@ -47,35 +48,60 @@ class SocialController extends Controller
     if($user) {
       Auth::login($user, true);
       return redirect($this->redirectTo);
-    } else {
-      Session::set('social', 'twitter');
-      Session::set('social_uid', $socialUser->id);
-      $nickname = $socialUser->nickname;
-      return view('auth.socialregister', compact('nickname'));
     }
+    Session::set('social', $provider);
+    Session::set('socialUid', $socialUser->id);
+    $nickname = $socialUser->nickname;
+    $email = $socialUser->email;
+    $avatar = ($provider == 'github') ? $socialUser->avatar : $socialUser->avatar_original;
+
+    $data = file_get_contents($avatar);
+    $imageResource = imagecreatefromstring($data);
+    $width  = imagesx($imageResource); // 横幅
+    $height = imagesy($imageResource); // 縦幅
+
+    if ($width >= $height) {
+        // 横長の画像の時
+        $side = $height;
+        $x = floor(($width - $height ) / 2);
+        $y = 0;
+        $width = $side;
+    } else {
+        // 縦長の画像の時
+        $side = $width;
+        $y = floor(($height - $width) / 2);
+        $x = 0;
+        $height = $side;
+    }
+
+    // 出力ピクセルサイズで新規画像作成
+    $square_width  = 300;
+    $square_height = 300;
+    $filePath = \Config::get('const.USER_IMAGES_DIRECTORY') . $provider . '_' . $socialUser->id . '.jpeg';
+    $square_new = imagecreatetruecolor($square_width, $square_height);
+    imagecopyresized($square_new, $imageResource, 0, 0, $x, $y, $square_width, $square_height, $width, $height);
+    imagejpeg($square_new, $filePath, 100);
+
+    return view('auth.socialregister', compact('nickname', 'email', 'filePath'));
+
   }
 
   public function handleError() {
     return view('auth.socialregister');
-
   }
 
-
   public function create(\App\Http\Requests\SocialRequest $request) {
-    // dd(Socialite::with('twitter')->redirect()->getTargetUrl());
-    //
-    // $this->validate($request, [
-    //     'name' => 'required|max:255|unique:users',
-    //     'email' => 'required|email|max:255|unique:users',
-    // ]);
 
     $social = Session::get('social');
-    $social_uid = Session::get('social_uid');
+    $socialUid = Session::get('socialUid');
+    $filePath = $request->input('avatarImagePath');
+
     $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'social' => $social,
-            'social_uid' => $social_uid
+            'social_uid' => $socialUid,
+            'avatar_image_path' => $filePath
     ]);
     Auth::login($user, true);
     return redirect($this->redirectTo);
