@@ -77,12 +77,12 @@ class SocialController extends Controller
     // 出力ピクセルサイズで新規画像作成
     $square_width  = 300;
     $square_height = 300;
-    $filePath = \Config::get('const.USER_IMAGES_DIRECTORY') . $provider . '_' . $socialUser->id . '.jpeg';
+    $avatarImagePath = \Config::get('const.USER_IMAGES_DIRECTORY') . $provider . '_' . $socialUser->id . '.jpeg';
     $square_new = imagecreatetruecolor($square_width, $square_height);
     imagecopyresized($square_new, $imageResource, 0, 0, $x, $y, $square_width, $square_height, $width, $height);
-    imagejpeg($square_new, $filePath, 100);
+    imagejpeg($square_new, $avatarImagePath, 100);
 
-    return view('auth.socialregister', compact('nickname', 'email', 'filePath'));
+    return view('auth.socialregister', compact('nickname', 'email', '$avatarImagePath'));
 
   }
 
@@ -94,14 +94,14 @@ class SocialController extends Controller
 
     $social = Session::get('social');
     $socialUid = Session::get('socialUid');
-    $filePath = $request->input('avatarImagePath');
+    $avatarImagePath = $request->input('avatar_image_path');
 
     $user = User::create([
             'name' => $request->input('name'),
             'email' => $request->input('email'),
             'social' => $social,
             'social_uid' => $socialUid,
-            'avatar_image_path' => $filePath
+            'avatar_image_path' => $avatarImagePath
     ]);
     Auth::login($user, true);
     return redirect($this->redirectTo);

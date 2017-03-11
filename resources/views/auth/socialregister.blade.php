@@ -10,7 +10,7 @@
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register/social') }}">
                         {{ csrf_field() }}
 
-                        <input type="hidden" name="avatarImagePath" value="{{isset($filePath) ? $filePath : 'images/app_images/yyux.png'}}">
+                        <input type="hidden" name="avatar_image_path" value="{{ isset($avatarImagePath) ? $avatarImagePath : 'images/app_images/yyux.png' }}">
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">Name</label>
@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col">
-          <img class="user-avatar" src="{{asset(isset($filePath) ? $filePath : old('avatarName'))}}">
+          <img class="user-avatar" src="{{asset(isset($avatarImagePath) ? $avatarImagePath : old('avatar_image_path'))}}">
         </div>
     </div>
 </div>

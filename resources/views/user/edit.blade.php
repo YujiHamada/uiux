@@ -23,6 +23,11 @@
         <input type="text" name="name"
           class="col-10 form-control"
           value="{{ Auth::user()->name }}" required autofocus>
+        @if ($errors->has('name'))
+            <span class="col-10 offset-2 help-block">
+                <strong>{{ $errors->first('name') }}</strong>
+            </span>
+        @endif
       </div>
       <div class="form-group row">
         <label class="col-2">メールアドレス</label>
@@ -44,7 +49,7 @@
         <label class="col-12">プロフィール画像</label>
         <div class="col-10 offset-2">
           <div class="ml-0 avatar-view" title="Change the avatar">
-            <img src="{{ asset(Auth::user()->avatar_image_path) }}" alt="Avatar">
+            <img src="{{ asset(old('avatar_image_path') !== null ? old('avatar_image_path') : Auth::user()->avatar_image_path) }}" alt="Avatar">
           </div>
         </div>
       </div>

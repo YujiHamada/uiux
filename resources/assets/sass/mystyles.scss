@@ -16,3 +16,67 @@ img.user-avatar {
   box-shadow: 0 0 5px rgba(0,0,0,.15);
   overflow: hidden;
 }
+
+h5.comment-header{
+  margin-top: 50px;
+}
+
+.comment{
+  border-bottom: 1px solid #aaa;
+}
+
+.comment-textarea{
+  width: 100%;
+}
+
+.commented-user{
+  text-align: right;
+}
+
+///////////////////////////////
+// Bootstrapを上書き
+//////////////////////////////
+
+
+
+// a {
+//   color: silver;
+// }
+//
+// a:focus, a:hover {
+//   color: #00a1e9;
+// }
+
+///////////////////////////////
+// 一般
+//////////////////////////////
+
+.yy-sidebar-outline {
+  border-bottom: 1px solid silver;
+}
+
+///////////////////////////////
+// カラー系
+//////////////////////////////
+$color-midnightblue: #001e43;
+
+.yy-bg-midnightblue {
+  background-color: $color-midnightblue !important;
+}
+
+a.yy-bg-midnightblue:focus, a.yy-bg-midnightblue:hover {
+  background-color: $color-midnightblue !important;
+}
+
+
+.yy-bg-sidebar {
+  background-color: white !important;
+}
+.yy-bg-sidebar.active {
+  color: black !important;
+  border-left: 2px solid $color-midnightblue;
+}
+
+a.yy-bg-sidebar:focus, a.yy-bg-sidebar:hover {
+  background-color: #bbe2f1 !important;
+}
