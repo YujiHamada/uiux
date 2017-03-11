@@ -21,7 +21,7 @@ Route::get('/review/create', 'ReviewController@create');
 Route::post('/review/create', 'ReviewController@confirm');
 Route::post('/review', 'ReviewController@store');
 Route::get('/review/{review}', 'ReviewController@show');
-Route::post('/review/agree', 'ReviewController@agree');
+Route::post('/review/agree', 'ReviewController@agree'); // Ajax
 
 //ReviewCommentContrller
 Route::post('/review/store', 'ReviewCommentController@store');
@@ -30,5 +30,13 @@ Route::post('/review/destroy', 'ReviewCommentController@destroy');
 // UserController
 Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');
-Route::post('/settings/edit', 'UserController@confirm');
-Route::post('/settings/crop', 'UserController@crop');
+Route::post('/settings/edit', 'UserController@store');
+Route::post('/settings/crop', 'UserController@crop'); // Ajax
+
+
+//SocialController
+Route::get('/login/callback', 'Auth\SocialController@handleError')->name('logincallback');
+Route::get('/login/{provider}', 'Auth\SocialController@redirectToSocialAuth');
+Route::get('/login/callback/{provider}', 'Auth\SocialController@handleSocialCallback');
+
+Route::post('/register/social', 'Auth\SocialController@create');

@@ -38,7 +38,7 @@ class ReviewController extends Controller
         $review = Review::findOrFail($reviewId);
         //賛成・飛散性を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
         $agree = Review_Agree::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
-        
+
         return view('review.show', compact('review', 'agree'));
     }
 
@@ -59,7 +59,7 @@ class ReviewController extends Controller
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
         if($file){
-            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();            
+            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
             $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
         }
         return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'category'));
@@ -79,14 +79,14 @@ class ReviewController extends Controller
         if(isset($parseUrl['host'])){
             $domain = $parseUrl['host'];
         }
-        
+
 
         $user = Auth::user();
         $user_id = $user->id;
 
         //画像を一時フォルダから保存用フォルダに移動
         if($fileName){
-            File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);       
+            File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
         }
 
         //DB保存用データの作成・保存
@@ -123,9 +123,9 @@ class ReviewController extends Controller
                 'isDeleted' => '1'
             ]);
         }else{
-            //まだ未評価の場合、評価を保存する。    
+            //まだ未評価の場合、評価を保存する。
             $isAgree = $request->agree;
-        
+
             $reviewAgree = new Review_Agree;
             $reviewAgree->user_id = $request->user_id;
             $reviewAgree->review_id = $request->review_id;

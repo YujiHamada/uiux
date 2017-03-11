@@ -15,12 +15,16 @@ class UsersTableSeeder extends Seeder
       DB::table('users')->insert([
         'name' => 'hamada',
         'email' => 'oc.yuji@gmail.com',
-        'password' => bcrypt('hamada')
+        'password' => bcrypt('hamada'),
+        'avatar_image_path' => 'images/user_images/myimages/YujiHamada.jpeg',
+        'biography' => 'hamadaだお'
       ]);
       DB::table('users')->insert([
         'name' => 'yutamaro0405',
         'email' => 'yutamaro0405@gmail.com',
-        'password' => bcrypt('yutamaro0405')
+        'password' => bcrypt('yutamaro0405'),
+        'avatar_image_path' => 'images/user_images/myimages/yutamaro0405.jpeg',
+        'biography' => 'yutamaro0405だお'
       ]);
     }
 }

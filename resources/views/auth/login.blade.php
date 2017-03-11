@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
                 <div class="panel-body">
@@ -13,7 +13,7 @@
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                                 @if ($errors->has('email'))
@@ -27,7 +27,7 @@
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
-                            <div class="col-md-6">
+                            <div class="col-6">
                                 <input id="password" type="password" class="form-control" name="password" required>
 
                                 @if ($errors->has('password'))
@@ -62,6 +62,20 @@
                     </form>
                 </div>
             </div>
+        </div>
+        <div class="col">
+          <a class="btn btn-block btn-social btn-twitter"  href="login/twitter">
+              <span class="fa fa-twitter"></span> Sign in with Twitter
+          </a>
+          <a class="btn btn-block btn-social btn-facebook" href="login/facebook">
+              <span class="fa fa-facebook"></span> Sign in with Facebook
+          </a>
+          <a class="btn btn-block btn-social btn-google"  href="login/google">
+              <span class="fa fa-google"></span> Sign in with Google
+          </a>
+          <a class="btn btn-block btn-social btn-github"  href="login/github">
+              <span class="fa fa-github"></span> Sign in with Github
+          </a>
         </div>
     </div>
 </div>

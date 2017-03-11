@@ -1,4 +1,4 @@
-const elixir = require('laravel-elixir');
+var elixir = require('laravel-elixir');
 
 require('laravel-elixir-vue-2');
 /*
@@ -17,7 +17,7 @@ require('laravel-elixir-vue-2');
 // mix.webpackはresources/assets/js内のファイルを参照して、
 // public/js/にコンパイルしたファイルを格納する。
 // メソッドチェーンで記載可能。
-elixir(mix => {
+elixir(function(mix) {
     mix.sass('app.scss')
         .sass('mystyles.scss')
         .webpack('app.js')

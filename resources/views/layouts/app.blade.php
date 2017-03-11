@@ -13,6 +13,8 @@
   <!-- Styles -->
   @section('head')
     <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" href="/css/cropper.css">
     <link rel="stylesheet" href="/css/croppermain.css">
     <link rel="stylesheet" href="/css/mystyles.css">
@@ -45,9 +47,9 @@
               <a class="nav-link disabled" href="#">Disabled</a>
             </li>
           </ul>
-          <form class="form-inline">
-            <input class="form-control mr-sm-2" type="text" placeholder="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          <form class="form-inline my-0">
+            <input class="form-control mr-2" type="text" placeholder="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
           </form>
           <!-- ログイン / ユーザネーム -->
           <ul class="navbar-nav form-inline mx-2">

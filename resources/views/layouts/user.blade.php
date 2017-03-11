@@ -3,7 +3,7 @@
 @section('leftSideBar')
   <div id="user-left-side-bar" class="col-3">
     <div class="card bg-success">
-      <img class="card-img-top m-3 user-avatar" src="{{asset('images/app_images/yyux.png')}}" alt="Card image cap">
+      <img class="card-img-top m-3 user-avatar" src="{{asset(isset($user) ? $user->avatar_image_path : Auth::user()->avatar_image_path)}}" alt="Card image cap">
       <div class="card-block">
         <h4 class="card-title">{{ isset($user) ? $user->name : Auth::user()->name }}</h4>
         <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>

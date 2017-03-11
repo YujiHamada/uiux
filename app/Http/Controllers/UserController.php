@@ -11,14 +11,11 @@ use App\Libs\CropAvatar;
 
 class UserController extends Controller
 {
-  /**
-   * Create a new controller instance.
-   *
-   * @return void
-   */
+
   public function __construct(){
       $this->middleware('auth');
   }
+
 
   public function show($name) {
     $user = Auth::user();
@@ -28,10 +25,11 @@ class UserController extends Controller
     if($name != $user->name) {
       $user = User::where('name', $name)->first();
     }
-
     $reviews = Review::where('user_id', $user->id)->get();
+
     return view('user.show', compact('user', 'reviews'));
   }
+
 
   public function edit() {
     $user = Auth::user();
@@ -39,12 +37,17 @@ class UserController extends Controller
     return view('user.edit');
   }
 
-  public function confirm() {
+
+  public function store(\App\Http\Requests\UserEditRequest $request) {
     $user = Auth::user();
+    $user->name = $request->input('name');
+    $user->email = $request->input('email');
+    $user->biography = $request->input('biography');
+    $user->avatar_image_path = $request->input('avatar_image_path');
+    $user->save();
 
-    return view('user.edit');
+    return redirect('/settings/edit')->with('flash_message', '保存しました。');
   }
-
 
 
   public function crop(Request $request){
@@ -57,7 +60,8 @@ class UserController extends Controller
     $response = array(
       'state'  => 200,
       'message' => $crop->getMsg(),
-      'result' => $crop->getResult() // imageファイルの格納先
+      'result' => $crop->getResult(), // ドメイン付きファイルパス
+      'avatarImagePath' => $crop->getAvatarImagePath() // ドメイン無しファイルパス
     );
 
     return response()->json($response);
