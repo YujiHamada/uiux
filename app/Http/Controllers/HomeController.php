@@ -26,13 +26,21 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $reviews = Review::all()->sortByDesc('created_at');
+        $reviews = Review::latest('created_at')->paginate(5);
 
-        // $agreeCount = DB::table('review_agree')->select(DB::raw('count(*) as count'))->where('is_agree', '1')->groupBy('is_agree');
+        return view('home.index', compact('reviews'));
+    }
 
-        // echo "<pre>";
-        // print_r($agreeCount);
-        // echo "</pre>";
+    public function showGoodTl()
+    {
+        $reviews = Review::where('good_or_bad', \Config::get('enum.good_or_bad.GOOD'))->latest('created_at')->paginate(5);
+
+        return view('home.index', compact('reviews'));
+    }
+
+    public function showBadTl()
+    {
+        $reviews = Review::where('good_or_bad', \Config::get('enum.good_or_bad.BAD'))->latest('created_at')->paginate(5);
 
         return view('home.index', compact('reviews'));
     }

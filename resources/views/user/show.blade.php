@@ -42,7 +42,7 @@
           </div>
           <div class="col-2">
           @if($review->image_name)
-            <img class="media-object" src="{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{ $review->image_name }}" alt="がぞう">
+            <img class="media-object" src="{{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }}" alt="がぞう">
           @endif
             <a href="{{ action('UserController@show', ['username' => $review->user->name]) }}" title="">{{$review->user->name}}</a>
           </div>

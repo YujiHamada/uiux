@@ -53,7 +53,7 @@
             </div>
         </div>
         <div class="col">
-          <img class="user-avatar" src="{{asset(isset($avatarImagePath) ? $avatarImagePath : old('avatar_image_path'))}}">
+          <img class="user-avatar" src="{{ asset(isset($avatarImagePath) ? $avatarImagePath : old('avatar_image_path')) }}">
         </div>
     </div>
 </div>

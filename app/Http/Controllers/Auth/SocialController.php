@@ -82,7 +82,7 @@ class SocialController extends Controller
     imagecopyresized($square_new, $imageResource, 0, 0, $x, $y, $square_width, $square_height, $width, $height);
     imagejpeg($square_new, $avatarImagePath, 100);
 
-    return view('auth.socialregister', compact('nickname', 'email', '$avatarImagePath'));
+    return view('auth.socialregister', compact('nickname', 'email', 'avatarImagePath'));
 
   }
 
