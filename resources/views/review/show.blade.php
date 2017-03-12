@@ -31,7 +31,7 @@
       </div>
     @endif
     @if($review->image_name)
-     <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
+     <img src="{{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }}" alt="">
     @endif
     <h4>タイトル：{{ $review->title }}</h4>
     <p>詳細：{{ $review->description }}</p>

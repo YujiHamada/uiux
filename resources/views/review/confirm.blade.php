@@ -15,7 +15,7 @@
 	<div class="col mx-3">
 		@if(isset($fileName))
 			<div class = "posted_image">
-				<img src="/{{Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY')}}{{ $fileName }}" alt=""　class="img-responsive">
+				<img src="{{ asset(Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName) }}" alt="" class="img-responsive">
 			</div>
 		@endif
 		<p>タイトル：{{ $title }}</p>
