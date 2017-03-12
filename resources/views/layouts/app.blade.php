@@ -87,8 +87,8 @@
     <!-- ナビゲーションバー以下 -->
     <div class="container-fluid my-3">
       <div class="row justify-content-center">
-        <div class="col-10">
-          <div class="row">
+        <div class="col-10 px-0">
+          <div class="row justify-content-center">
             <!-- 左サイドバー -->
             @section('leftSideBar')
               <nav class="col-2 px-0 mx-1">
@@ -119,9 +119,8 @@
               </nav>
             @show
             <!-- 中央メインコンテンツ -->
-            <div class="col mx-3">
-              @yield('content')
-            </div>
+            @section('content')
+            @show
             <!-- 右サイドバー -->
             @section('rightSideBar')
               <nav class="col-2 px-0 mx-1">

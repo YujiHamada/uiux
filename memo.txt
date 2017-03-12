@@ -3,7 +3,7 @@
   ◆データベース更新
     データベースをリフレッシュし、全データベースシードを実行
     php artisan migrate:refresh --seed
-    
+
   ◆seederクラス作成
     php artisan make:seeder クラス名
     (./database/seeds/を参照)
@@ -21,8 +21,10 @@
   ◆migration実行
     php artisan migrate
 
-【sass】
-  CSSの拡張言語。変数使えたり、構造化して書ける。
+【composer】
+  composer install：composer.lockに書かれている各ライブラリをインストールする。
+  composer update：composer.jsonをもとに各ファイルを最新版にアップデートする。
+
 
 【npm】
   node.jsのパッケージ管理ツール。

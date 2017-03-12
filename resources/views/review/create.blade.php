@@ -1,55 +1,57 @@
 @extends('layouts.app')
 
 @section('content')
-  <div id="example"></div>
-  <form class="form-horizontal" role="form" method="POST" action="{{ url('review/create') }}" enctype="multipart/form-data">
-  	{{ csrf_field() }}
-  	タイトル：
-    <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
-  	詳細：
-    @if ($errors->has('title'))
-      <span class="help-block">
-        <strong>{{ $errors->first('title') }}</strong>
-      </span>
-    @endif
-      <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
-    @if ($errors->has('description'))
-      <span class="help-block">
-          <strong>{{ $errors->first('description') }}</strong>
-      </span>
-    @endif
-    URL：
-    <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
-    @if ($errors->has('url'))
-      <span class="help-block">
-          <strong>{{ $errors->first('url') }}</strong>
-      </span>
-    @endif
-    カテゴリー：
-    <select name="category" class="form-control">
-      <?php foreach($categories as $category): ?>
-        <option value="{{$category->id}}">{{$category->name}}</option>
-      <?php endforeach; ?>
-    </select>
+  <div class="col mx-3">
+    <div id="example"></div>
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('review/create') }}" enctype="multipart/form-data">
+    	{{ csrf_field() }}
+    	タイトル：
+      <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+    	詳細：
+      @if ($errors->has('title'))
+        <span class="help-block">
+          <strong>{{ $errors->first('title') }}</strong>
+        </span>
+      @endif
+        <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
+      @if ($errors->has('description'))
+        <span class="help-block">
+            <strong>{{ $errors->first('description') }}</strong>
+        </span>
+      @endif
+      URL：
+      <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
+      @if ($errors->has('url'))
+        <span class="help-block">
+            <strong>{{ $errors->first('url') }}</strong>
+        </span>
+      @endif
+      カテゴリー：
+      <select name="category" class="form-control">
+        <?php foreach($categories as $category): ?>
+          <option value="{{$category->id}}">{{$category->name}}</option>
+        <?php endforeach; ?>
+      </select>
 
-    <label class="radio-inline">
-      <input type="radio" name="good_or_bad" value="1">Good
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="good_or_bad" value="0">BAD
-    </label>
-    <label class="radio-inline">
-      <input type="radio" name="good_or_bad" value="2">SoSo...
-    </label>
-    @if ($errors->has('good_or_bad'))
-      <span class="help-block">
-          <strong>{{ $errors->first('good_or_bad') }}</strong>
-      </span>
-    @endif
-    <input type="file" name="uiImage">
-    <button type="submit" class="btn btn-primary">投稿</button>
-  </form>
-  <div class="preview">
+      <label class="radio-inline">
+        <input type="radio" name="good_or_bad" value="1">Good
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="good_or_bad" value="0">BAD
+      </label>
+      <label class="radio-inline">
+        <input type="radio" name="good_or_bad" value="2">SoSo...
+      </label>
+      @if ($errors->has('good_or_bad'))
+        <span class="help-block">
+            <strong>{{ $errors->first('good_or_bad') }}</strong>
+        </span>
+      @endif
+      <input type="file" name="uiImage">
+      <button type="submit" class="btn btn-primary">投稿</button>
+    </form>
+    <div class="preview">
+    </div>
   </div>
 @endsection
 

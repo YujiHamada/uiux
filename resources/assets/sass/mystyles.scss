@@ -59,12 +59,13 @@ h5.comment-header{
 // カラー系
 //////////////////////////////
 $color-midnightblue: #001e43;
+$color-sidebar-hover: #f0f8ff;
 
-.yy-bg-midnightblue {
-  background-color: $color-midnightblue !important;
+.yy-bg-white {
+  background-color: white !important;
 }
 
-a.yy-bg-midnightblue:focus, a.yy-bg-midnightblue:hover {
+.yy-bg-midnightblue {
   background-color: $color-midnightblue !important;
 }
 
@@ -78,5 +79,5 @@ a.yy-bg-midnightblue:focus, a.yy-bg-midnightblue:hover {
 }
 
 a.yy-bg-sidebar:focus, a.yy-bg-sidebar:hover {
-  background-color: #bbe2f1 !important;
+  background-color: $color-sidebar-hover !important;
 }

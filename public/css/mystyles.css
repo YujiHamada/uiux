@@ -32,11 +32,11 @@ h5.comment-header {
   border-bottom: 1px solid silver;
 }
 
-.yy-bg-midnightblue {
-  background-color: #001e43 !important;
+.yy-bg-white {
+  background-color: white !important;
 }
 
-a.yy-bg-midnightblue:focus, a.yy-bg-midnightblue:hover {
+.yy-bg-midnightblue {
   background-color: #001e43 !important;
 }
 
@@ -50,7 +50,7 @@ a.yy-bg-midnightblue:focus, a.yy-bg-midnightblue:hover {
 }
 
 a.yy-bg-sidebar:focus, a.yy-bg-sidebar:hover {
-  background-color: #bbe2f1 !important;
+  background-color: #f0f8ff !important;
 }
 
 /*# sourceMappingURL=mystyles.css.map */
