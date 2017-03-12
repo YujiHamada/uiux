@@ -11,20 +11,46 @@ img.user-avatar {
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
   overflow: hidden;
 }
-h5.comment-header{
+
+h5.comment-header {
   margin-top: 50px;
 }
 
-.comment{
-      border-bottom: 1px solid #aaa;
+.comment {
+  border-bottom: 1px solid #aaa;
 }
 
-.comment-textarea{
+.comment-textarea {
   width: 100%;
 }
 
-.commented-user{
+.commented-user {
   text-align: right;
+}
+
+.yy-sidebar-outline {
+  border-bottom: 1px solid silver;
+}
+
+.yy-bg-white {
+  background-color: white !important;
+}
+
+.yy-bg-midnightblue {
+  background-color: #001e43 !important;
+}
+
+.yy-bg-sidebar {
+  background-color: white !important;
+}
+
+.yy-bg-sidebar.active {
+  color: black !important;
+  border-left: 2px solid #001e43;
+}
+
+a.yy-bg-sidebar:focus, a.yy-bg-sidebar:hover {
+  background-color: #f0f8ff !important;
 }
 
 /*# sourceMappingURL=mystyles.css.map */

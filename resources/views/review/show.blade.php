@@ -21,71 +21,72 @@
 @endsection
 
 @section('content')
-  @if (session('flash_message'))
-    <div class="alert alert-success alert-dismissible fade show" role="alert">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      {{ session('flash_message') }}
-    </div>
-  @endif
-  @if($review->image_name)
-   <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
-  @endif
-  <h4>タイトル：{{ $review->title }}</h4>
-  <p>詳細：{{ $review->description }}</p>
-  <span>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</span>
-  @if(Auth::user()->id != $review->user_id)
-    <p>
-    賛成数：{{$review->agreeCount()->count()}}
-    反対数：{{$review->disagreeCount()->count()}}
-    </p>
-    <p>↓このレビューに↓</p>
-    <button id="agree" class="agree btn btn-primary {{ isset($agree) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.agree.AGREE')}}">
-      {{ (isset($agree) && $agree->is_agree == 1) ? '賛成済' : '賛成' }}
-    </button>
-    <button id="disagree" class="agree btn btn-warning {{isset($agree) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.agree.DISAGREE')}}">
-      {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
-    </button>
-  @endif
-
-  <div class="comments">
-    <h5 class="comment-header">コメント：{{$review->commentsCount()->count()}}件</h5>
-    @foreach($review->comments as $reviewComment)
-      <div class="comment">
-        <div>
-          <p>{{$reviewComment->comment}}</p>  
-        </div>
-        <div class="commented-user">
-          @if($reviewComment->user->id == Auth::user()->id)
-            <form action="destroy" method="post" accept-charset="utf-8">
-              {{ csrf_field() }}
-              <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
-              <input type="hidden" name="reviewId" value="{{$review->id}}">
-              <input class="btn btn-danger btn-sm" type="submit" name="deleteButton" value="削除">
-              <span>投稿者：{{$reviewComment->user->name}}</span>
-              <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
-            </form> 
-          @endif
-        </div>
+  <div class="col mx-3">
+    @if (session('flash_message'))
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        {{ session('flash_message') }}
       </div>
-    @endforeach
-  </div>
+    @endif
+    @if($review->image_name)
+     <img src="/{{Config::get('const.IMAGE_FILE_DIRECTORY')}}{{$review->image_name }}" alt="">
+    @endif
+    <h4>タイトル：{{ $review->title }}</h4>
+    <p>詳細：{{ $review->description }}</p>
+    <span>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</span>
+    @if(Auth::user()->id != $review->user_id)
+      <p>
+      賛成数：{{$review->agreeCount()->count()}}
+      反対数：{{$review->disagreeCount()->count()}}
+      </p>
+      <p>↓このレビューに↓</p>
+      <button id="agree" class="agree btn btn-primary {{ isset($agree) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.agree.AGREE')}}">
+        {{ (isset($agree) && $agree->is_agree == 1) ? '賛成済' : '賛成' }}
+      </button>
+      <button id="disagree" class="agree btn btn-warning {{isset($agree) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.agree.DISAGREE')}}">
+        {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
+      </button>
+    @endif
 
-  <p>このレビューにコメントをする</p>
-  @if ($errors->has('comment'))
-    <span class="help-block">
-      <strong>{{ $errors->first('comment') }}</strong>
-    </span>
-  @endif
-  <form action="store" method="post">
-    {{ csrf_field() }}
-    <textarea class="comment-textarea" name="comment"></textarea>
-    <input type="hidden" name="reviewId" value="{{$review->id}}">
-    <input type="hidden" name="userId" value="{{Auth::user()->id}}">
-    <input class="btn btn-primary" type="submit" name="commentSubmit" value="コメントする">
-  </form>
-  
+    <div class="comments">
+      <h5 class="comment-header">コメント：{{$review->commentsCount()->count()}}件</h5>
+      @foreach($review->comments as $reviewComment)
+        <div class="comment">
+          <div>
+            <p>{{$reviewComment->comment}}</p>
+          </div>
+          <div class="commented-user">
+            @if($reviewComment->user->id == Auth::user()->id)
+              <form action="destroy" method="post" accept-charset="utf-8">
+                {{ csrf_field() }}
+                <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
+                <input type="hidden" name="reviewId" value="{{$review->id}}">
+                <input class="btn btn-danger btn-sm" type="submit" name="deleteButton" value="削除">
+                <span>投稿者：{{$reviewComment->user->name}}</span>
+                <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
+              </form>
+            @endif
+          </div>
+        </div>
+      @endforeach
+    </div>
+
+    <p>このレビューにコメントをする</p>
+    @if ($errors->has('comment'))
+      <span class="help-block">
+        <strong>{{ $errors->first('comment') }}</strong>
+      </span>
+    @endif
+    <form action="store" method="post">
+      {{ csrf_field() }}
+      <textarea class="comment-textarea" name="comment"></textarea>
+      <input type="hidden" name="reviewId" value="{{$review->id}}">
+      <input type="hidden" name="userId" value="{{Auth::user()->id}}">
+      <input class="btn btn-primary" type="submit" name="commentSubmit" value="コメントする">
+    </form>
+  </div>
 @endsection
 
 @section('foot')

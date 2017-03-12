@@ -16,6 +16,7 @@
 @endsection
 
 @section('content')
+  <div class="col mx-3">
     <h4>タイムライン</h4>
     <div class="timeline">
     	@foreach($reviews as $review)
@@ -48,5 +49,5 @@
         </div>
       @endforeach
     </div>
-
+  </div>
 @endsection
