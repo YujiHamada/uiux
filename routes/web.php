@@ -36,10 +36,13 @@ Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@store');
 Route::post('/settings/crop', 'UserController@crop'); // Ajax
 
+Route::get('/{username}/following', 'UserController@showFollowing');
+Route::get('/{username}/followers', 'UserController@showFollowers');
+
+
 
 //SocialController
 Route::get('/login/callback', 'Auth\SocialController@handleError')->name('logincallback');
 Route::get('/login/{provider}', 'Auth\SocialController@redirectToSocialAuth');
 Route::get('/login/callback/{provider}', 'Auth\SocialController@handleSocialCallback');
-
 Route::post('/register/social', 'Auth\SocialController@create');

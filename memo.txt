@@ -83,6 +83,13 @@
     .align-items-start 上寄せ
     .align-items-center 中央寄せ
     .align-items-end 下寄せ
+  ◆text系
+    .text-justify 均等割り付けにする
+    .text-left 左寄せ
+    .text-center 中央寄せ
+    .text-right 右寄せ
+    .font-weight-bold ボールド
+    .font-italic イタリック
 
 【コーディング規約】
   メソッド名:キャメル

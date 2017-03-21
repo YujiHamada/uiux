@@ -44,7 +44,7 @@
         </div>
         <div class="row form-group">
           <label class="col-2">自己紹介</label>
-          <textarea name="biography" class="col-10 form-control" rows="3">{{ Auth::user()->biography }}</textarea>
+          <textarea name="biography" maxlength="150" class="col-10 form-control" rows="3">{{ Auth::user()->biography }}</textarea>
         </div>
         <div class="row form-group">
           <label class="col-12">プロフィール画像</label>

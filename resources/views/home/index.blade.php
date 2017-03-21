@@ -1,22 +1,7 @@
 @extends('layouts.app')
 
-@section('head')
-  @parent
-  <style>
-    img {
-        width: auto;
-        height: auto;
-        max-width: 120px;
-        max-height: 150px;
-    }
-    div.review{
-      border-top: 1px solid #ddd;
-    }
-  </style>
-@endsection
-
 @section('content')
-  <div class="col mx-3">
+  <div class="col mx-3 px-0">
 
     @if (session('flash_message'))
       <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -34,21 +19,22 @@
     </div>
 
 
-    <div class="timeline">
 
-      <!-- タブ -->
-      <ul class="nav nav-tabs">
-        <li class="nav-item">
-          <a class="nav-link {{ url()->current() === url('/') || url()->current() === url('/timeline/all') ? " active" : "" }}" href="/timeline/all">All</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ url()->current() === url('/timeline/good') ? " active" : "" }}" href="/timeline/good">Good</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link {{ url()->current() === url('/timeline/bad') ? " active" : "" }}" href="/timeline/bad">Bad</a>
-        </li>
-      </ul>
 
+    <!-- タブ -->
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link {{ url()->current() === url('/') || url()->current() === url('/timeline/all') ? " active" : "" }}" href="/timeline/all">All</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ url()->current() === url('/timeline/good') ? " active" : "" }}" href="/timeline/good">Good</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ url()->current() === url('/timeline/bad') ? " active" : "" }}" href="/timeline/bad">Bad</a>
+      </li>
+    </ul>
+
+    <div class="timeline pt-3">
       <!-- レビュー -->
       @foreach($reviews as $review)
         @include('subs.timelinereview')
