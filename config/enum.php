@@ -1,9 +1,9 @@
 <?php
 return array(
-		'good_or_bad' =>  
-		array(
-			'GOOD' => '0',
-    		'BAD' => '1',
+			'good_or_bad' =>
+			array(
+    		'BAD' => '0',
+				'GOOD' => '1',
     		'SOSO' => '2'
     		),
     	'agree' =>

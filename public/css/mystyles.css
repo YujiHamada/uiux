@@ -1,17 +1,5 @@
+@charset "UTF-8";
 @import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);
-img.user-avatar {
-  display: inline-block;
-  margin: 0 auto;
-  height: 220px;
-  width: auto;
-  max-width: 220px;
-  max-height: 220px;
-  border: 3px solid #fff;
-  border-radius: 5px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  overflow: hidden;
-}
-
 h5.comment-header {
   margin-top: 50px;
 }
@@ -28,8 +16,92 @@ h5.comment-header {
   text-align: right;
 }
 
-.yy-sidebar-outline {
-  border-bottom: 1px solid silver;
+.yy-fontsize-09 {
+  font-size: 0.9rem;
+}
+
+.yy-fontsize-h5 {
+  font-size: 1.25rem;
+}
+
+.yy-vertical-align-middle {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.yy-review-img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 150px;
+  height: 150px;
+  background-size: cover;
+}
+
+.yy-avatar-img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  margin: 5px;
+  width: 220px;
+  height: 220px;
+  background-size: cover;
+  border: 3px solid #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+}
+
+.yy-avatar-thumbnail-img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 1.35rem;
+  height: 1.35rem;
+  background-size: cover;
+  border-radius: 5px;
+}
+
+.yy-overflow-hidden {
+  overflow: hidden;
+}
+
+.yy-word-wrap {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.yy-review-word-wrap {
+  line-height: 1.5rem;
+  max-height: 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.yy-review-word-wrap:before, .yy-review-word-wrap:after {
+  position: absolute;
+  background: #fff;
+}
+
+.yy-review-word-wrap:before {
+  content: "･･･";
+  bottom: 0;
+  right: 0;
+}
+
+.yy-review-word-wrap:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+}
+
+.yy-outline {
+  border: 1px solid #bccddb;
+  border-radius: 5px;
+}
+
+.yy-outline-bottom {
+  border-bottom: 1px solid #bccddb;
 }
 
 .yy-bg-white {
@@ -38,6 +110,11 @@ h5.comment-header {
 
 .yy-bg-midnightblue {
   background-color: #001e43 !important;
+}
+
+.yy-bg-body {
+  background: -webkit-linear-gradient(right, #f0f8ff, white 10%, white 90%, #f0f8ff);
+  background: linear-gradient(to left, #f0f8ff, white 10%, white 90%, #f0f8ff);
 }
 
 .yy-bg-sidebar {
@@ -49,7 +126,7 @@ h5.comment-header {
   border-left: 2px solid #001e43;
 }
 
-a.yy-bg-sidebar:focus, a.yy-bg-sidebar:hover {
+.yy-bg-sidebar:focus, .yy-bg-sidebar:hover {
   background-color: #f0f8ff !important;
 }
 

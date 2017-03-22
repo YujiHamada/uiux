@@ -42,7 +42,11 @@ class UserController extends Controller
     $user = Auth::user();
     $user->name = $request->input('name');
     $user->email = $request->input('email');
-    $user->biography = $request->input('biography');
+    $str = $request->input('biography');
+    $str = trim($str); // 両サイドのスペースを消す
+    $str = preg_replace('/[\n\r\t]/', ' ', $str); // 改行、タブをスペースへ
+    $str = preg_replace('/\s(?=\s)/', ' ', $str); // 複数スペースを一つへ
+    $user->biography = $str;
     $user->avatar_image_path = $request->input('avatar_image_path');
     $user->save();
 
@@ -65,8 +69,22 @@ class UserController extends Controller
     );
 
     return response()->json($response);
+  }
 
-    // echo json_encode($response);
+
+  public function showFollowing($name) {
+    $user = User::where('name', $name)->first();
+
+    $following = $user->getFollowing();
+
+    return view('user.showfollow', compact('user', 'following'));
+  }
+
+  public function showFollowers($name) {
+    $user = User::where('name', $name)->first();
+
+    $followers = $user->getFollowers();
+    return view('user.showfollow', compact('user', 'followers'));
   }
 
 }

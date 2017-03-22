@@ -61,5 +61,38 @@ class ReviewsTableSeeder extends Seeder
           'updated_at' => $date
         ]);
       }
+
+      // For yoshimi
+      $yoshimi = DB::table('users')->where('email', 'yoshimi@gmail.com')->first();
+      for($i = 0; $i < count($titles); $i++) {
+        $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
+        DB::table('reviews')->insert([
+          'user_id' => $yoshimi->id,
+          'good_or_bad' => $goodOrBads[$i],
+          'title' => $yoshimi->name . '\'s ' . $titles[$i],
+          'description' => $titles[$i] . ' description',
+          'url' => $urlYYUIUX,
+          'domain' => $domainYYUIUX,
+          'image_name' => $imageNames[$i],
+          'created_at' => $date,
+          'updated_at' => $date
+        ]);
+      }
+      // For rika
+      $rika = DB::table('users')->where('email', 'rika@gmail.com')->first();
+      for($i = 0; $i < count($titles); $i++) {
+        $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
+        DB::table('reviews')->insert([
+          'user_id' => $rika->id,
+          'good_or_bad' => $goodOrBads[$i],
+          'title' => $rika->name . '\'s ' . $titles[$i],
+          'description' => $titles[$i] . ' description',
+          'url' => $urlYYUIUX,
+          'domain' => $domainYYUIUX,
+          'image_name' => $imageNames[$i],
+          'created_at' => $date,
+          'updated_at' => $date
+        ]);
+      }
     }
 }

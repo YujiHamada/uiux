@@ -26,7 +26,7 @@
   </script>
 </head>
 
-<body>
+<body class="yy-bg-body">
   <div id="app">
     <!-- ナビゲーションバー -->
     @section('navigationBar')
@@ -58,6 +58,7 @@
               <li><a href="{{ url('/login') }}">Login</a></li>
               <li><a href="{{ url('/register') }}">Register</a></li>
               @else
+              <spqn class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></spqn>
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                   {{ Auth::user()->name }} <span class="caret"></span>
@@ -91,27 +92,27 @@
           <div class="row justify-content-center">
             <!-- 左サイドバー -->
             @section('leftSideBar')
-              <nav class="col-2 px-0 mx-1">
+              <nav class="col-2 px-0 mx-3">
                 <ul class="nav nav-pills flex-column">
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <p class="nav-link yy-bg-midnightblue text-white my-0" >LeftSidebar</p>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar active" href="#">Link</a>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">Link</a>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">Link</a>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">Link</a>
                   </li>
                 </ul>
                 <ul class="nav nav-pills flex-column">
                 <?php foreach($categories as $category): ?>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">{{$category->name}}</a>
                   </li>
                 <?php endforeach; ?>
@@ -123,18 +124,18 @@
             @show
             <!-- 右サイドバー -->
             @section('rightSideBar')
-              <nav class="col-2 px-0 mx-1">
+              <nav class="col-2 px-0 mx-3">
                 <ul class="nav nav-pills flex-column">
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <p class="nav-link yy-bg-midnightblue text-white my-0" >RightSidebar</p>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">ユーザー情報</a>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">Twitter</a>
                   </li>
-                  <li class="nav-item yy-sidebar-outline">
+                  <li class="nav-item yy-outline-bottom">
                     <a class="nav-link yy-bg-sidebar" href="#">ランキング</a>
                   </li>
                 </ul>
