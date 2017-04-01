@@ -20,6 +20,11 @@
     (./database/migrations/を参照)
   ◆migration実行
     php artisan migrate
+  ◆コマンドから実行するクラスの作成
+    php artisan make:command クラス名
+    作成したファイルの$signatureでコマンド名を指定
+    php artisan コマンド名　で実行可能
+    実行内容はhandle()に記載する
 
 【composer】
   composer install：composer.lockに書かれている各ライブラリをインストールする。

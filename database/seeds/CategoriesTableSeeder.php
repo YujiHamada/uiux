@@ -13,13 +13,16 @@ class CategoriesTableSeeder extends Seeder
     public function run()
     {
       DB::table('categories')->insert([
-        'name' => 'ui'
+        'name' => 'ui',
+        'is_master' => '1' 
       ]);
       DB::table('categories')->insert([
-        'name' => 'ux'
+        'name' => 'ux',
+        'is_master' => '1'
       ]);
       DB::table('categories')->insert([
-        'name' => 'yyuiux'
+        'name' => 'yyuiux',
+        'is_master' => '1'
       ]);
     }
 }
