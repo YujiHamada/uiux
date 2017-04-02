@@ -45,7 +45,10 @@ class ReviewController extends Controller
     //投稿用
     public function create() {
         $categories = Category::take(10)->get();
-        return view('review.create',compact('categories'));
+        $categoryNames = DB::table('categories')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
+        //カテゴリーをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
+        $categoryNames = '"' .implode('","',$categoryNames->all()) . '"';
+        return view('review.create',compact('categories', 'categoryNames'));
     }
 
     //投稿確認画面表示用
@@ -55,14 +58,14 @@ class ReviewController extends Controller
         $file = $request->file('uiImage');
         $url = $request->input('url');
         $good_or_bad = $request->input('good_or_bad');
-        $category = $request->input('category');
+        $selectedCategories = $request->input('categories');
 
         //ファイル名はmd5で暗号化したものに元の拡張子をつける
         if($file){
             $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
             $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
         }
-        return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'category'));
+        return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'selectedCategories'));
     }
 
     //投稿完了画面表示用
@@ -101,15 +104,28 @@ class ReviewController extends Controller
 
         $review->save();
 
-        $review_category = new Review_Category;
-        $review_category->review_id = $review->id;
-
-        $category = $request->input('category');
-        $review_category->category_id = $category;
-
-        $review_category->save();
+        $this->categorize($request->input('categories'), $review->id);
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
+    }
+
+    public function categorize($categories, $reviewId){
+        $reviewCategories = array();
+        foreach($categories as $key => $categoryName){
+            $savedCategory = Category::where('name', $categoryName)->first();
+            $categoryId;
+            if(!empty($savedCategory->id)){
+                $categoryId = $savedCategory->id;
+            }else{
+                $category = new Category;
+                $category->name = $categoryName;
+                $category->save();
+
+                $categoryId = $category->id;
+            }
+            array_push($reviewCategories, array('category_id' => $categoryId, 'review_id' => $reviewId, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')));
+        }
+        DB::table('review_category')->insert($reviewCategories);
     }
 
     public function agree(Request $request){

@@ -20,7 +20,11 @@
 		@endif
 		<p>タイトル：{{ $title }}</p>
 		<p>概要：{{ $description }}</p>
-		<p>カテゴリー：{{$category}}</p>
+		<p>カテゴリー：
+			@foreach($selectedCategories as $category)
+		 		<span class="badge badge-pill badge-default">{{ $category }}</span>
+		    @endforeach
+		</p>
 		@if($url)
 			<p>URL：{{$url}}</p>
 		@endif
@@ -38,6 +42,9 @@
 			@endif
 			<input type="hidden" name="good_or_bad" value = "{{ $good_or_bad }}">
 			<input type="hidden" name="category" value="{{$category}}">
+			@foreach($selectedCategories as $category)
+				<input type="hidden" name="categories[]" value="{{ $category }}">
+		    @endforeach
 			<button type="submit" class="btn btn-primary">投稿</button>
 		</form>
 	</div>

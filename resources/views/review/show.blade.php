@@ -49,6 +49,9 @@
         {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
       </button>
     @endif
+    @foreach($review->reviewCategory as $reviewCategory)
+      <span class="badge badge-pill badge-default">{{ $reviewCategory->category->name }}</span>
+    @endforeach
 
     <div class="comments">
       <h5 class="comment-header">コメント：{{$review->commentsCount()->count()}}件</h5>

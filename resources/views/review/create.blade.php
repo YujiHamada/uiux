@@ -27,20 +27,18 @@
         </span>
       @endif
       カテゴリー：
-      <select name="category" class="form-control">
-        <?php foreach($categories as $category): ?>
-          <option value="{{$category->id}}">{{$category->name}}</option>
-        <?php endforeach; ?>
-      </select>
+      <div class="categories">
+        <input type="text" id="category">
+      </div>
 
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD' }}">Good
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}">Good
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD' }}">BAD
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}">BAD
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO' }}">SoSo...
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}">SoSo...
       </label>
       @if ($errors->has('good_or_bad'))
         <span class="help-block">
@@ -57,8 +55,55 @@
 
 @section('foot')
   @parent
+  <link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
+  <script src="/js/jquery-ui.min.js"></script>
   <script>
+    //エンター押下時の制御
+    $("#category").keydown(function(event){
+      if(event.keyCode == 13) {
+        var typedCategory = $("#category").val();
+        event.preventDefault();
+        if(typedCategory.length > 0) {
+          inputCategory(typedCategory);
+          event.preventDefault();
+          //オートコンプリートをクローズすることでオートコンプリートのセレクトを呼び出さないようにしている
+          $('#category').autocomplete('close');
+          $(this).val('');
+        }
+      }
+    });
+    //追加したカテゴリーを削除する。jqueryでの追加要素なので、$(document)から指定している。
+    $(document).on('click', '.removeCategory', function(){  
+      //removeに動作つけるためコールバックしている
+      $(this).parent().hide('slow', function(){
+        $(this).remove();
+      });
+    });
+
     $(function(){
+      // autocompleteで使用する値候補
+      var name = [{!! $categoryNames !!}];
+   
+      $('#category').autocomplete({
+        source: name,
+        change: function(event, ui) {
+          //警告メッセージの削除
+          $('.alert-warning').remove();
+        },
+        search: function(event, ui) {
+          //警告メッセージの削除
+          $('.alert-warning').remove();
+        },
+        select: function(event, ui) {
+          inputCategory(ui.item.value);
+          $('#category').val('');
+          //jquery autocompleteの機能でtextが保管されるのでpreventDefault()。jquery-ui.jsの5860行目あたり
+          event.preventDefault();
+        },
+      });
+
+      
+
       //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
       $('form').on('change', 'input[type="file"]', function(e) {
         let file = e.target.files[0]
@@ -88,5 +133,20 @@
         reader.readAsDataURL(file);
       });
     });
+
+    function inputCategory(selectedCategory){
+      var selectedCategories = $(':hidden[name="categories[]"]').map(function() {
+        return $(this).val();
+      }).get();
+      //選択したカテゴリーがすでに選択されているか判定
+      if($.inArray(selectedCategory, selectedCategories) >= 0){
+        if(document.getElementsByClassName('alert-warning').length == 0){
+          //エラーメッセージがすでにあるか一応判定（jqueryでDOM判定は遅いそうなのでgetElementsByClassNameを使用  
+          $('.categories').append('<div class="alert alert-warning">' + selectedCategory + 'はすでに登録されています</div>');  
+        }
+      }else{
+        $('.categories').append('<span class="badge badge-pill badge-default">' + selectedCategory + '<span class="removeCategory"> ✕</span>'+ '<input name="categories[]" type="hidden" value="' + selectedCategory + '">' +'</span>');
+      }
+    }
   </script>
 @endsection
