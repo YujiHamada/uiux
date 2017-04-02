@@ -34,13 +34,13 @@
       </select>
 
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD' }}">Good
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}">Good
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD' }}">BAD
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}">BAD
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO' }}">SoSo...
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}">SoSo...
       </label>
       @if ($errors->has('good_or_bad'))
         <span class="help-block">

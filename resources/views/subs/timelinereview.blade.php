@@ -36,13 +36,13 @@
     </div>
     @if($review->image_name)
       <div class="col-3 p-0 text-right">
-        <spqn class="yy-review-img d-block ml-auto" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></spqn>
+        <span class="yy-review-img d-block ml-auto" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></span>
       </div>
     @endif
   </div>
   <div class="row mx-0">
     <div class="col p-0">
-      <spqn class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset($review->user->avatar_image_path) }})"></spqn>
+      <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset($review->user->avatar_image_path) }})"></span>
       <a class ="yy-fontsize-09" href="{{ action('UserController@show', ['username' => $review->user->name]) }}" title="">{{ $review->user->name }}</a>
       @foreach($review->reviewCategory as $reviewCategory)
         <span class="badge badge-pill badge-default">{{ $reviewCategory->category->name }}</span>
