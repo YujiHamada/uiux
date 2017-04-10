@@ -36,8 +36,11 @@ Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@store');
 Route::post('/settings/crop', 'UserController@crop'); // Ajax
 
+Route::post('/{username}/follow', 'UserController@follow');
 Route::get('/{username}/following', 'UserController@showFollowing');
 Route::get('/{username}/followers', 'UserController@showFollowers');
+
+
 
 
 

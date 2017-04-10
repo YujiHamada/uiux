@@ -3,6 +3,8 @@
 @section('leftSideBar')
   <div id="user-left-side-bar" class="col-3 px-0">
 
+    {{-- 変数$userに値が設定されていない場合、
+    変数$userにログイン中のユーザを設定する。 --}}
     @php
       if(!isset($user)) {
         $user = Auth::user();
@@ -19,17 +21,24 @@
           <p>{{ $user->biography }}</p>
         </div>
         <div class="py-3">
-          <a href="#" class="btn btn-outline-success d-block">Go somewhere</a>
+          @if($user->name == Auth::user()->name)
+            <a href="{{ action('UserController@edit') }}" class="btn btn-outline-success d-block">プロフィールを編集</a>
+          @else
+            <button id="follow-btn" class="btn btn-outline-success btn-block {{ $user->isFollowed() ? 'active' : '' }}" type="button" aria-pressed="true">
+              {{ $user->isFollowed() ? 'フォロー中' : 'フォローする' }}
+            </button>
+          @endif
         </div>
         <div>
           <p>
             フォロー数：
-            <a href="{{ action('UserController@showFollowing', $user->name) }}">{{ $user->getFollowCount() }}
+            <a id="follow-count" href="{{ action('UserController@showFollowing', $user->name) }}">
+              {{ $user->getFollowCount() }}
             </a>
           </p>
           <p>
             フォロワー数：
-            <a href="{{ action('UserController@showFollowers', $user->name) }}">
+            <a id="follower-count" href="{{ action('UserController@showFollowers', $user->name) }}">
               {{ $user->getFollowerCount() }}
             </a>
           </p>
@@ -64,4 +73,48 @@
 
 {{-- 右サイドバーは不要のため、空で上書き --}}
 @section('rightSideBar')
+@endsection
+
+@section('foot')
+  @parent
+  <script>
+    $(function() {
+
+      // 画面表示時にフォローボタンの属性を設定
+      if($('#follow-btn').hasClass('active')) {
+        $('#follow-btn').mouseenter(function() {$(this).text('解除する').css('background-color','red');})
+                        .mouseleave(function() {$(this).text('フォロー中').css('background-color','');});
+      }
+
+      // フォローボタン押下時イベント。Ajax。
+      $('#follow-btn').on('click', function() {
+        var name = "{{ $user->name }}";
+        $.ajax({
+          url: "/{{ $user->name }}/follow",
+          type:'POST',
+          dataType: 'json',
+          data: {
+            name: name
+          }
+        }).done(function(data) {
+          $('#follow-btn').toggleClass('active');
+
+          // フォローボタンの属性を設定する
+          if(data.isFollow){
+            $('#follower-count').text(data.followerCount);
+            $('#follow-btn').text('フォロー中')
+                            .mouseenter(function() {$(this).text('解除する').css('background-color','red');})
+                            .mouseleave(function() {$(this).text('フォロー中').css('background-color','');});
+          } else {
+            $('#follower-count').text(data.followerCount);
+            $('#follow-btn').text('フォローする').unbind('mouseenter').unbind('mouseleave').css('background-color','');
+          }
+
+        }).fail(function() {
+          alert('失敗しました');
+        });
+      });
+
+    });
+  </script>
 @endsection

@@ -54,7 +54,7 @@ class UserController extends Controller
   }
 
 
-  public function crop(Request $request){
+  public function crop(Request $request) {
     $crop = new CropAvatar(
       Input::has('avatar_src') ? $request->input('avatar_src') : null,
       Input::has('avatar_data') ? $request->input('avatar_data') : null,
@@ -71,7 +71,7 @@ class UserController extends Controller
     return response()->json($response);
   }
 
-
+  // フォローしているユーザの一覧を表示する
   public function showFollowing($name) {
     $user = User::where('name', $name)->first();
 
@@ -80,11 +80,31 @@ class UserController extends Controller
     return view('user.showfollow', compact('user', 'following'));
   }
 
+  // フォロワーの一覧を表示する
   public function showFollowers($name) {
     $user = User::where('name', $name)->first();
 
     $followers = $user->getFollowers();
     return view('user.showfollow', compact('user', 'followers'));
+  }
+
+  // フォローボタンのイベント。Ajax。
+  public function follow(Request $request) {
+    $name = $request->name;
+    $user = User::where('name', $name)->first();
+
+    if($user->isFollowed()) {
+      // すでにフォローされている場合、フォローを解除
+      $user->resetFollow();
+    } else {
+      // フォローされていなかった場合、フォローする
+      $user->setFollow();
+    }
+
+    return response()->json([
+        'isFollow' => $user->isFollowed(),
+        'followerCount' => $user->getFollowerCount()
+    ]);
   }
 
 }

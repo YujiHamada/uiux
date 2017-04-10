@@ -62,7 +62,7 @@
           </div>
           <div class="commented-user">
             @if($reviewComment->user->id == Auth::user()->id)
-              <form action="destroy" method="post" accept-charset="utf-8">
+              <form action="{{ action('ReviewCommentController@destroy') }}" method="post" accept-charset="utf-8">
                 {{ csrf_field() }}
                 <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
                 <input type="hidden" name="reviewId" value="{{$review->id}}">
@@ -82,7 +82,7 @@
         <strong>{{ $errors->first('comment') }}</strong>
       </span>
     @endif
-    <form action="store" method="post">
+    <form action="{{ action('ReviewCommentController@store') }}" method="post">
       {{ csrf_field() }}
       <textarea class="comment-textarea" name="comment"></textarea>
       <input type="hidden" name="reviewId" value="{{$review->id}}">
@@ -95,18 +95,14 @@
 @section('foot')
   @parent
   <script>
+  // ボタン連打対策
   $(function () {
     $('form').submit(function () {
       $(this).find(':submit').prop('disabled', true);
     });
   });
 
-  $.ajaxSetup({
-          headers: {
-              'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-          }
-  });
-
+  // 賛成・反対のボタン押下時イベント。Ajax。
   $('.agree').on('click',function(){
     var userID = {{Auth::user()->id}};
     var reviewID = {{$review->id}};
