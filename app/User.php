@@ -4,6 +4,10 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\User;
+use App\Follow;
+use Auth;
+
 
 class User extends Authenticatable
 {
@@ -33,21 +37,44 @@ class User extends Authenticatable
     //   return $this->hasMany('App\Follow', 'user_id', 'id')->get();
     // }
 
-    public function getFollowing(){
+    // フォローしているユーザを取得する
+    public function getFollowing() {
       $followUserIds = $this->hasMany('App\Follow', 'user_id', 'id')->select('follow_id')->get();
       return User::whereIn('id', $followUserIds)->get();
     }
 
-    public function getFollowCount(){
+    // フォローしているユーザをカウントする
+    public function getFollowCount() {
       return $this->getFollowing()->count();
     }
 
-    public function getFollowers(){
+    // フォロワーを取得する
+    public function getFollowers() {
       $followerUserIds = $this->hasMany('App\Follow', 'follow_id', 'id')->select('user_id')->get();
       return User::whereIn('id', $followerUserIds)->get();
     }
 
-    public function getFollowerCount(){
+    // フォロワーの数をカウントする
+    public function getFollowerCount() {
       return $this->getFollowers()->count();
+    }
+
+    // ログインユーザにフォローされているかチェックする
+    public function isFollowed() {
+      $follow = $this->hasMany('App\Follow', 'follow_id', 'id')->where('user_id', Auth::user()->id)->first();
+      return isset($follow);
+    }
+
+    // ログインユーザからのフォローをセットする
+    public function setFollow() {
+      $follow = new Follow;
+      $follow->user_id = Auth::user()->id;
+      $follow->follow_id = $this->id;
+      $follow->save();
+    }
+
+    // ログインユーザからのフォローを解除する
+    public function resetFollow() {
+      $follow = $this->hasMany('App\Follow', 'follow_id', 'id')->where('user_id', Auth::user()->id)->delete();
     }
 }

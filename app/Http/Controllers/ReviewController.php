@@ -36,7 +36,7 @@ class ReviewController extends Controller
     //表示用
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        //賛成・飛散性を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
+        //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
         $agree = Review_Agree::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
 
         return view('review.show', compact('review', 'agree'));
