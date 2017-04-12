@@ -8,7 +8,8 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <title>{{ config('app.name', 'Laravel') }}</title>
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/app_images/yyuxlogo.ico') }}">
+  <title>{{ config('app.name') }}</title>
 
   <!-- Styles -->
   @section('head')
@@ -31,8 +32,8 @@
     <!-- ナビゲーションバー -->
     @section('navigationBar')
       <div class="row justify-content-center yy-bg-midnightblue">
-        <nav class="col-10 navbar navbar-toggleable-md navbar-inverse">
-          <a class="navbar-brand" href="/">yyUIUX</a>
+        <nav class="col-8 navbar navbar-toggleable-md navbar-inverse">
+          <a class="navbar-brand" href="/">yyUX</a>
           <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -88,43 +89,18 @@
     <!-- ナビゲーションバー以下 -->
     <div class="container-fluid my-3">
       <div class="row justify-content-center">
-        <div class="col-10 px-0">
+        <div class="col-8 px-0">
           <div class="row justify-content-center">
             <!-- 左サイドバー -->
             @section('leftSideBar')
-              <nav class="col-2 px-0 mx-3">
-                <ul class="nav nav-pills flex-column">
-                  <li class="nav-item yy-outline-bottom">
-                    <p class="nav-link yy-bg-midnightblue text-white my-0" >LeftSidebar</p>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar active" href="#">Link</a>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">Link</a>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">Link</a>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">Link</a>
-                  </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                <?php foreach($categories as $category): ?>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">{{$category->name}}</a>
-                  </li>
-                <?php endforeach; ?>
-                </ul>
-              </nav>
+
             @show
             <!-- 中央メインコンテンツ -->
             @section('content')
             @show
             <!-- 右サイドバー -->
             @section('rightSideBar')
-              <nav class="col-2 px-0 mx-3">
+              <nav class="col-3 px-0 mx-3">
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item yy-outline-bottom">
                     <p class="nav-link yy-bg-midnightblue text-white my-0" >RightSidebar</p>
@@ -139,6 +115,13 @@
                     <a class="nav-link yy-bg-sidebar" href="#">ランキング</a>
                   </li>
                 </ul>
+                <ul class="nav nav-pills flex-column">
+                <?php foreach($categories as $category): ?>
+                  <li class="nav-item yy-outline-bottom">
+                    <a class="nav-link yy-bg-sidebar" href="#">{{$category->name}}</a>
+                  </li>
+                <?php endforeach; ?>
+                </ul>
               </nav>
             @show
           </div>
@@ -149,7 +132,60 @@
     </div>
     <!-- フッター -->
     @section('footer')
-      <!-- 未作成 -->
+      <footer class="row justify-content-center bg-inverse">
+        <div class="col-8 m-0 p-0">
+
+          <div class="row mx-0 p-0 mt-3">
+            <div class="col-3 py-2 px-3">
+              <ul class="text-white">
+                <li>
+                  利用規約
+                </li>
+                <li>
+                  プライバシーボリシー
+                </li>
+                <li>
+                  その他1
+                </li>
+                <li>
+                  その他1
+                </li>
+                <li>
+                  その他3
+                </li>
+              </ul>
+            </div>
+            <div class="col-3 py-2 px-3">
+              <ul class="text-white">
+                <li>
+                  よくある質問
+                </li>
+                <li>
+                  お問い合わせ
+                </li>
+              </ul>
+            </div>
+            <div class="col-6 py-2 px-3 text-white d-flex align-items-center">
+              <div class="d-block">
+                <h1 class="pb-1">
+                  yyUX
+                </h1>
+                <p class="d-inline">yyUXについて</p>
+                <span class="px-3">|</span>
+                <p class="d-inline border-left-0">公式ブログ</p>
+                <span class="px-3">|</span>
+                <p class="d-inline border-left-0"><span class="fa fa-twitter"></span>ソーシャルメディア</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <div class="col-8 py-2 px-3">
+          <p class="m-0 text-white text-center">
+            Copyright© 2017 yyUX All Rights Reserved.
+          </p>
+        </div>
+      </footer>
     @show
   </div>
   <!-- Scripts -->
