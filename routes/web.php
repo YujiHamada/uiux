@@ -15,9 +15,7 @@ Auth::routes();
 
 // HomeController
 Route::get('/', 'HomeController@index');
-Route::get('/timeline/all', 'HomeController@index');
-Route::get('/timeline/good', 'HomeController@showGoodTl');
-Route::get('/timeline/bad', 'HomeController@showBadTl');
+Route::get('/timeline', 'HomeController@index');
 
 // ReviewController
 Route::get('/review/create', 'ReviewController@create');

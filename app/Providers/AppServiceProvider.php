@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       try{
-         $categories = DB::table('categories')->get();
+         $categories = DB::table('categories')->where('is_master', '1')->get();
          View::share('categories', $categories);
        } catch (\Exception $e) {
          // 「categories」テーブルがない場合エラーが出るのでcatch。
