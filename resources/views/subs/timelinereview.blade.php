@@ -45,7 +45,7 @@
       <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset($review->user->avatar_image_path) }})"></span>
       <a class ="yy-fontsize-09" href="{{ action('UserController@show', ['username' => $review->user->name]) }}" title="">{{ $review->user->name }}</a>
       @foreach($review->reviewCategory as $reviewCategory)
-        <span class="badge badge-pill badge-default">{{ $reviewCategory->category->name }}</span>
+        <a href="/timeline?categoryId={{ $reviewCategory->category->id }}"><span class="badge badge-pill badge-default">{{ $reviewCategory->category->name }}</span></a>
       @endforeach
     </div>
     <div class="col-3 p-0 text-right">

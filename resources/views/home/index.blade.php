@@ -17,22 +17,33 @@
         <a href="{{ url('/review/create') }}">UIUXレビューを投稿する</a>
       </div>
     </div>
-
-
-
+    @if(!empty($serchWords))
+      <h3>{{$serchWords}}の検索結果 {{$reviews->total()}}件</h3>
+    @endif
+    @if(!empty($selectedCategory))
+      <p>カテゴリー>{{$selectedCategory->name}}</p>
+    @endif
 
     <!-- タブ -->
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link {{ url()->current() === url('/') || url()->current() === url('/timeline/all') ? " active" : "" }}" href="/timeline/all">All</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ url()->current() === url('/timeline/good') ? " active" : "" }}" href="/timeline/good">Good</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link {{ url()->current() === url('/timeline/bad') ? " active" : "" }}" href="/timeline/bad">Bad</a>
-      </li>
-    </ul>
+    <form action="" method="get">
+      <input type="hidden" name="feed" value="">
+      <input type="hidden" name="categoryId" value="{{ $categoryId or '' }}">
+      <input type="hidden" name="serchWords" value="{{ $serchWords or '' }}">
+    
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <span class="yy-review-kind nav-link {{ url()->current() === url('/') || app('request')->feed === 'ALL' || empty(app('request')->feed) ? ' active' : '' }}" data-action="/timeline" data-feed="ALL">
+            All
+          </span>
+        </li>
+        <li class="nav-item">
+          <span class="yy-review-kind nav-link {{ app('request')->feed === 'GOOD' ? ' active' : '' }}" data-action="/timeline" data-feed="GOOD">Good</span>
+        </li>
+        <li class="nav-item">
+          <span class="yy-review-kind nav-link {{ app('request')->feed === 'BAD' ? ' active' : '' }}" data-action="/timeline" data-feed="BAD">Bad</span>
+        </li>
+      </ul>
+    </form>
 
     <div class="timeline pt-3">
       <!-- レビュー -->
@@ -46,5 +57,22 @@
     </div>
 
   </div>
+
+@endsection
+@section('foot')
+  @parent
+  <script>
+
+    $('.yy-review-kind').on('click', function() {
+      //押されたボタンからフィードの種類（good or bad）の取得
+      $('input[name="feed"]').val($(this).data('feed'));
+      //値のないinputは削除（URLがごちゃごちゃするため）
+      $('input[value=""]').remove();
+      $(this).parents('form').attr('action', $(this).data('action'));
+      $(this).parents('form').submit();
+    });
+
+  </script>
+
 
 @endsection
