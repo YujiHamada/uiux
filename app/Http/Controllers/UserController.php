@@ -25,7 +25,9 @@ class UserController extends Controller
     if($name != $user->name) {
       $user = User::where('name', $name)->first();
     }
-    $reviews = Review::where('user_id', $user->id)->get();
+
+    $reviews = Review::latest('created_at')->where('user_id', $user->id)->paginate(5);
+    // $reviews = Review::where('user_id', $user->id)->get();
 
     return view('user.show', compact('user', 'reviews'));
   }
