@@ -53,7 +53,7 @@ class HomeController extends Controller
         $reviews->setPath('?searchWords=' . $searchWords . '&tagId='. $tagId);
 
         return view('home.index', compact('reviews', 'searchWords', 'tagId', 'selectedTag'));
-        
+
     }
 
     private function setSearchWords($query, $searchWords) {
@@ -91,5 +91,11 @@ class HomeController extends Controller
         $reviews = Review::whereIn('id',$ids)->paginate(\Config::get('const.NUMBER_OF_REVIEWS_PER_PAGE'));
 
         return view('home.index', compact('reviews', 'tagId'));
+    }
+
+    public function showAbout()
+    {
+        return view('home.about');
+
     }
 }

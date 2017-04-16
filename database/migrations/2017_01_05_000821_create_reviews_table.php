@@ -18,7 +18,7 @@ class CreateReviewsTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->tinyInteger('good_or_bad');
             $table->string('title');
-            $table->string('description');
+            $table->string('description', 400);
             $table->string('url')->nullable();
             $table->string('image_name')->nullable();
             $table->string('domain')->nullable();

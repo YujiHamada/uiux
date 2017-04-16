@@ -95,6 +95,11 @@ h5.comment-header {
   height: 100%;
 }
 
+.yy-body {
+  min-height: 100vh;
+  padding-top: 4rem;
+}
+
 .yy-outline {
   border: 1px solid #bccddb;
   border-radius: 5px;
@@ -110,6 +115,7 @@ h5.comment-header {
 
 .yy-bg-midnightblue {
   background-color: #001e43 !important;
+  alpha: 0.5;
 }
 
 .yy-bg-body {
