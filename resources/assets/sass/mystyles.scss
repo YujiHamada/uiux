@@ -56,7 +56,7 @@ $yy-line-height: 1rem * 1.5;
 }
 
 .yy-vertical-align-middle {
-  display:table-cell;
+  display: table-cell;
   vertical-align: middle;
 }
 
@@ -124,6 +124,10 @@ $yy-line-height: 1rem * 1.5;
     width: 100%;
     height: 100%;
   }
+}
+
+.yy-body {
+  min-height: 100vh;
 }
 
 .yy-outline {

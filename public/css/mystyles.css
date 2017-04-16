@@ -95,6 +95,10 @@ h5.comment-header {
   height: 100%;
 }
 
+.yy-body {
+  min-height: 100vh;
+}
+
 .yy-outline {
   border: 1px solid #bccddb;
   border-radius: 5px;
