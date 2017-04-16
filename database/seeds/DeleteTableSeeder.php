@@ -3,8 +3,8 @@
 use Illuminate\Database\Seeder;
 use App\User;
 use App\Review;
-use App\Category;
-use App\Review_Category;
+use App\Tag;
+use App\Review_Tag;
 
 class DeleteTableSeeder extends Seeder
 {
@@ -15,9 +15,9 @@ class DeleteTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('review_category')->delete();
+      DB::table('review_tag')->delete();
       DB::table('reviews')->delete();
-      DB::table('categories')->delete();
+      DB::table('tags')->delete();
       DB::table('users')->delete();
     }
 }

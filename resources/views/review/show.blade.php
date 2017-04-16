@@ -49,8 +49,8 @@
         {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
       </button>
     @endif
-    @foreach($review->reviewCategory as $reviewCategory)
-      <span class="badge badge-pill badge-default">{{ $reviewCategory->category->name }}</span>
+    @foreach($review->reviewTag as $reviewTag)
+      <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
     @endforeach
 
     <div class="comments">

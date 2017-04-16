@@ -26,26 +26,31 @@
             <strong>{{ $errors->first('url') }}</strong>
         </span>
       @endif
-      カテゴリー：
-      <div class="categories">
-        <input type="text" id="category">
+      タグ：
+      <div class="tags">
+        <input type="text" id="tag">
       </div>
+      @if ($errors->has('tags'))
+        <span class="help-block">
+            <strong>{{ $errors->first('tags') }}</strong>
+        </span>
+      @endif
 
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}">Good
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}" @if(old('good_or_bad') == Config::get('enum.good_or_bad.GOOD')) checked @endif>Good
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}">BAD
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}"@if(old('good_or_bad') == Config::get('enum.good_or_bad.BAD')) checked @endif>BAD
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}">SoSo...
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}"@if(old('good_or_bad') == Config::get('enum.good_or_bad.SOSO')) checked @endif>SoSo...
       </label>
       @if ($errors->has('good_or_bad'))
         <span class="help-block">
             <strong>{{ $errors->first('good_or_bad') }}</strong>
         </span>
       @endif
-      <input type="file" name="uiImage">
+      <input type="file" name="uiImage" value="{{ old('uiImage') }}">
       <button type="submit" class="btn btn-primary">投稿</button>
     </form>
     <div class="preview">
@@ -59,21 +64,21 @@
   <script src="/js/jquery-ui.min.js"></script>
   <script>
     //エンター押下時の制御
-    $("#category").keydown(function(event){
+    $("#tag").keydown(function(event){
       if(event.keyCode == 13) {
-        var typedCategory = $("#category").val();
+        var typedTag = $("#tag").val();
         event.preventDefault();
-        if(typedCategory.length > 0) {
-          inputCategory(typedCategory);
+        if(typedTag.length > 0) {
+          inputTag(typedTag);
           event.preventDefault();
           //オートコンプリートをクローズすることでオートコンプリートのセレクトを呼び出さないようにしている
-          $('#category').autocomplete('close');
+          $('#tag').autocomplete('close');
           $(this).val('');
         }
       }
     });
-    //追加したカテゴリーを削除する。jqueryでの追加要素なので、$(document)から指定している。
-    $(document).on('click', '.removeCategory', function(){  
+    //追加したタグを削除する。jqueryでの追加要素なので、$(document)から指定している。
+    $(document).on('click', '.removeTag', function(){  
       //removeに動作つけるためコールバックしている
       $(this).parent().hide('slow', function(){
         $(this).remove();
@@ -82,9 +87,9 @@
 
     $(function(){
       // autocompleteで使用する値候補
-      var name = [{!! $categoryNames !!}];
+      var name = [{!! $tagNames !!}];
    
-      $('#category').autocomplete({
+      $('#tag').autocomplete({
         source: name,
         change: function(event, ui) {
           //警告メッセージの削除
@@ -95,8 +100,8 @@
           $('.alert-warning').remove();
         },
         select: function(event, ui) {
-          inputCategory(ui.item.value);
-          $('#category').val('');
+          inputTag(ui.item.value);
+          $('#tag').val('');
           //jquery autocompleteの機能でtextが保管されるのでpreventDefault()。jquery-ui.jsの5860行目あたり
           event.preventDefault();
         },
@@ -134,18 +139,18 @@
       });
     });
 
-    function inputCategory(selectedCategory){
-      var selectedCategories = $(':hidden[name="categories[]"]').map(function() {
+    function inputTag(selectedTag){
+      var selectedTags = $(':hidden[name="tags[]"]').map(function() {
         return $(this).val();
       }).get();
-      //選択したカテゴリーがすでに選択されているか判定
-      if($.inArray(selectedCategory, selectedCategories) >= 0){
+      //選択したタグがすでに選択されているか判定
+      if($.inArray(selectedTag, selectedTags) >= 0){
         if(document.getElementsByClassName('alert-warning').length == 0){
           //エラーメッセージがすでにあるか一応判定（jqueryでDOM判定は遅いそうなのでgetElementsByClassNameを使用  
-          $('.categories').append('<div class="alert alert-warning">' + selectedCategory + 'はすでに登録されています</div>');  
+          $('.tags').append('<div class="alert alert-warning">' + selectedTag + 'はすでに登録されています</div>');  
         }
       }else{
-        $('.categories').append('<span class="badge badge-pill badge-default">' + selectedCategory + '<span class="removeCategory"> ✕</span>'+ '<input name="categories[]" type="hidden" value="' + selectedCategory + '">' +'</span>');
+        $('.tags').append('<span class="badge badge-pill badge-default">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="tags[]" type="hidden" value="' + selectedTag + '">' +'</span>');
       }
     }
   </script>

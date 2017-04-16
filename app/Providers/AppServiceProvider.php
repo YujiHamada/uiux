@@ -16,10 +16,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       try{
-         $categories = DB::table('categories')->where('is_master', '1')->get();
-         View::share('categories', $categories);
+         $tags = DB::table('tags')->where('is_master', '1')->get();
+         View::share('tags', $tags);
        } catch (\Exception $e) {
-         // 「categories」テーブルがない場合エラーが出るのでcatch。
+         // 「tags」テーブルがない場合エラーが出るのでcatch。
          // （php artisan migrate:refresh対策）
        }
     }
