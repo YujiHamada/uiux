@@ -97,6 +97,7 @@ h5.comment-header {
 
 .yy-body {
   min-height: 100vh;
+  padding-top: 4rem;
 }
 
 .yy-outline {
@@ -114,6 +115,7 @@ h5.comment-header {
 
 .yy-bg-midnightblue {
   background-color: #001e43 !important;
+  alpha: 0.5;
 }
 
 .yy-bg-body {

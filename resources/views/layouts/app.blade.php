@@ -28,65 +28,63 @@
 </head>
 
 <body class="yy-body yy-bg-body d-flex flex-column">
+
+  {{-- consoleでvueのエラーがでるので以下を残す。使途不明。 --}}
+  <div id="app"></div>
+
   <!-- ナビゲーションバー -->
   <heder>
     @section('navigationBar')
-      <div class="container-fluid">
-        <div class="row justify-content-center yy-bg-midnightblue">
-          <nav class="col-8 navbar navbar-toggleable-md fixed-top navbar-inverse">
-            <a class="navbar-brand" href="/">yyUX</a>
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-              <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-              </ul>
-              <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
-                <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
-                <button class="btn btn-outline-success" type="submit">Search</button>
-              </form>
-              <!-- ログイン / ユーザネーム -->
-              <ul class="navbar-nav form-inline mx-2">
-                @if (Auth::guest())
-                <li><a href="{{ url('/login') }}">Login</a></li>
-                <li><a href="{{ url('/register') }}">Register</a></li>
-                @else
-                <span class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
-                <li class="dropdown">
-                  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                    {{ Auth::user()->name }} <span class="caret"></span>
-                  </a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li>
-                      <a href="{{ action('UserController@show', Auth::user()->name) }}">
-                        マイページ
-                      </a>
-                    </li>
-                    <li>
-                      <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        ログアウト
-                      </a>
-                      <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                        {{ csrf_field() }}
-                      </form>
+
+          <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top yy-bg-midnightblue">
+            <div class="container col-8 px-0">
+                <a class="navbar-brand" href="/">yyUX</a>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">Link</a>
                     </li>
                   </ul>
-                </li>
-                @endif
-              </ul>
+                  <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
+                    <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                  </form>
+                  <!-- ログイン / ユーザネーム -->
+                  <ul class="navbar-nav form-inline mx-2">
+                    @if (Auth::guest())
+                    <li><a href="{{ url('/login') }}">Login</a></li>
+                    <li><a href="{{ url('/register') }}">Register</a></li>
+                    @else
+                    <span class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                        {{ Auth::user()->name }} <span class="caret"></span>
+                      </a>
+                      <ul class="dropdown-menu" role="menu">
+                        <li>
+                          <a href="{{ action('UserController@show', Auth::user()->name) }}">
+                            マイページ
+                          </a>
+                        </li>
+                        <li>
+                          <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            ログアウト
+                          </a>
+                          <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                          </form>
+                        </li>
+                      </ul>
+                    </li>
+                    @endif
+                  </ul>
+                </div>
             </div>
           </nav>
-        </div>
-      </div>
+
 
     @show
   </heder>
@@ -176,7 +174,7 @@
                     yyUX
                   </h1>
                   <p class="d-inline">
-                    <a>yyUXについて</a>
+                    <a class="text-white" href="/about">yyUXについて</a>
                   </p>
                   <span class="px-3">|</span>
                   <p class="d-inline">

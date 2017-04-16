@@ -16,6 +16,7 @@ Auth::routes();
 // HomeController
 Route::get('/', 'HomeController@index');
 Route::get('/timeline', 'HomeController@index');
+Route::get('/about', 'HomeController@showAbout');
 
 // ReviewController
 Route::get('/review/create', 'ReviewController@create');
