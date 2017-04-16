@@ -51,7 +51,7 @@
                 </li>
               </ul>
               <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
-                <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $serchWords or '' }}" name="serchWords" required>
+                <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
                 <button class="btn btn-outline-success" type="submit">Search</button>
               </form>
               <!-- ログイン / ユーザネーム -->
@@ -121,9 +121,9 @@
                   </li>
                 </ul>
                 <ul class="nav nav-pills flex-column">
-                @foreach($categories as $category)
+                @foreach($tags as $tag)
                   <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="/timeline?categoryId={{ $category->id }}">{{ $category->name }}</a>
+                    <a class="nav-link yy-bg-sidebar" href="/timeline?tagId={{ $tag->id }}">{{ $tag->name }}</a>
                   </li>
                 @endforeach
                 </ul>
