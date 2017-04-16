@@ -27,6 +27,7 @@ class StoreReviewPost extends FormRequest
             'title' => 'required|max:50',
             'description' => 'required|max:300',
             'good_or_bad' => 'required',
+            'tags' => 'required',
             'url' => 'url',
         ];
     }

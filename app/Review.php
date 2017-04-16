@@ -14,8 +14,8 @@ class Review extends Model
     	return $this->belongsTo('App\User');
     }
 
-    public function reviewCategory(){
-    	return $this->hasMany('App\Review_Category');
+    public function reviewTag(){
+    	return $this->hasMany('App\Review_Tag');
     }
 
     public function agree(){

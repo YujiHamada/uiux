@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Review;
 use App\Review_Agree;
-use App\Review_Category;
-use App\Category;
+use App\Review_Tag;
+use App\Tag;
 
 class HomeController extends Controller
 {
@@ -36,38 +36,38 @@ class HomeController extends Controller
             $query = Review::latest('created_at');
         }
 
-        //検索条件にカテゴリーを加える
-        $categoryId = $request->input('categoryId');
+        //検索条件にタグを加える
+        $tagId = $request->input('tagId');
 
-        $selectedCategory;
+        $selectedTag;
 
-        if(!empty($categoryId)){
-            $selectedCategory = Category::select('name')->where('id', $categoryId)->first();
-            $query = $this->setCategory($query, $categoryId);
+        if(!empty($tagId)){
+            $selectedTag = Tag::select('name')->where('id', $tagId)->first();
+            $query = $this->setTags($query, $tagId);
         }
 
         //検索条件に検索ワードを加える
-        $serchWords = $request->input('serchWords');
-        $reviews = $this->setSerchWords($query, $serchWords)->paginate(\Config::get('const.NUMBER_OF_REVIEWS_PER_PAGE'));
+        $searchWords = $request->input('searchWords');
+        $reviews = $this->setSearchWords($query, $searchWords)->paginate(\Config::get('const.NUMBER_OF_REVIEWS_PER_PAGE'));
 
-        $reviews->setPath('?serchWords=' . $serchWords . '&categoryId='. $categoryId);
+        $reviews->setPath('?searchWords=' . $searchWords . '&tagId='. $tagId);
 
-        return view('home.index', compact('reviews', 'serchWords', 'categoryId', 'selectedCategory'));
+        return view('home.index', compact('reviews', 'searchWords', 'tagId', 'selectedTag'));
         
     }
 
-    private function setSerchWords($query, $serchWords) {
-        if(!empty($serchWords)){
+    private function setSearchWords($query, $searchWords) {
+        if(!empty($searchWords)){
             //全角スペースを半角スペースに変換し半角スペースでpreg_split
-            $serchWordsArray =preg_split('/[\s]+/',mb_convert_kana($serchWords, 's'));
+            $searchWordsArray =preg_split('/[\s]+/',mb_convert_kana($searchWords, 's'));
 
-            $query = $query->Where(function ($q) use(&$serchWordsArray, &$categoryQuery) {
-                $categoryQuery = Review_Category::select('review_category.review_id')->join('categories', 'review_category.category_id', 'categories.id');
-                foreach($serchWordsArray as $serchWord){
-                    $q->orwhere('title', 'like', '%' . $serchWord . '%')->orWhere('description', 'like', '%' . $serchWord . '%');
-                    $categoryQuery = $categoryQuery->where('categories.name', 'like', '%' . $serchWord . '%');
+            $query = $query->Where(function ($q) use(&$searchWordsArray, &$tagQuery) {
+                $tagQuery = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id');
+                foreach($searchWordsArray as $searchWord){
+                    $q->orwhere('title', 'like', '%' . $searchWord . '%')->orWhere('description', 'like', '%' . $searchWord . '%');
+                    $tagQuery = $tagQuery->where('tags.name', 'like', '%' . $searchWord . '%');
                 }
-                $q->orWhereIn('id', $categoryQuery->get());
+                $q->orWhereIn('id', $tagQuery->get());
             });
 
         }
@@ -75,9 +75,9 @@ class HomeController extends Controller
         return $query;
     }
 
-    private function setCategory($query, $categoryId) {
-        if(!empty($categoryId)){
-            $reviewIds = Review_Category::select('review_category.review_id')->join('categories', 'review_category.category_id', 'categories.id')->where('categories.id', $categoryId)->get();
+    private function setTags($query, $tagId) {
+        if(!empty($tagId)){
+            $reviewIds = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
             $query = $query->Where(function ($q) use(&$reviewIds){
                 $q->orWhereIn('id', $reviewIds);
             });
@@ -85,11 +85,11 @@ class HomeController extends Controller
         return $query;
     }
 
-    public function categorySerch($categoryId) {
-        $ids = Review_Category::select('review_category.review_id')->join('categories', 'review_category.category_id', 'categories.id')->where('categories.id', $categoryId)->get();
+    public function tagSearch($tagId) {
+        $ids = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
 
         $reviews = Review::whereIn('id',$ids)->paginate(\Config::get('const.NUMBER_OF_REVIEWS_PER_PAGE'));
 
-        return view('home.index', compact('reviews', 'categoryId'));
+        return view('home.index', compact('reviews', 'tagId'));
     }
 }

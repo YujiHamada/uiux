@@ -17,18 +17,18 @@
         <a href="{{ url('/review/create') }}">UIUXレビューを投稿する</a>
       </div>
     </div>
-    @if(!empty($serchWords))
-      <h3>{{$serchWords}}の検索結果 {{$reviews->total()}}件</h3>
+    @if(!empty($searchWords))
+      <h3>{{$searchWords}}の検索結果 {{$reviews->total()}}件</h3>
     @endif
-    @if(!empty($selectedCategory))
-      <p>カテゴリー>{{$selectedCategory->name}}</p>
+    @if(!empty($selectedTag))
+      <p>タグ>{{$selectedTag->name}}</p>
     @endif
 
     <!-- タブ -->
     <form action="" method="get">
       <input type="hidden" name="feed" value="">
-      <input type="hidden" name="categoryId" value="{{ $categoryId or '' }}">
-      <input type="hidden" name="serchWords" value="{{ $serchWords or '' }}">
+      <input type="hidden" name="tagId" value="{{ $tagId or '' }}">
+      <input type="hidden" name="searchWords" value="{{ $searchWords or '' }}">
     
       <ul class="nav nav-tabs">
         <li class="nav-item">

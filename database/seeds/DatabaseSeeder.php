@@ -22,9 +22,9 @@ class DatabaseSeeder extends Seeder
       // 初期データ作成
       // (テストデータ含む)
       $this->call(UsersTableSeeder::class);
-      $this->call(CategoriesTableSeeder::class);
+      $this->call(TagsTableSeeder::class);
       $this->call(ReviewsTableSeeder::class);
-      $this->call(ReviewCategoryTableSeeder::class);
+      $this->call(ReviewTagTableSeeder::class);
       $this->call(FollowsTableSeeder::class);
 
     }

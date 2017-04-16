@@ -36,8 +36,8 @@
           <div class="col">
             <a href="{{ action('ReviewController@show', $review->id) }}"><h5>{{$review->title}}</h5></a>
             <p>{{$review->description}}</p>
-            @foreach($review->reviewCategory as $reviewCategory)
-              <span class="badge badge-pill badge-default">{{$reviewCategory->category->name}}</span>
+            @foreach($review->reviewTag as $reviewTag)
+              <span class="badge badge-pill badge-default">{{$reviewTag->tag->name}}</span>
             @endforeach
           </div>
           <div class="col-2">

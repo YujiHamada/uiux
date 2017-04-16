@@ -4,16 +4,16 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-use App\Category;
+use App\Tag;
 
-class MasteringCategories extends Command
+class MasteringTags extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'masteringCategories';
+    protected $signature = 'masteringTags';
 
     /**
      * The console command description.
@@ -41,30 +41,30 @@ class MasteringCategories extends Command
     {
         //laravel5.3のバグでhaving句が使えない。下のはSELECTするまで書いた。
         //https://github.com/laravel/framework/issues/14908
-        // $masteringCategoryIds = DB::table('review_category')
-        //                             ->select(DB::raw('count(category_id) as category_count, category_id'))
-        //                             ->join('categories', 'categories.id', '=', 'review_category.category_id')
-        //                             ->where('categories.is_master', '=', '0')
-        //                             ->groupBy('category_id')
-        //                             ->having('category_count', '>', 0)
+        // $masteringTagIds = DB::table('review_tag')
+        //                             ->select(DB::raw('count(tag_id) as tag_count, tag_id'))
+        //                             ->join('tags', 'tags.id', '=', 'review_tag.tag_id')
+        //                             ->where('tags.is_master', '=', '0')
+        //                             ->groupBy('tag_id')
+        //                             ->having('tag_count', '>', 0)
         //                             ->get();
         
-        //マスターになっていないカテゴリーの取得
-        $notmasteredCategoryIds = DB::table('review_category')
-                                    ->select(DB::raw('count(category_id) as category_count, category_id'))
-                                    ->join('categories', 'categories.id', '=', 'review_category.category_id')
-                                    ->where('categories.is_master', '=', '0')
-                                    ->groupBy('category_id')
+        //マスターになっていないタグの取得
+        $notmasteredTagIds = DB::table('review_tag')
+                                    ->select(DB::raw('count(tag_id) as tag_count, tag_id'))
+                                    ->join('tags', 'tags.id', '=', 'review_tag.tag_id')
+                                    ->where('tags.is_master', '=', '0')
+                                    ->groupBy('tag_id')
                                     ->get();
 
-        $masteringCategoryIds = array();
-        //マスターへの閾値を超えたカテゴリーはマスターとして設定
-        foreach($notmasteredCategoryIds as $notmastedCategoryId){
-            if($notmastedCategoryId->category_count > \Config::get('const.MASTERING_CATEGORY_THRESHOLD')){
-                array_push($masteringCategoryIds, $notmastedCategoryId->category_id);
+        $masteringtagIds = array();
+        //マスターへの閾値を超えたタグはマスターとして設定
+        foreach($notmasteredTagIds as $notmastedTagId){
+            if($notmastedTagId->tag_count > \Config::get('const.MASTERING_TAG_THRESHOLD')){
+                array_push($masteringTagIds, $notmastedTagId->tag_id);
             }
         }
-        DB::table('categories')->whereIn('id', $masteringCategoryIds)->update(['is_master' => '1']);
+        DB::table('tags')->whereIn('id', $masteringTagIds)->update(['is_master' => '1']);
 
     }
 }
