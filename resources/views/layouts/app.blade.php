@@ -33,7 +33,7 @@
     @section('navigationBar')
       <div class="container-fluid">
         <div class="row justify-content-center yy-bg-midnightblue">
-          <nav class="col-8 navbar navbar-toggleable-md navbar-inverse">
+          <nav class="col-8 navbar navbar-toggleable-md fixed-top navbar-inverse">
             <a class="navbar-brand" href="/">yyUX</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon"></span>
@@ -41,7 +41,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                  <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                   <a class="nav-link" href="#">Link</a>
@@ -175,11 +175,21 @@
                   <h1 class="pb-1">
                     yyUX
                   </h1>
-                  <p class="d-inline">yyUXについて</p>
+                  <p class="d-inline">
+                    <a>yyUXについて</a>
+                  </p>
                   <span class="px-3">|</span>
-                  <p class="d-inline border-left-0">公式ブログ</p>
+                  <p class="d-inline">
+                    <a class="text-white" href="http://yyux.hatenablog.com/" target="_blank">
+                      公式ブログ
+                    </a>
+                  </p>
                   <span class="px-3">|</span>
-                  <p class="d-inline border-left-0"><span class="fa fa-twitter"></span>ソーシャルメディア</p>
+                  <p class="d-inline">
+                    <a class="text-white" href="https://twitter.com/yyUX_info?lang=ja" target="_blank">
+                      <span class="fa fa-twitter"></span>Twitter (@yyUX_info)
+                    </a>
+                  </p>
                 </div>
               </div>
             </div>

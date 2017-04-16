@@ -12,7 +12,7 @@ class TagsTableSeeder extends Seeder
     public function run(){
       DB::table('tags')->insert([
         'name' => 'ui',
-        'is_master' => '1' 
+        'is_master' => '1'
       ]);
       DB::table('tags')->insert([
         'name' => 'ux',

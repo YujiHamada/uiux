@@ -7,7 +7,7 @@
       <p class="m-0 mb-2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
     </div> --}}
 
-    <div class="col-9 p-0">
+    <div class="col-9 p-0 d-flex flex-column">
       <div class="d-flex justify-content-between">
         <a class="yy-overflow-hidden" href="{{ action('ReviewController@show', $review->id) }}">
           <h5 class="yy-word-wrap mb-1">{{ $review->title }}</h5>
@@ -21,12 +21,7 @@
         @endif
       </div>
 
-      <p class="yy-review-word-wrap text-justify m-0">{{ $review->description }}.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.
-      </p>
+      <p class="yy-review-word-wrap text-justify m-0 mb-auto">{{ $review->description }}</p>
 
       <div class="mt-1">
         <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
