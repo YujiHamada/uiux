@@ -45,3 +45,7 @@
     </div>
 </div>
 @endsection
+
+{{-- 右サイドバーは不要のため、空で上書き --}}
+@section('rightSideBar')
+@endsection
