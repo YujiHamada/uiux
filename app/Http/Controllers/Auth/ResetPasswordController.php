@@ -21,6 +21,14 @@ class ResetPasswordController extends Controller
     use ResetsPasswords;
 
     /**
+     * Where to redirect users after login.
+     *
+     * @var string
+     */
+    protected $redirectTo = '/';
+
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -30,7 +38,7 @@ class ResetPasswordController extends Controller
         $this->middleware('guest');
     }
 
-    protected function guard(){
-       return Auth::guard('guard-name');
-    }
+    // protected function guard(){
+    //    return Auth::guard('guard-name');
+    // }
 }

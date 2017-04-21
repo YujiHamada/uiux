@@ -33,7 +33,7 @@
   <div id="app"></div>
 
   <!-- ナビゲーションバー -->
-  <heder>
+  <header>
     @section('navigationBar')
 
           <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top yy-bg-midnightblue">
@@ -87,7 +87,7 @@
 
 
     @show
-  </heder>
+  </header>
   <!-- ナビゲーションバー以下 -->
   <main class="mb-auto">
     <div class="container-fluid my-3">
