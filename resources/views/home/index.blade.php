@@ -14,7 +14,10 @@
 
     <div class="panel panel-default">
       <div class="panel-heading">
-        <a href="{{ url('/review/create') }}">UIUXレビューを投稿する</a>
+        <a href="{{ url('/review/create') }}">UXレビューを投稿する</a>
+      </div>
+      <div class="panel-heading">
+        <a href="{{ url('/request/create') }}">UXレビューを依頼する</a>
       </div>
     </div>
     @if(!empty($searchWords))
@@ -41,6 +44,9 @@
         </li>
         <li class="nav-item">
           <span class="yy-review-kind nav-link {{ app('request')->feed === 'BAD' ? ' active' : '' }}" data-action="/timeline" data-feed="BAD">Bad</span>
+        </li>
+        <li class="nav-item">
+          <span class="yy-review-kind nav-link {{ app('request')->feed === 'BAD' ? ' active' : '' }}" data-action="/timeline" data-feed="request">レビュー依頼</span>
         </li>
       </ul>
     </form>

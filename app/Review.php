@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Review extends Model
 {
-		protected $table = 'reviews';
+	protected $table = 'reviews';
     public $timestamps = true;
 
     public function user(){

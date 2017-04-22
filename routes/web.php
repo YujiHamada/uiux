@@ -29,6 +29,12 @@ Route::post('/review/agree', 'ReviewController@agree'); // Ajax
 Route::post('/review/store', 'ReviewCommentController@store');
 Route::post('/review/destroy', 'ReviewCommentController@destroy');
 
+//ReviewRequestController
+Route::get('/request/create', 'ReviewRequestController@create');
+Route::post('/request/create', 'ReviewRequestController@confirm');
+Route::get('/review/request/{review}', 'ReviewRequestController@show');
+Route::post('/review/request', 'ReviewRequestController@store');
+
 // UserController
 Route::get('/confirm/{token}', 'UserController@getConfirm');
 Route::get('/{username}', 'UserController@show');

@@ -16,12 +16,13 @@ class CreateReviewsTable extends Migration
         Schema::create('reviews', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->tinyInteger('good_or_bad');
+            $table->tinyInteger('good_or_bad')->nullable();
             $table->string('title');
             $table->string('description', 400);
             $table->string('url')->nullable();
             $table->string('image_name')->nullable();
             $table->string('domain')->nullable();
+            $table->tinyInteger('is_request')->default(false);
             $table->timestamps();
 
             // 制約
