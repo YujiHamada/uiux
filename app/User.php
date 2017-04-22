@@ -89,7 +89,7 @@ class User extends Authenticatable
     // ユーザ確認完了
     public function confirm() {
         $this->confirmed_at = Carbon::now();
-        $this->confirmation_token = '';
+        $this->confirmation_token = null;
     }
 
     // ユーザ確認されているか確認

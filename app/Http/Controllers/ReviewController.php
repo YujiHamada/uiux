@@ -136,7 +136,7 @@ class ReviewController extends Controller
             //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
             Review_Agree::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
             return response()->json([
-                'isDeleted' => '1'
+                'isDeleted' => true
             ]);
         }else{
             //まだ未評価の場合、評価を保存する。
