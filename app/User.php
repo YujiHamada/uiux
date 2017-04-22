@@ -7,6 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\User;
 use App\Follow;
 use Auth;
+use Carbon\Carbon;
 
 
 class User extends Authenticatable
@@ -20,7 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'avatar_image_path',
-        'social', 'social_uid'
+        'social', 'social_uid', 'confirmation_token', 'confirmed_at', 'confirmation_sent_at'
     ];
 
     /**
@@ -29,7 +30,13 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password', 'remember_token', 'confirmation_token', 'confirmed_at', 'confirmation_sent_at'
+    ];
+
+    // 日付ミューテーター(Carbonインスタンスに変換される)
+    protected $dates = [
+        'confirmed_at',
+        'confirmation_sent_at',
     ];
 
 
@@ -77,4 +84,17 @@ class User extends Authenticatable
     public function resetFollow() {
       $follow = $this->hasMany('App\Follow', 'follow_id', 'id')->where('user_id', Auth::user()->id)->delete();
     }
+
+
+    // ユーザ確認完了
+    public function confirm() {
+        $this->confirmed_at = Carbon::now();
+        $this->confirmation_token = '';
+    }
+
+    // ユーザ確認されているか確認
+    public function isConfirmed() {
+        return ! empty($this->confirmed_at);
+    }
+
 }

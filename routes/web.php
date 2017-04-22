@@ -30,6 +30,7 @@ Route::post('/review/store', 'ReviewCommentController@store');
 Route::post('/review/destroy', 'ReviewCommentController@destroy');
 
 // UserController
+Route::get('/confirm/{token}', 'UserController@getConfirm');
 Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@store');

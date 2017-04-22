@@ -109,4 +109,19 @@ class UserController extends Controller
     ]);
   }
 
+  // ユーザが確認メールのURLにアクセスした時に実行されるアクション
+  public function getConfirm($token) {
+      $user = User::where('confirmation_token', '=', $token)->first();
+      if (!$user) {
+          \Session::flash('flash_message', '無効なトークンです。');
+          return redirect('/');
+      }
+
+      $user->confirm();
+      $user->save();
+
+      \Session::flash('flash_message', '新しいメールアドレス '. $user->email .' を確認しました');
+      return redirect('/');
+  }
+
 }
