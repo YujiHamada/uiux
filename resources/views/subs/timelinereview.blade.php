@@ -9,7 +9,7 @@
 
     <div class="col-9 p-0 d-flex flex-column">
       <div class="d-flex justify-content-between">
-        <a class="yy-overflow-hidden" href="{{ action('ReviewController@show', $review->id) }}">
+        <a class="yy-overflow-hidden" href="review/{{ !empty($review->is_request) ? 'request/' : '' }}{{ $review->id }}">
           <h5 class="yy-word-wrap mb-1">{{ $review->title }}</h5>
         </a>
         @if(Config::get('enum.good_or_bad.GOOD') == $review->good_or_bad)
@@ -18,6 +18,8 @@
           <span class="badge badge-danger mb-1">BAD</span>
         @elseif(Config::get('enum.good_or_bad.SOSO') == $review->good_or_bad)
           {{-- <p><span class="badge badge-default">SOSO</span></p> --}}
+        @elseif(!empty($review->is_request))
+          <span class="badge badge-danger mb-1">レビュー依頼</span>
         @endif
       </div>
 
