@@ -30,7 +30,9 @@ class HomeController extends Controller
     {
         $query;
 
-        if(isset($request->feed) && $request->feed != 'ALL') {
+        if(isset($request->feed) && $request->feed == 'request') {
+            $query = Review::where('is_request', 1)->orderBy('created_at', 'desc');
+        }elseif(isset($request->feed) && $request->feed != 'ALL'){
             $query = Review::where('good_or_bad', \Config::get('enum.good_or_bad')[$request->feed])->orderBy('created_at', 'desc');
         }else{
             $query = Review::latest('created_at');
