@@ -36,6 +36,7 @@ Route::get('/review/request/{review}', 'ReviewRequestController@show');
 Route::post('/review/request', 'ReviewRequestController@store');
 
 // UserController
+Route::get('/confirm/{token}', 'UserController@getConfirm');
 Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@store');

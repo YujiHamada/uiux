@@ -6,6 +6,11 @@ use App\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
+use Carbon\Carbon;
+use App\Mail\UserConfirmation;
+use Illuminate\Support\Facades\Mail;
 
 class RegisterController extends Controller
 {
@@ -62,11 +67,45 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+      $confirmation_token = hash_hmac(
+          'sha256',
+          str_random(40).$data['email'],
+          \Config::get('app.key')
+      );
+
+      return User::create([
+          'name' => $data['name'],
+          'email' => $data['email'],
+          'password' => bcrypt($data['password']),
+          'confirmation_token' => $confirmation_token,
+          'confirmation_sent_at' => Carbon::now(),
+      ]);
+    }
+
+    // Illuminate\Foundation\Auth\RegistersUsersトレイトのメソッドオーバーライド
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        $user = $this->create($request->all());
+        event(new Registered($user));
+
+
+        $this->guard()->login($user);
+
+        $this->sendConfirmMail($user);
+        \Session::flash('flash_message', 'ユーザー登録確認メールを送りました。');
+
+        return $this->registered($request, $user)
+            ?: redirect($this->redirectPath());
+    }
+
+    // ユーザ確認メールを送信
+    private function sendConfirmMail(User $user)
+    {
+        // 開発の都合上、宛先をinfo.yyuxにしておく
+        Mail::to("info.yyux@gmail.com")->send(new UserConfirmation($user));
+        // Mail::to($user->email)->send(new UserConfirmation($user));
     }
 
     // protected function guard(){
