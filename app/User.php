@@ -21,7 +21,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name', 'email', 'password', 'avatar_image_path',
-        'social', 'social_uid', 'confirmation_token', 'confirmed_at', 'confirmation_sent_at'
+        'confirmation_token', 'confirmed_at', 'confirmation_sent_at'
     ];
 
     /**
@@ -38,11 +38,6 @@ class User extends Authenticatable
         'confirmed_at',
         'confirmation_sent_at',
     ];
-
-
-    // public function getFollowing(){
-    //   return $this->hasMany('App\Follow', 'user_id', 'id')->get();
-    // }
 
     // フォローしているユーザを取得する
     public function getFollowing() {
@@ -96,5 +91,6 @@ class User extends Authenticatable
     public function isConfirmed() {
         return ! empty($this->confirmed_at);
     }
+
 
 }

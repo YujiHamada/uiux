@@ -105,6 +105,10 @@ h5.comment-header {
   border-radius: 5px;
 }
 
+.yy-outline-top {
+  border-top: 1px solid #bccddb;
+}
+
 .yy-outline-bottom {
   border-bottom: 1px solid #bccddb;
 }
@@ -114,8 +118,7 @@ h5.comment-header {
 }
 
 .yy-bg-midnightblue {
-  background-color: #001e43 !important;
-  alpha: 0.5;
+  background-color: #202f55 !important;
 }
 
 .yy-bg-body {
@@ -129,7 +132,7 @@ h5.comment-header {
 
 .yy-bg-sidebar.active {
   color: black !important;
-  border-left: 2px solid #001e43;
+  border-left: 2px solid #202f55;
 }
 
 .yy-bg-sidebar:focus, .yy-bg-sidebar:hover {

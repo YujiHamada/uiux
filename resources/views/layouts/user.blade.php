@@ -61,6 +61,9 @@
               <a class="nav-link yy-bg-sidebar" href="#">パスワードを設定</a>
             </li>
             <li class="nav-item yy-outline-bottom">
+              <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@showLinkSocial') }}">ソーシャル連携</a>
+            </li>
+            <li class="nav-item yy-outline-bottom">
               <a class="nav-link yy-bg-sidebar" href="#">通知</a>
             </li>
           </ul>

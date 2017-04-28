@@ -8,6 +8,7 @@ use App\Review;
 use App\User;
 use Auth;
 use App\Libs\CropAvatar;
+use App\SocialProvider;
 
 class UserController extends Controller
 {
@@ -88,6 +89,21 @@ class UserController extends Controller
 
     $followers = $user->getFollowers();
     return view('user.showfollow', compact('user', 'followers'));
+  }
+
+  // ソーシャル連携画面を表示する
+  public function showLinkSocial() {
+    $user = Auth::user();
+    $socials = SocialProvider::where('user_id', $user->id)->pluck('social');
+
+    return view('user.linkSocial', compact('socials'));
+  }
+
+  // ソーシャル連携を解除するイベント
+  public function unlinkSocial($provider) {
+    $social = SocialProvider::where('user_id', Auth::user()->id)->where('social', $provider)->delete();
+    return redirect('/settings/link');
+
   }
 
   // フォローボタンのイベント。Ajax。
