@@ -17,8 +17,6 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('name')->unique();
             $table->string('email')->unique();
-            $table->enum('social', ['twitter', 'facebook', 'google', 'github'])->nullable(); // ソーシャルログイン出ない場合はnull
-            $table->string('social_uid')->nullable(); // ソーシャルプロバイダーそれぞれから発行されるユニークID
             $table->string('password')->nullable();
             $table->string('avatar_image_path')->nullable(); // 自己紹介画像
             $table->string('biography')->nullable(); // 自己紹介文
@@ -27,10 +25,6 @@ class CreateUsersTable extends Migration
             $table->timestamp('confirmation_sent_at')->nullable(); // 確認メール送信日時
             $table->rememberToken();
             $table->timestamps();
-
-            // 制約
-            $table->unique(['id', 'social']);
-            $table->unique(['social', 'social_uid']);
         });
     }
 

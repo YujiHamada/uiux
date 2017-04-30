@@ -40,14 +40,13 @@ Route::get('/confirm/{token}', 'UserController@getConfirm');
 Route::get('/{username}', 'UserController@show');
 Route::get('/settings/edit', 'UserController@edit');
 Route::post('/settings/edit', 'UserController@store');
+Route::get('/settings/link', 'UserController@showLinkSocial');
+Route::get('/settings/link/{provider}', 'UserController@unlinkSocial');
 Route::post('/settings/crop', 'UserController@crop'); // Ajax
 
 Route::post('/{username}/follow', 'UserController@follow');
 Route::get('/{username}/following', 'UserController@showFollowing');
 Route::get('/{username}/followers', 'UserController@showFollowers');
-
-
-
 
 
 //SocialController
