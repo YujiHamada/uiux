@@ -12,11 +12,11 @@
         <a class="yy-overflow-hidden" href="review/{{ !empty($review->is_request) ? 'request/' : '' }}{{ $review->id }}">
           <h5 class="yy-word-wrap mb-1">{{ $review->title }}</h5>
         </a>
-        @if(Config::get('enum.good_or_bad.GOOD') == $review->good_or_bad)
-          <span class="badge badge-success mb-1" style="vertical-align: middle;">GOOD!!</span>
-        @elseif(Config::get('enum.good_or_bad.BAD') == $review->good_or_bad)
-          <span class="badge badge-danger mb-1">BAD</span>
-        @elseif(Config::get('enum.good_or_bad.SOSO') == $review->good_or_bad)
+        @if(Config::get('enum.type.GOOD_UX') == $review->type)
+          <span class="badge badge-success mb-1" style="vertical-align: middle;">GOOD UX!!</span>
+        @elseif(Config::get('enum.type.KAIZEN_UX') == $review->type)
+          <span class="badge badge-danger mb-1">KAIZEN UX</span>
+        @elseif(Config::get('enum.type.SOSO') == $review->type)
           {{-- <p><span class="badge badge-default">SOSO</span></p> --}}
         @elseif(!empty($review->is_request))
           <span class="badge badge-danger mb-1">レビュー依頼</span>

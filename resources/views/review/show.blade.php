@@ -42,11 +42,11 @@
       反対数：{{$review->disagreeCount()->count()}}
       </p>
       <p>↓このレビューに↓</p>
-      <button id="agree" class="agree btn btn-primary {{ isset($agree) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.agree.AGREE')}}">
-        {{ (isset($agree) && $agree->is_agree == 1) ? '賛成済' : '賛成' }}
+      <button id="agree" class="evaluation btn btn-primary {{ isset($evaluation) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.evaluation.AGREE')}}">
+        {{ (isset($evaluation) && $evaluation->is_agree == 1) ? '賛成済' : '賛成' }}
       </button>
-      <button id="disagree" class="agree btn btn-warning {{isset($agree) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.agree.DISAGREE')}}">
-        {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
+      <button id="disagree" class="evaluation btn btn-warning {{isset($evaluation) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}">
+        {{ (isset($evaluation) && $evaluation->is_agree == 0) ? '反対済' : '反対' }}
       </button>
     @else
       <a href="/review/edit/{{$review->id}}">【編集】</a>
@@ -105,27 +105,27 @@
   });
 
   // 賛成・反対のボタン押下時イベント。Ajax。
-  $('.agree').on('click',function(){
+  $('.evaluation').on('click',function(){
     var userID = {{Auth::user()->id}};
     var reviewID = {{$review->id}};
-    var agree = $(this).val();
+    var evaluation = $(this).val();
     $.ajax({
-      url: "/review/agree",
+      url: "/review/evaluate",
       type:'POST',
       dataType: 'json',
       data : {
         user_id : userID,
         review_id : reviewID,
-        agree : agree
+        evaluation : evaluation
         },
       success: function(data) {
-        $('.agree').toggleClass('clicked');
+        $('.evaluation').toggleClass('clicked');
         if(data.isDeleted){
           $('#agree').text('賛成');
           $('#disagree').text('反対');
-        }else if(data.isAgree == {{Config::get('enum.agree.AGREE')}}){
+        }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
           $('#agree').text('賛成済');
-        }else if(data.isAgree == {{Config::get('enum.agree.DISAGREE')}}){
+        }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
           $('#disagree').text('反対済');
         }
       },
