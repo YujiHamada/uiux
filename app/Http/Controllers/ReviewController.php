@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Tag;
 use App\Review_Tag;
+use App\SummaryTag;
 use App\Review_Evaluation;
 
 class ReviewController extends Controller
@@ -103,10 +104,12 @@ class ReviewController extends Controller
 
         $this->insertReviewTag($request->input('tags'), $review->id);
 
+        SummaryTag::summaryTags();
+
         return redirect('/')->with('flash_message', '投稿が完了しました');
     }
 
-    public function insertReviewTag($tags, $reviewId){
+    private function insertReviewTag($tags, $reviewId){
         $reviewTags = array();
         foreach($tags as $key => $tagName){
             $savedTag = Tag::where('name', $tagName)->first();

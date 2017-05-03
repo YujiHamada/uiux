@@ -26,6 +26,8 @@ class DatabaseSeeder extends Seeder
       $this->call(ReviewsTableSeeder::class);
       $this->call(ReviewTagTableSeeder::class);
       $this->call(FollowsTableSeeder::class);
+      $this->call(SummaryTagsTableSeeder::class);
+
 
     }
 }

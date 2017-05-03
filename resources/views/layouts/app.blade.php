@@ -103,27 +103,50 @@
             @show
             <!-- 右サイドバー -->
             @section('rightSideBar')
+
+
               <nav class="col-3 px-0 mx-3">
+
+                <div class="yy-outline mb-3">
+                  <div class="bg-primary text-white px-3 py-2">
+                    <p class="m-0">
+                      投稿する
+                    </p>
+                  </div>
+                  <div class="px-3 py-2">
+                    <small>
+                      サービス、プロダクトのUXについてレビュー評価しよう！
+                    </small>
+                    <a href="{{ url('/review/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビューする</a>
+                  </div>
+                </div>
+
+                <div class="yy-outline mb-3">
+                  <div class="bg-primary text-white px-3 py-2">
+                    <p class="m-0">
+                      依頼する
+                    </p>
+                  </div>
+                  <div class="px-3 py-2">
+                    <small>
+                      自分のサービス、プロダクトのレビューを依頼しよう！
+                    </small>
+                    <a href="{{ url('/request/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビュー依頼する</a>
+                  </div>
+                </div>
+
                 <ul class="nav nav-pills flex-column">
                   <li class="nav-item yy-outline-bottom">
-                    <p class="nav-link yy-bg-midnightblue text-white my-0" >RightSidebar</p>
+                    <p class="nav-link yy-bg-midnightblue text-white my-0" >トップタグ</p>
                   </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">ユーザー情報</a>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">Twitter</a>
-                  </li>
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="#">ランキング</a>
-                  </li>
-                </ul>
-                <ul class="nav nav-pills flex-column">
-                @foreach($tags as $tag)
-                  <li class="nav-item yy-outline-bottom">
-                    <a class="nav-link yy-bg-sidebar" href="/timeline?tagId={{ $tag->id }}">{{ $tag->name }}</a>
-                  </li>
-                @endforeach
+                  @foreach($summaryTags as $tag)
+                    <li class="nav-item yy-outline-bottom d-flex justify-content-between">
+                      <a class="d-inline-block nav-link yy-bg-sidebar" href="/timeline?tagId={{ $tag->tag_id }}">
+                        <span class="badge badge-pill badge-default">{{ $tag->tag_name }}</span>
+                      </a>
+                      <p class="d-inline-block m-0 px-3 py-2">{{ $tag->count }}<small>タグ</small></p>
+                    </li>
+                  @endforeach
                 </ul>
               </nav>
             @show

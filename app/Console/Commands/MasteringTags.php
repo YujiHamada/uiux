@@ -13,7 +13,7 @@ class MasteringTags extends Command
      *
      * @var string
      */
-    protected $signature = 'masteringTags';
+    protected $signature = 'yyux:mastering-tags';
 
     /**
      * The console command description.
@@ -48,7 +48,7 @@ class MasteringTags extends Command
         //                             ->groupBy('tag_id')
         //                             ->having('tag_count', '>', 0)
         //                             ->get();
-        
+
         //マスターになっていないタグの取得
         $notmasteredTagIds = DB::table('review_tag')
                                     ->select(DB::raw('count(tag_id) as tag_count, tag_id'))
