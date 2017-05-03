@@ -26,7 +26,7 @@ class StoreReviewPost extends FormRequest
         return [
             'title' => 'required|max:50',
             'description' => 'required|max:300',
-            'good_or_bad' => 'required',
+            'type' => 'required',
             'tags' => 'required',
             'url' => 'url',
         ];
