@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewAgreeTable extends Migration
+class CreateReviewEvaluationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReviewAgreeTable extends Migration
      */
     public function up()
     {
-        Schema::create('review_agree', function (Blueprint $table) {
+        Schema::create('review_evaluations', function (Blueprint $table) {
 
             $table->integer('review_id')->unsigned();
             $table->integer('user_id')->unsigned();
@@ -36,6 +36,6 @@ class CreateReviewAgreeTable extends Migration
      */
     public function down()
     {
-        Schema::drop('review_agree');
+        Schema::dropIfExists('review_evaluations');
     }
 }

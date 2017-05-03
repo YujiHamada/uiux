@@ -13,8 +13,12 @@ use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Tag;
 use App\Review_Tag;
+<<<<<<< HEAD
 use App\Review_Agree;
 use App\SummaryTag;
+=======
+use App\Review_Evaluation;
+>>>>>>> master
 
 class ReviewController extends Controller
 {
@@ -38,9 +42,9 @@ class ReviewController extends Controller
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
         //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        $agree = Review_Agree::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
+        $evaluation = Review_Evaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
 
-        return view('review.show', compact('review', 'agree'));
+        return view('review.show', compact('review', 'evaluation'));
     }
 
     //投稿用
@@ -66,7 +70,7 @@ class ReviewController extends Controller
         $title = $request->input('title');
         $file = $request->file('uiImage');
         $url = $request->input('url');
-        $good_or_bad = $request->input('good_or_bad');
+        $type = $request->input('type');
 
         $parseUrl = parse_url($url);
         $domain = "";
@@ -97,7 +101,7 @@ class ReviewController extends Controller
         }
         $review->url = $url;
         $review->domain = $domain;
-        $review->good_or_bad = $good_or_bad;
+        $review->type = $type;
         $review->user_id = $user_id;
 
         $review->save();
@@ -132,29 +136,29 @@ class ReviewController extends Controller
         DB::table('review_tag')->insert($reviewTags);
     }
 
-    public function agree(Request $request){
+    public function evaluate(Request $request){
 
-        $reviewAgree = Review_Agree::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
+        $reviewEvaluation = Review_Evaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
 
-        if($reviewAgree){
+        if(!empty($reviewEvaluation)){
             //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-            Review_Agree::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
+            Review_Evaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
             return response()->json([
                 'isDeleted' => true
             ]);
         }else{
             //まだ未評価の場合、評価を保存する。
-            $isAgree = $request->agree;
+            $evaluation = $request->evaluation;
 
-            $reviewAgree = new Review_Agree;
-            $reviewAgree->user_id = $request->user_id;
-            $reviewAgree->review_id = $request->review_id;
-            $reviewAgree->is_agree = $isAgree;
+            $reviewEvaluation = new Review_Evaluation;
+            $reviewEvaluation->user_id = $request->user_id;
+            $reviewEvaluation->review_id = $request->review_id;
+            $reviewEvaluation->is_agree = $evaluation;
 
-            $reviewAgree->save();
+            $reviewEvaluation->save();
 
             return response()->json([
-                'isAgree' => $isAgree
+                'evaluation' => $evaluation
             ]);
         }
     }

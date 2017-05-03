@@ -22,8 +22,9 @@ class Review extends Model
   	return $this->hasMany('App\Review_Tag');
   }
 
+
   public function agree() {
-  	return $this->hasMany('App\Review_Agree', 'review_id', 'id');
+  	return $this->hasMany('App\Review_Evaluation', 'review_id', 'id');
   }
 
   public function agreeCount() {

@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Review;
-use App\Review_Agree;
+use App\Review_Evaluations;
 use App\Review_Tag;
 use App\Tag;
 use Illuminate\Support\Facades\Mail;
@@ -37,7 +37,7 @@ class HomeController extends Controller
         if(isset($request->feed) && $request->feed == 'request') {
             $query = Review::where('is_request', true)->orderBy('created_at', 'desc');
         }elseif(isset($request->feed) && $request->feed != 'ALL'){
-            $query = Review::where('good_or_bad', \Config::get('enum.good_or_bad')[$request->feed])->orderBy('created_at', 'desc');
+            $query = Review::where('type', $request->feed)->orderBy('created_at', 'desc');
         }else{
             $query = Review::latest('created_at');
         }
