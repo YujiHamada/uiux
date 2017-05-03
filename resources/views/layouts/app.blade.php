@@ -8,7 +8,7 @@
   <!-- CSRF Token -->
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
-  <link rel="icon" type="image/x-icon" href="{{ asset('images/app_images/yyuxlogo.ico') }}">
+  <link rel="icon" type="image/x-icon" href="{{ asset('images/app_images/yyuxlogo_black.ico') }}">
   <title>{{ config('app.name') }}</title>
 
   <!-- Styles -->
@@ -38,7 +38,10 @@
 
           <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top yy-bg-midnightblue">
             <div class="container col-8 px-0">
-                <a class="navbar-brand" href="/">yyUX</a>
+                <a class="navbar-brand" href="/">
+                  <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
+                  yyUX
+                </a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                   <span class="navbar-toggler-icon"></span>
                 </button>
@@ -135,16 +138,31 @@
                   </div>
                 </div>
 
-                <ul class="nav nav-pills flex-column">
+                <ul class="nav nav-pills flex-column mb-3">
                   <li class="nav-item yy-outline-bottom">
-                    <p class="nav-link yy-bg-midnightblue text-white my-0" >トップタグ</p>
+                    <p class="nav-link yy-bg-test text-white my-0" >トップタグ</p>
                   </li>
                   @foreach($summaryTags as $tag)
-                    <li class="nav-item yy-outline-bottom d-flex justify-content-between">
-                      <a class="d-inline-block nav-link yy-bg-sidebar" href="/timeline?tagId={{ $tag->tag_id }}">
+                    <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
+                      <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/timeline?tagId={{ $tag->tag_id }}">
                         <span class="badge badge-pill badge-default">{{ $tag->tag_name }}</span>
                       </a>
-                      <p class="d-inline-block m-0 px-3 py-2">{{ $tag->count }}<small>タグ</small></p>
+                      <p class="d-inline-block m-0">{{ $tag->count }}<small>タグ</small></p>
+                    </li>
+                  @endforeach
+                </ul>
+
+                <ul class="nav nav-pills flex-column">
+                  <li class="nav-item yy-outline-bottom">
+                    <p class="nav-link yy-bg-test text-white my-0" >スコアランキング</p>
+                  </li>
+                  @foreach($summaryScores as $score)
+                    <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
+                      <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
+                        <span class="yy-avatar-thumbnail-img" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
+                        <small>{{ $score->user_name }}</small>
+                      </a>
+                      <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>
                     </li>
                   @endforeach
                 </ul>
@@ -193,7 +211,8 @@
               </div>
               <div class="col-6 py-2 px-3 text-white d-flex align-items-center">
                 <div class="d-block">
-                  <h1 class="pb-1">
+                  <h1 class="pb-2">
+                    <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 3.5rem;" class="mr-2" />
                     yyUX
                   </h1>
                   <p class="d-inline">
