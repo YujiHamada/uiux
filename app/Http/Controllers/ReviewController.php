@@ -157,7 +157,7 @@ class ReviewController extends Controller
     }
 
     public function delete($id){
-        DB::table('reviews')->where(['id' => $id])->delete();
+        Review::destroy($id);
         return redirect('/')->with('flash_message', 'レビューの削除が完了しました');
     }
 }

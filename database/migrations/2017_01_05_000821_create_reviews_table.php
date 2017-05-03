@@ -23,6 +23,7 @@ class CreateReviewsTable extends Migration
             $table->string('image_name')->nullable();
             $table->string('domain')->nullable();
             $table->tinyInteger('is_request')->default(false);
+            $table->softDeletes();
             $table->timestamps();
 
             // 制約
