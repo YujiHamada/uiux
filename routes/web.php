@@ -23,10 +23,11 @@ Route::post('/contact', 'HomeController@sendContact');
 
 // ReviewController
 Route::get('/review/create', 'ReviewController@create');
-Route::post('/review/create', 'ReviewController@confirm');
+Route::get('/review/edit/{review}', 'ReviewController@create');
 Route::post('/review', 'ReviewController@store');
 Route::get('/review/{review}', 'ReviewController@show');
 Route::post('/review/agree', 'ReviewController@agree'); // Ajax
+Route::get('/review/delete/{review}', 'ReviewController@delete');
 
 //ReviewCommentContrller
 Route::post('/review/store', 'ReviewCommentController@store');
