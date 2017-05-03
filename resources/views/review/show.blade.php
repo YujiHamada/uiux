@@ -48,6 +48,8 @@
       <button id="disagree" class="agree btn btn-warning {{isset($agree) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.agree.DISAGREE')}}">
         {{ (isset($agree) && $agree->is_agree == 0) ? '反対済' : '反対' }}
       </button>
+    @else
+      <a href="/review/edit/{{$review->id}}">【編集】</a>
     @endif
     @foreach($review->reviewTag as $reviewTag)
       <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
