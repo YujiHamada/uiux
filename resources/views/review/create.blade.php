@@ -2,25 +2,28 @@
 
 @section('content')
   <div class="col mx-3">
-    <div id="example"></div>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('review/create') }}" enctype="multipart/form-data">
+  @if(isset($review))
+    <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>
+  @endif
+
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('review') }}" enctype="multipart/form-data">
     	{{ csrf_field() }}
     	タイトル：
-      <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+      <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
     	詳細：
       @if ($errors->has('title'))
         <span class="help-block">
           <strong>{{ $errors->first('title') }}</strong>
         </span>
       @endif
-        <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
+        <textarea id="description" type="text" class="form-control" name="description">{{ old('description', isset($review->description) ? $review->description : '') }}</textarea>
       @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
         </span>
       @endif
       URL：
-      <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
+      <input id="url" type="text" class="form-control" name="url" value="{{ old('url', isset($review->url) ? $review->url : '') }}">
       @if ($errors->has('url'))
         <span class="help-block">
             <strong>{{ $errors->first('url') }}</strong>
@@ -29,6 +32,11 @@
       タグ：
       <div class="tags">
         <input type="text" id="tag">
+        @if(isset($review))
+          @foreach($review->reviewTag as $reviewTag)
+            <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span><input name="tags[]" type="hidden" value="{{$reviewTag->tag->name}}">
+          @endforeach
+        @endif
       </div>
       @if ($errors->has('tags'))
         <span class="help-block">
@@ -37,20 +45,29 @@
       @endif
 
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}" @if(old('good_or_bad') == Config::get('enum.good_or_bad.GOOD')) checked @endif>Good
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.GOOD') }}" @if(old('good_or_bad', isset($review->good_or_bad) ? $review->good_or_bad : '') == Config::get('enum.good_or_bad.GOOD')) checked @endif>Good
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}"@if(old('good_or_bad') == Config::get('enum.good_or_bad.BAD')) checked @endif>BAD
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.BAD') }}"@if(old('good_or_bad', isset($review->good_or_bad) ? $review->good_or_bad : '') == Config::get('enum.good_or_bad.BAD')) checked @endif>BAD
       </label>
       <label class="radio-inline">
-        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}"@if(old('good_or_bad') == Config::get('enum.good_or_bad.SOSO')) checked @endif>SoSo...
+        <input type="radio" name="good_or_bad" value="{{ Config::get('enum.good_or_bad.SOSO') }}"@if(old('good_or_bad', isset($review->good_or_bad) ? $review->good_or_bad : '') == Config::get('enum.good_or_bad.SOSO')) checked @endif>SoSo...
       </label>
       @if ($errors->has('good_or_bad'))
         <span class="help-block">
             <strong>{{ $errors->first('good_or_bad') }}</strong>
         </span>
       @endif
+      <div>
+        @if(old('tags'))
+          @foreach(old('tags') as $tag)
+            {{$tag}}
+          @endforeach
+        @endif
+      </div>
+      
       <input type="file" name="uiImage" value="{{ old('uiImage') }}">
+      <input type="hidden" name="reviewId" value="{{$reviewId}}">
       <button type="submit" class="btn btn-primary">投稿</button>
     </form>
     <div class="preview">
@@ -153,5 +170,10 @@
         $('.tags').append('<span class="badge badge-pill badge-default">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="tags[]" type="hidden" value="' + selectedTag + '">' +'</span>');
       }
     }
+
+    function deleteConfirm(){
+      return confirm('このレビューを削除してよろしいですか？');
+    }
+
   </script>
 @endsection

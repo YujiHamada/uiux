@@ -4,11 +4,15 @@ namespace App;
 use App\User;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Review extends Model
 {
 	protected $table = 'reviews';
     public $timestamps = true;
+    protected $dates = ['deleted_at'];
+    use SoftDeletes;
+
 
     public function user(){
     	return $this->belongsTo('App\User');

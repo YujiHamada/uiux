@@ -43,37 +43,27 @@ class ReviewController extends Controller
     }
 
     //投稿用
-    public function create() {
+    public function create(Request $request,$reviewId = null) {
+        $review;
+        if(!empty($reviewId)){
+            $review = Review::findOrFail($reviewId);
+        }
         $tags = Tag::take(10)->get();
         $tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
         //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
         $tagNames = '"' .implode('","',$tagNames->all()) . '"';
-        return view('review.create',compact('tags', 'tagNames'));
-    }
 
-    //投稿確認画面表示用
-    public function confirm(\App\Http\Requests\StoreReviewPost $request){
-        $description = $request->input('description');
-        $title = $request->input('title');
-        $file = $request->file('uiImage');
-        $url = $request->input('url');
-        $good_or_bad = $request->input('good_or_bad');
-        $selectedTags = $request->input('tags');
-
-        //ファイル名はmd5で暗号化したものに元の拡張子をつける
-        if($file){
-            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-            $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-        }
-        return view('review.confirm', compact('title', 'description', 'fileName', 'url', 'good_or_bad', 'selectedTags'));
+        return view('review.create',compact('tags', 'tagNames', 'review', 'reviewId'));
     }
 
     //投稿完了画面表示用
-    public function store(Request $request){
+    public function store(\App\Http\Requests\StoreReviewPost $request){
         //リクエストから値の取得
+
+        $reviewId = $request->input('reviewId');
         $description = $request->input('description');
         $title = $request->input('title');
-        $fileName = $request->input('fileName');
+        $file = $request->file('uiImage');
         $url = $request->input('url');
         $good_or_bad = $request->input('good_or_bad');
 
@@ -83,20 +73,27 @@ class ReviewController extends Controller
             $domain = $parseUrl['host'];
         }
 
-
         $user = Auth::user();
         $user_id = $user->id;
 
-        //画像を一時フォルダから保存用フォルダに移動
-        if($fileName){
-            File::move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY') . $fileName, \Config::get('const.IMAGE_FILE_DIRECTORY') . $fileName);
+        $fileName;
+        if($file){
+            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
+            $file->move(\Config::get('const.IMAGE_FILE_DIRECTORY'), $fileName);
         }
 
         //DB保存用データの作成・保存
-        $review = new Review;
+        $review;
+        if(!empty($reviewId)){
+            $review = Review::find($reviewId);
+        }else{
+            $review = new Review;
+        }
         $review->title = $title;
         $review->description = $description;
-        $review->image_name = $fileName;
+        if(isset($fileName)){
+            $review->image_name = $fileName;
+        }
         $review->url = $url;
         $review->domain = $domain;
         $review->good_or_bad = $good_or_bad;
@@ -116,6 +113,10 @@ class ReviewController extends Controller
             $tagId;
             if(!empty($savedTag->id)){
                 $tagId = $savedTag->id;
+                if(count(Review_Tag::where(['review_id' => $reviewId], ['tag_id' => $tagId])->first()) != 0){
+                    //同じレビューID、タグIDが存在したらinsertしない
+                    continue;
+                }
             }else{
                 $tag = new Tag;
                 $tag->name = $tagName;
@@ -153,5 +154,10 @@ class ReviewController extends Controller
                 'isAgree' => $isAgree
             ]);
         }
+    }
+
+    public function delete($id){
+        Review::destroy($id);
+        return redirect('/')->with('flash_message', 'レビューの削除が完了しました');
     }
 }
