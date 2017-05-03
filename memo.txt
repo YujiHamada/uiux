@@ -4,6 +4,9 @@
     データベースをリフレッシュし、全データベースシードを実行
     php artisan migrate:refresh --seed
 
+  ◆ディレクトを変更した場合
+    composer dump-autoload
+
   ◆seederクラス作成
     php artisan make:seeder クラス名
     (./database/seeds/を参照)
