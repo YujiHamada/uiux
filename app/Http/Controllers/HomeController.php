@@ -8,6 +8,10 @@ use App\Review;
 use App\Review_Agree;
 use App\Review_Tag;
 use App\Tag;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\ContactInformation;
+
+
 
 class HomeController extends Controller
 {
@@ -95,9 +99,27 @@ class HomeController extends Controller
         return view('home.index', compact('reviews', 'tagId'));
     }
 
-    public function showAbout()
-    {
+    // このサイトについてのページを表示
+    public function showAbout() {
         return view('home.about');
-
     }
+
+    // お問い合わせのページを表示
+    public function showContact() {
+        return view('home.contact');
+    }
+
+    // お問い合わせのページを表示 & お問い合わせ内容のメール送信
+    public function sendContact(\App\Http\Requests\ContactRequest $request) {
+      $name = $request->name;
+      $email = $request->email;
+      $url = $request->url;
+      $contact = $request->contact;
+
+      // お問い合わせ内容を開発者メールに送信する。
+      Mail::to("info.yyux@gmail.com")->send(new ContactInformation($name, $email, $url, $contact));
+
+      return redirect('/')->with('flash_message', '問い合わせを受け付けました。');
+    }
+
 }

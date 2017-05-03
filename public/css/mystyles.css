@@ -121,6 +121,10 @@ h5.comment-header {
   background-color: #202f55 !important;
 }
 
+.yy-bg-powderblue {
+  background-color: #bccddb !important;
+}
+
 .yy-bg-body {
   background: -webkit-linear-gradient(right, #f0f8ff, white 3%, white 97%, #f0f8ff);
   background: linear-gradient(to left, #f0f8ff, white 3%, white 97%, #f0f8ff);

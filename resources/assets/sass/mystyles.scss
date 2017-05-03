@@ -29,20 +29,8 @@ h5.comment-header{
 // $color-midnightblue: #001e43;
 $color-midnightblue: #202f55;
 $color-sidebar-hover: #f0f8ff;
-$color-powderlue: #bccddb;
+$color-powderblue: #bccddb;
 $yy-line-height: 1rem * 1.5;
-
-///////////////////////////////
-// Bootstrapを上書き
-//////////////////////////////
-
-// a {
-//   color: silver;
-// }
-//
-// a:focus, a:hover {
-//   color: #00a1e9;
-// }
 
 ///////////////////////////////
 // 一般
@@ -133,16 +121,16 @@ $yy-line-height: 1rem * 1.5;
 }
 
 .yy-outline {
-  border: 1px solid $color-powderlue;
+  border: 1px solid $color-powderblue;
   border-radius: 5px;
 }
 
 .yy-outline-top {
-  border-top: 1px solid $color-powderlue;
+  border-top: 1px solid $color-powderblue;
 }
 
 .yy-outline-bottom {
-  border-bottom: 1px solid $color-powderlue;
+  border-bottom: 1px solid $color-powderblue;
 }
 
 
@@ -152,6 +140,10 @@ $yy-line-height: 1rem * 1.5;
 
 .yy-bg-midnightblue {
   background-color: $color-midnightblue !important;
+}
+
+.yy-bg-powderblue {
+  background-color: $color-powderblue !important;
 }
 
 .yy-bg-body {

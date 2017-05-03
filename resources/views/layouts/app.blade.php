@@ -164,7 +164,7 @@
                     よくある質問
                   </li>
                   <li>
-                    お問い合わせ
+                    <a class="text-white" href="/contact">お問い合わせ</a>
                   </li>
                 </ul>
               </div>
