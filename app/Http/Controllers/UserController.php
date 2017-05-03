@@ -96,7 +96,7 @@ class UserController extends Controller
     $user = Auth::user();
     $socials = SocialProvider::where('user_id', $user->id)->pluck('social');
 
-    return view('user.linkSocial', compact('socials'));
+    return view('user.link-social', compact('socials'));
   }
 
   // ソーシャル連携を解除するイベント
