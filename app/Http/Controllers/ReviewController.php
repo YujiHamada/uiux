@@ -13,12 +13,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Tag;
 use App\Review_Tag;
-<<<<<<< HEAD
-use App\Review_Agree;
 use App\SummaryTag;
-=======
 use App\Review_Evaluation;
->>>>>>> master
 
 class ReviewController extends Controller
 {
