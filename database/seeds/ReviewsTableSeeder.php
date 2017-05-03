@@ -18,7 +18,7 @@ class ReviewsTableSeeder extends Seeder
 
       $urlYYUIUX = 'http://uiux.com/';
       $domainYYUIUX = 'uiux.com';
-      $goodOrBads = array(1, 0, 2, 1);
+      $types = array(1, 0, 2, 1);
       $titles = array('github', 'android', 'mac', 'laravel');
       $imageNames = array(
         'myimages/github.png',
@@ -35,7 +35,7 @@ class ReviewsTableSeeder extends Seeder
         $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $hamada->id,
-          'type' => $goodOrBads[$i],
+          'type' => $types[$i],
           'title' => $hamada->name . '\'s ' . $titles[$i],
           'description' => $titles[$i] . ' description.',
           'url' => $urlYYUIUX,
@@ -51,7 +51,7 @@ class ReviewsTableSeeder extends Seeder
         $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $yutamaro0405->id,
-          'type' => $goodOrBads[$i],
+          'type' => $types[$i],
           'title' => $yutamaro0405->name . '\'s ' . $titles[$i],
           'description' => $titles[$i] . ' description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.',
           'url' => $urlYYUIUX,
@@ -68,7 +68,7 @@ class ReviewsTableSeeder extends Seeder
         $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $yoshimi->id,
-          'type' => $goodOrBads[$i],
+          'type' => $types[$i],
           'title' => $yoshimi->name . '\'s ' . $titles[$i],
           'description' => $titles[$i] . ' description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.',
           'url' => $urlYYUIUX,
@@ -84,7 +84,7 @@ class ReviewsTableSeeder extends Seeder
         $date = Carbon::now()->subDay(mt_rand(0, 28))->subMonth(mt_rand(0, 11))->format('Y-m-d H:i:s');
         DB::table('reviews')->insert([
           'user_id' => $rika->id,
-          'type' => $goodOrBads[$i],
+          'type' => $types[$i],
           'title' => $rika->name . '\'s ' . $titles[$i],
           'description' => $titles[$i] . ' description. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.',
           'url' => $urlYYUIUX,
