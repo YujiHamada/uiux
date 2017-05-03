@@ -8,4 +8,5 @@ class Tag extends Model
 {
     protected $table = 'tags';
     public $timestamps = true;
+
 }
