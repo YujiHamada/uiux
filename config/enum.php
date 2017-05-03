@@ -1,12 +1,12 @@
 <?php
 return array(
-			'good_or_bad' =>
+			'type' =>
             array(
-                'BAD' => '0',
-                'GOOD' => '1',
+                'KAIZEN_UX' => '0',
+                'GOOD_UX' => '1',
                 'SOSO' => '2'
     		),
-    	   'agree' =>
+    	   'evaluation' =>
            array(
                 'DISAGREE' => '0',
                 'AGREE' => '1'

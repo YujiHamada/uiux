@@ -35,18 +35,18 @@
     
       <ul class="nav nav-tabs">
         <li class="nav-item">
-          <span class="yy-review-kind nav-link {{ url()->current() === url('/') || app('request')->feed === 'ALL' || empty(app('request')->feed) ? ' active' : '' }}" data-action="/timeline" data-feed="ALL">
+          <span class="yy-review-kind nav-link {{ url()->current() === url('/') || app('request')->feed === 'ALL' || !isset(app('request')->feed) ? ' active' : '' }}" data-action="/timeline" data-feed="ALL">
             All
           </span>
         </li>
         <li class="nav-item">
-          <span class="yy-review-kind nav-link {{ app('request')->feed === 'GOOD' ? ' active' : '' }}" data-action="/timeline" data-feed="GOOD">Good</span>
+          <span class="yy-review-kind nav-link {{ app('request')->feed === Config::get('enum.type.GOOD_UX') ? ' active' : '' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.GOOD_UX')}}">Good UX</span>
         </li>
         <li class="nav-item">
-          <span class="yy-review-kind nav-link {{ app('request')->feed === 'BAD' ? ' active' : '' }}" data-action="/timeline" data-feed="BAD">Bad</span>
+          <span class="yy-review-kind nav-link {{ app('request')->feed === Config::get('enum.type.KAIZEN_UX') ? ' active' : '' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.KAIZEN_UX')}}">KAIZEN UX</span>
         </li>
         <li class="nav-item">
-          <span class="yy-review-kind nav-link {{ app('request')->feed === 'BAD' ? ' active' : '' }}" data-action="/timeline" data-feed="request">レビュー依頼</span>
+          <span class="yy-review-kind nav-link {{ app('request')->feed === 'request' ? ' active' : '' }}" data-action="/timeline" data-feed="request">レビュー依頼</span>
         </li>
       </ul>
     </form>
