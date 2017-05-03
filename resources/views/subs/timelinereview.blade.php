@@ -16,8 +16,8 @@
           <span class="badge badge-success mb-1" style="vertical-align: middle;">GOOD UX!!</span>
         @elseif(Config::get('enum.type.KAIZEN_UX') == $review->type)
           <span class="badge badge-danger mb-1">KAIZEN UX</span>
-        @elseif(Config::get('enum.type.SOSO') == $review->type)
-          {{-- <p><span class="badge badge-default">SOSO</span></p> --}}
+        @elseif(Config::get('enum.type.OPINION') == $review->type)
+          {{-- <p><span class="badge badge-default">OPINION</span></p> --}}
         @elseif(!empty($review->is_request))
           <span class="badge badge-danger mb-1">レビュー依頼</span>
         @endif

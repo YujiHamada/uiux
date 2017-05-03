@@ -51,7 +51,7 @@
         <input type="radio" name="type" value="{{ Config::get('enum.type.KAIZEN_UX') }}"@if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.KAIZEN_UX')) checked @endif>KAIZEN UX
       </label>
       <label class="radio-inline">
-        <input type="radio" name="type" value="{{ Config::get('enum.type.SOSO') }}"@if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.SOSO')) checked @endif>SoSo...
+        <input type="radio" name="type" value="{{ Config::get('enum.type.OPINION') }}"@if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.OPINION')) checked @endif>OPINION
       </label>
       @if ($errors->has('type'))
         <span class="help-block">
