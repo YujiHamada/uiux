@@ -12,14 +12,6 @@
       </div>
     @endif
 
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <a href="{{ url('/review/create') }}">UXレビューを投稿する</a>
-      </div>
-      <div class="panel-heading">
-        <a href="{{ url('/request/create') }}">UXレビューを依頼する</a>
-      </div>
-    </div>
     @if(!empty($searchWords))
       <h3>{{$searchWords}}の検索結果 {{$reviews->total()}}件</h3>
     @endif
@@ -32,7 +24,7 @@
       <input type="hidden" name="feed" value="">
       <input type="hidden" name="tagId" value="{{ $tagId or '' }}">
       <input type="hidden" name="searchWords" value="{{ $searchWords or '' }}">
-    
+
       <ul class="nav nav-tabs">
         <li class="nav-item">
           <span class="yy-review-kind nav-link {{ url()->current() === url('/') || app('request')->feed === 'ALL' || empty(app('request')->feed) ? ' active' : '' }}" data-action="/timeline" data-feed="ALL">

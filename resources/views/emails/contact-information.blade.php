@@ -1,15 +1,19 @@
 <p>
-    name: {{ $name }}
+    name:
+    {{ $name }}
 </p>
 
 <p>
-    email: {{ $email }}
+    email:
+    {{ $email }}
 </p>
 
 <p>
-    url: {{ $url }}
+    url:
+    {{ $url }}
 </p>
 
 <p>
-    contact: {{ $contact }}
+    contact:
+    {{ $contact }}
 </p>
