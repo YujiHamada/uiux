@@ -11,6 +11,7 @@ class SummaryTagsTableSeeder extends Seeder
      * @return void
      */
     public function run(){
+      // summary_tabsテーブルの作成
       SummaryTag::summaryTags();
     }
 }

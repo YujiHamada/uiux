@@ -101,16 +101,16 @@ h5.comment-header {
 }
 
 .yy-outline {
-  border: 1px solid #bccddb;
+  border: 1px solid #4682b4;
   border-radius: 5px;
 }
 
 .yy-outline-top {
-  border-top: 1px solid #bccddb;
+  border-top: 1px solid #4682b4;
 }
 
 .yy-outline-bottom {
-  border-bottom: 1px solid #bccddb;
+  border-bottom: 1px solid #4682b4;
 }
 
 .yy-bg-white {
@@ -123,6 +123,10 @@ h5.comment-header {
 
 .yy-bg-powderblue {
   background-color: #bccddb !important;
+}
+
+.yy-bg-test {
+  background-color: #4682b4 !important;
 }
 
 .yy-bg-body {

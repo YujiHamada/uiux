@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('password')->nullable();
             $table->string('avatar_image_path')->nullable(); // 自己紹介画像
             $table->string('biography')->nullable(); // 自己紹介文
+            $table->integer('score')->unsigned()->default(0);
             $table->string('confirmation_token')->nullable(); // 確認用トークン
             $table->timestamp('confirmed_at')->nullable(); // 確認日時
             $table->timestamp('confirmation_sent_at')->nullable(); // 確認メール送信日時

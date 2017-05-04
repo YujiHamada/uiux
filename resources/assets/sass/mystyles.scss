@@ -30,6 +30,7 @@ h5.comment-header{
 $color-midnightblue: #202f55;
 $color-sidebar-hover: #f0f8ff;
 $color-powderblue: #bccddb;
+$color-steelblue: #4682b4;
 $yy-line-height: 1rem * 1.5;
 
 ///////////////////////////////
@@ -121,16 +122,16 @@ $yy-line-height: 1rem * 1.5;
 }
 
 .yy-outline {
-  border: 1px solid $color-powderblue;
+  border: 1px solid $color-steelblue;
   border-radius: 5px;
 }
 
 .yy-outline-top {
-  border-top: 1px solid $color-powderblue;
+  border-top: 1px solid $color-steelblue;
 }
 
 .yy-outline-bottom {
-  border-bottom: 1px solid $color-powderblue;
+  border-bottom: 1px solid $color-steelblue;
 }
 
 
@@ -144,6 +145,10 @@ $yy-line-height: 1rem * 1.5;
 
 .yy-bg-powderblue {
   background-color: $color-powderblue !important;
+}
+
+.yy-bg-test {
+  background-color: $color-steelblue !important;
 }
 
 .yy-bg-body {

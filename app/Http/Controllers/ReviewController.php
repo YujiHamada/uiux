@@ -14,6 +14,7 @@ use App\Review;
 use App\Tag;
 use App\Review_Tag;
 use App\SummaryTag;
+use App\SummaryScore;
 use App\Review_Evaluation;
 
 class ReviewController extends Controller
@@ -104,7 +105,14 @@ class ReviewController extends Controller
 
         $this->insertReviewTag($request->input('tags'), $review->id);
 
+        // summary_tabsテーブルの作成
         SummaryTag::summaryTags();
+
+        // summary_scoresテーブルの作成
+        SummaryScore::summaryScores();
+
+        // userテーブルのscoreカラムを更新
+        SummaryScore::updateAllUserScore();
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
     }
