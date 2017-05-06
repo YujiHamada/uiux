@@ -16,7 +16,6 @@ use App\ReviewTag;
 use App\SummaryTag;
 use App\SummaryScore;
 use App\ReviewEvaluation;
-use \App\Libs\Util;
 
 class ReviewController extends Controller
 {
@@ -104,7 +103,7 @@ class ReviewController extends Controller
 
         $review->save();
 
-        Util::insertReviewTag($request->input('tags'), $review->id);
+        Tag::insertReviewTag($request->input('tags'), $review->id);
 
         // summary_tabsテーブルの作成
         SummaryTag::summaryTags();

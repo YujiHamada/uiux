@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Review;
-use \App\Libs\Util;
+use App\Tag;
 
 class ReviewRequestController extends Controller
 {
@@ -58,7 +58,7 @@ class ReviewRequestController extends Controller
 
         $reviewRequest->save();
 
-        Util::insertReviewTag($request->input('tags'), $reviewRequest->id);
+        Tag::insertReviewTag($request->input('tags'), $reviewRequest->id);
 
         return redirect('/')->with('flash_message', 'レビュー依頼が完了しました');
     }
