@@ -3,7 +3,7 @@
 @section('content')
   <div class="col mx-3">
     <h1>レビュー依頼する</h1>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('request/create') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/review/request') }}" enctype="multipart/form-data">
     	{{ csrf_field() }}
     	タイトル：
       <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>

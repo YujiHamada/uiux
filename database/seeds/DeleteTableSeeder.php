@@ -5,7 +5,7 @@ use App\User;
 use App\Review;
 use App\Tag;
 use App\Follow;
-use App\Review_Tag;
+use App\ReviewTag;
 
 class DeleteTableSeeder extends Seeder
 {
@@ -16,7 +16,7 @@ class DeleteTableSeeder extends Seeder
      */
     public function run()
     {
-      DB::table('review_tag')->delete();
+      DB::table('review_tags')->delete();
       DB::table('reviews')->delete();
       DB::table('tags')->delete();
       DB::table('follows')->delete();

@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Auth;
 
 use App\Review;
 use App\Tag;
-use App\Review_Tag;
+use App\ReviewTag;
 use App\SummaryTag;
 use App\SummaryScore;
-use App\Review_Evaluation;
+use App\ReviewEvaluation;
+use \App\Libs\Util;
 
 class ReviewController extends Controller
 {
@@ -39,7 +40,7 @@ class ReviewController extends Controller
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
         //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        $evaluation = Review_Evaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
+        $evaluation = ReviewEvaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
 
         return view('review.show', compact('review', 'evaluation'));
     }
@@ -103,7 +104,7 @@ class ReviewController extends Controller
 
         $review->save();
 
-        $this->insertReviewTag($request->input('tags'), $review->id);
+        Util::insertReviewTag($request->input('tags'), $review->id);
 
         // summary_tabsテーブルの作成
         SummaryTag::summaryTags();
@@ -124,7 +125,7 @@ class ReviewController extends Controller
             $tagId;
             if(!empty($savedTag->id)){
                 $tagId = $savedTag->id;
-                if(count(Review_Tag::where(['review_id' => $reviewId], ['tag_id' => $tagId])->first()) != 0){
+                if(count(ReviewTag::where(['review_id' => $reviewId], ['tag_id' => $tagId])->first()) != 0){
                     //同じレビューID、タグIDが存在したらinsertしない
                     continue;
                 }
@@ -137,16 +138,16 @@ class ReviewController extends Controller
             }
             array_push($reviewTags, array('tag_id' => $tagId, 'review_id' => $reviewId, 'created_at' => date('Y-m-d H:i:s'), 'updated_at' => date('Y-m-d H:i:s')));
         }
-        DB::table('review_tag')->insert($reviewTags);
+        DB::table('review_tags')->insert($reviewTags);
     }
 
     public function evaluate(Request $request){
 
-        $reviewEvaluation = Review_Evaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
+        $reviewEvaluation = ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
 
         if(!empty($reviewEvaluation)){
             //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-            Review_Evaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
+            ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
             return response()->json([
                 'isDeleted' => true
             ]);
@@ -154,7 +155,7 @@ class ReviewController extends Controller
             //まだ未評価の場合、評価を保存する。
             $evaluation = $request->evaluation;
 
-            $reviewEvaluation = new Review_Evaluation;
+            $reviewEvaluation = new ReviewEvaluation;
             $reviewEvaluation->user_id = $request->user_id;
             $reviewEvaluation->review_id = $request->review_id;
             $reviewEvaluation->is_agree = $evaluation;

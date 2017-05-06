@@ -20,12 +20,12 @@ class Review extends Model
   }
 
   public function reviewTag() {
-  	return $this->hasMany('App\Review_Tag');
+  	return $this->hasMany('App\ReviewTag');
   }
 
 
   public function agree() {
-  	return $this->hasMany('App\Review_Evaluation', 'review_id', 'id');
+  	return $this->hasMany('App\ReviewEvaluation', 'review_id', 'id');
   }
 
   public function agreeCount() {
@@ -37,11 +37,11 @@ class Review extends Model
   }
 
   public function comments() {
-      return $this->hasMany('App\Review_Comment', 'review_id', 'id')->orderBy('created_at', 'desc');
+      return $this->hasMany('App\ReviewComment', 'review_id', 'id')->orderBy('created_at', 'desc');
   }
 
   public function commentsCount() {
-      return $this->hasMany('App\Review_Comment', 'review_id', 'id')->selectRaw('count(*) as count');
+      return $this->hasMany('App\ReviewComment', 'review_id', 'id')->selectRaw('count(*) as count');
   }
 
 }

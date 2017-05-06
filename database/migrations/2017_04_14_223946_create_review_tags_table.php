@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateReviewTagTable extends Migration
+class CreateReviewTagsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateReviewTagTable extends Migration
      */
    public function up()
     {
-        Schema::create('review_tag', function (Blueprint $table) {
+        Schema::create('review_tags', function (Blueprint $table) {
 
             $table->integer('review_id')->unsigned();
             $table->integer('tag_id')->unsigned();
@@ -35,6 +35,6 @@ class CreateReviewTagTable extends Migration
      */
     public function down()
     {
-        Schema::drop('review_tag');
+        Schema::drop('review_tags');
     }
 }

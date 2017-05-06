@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Review;
+use \App\Libs\Util;
 
 class ReviewRequestController extends Controller
 {
@@ -24,25 +25,11 @@ class ReviewRequestController extends Controller
     	return view('review.request.create',compact('tagNames'));
     }
 
-    public function confirm(Request $request){
+    public function store(\App\Http\Requests\StoreReviewRequest $request){
     	$description = $request->input('description');
         $title = $request->input('title');
+        $url = $request->input('url');
         $file = $request->file('uiImage');
-        $url = $request->input('url');
-        $selectedTags = $request->input('tags');
-
-        if($file){
-            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-            $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-        }
-        return view('review.request.confirm', compact('title', 'description', 'fileName', 'url', 'selectedTags'));
-    }
-
-    public function store(Request $request){
-    	$description = $request->input('description');
-        $title = $request->input('title');
-        $fileName = $request->input('fileName');
-        $url = $request->input('url');
 
         $parseUrl = parse_url($url);
         $domain = "";
@@ -50,18 +37,28 @@ class ReviewRequestController extends Controller
             $domain = $parseUrl['host'];
         }
 
+        $fileName;
+        if($file){
+            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
+            $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
+        }
+
         $user_id = Auth::user()->id;
 
         $reviewRequest = new Review;
         $reviewRequest->title = $title;
         $reviewRequest->description = $description;
-        $reviewRequest->image_name = $fileName;
+        if(isset($fileName)){
+            $review->image_name = $fileName;
+        }
         $reviewRequest->url = $url;
         $reviewRequest->domain = $domain;
         $reviewRequest->user_id = $user_id;
         $reviewRequest->is_request = true;
 
         $reviewRequest->save();
+
+        Util::insertReviewTag($request->input('tags'), $reviewRequest->id);
 
         return redirect('/')->with('flash_message', 'レビュー依頼が完了しました');
     }

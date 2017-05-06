@@ -18,7 +18,7 @@ class ReviewTagTableSeeder extends Seeder
 		// ランダムにタグを選ぶ準備
 		$randomCateIndex = rand(0, $tagsCount - 1);
 
-		DB::table('review_tag')->insert([
+		DB::table('review_tags')->insert([
 		  'review_id' => $reviews[$i]->id,
 		  'tag_id' => $tags[$randomCateIndex]->id
 		]);

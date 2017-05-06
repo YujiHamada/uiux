@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Auth;
 
-class Review_Comment extends Model
+class ReviewComment extends Model
 {
     protected $table = 'review_comments';
 
@@ -14,11 +14,11 @@ class Review_Comment extends Model
     }
 
     public function evaluation(){
-    	return $this->hasOne('App\Comment_Evaluation', 'comment_id', 'id')->where('user_id', Auth::user()->id);
+    	return $this->hasOne('App\CommentEvaluation', 'comment_id', 'id')->where('user_id', Auth::user()->id);
     }
 
     public function evaluations() {
-  		return $this->hasMany('App\Comment_Evaluation', 'comment_id', 'id');
+  		return $this->hasMany('App\CommentEvaluation', 'comment_id', 'id');
   	}
 
     public function agreeCount() {
