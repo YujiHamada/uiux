@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\ScoreHistory;
 use App\Review;
+use Config;
 
 
 
