@@ -3,7 +3,8 @@
 @section('content')
   <div class="col mx-3">
   @if(isset($review))
-    <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>
+    <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>｜
+    <a href="/review/report/kaizen/{{ $review->id }}">このUXが改善されたことを報告する</a>
   @endif
 
     <form class="form-horizontal" role="form" method="POST" action="{{ url('review') }}" enctype="multipart/form-data">
