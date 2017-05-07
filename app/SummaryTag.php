@@ -25,8 +25,6 @@ class SummaryTag extends Model
                       ->orderBy('tag_count', 'desc')
                       ->get(10);
 
-      // dd($topTenTags);
-
       foreach($topTenTags as $tag){
         $tagId = $tag->tag_id;
         $tagName = Tag::where('id', $tagId)->first()->name;
