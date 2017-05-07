@@ -62,14 +62,12 @@ class AppServiceProvider extends ServiceProvider
 
         // Tagレコードが新規作成された場合
         ReviewTag::created(function ($reviewTag) {
-          dd($reviewTag);
           // summary_tabsテーブルの作成
           SummaryTag::summaryTags();
         });
 
         // Tagレコードが削除された場合
         ReviewTag::deleted(function ($reviewTag) {
-          dd($reviewTag);
           // summary_tabsテーブルの作成
           SummaryTag::summaryTags();
         });
