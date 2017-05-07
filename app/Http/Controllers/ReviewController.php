@@ -105,14 +105,8 @@ class ReviewController extends Controller
 
         Tag::insertReviewTag($request->input('tags'), $review->id);
 
-        // summary_tabsテーブルの作成
-        SummaryTag::summaryTags();
 
-        // summary_scoresテーブルの作成
-        SummaryScore::summaryScores();
 
-        // userテーブルのscoreカラムを更新
-        SummaryScore::updateAllUserScore();
 
         return redirect('/')->with('flash_message', '投稿が完了しました');
     }
@@ -176,6 +170,6 @@ class ReviewController extends Controller
         $review = Review::findOrFail($id);
         $review->is_kaizened = true;
         $review->save();
-        return redirect('/')->with('flash_message', 'レビューの改善報告が完了しました');   
+        return redirect('/')->with('flash_message', 'レビューの改善報告が完了しました');
     }
 }

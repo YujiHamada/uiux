@@ -36,6 +36,6 @@ class CommentEvaluations extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('commnet_evaluations');
+        Schema::dropIfExists('comment_evaluations');
     }
 }
