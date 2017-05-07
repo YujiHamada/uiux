@@ -41,17 +41,12 @@ class Tag extends Model
         // }
 
         foreach($reviewTagNames as $reviewTagName) {
+          
           // tagsテーブルに指定のタグ名がまだないの場合は登録。
           $tag = Tag::firstOrCreate(['name' => $reviewTagName]);
 
           // review_tagsテーブルに指定のタグがない場合は登録。
-          $reviewTag = ReviewTag::where(['review_id' => $reviewId], ['tag_id' => $tag->id])->first();
-          if(!$reviewTag) {
-            ReviewTag::create([
-                    'review_id' => $reviewId,
-                    'tag_id' => $tag->id
-                  ]);
-          }
+          ReviewTag::firstOrCreate(['review_id' => $reviewId, 'tag_id' => $tag->id]);
         }
 
     }
