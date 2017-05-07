@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\ScoreHistory;
 use App\Review;
 use App\ReviewTag;
+use App\Tag;
 use Config;
 use App\SummaryTag;
 use App\SummaryScore;
@@ -60,20 +61,20 @@ class AppServiceProvider extends ServiceProvider
         });
 
 
-        // Tagレコードが新規作成された場合
+        // ReviewTagレコードが新規作成された場合
         ReviewTag::created(function ($reviewTag) {
           // summary_tabsテーブルの作成
           SummaryTag::summaryTags();
         });
 
-        // Tagレコードが削除された場合
+        // ReviewTagレコードが削除された場合
         ReviewTag::deleted(function ($reviewTag) {
           // summary_tabsテーブルの作成
           SummaryTag::summaryTags();
         });
 
        } catch (\Exception $e) {
-         // 「tags」テーブルがない場合エラーが出るのでcatch。
+         // テーブルがない場合エラーが出るのでcatch。
          // （php artisan migrate:refresh対策）
        }
     }

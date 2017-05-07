@@ -58,7 +58,7 @@ class ReviewRequestController extends Controller
 
         $reviewRequest->save();
 
-        Tag::insertReviewTag($request->input('tags'), $reviewRequest->id);
+        Tag::insertReviewTag($request->input('review_tag_names'), $reviewRequest->id);
 
         return redirect('/')->with('flash_message', 'レビュー依頼が完了しました');
     }

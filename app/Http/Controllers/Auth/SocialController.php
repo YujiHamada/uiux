@@ -54,7 +54,7 @@ class SocialController extends Controller
                 'user_id' => $user->id,
                 'social' => $provider,
                 'social_uid' => $socialUser->id
-        ]);
+              ]);
       } catch (\Exception $e) {
         // 異なるメールアドレスに一つのソーシャルサイトを紐付けようとした場合、
         // 一意制約にかかりエラーとなる。
