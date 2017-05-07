@@ -42,10 +42,10 @@
       反対数：{{$review->disagreeCount()->count()}}
       </p>
       <p>↓このレビューに↓</p>
-      <button id="agree" class="evaluation btn btn-primary {{ isset($evaluation) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.evaluation.AGREE')}}">
+      <button id="yy-agree" class="yy-review-evaluation btn btn-primary {{ isset($evaluation) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.evaluation.AGREE')}}">
         {{ (isset($evaluation) && $evaluation->is_agree == 1) ? '賛成済' : '賛成' }}
       </button>
-      <button id="disagree" class="evaluation btn btn-warning {{isset($evaluation) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}">
+      <button id="yy-disagree" class="yy-review-evaluation btn btn-warning {{isset($evaluation) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}">
         {{ (isset($evaluation) && $evaluation->is_agree == 0) ? '反対済' : '反対' }}
       </button>
     @else
@@ -69,10 +69,19 @@
                 <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
                 <input type="hidden" name="reviewId" value="{{$review->id}}">
                 <input class="btn btn-danger btn-sm" type="submit" name="deleteButton" value="削除">
-                <span>投稿者：{{$reviewComment->user->name}}</span>
-                <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
               </form>
+            @else
+              <button id="yy-comment-agree-{{$reviewComment->id}}" class="yy-comment-evaluation btn btn-primary btn-sm {{ isset($reviewComment->evaluation) ? ' clicked' : '' }}" type="button" value="{{Config::get('enum.evaluation.AGREE')}}" data-comment-id="{{$reviewComment->id}}">
+                {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 1) ? '賛成済' : '賛成' }}
+              </button>
+              <button id="yy-comment-disagree-{{$reviewComment->id}}" class="yy-comment-evaluation btn btn-warning btn-sm {{isset($reviewComment->evaluation) ? ' clicked' : ''}}" type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}" data-comment-id="{{$reviewComment->id}}">
+                {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 0) ? '反対済' : '反対' }}
+              </button>
             @endif
+            賛成数：{{$reviewComment->agreeCount()->count()}}
+            反対数：{{$reviewComment->disagreeCount()->count()}}
+            <span>投稿者：{{$reviewComment->user->name}}</span>
+            <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
           </div>
         </div>
       @endforeach
@@ -105,7 +114,7 @@
   });
 
   // 賛成・反対のボタン押下時イベント。Ajax。
-  $('.evaluation').on('click',function(){
+  $('.yy-review-evaluation').on('click',function(){
     var userID = {{Auth::user()->id}};
     var reviewID = {{$review->id}};
     var evaluation = $(this).val();
@@ -119,14 +128,46 @@
         evaluation : evaluation
         },
       success: function(data) {
-        $('.evaluation').toggleClass('clicked');
+        $('.yy-review-evaluation').toggleClass('clicked');
         if(data.isDeleted){
-          $('#agree').text('賛成');
-          $('#disagree').text('反対');
+          $('#yy-agree').text('賛成');
+          $('#yy-disagree').text('反対');
         }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
-          $('#agree').text('賛成済');
+          $('#yy-agree').text('賛成済');
         }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
-          $('#disagree').text('反対済');
+          $('#yy-disagree').text('反対済');
+        }
+      },
+      error: function(XMLHttpRequest, textStatus, errorThrown){
+        alert('賛成・反対の送信に失敗しました');
+      }
+    });
+  });
+
+  $('.yy-comment-evaluation').on('click',function(){
+    var userID = {{Auth::user()->id}};
+    var commentId = $(this).data('comment-id');
+    var evaluation = $(this).val();
+    $.ajax({
+      url: "/review/comment/evaluate",
+      type:'POST',
+      dataType: 'json',
+      data : {
+        user_id : userID,
+        comment_id : commentId,
+        evaluation : evaluation
+        },
+      success: function(data) {
+        console.log('#yy-comment-agree-' + data.commentId);
+        $('#yy-comment-agree-' + data.commentId).toggleClass('clicked');
+        $('#yy-comment-disagree-' + data.commentId).toggleClass('clicked');
+        if(data.isDeleted){
+          $('#yy-comment-agree-' + data.commentId).text('賛成');
+          $('#yy-comment-disagree-' + data.commentId).text('反対');
+        }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
+          $('#yy-comment-agree-' + data.commentId).text('賛成済');
+        }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
+          $('#yy-comment-disagree-' + data.commentId).text('反対済');
         }
       },
       error: function(XMLHttpRequest, textStatus, errorThrown){

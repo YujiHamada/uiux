@@ -32,6 +32,7 @@ Route::get('/review/delete/{review}', 'ReviewController@delete');
 //ReviewCommentContrller
 Route::post('/review/store', 'ReviewCommentController@store');
 Route::post('/review/destroy', 'ReviewCommentController@destroy');
+Route::post('/review/comment/evaluate', 'ReviewCommentController@evaluate'); // Ajax
 
 //ReviewRequestController
 Route::get('/request/create', 'ReviewRequestController@create');

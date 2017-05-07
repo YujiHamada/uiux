@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreReviewPost extends FormRequest
+class StoreReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,6 @@ class StoreReviewPost extends FormRequest
         return [
             'title' => 'required|max:50',
             'description' => 'required|max:300',
-            'type' => 'required',
         ];
     }
 
@@ -35,7 +34,6 @@ class StoreReviewPost extends FormRequest
         return [
             'title.required' => 'タイトルを入力してください',
             'description.required' => '詳細を入力してください',
-            'type.required' => 'レビュータイプを選択してください',
         ];
     }
 }

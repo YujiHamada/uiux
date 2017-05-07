@@ -19,7 +19,7 @@ class SummaryTag extends Model
 
       DB::table('summary_tags')->delete();
 
-      $topTenTags = DB::table('review_tag')
+      $topTenTags = DB::table('review_tags')
                       ->groupBy('tag_id')
                       ->select(DB::raw('tag_id, count(*) as tag_count'))
                       ->orderBy('tag_count', 'desc')

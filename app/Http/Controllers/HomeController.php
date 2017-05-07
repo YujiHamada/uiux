@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Review;
-use App\Review_Evaluations;
-use App\Review_Tag;
+use App\ReviewEvaluations;
+use App\ReviewTag;
 use App\Tag;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactInformation;
@@ -68,7 +68,7 @@ class HomeController extends Controller
             $searchWordsArray =preg_split('/[\s]+/',mb_convert_kana($searchWords, 's'));
 
             $query = $query->Where(function ($q) use(&$searchWordsArray, &$tagQuery) {
-                $tagQuery = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id');
+                $tagQuery = ReviewTag::select('review_tags.review_id')->join('tags', 'review_tags.tag_id', 'tags.id');
                 foreach($searchWordsArray as $searchWord){
                     $q->orwhere('title', 'like', '%' . $searchWord . '%')->orWhere('description', 'like', '%' . $searchWord . '%');
                     $tagQuery = $tagQuery->where('tags.name', 'like', '%' . $searchWord . '%');
@@ -83,7 +83,7 @@ class HomeController extends Controller
 
     private function setTags($query, $tagId) {
         if(!empty($tagId)){
-            $reviewIds = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
+            $reviewIds = ReviewTag::select('review_tags.review_id')->join('tags', 'review_tags.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
             $query = $query->Where(function ($q) use(&$reviewIds){
                 $q->orWhereIn('id', $reviewIds);
             });
@@ -92,7 +92,7 @@ class HomeController extends Controller
     }
 
     public function tagSearch($tagId) {
-        $ids = Review_Tag::select('review_tag.review_id')->join('tags', 'review_tag.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
+        $ids = ReviewTag::select('review_tags.review_id')->join('tags', 'review_tags.tag_id', 'tags.id')->where('tags.id', $tagId)->get();
 
         $reviews = Review::whereIn('id',$ids)->paginate(\Config::get('const.NUMBER_OF_REVIEWS_PER_PAGE'));
 

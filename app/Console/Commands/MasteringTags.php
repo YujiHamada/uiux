@@ -50,9 +50,9 @@ class MasteringTags extends Command
         //                             ->get();
 
         //マスターになっていないタグの取得
-        $notmasteredTagIds = DB::table('review_tag')
+        $notmasteredTagIds = DB::table('review_tags')
                                     ->select(DB::raw('count(tag_id) as tag_count, tag_id'))
-                                    ->join('tags', 'tags.id', '=', 'review_tag.tag_id')
+                                    ->join('tags', 'tags.id', '=', 'review_tags.tag_id')
                                     ->where('tags.is_master', '=', '0')
                                     ->groupBy('tag_id')
                                     ->get();

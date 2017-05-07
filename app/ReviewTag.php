@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Review_Tag extends Model
+class ReviewTag extends Model
 {
-    protected $table = 'review_tag';
+    protected $table = 'review_tags';
     public $timestamps = true;
 
     public function tag(){
