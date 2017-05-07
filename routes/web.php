@@ -28,6 +28,7 @@ Route::post('/review', 'ReviewController@store');
 Route::get('/review/{review}', 'ReviewController@show');
 Route::post('/review/evaluate', 'ReviewController@evaluate'); // Ajax
 Route::get('/review/delete/{review}', 'ReviewController@delete');
+Route::get('/review/report/kaizen/{review}', 'ReviewController@report');
 
 //ReviewCommentContrller
 Route::post('/review/store', 'ReviewCommentController@store');

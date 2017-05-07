@@ -171,4 +171,11 @@ class ReviewController extends Controller
         Review::destroy($id);
         return redirect('/')->with('flash_message', 'レビューの削除が完了しました');
     }
+
+    public function report($id){
+        $review = Review::findOrFail($id);
+        $review->is_kaizened = true;
+        $review->save();
+        return redirect('/')->with('flash_message', 'レビューの改善報告が完了しました');   
+    }
 }
