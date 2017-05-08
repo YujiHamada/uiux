@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\MasteringTags::class
+        Commands\MasteringTags::class,
+        Commands\Refresh::class
     ];
 
     /**

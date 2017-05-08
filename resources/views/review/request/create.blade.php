@@ -64,7 +64,7 @@
       }
     });
     //追加したタグを削除する。jqueryでの追加要素なので、$(document)から指定している。
-    $(document).on('click', '.removeTag', function(){  
+    $(document).on('click', '.removeTag', function(){
       //removeに動作つけるためコールバックしている
       $(this).parent().hide('slow', function(){
         $(this).remove();
@@ -74,7 +74,7 @@
     $(function(){
       // autocompleteで使用する値候補
       var name = [{!! $tagNames !!}];
-   
+
       $('#tag').autocomplete({
         source: name,
         change: function(event, ui) {
@@ -93,7 +93,7 @@
         },
       });
 
-      
+
 
       //画像ファイルプレビュー表示のイベント追加 fileを選択時に発火するイベントを登録
       $('form').on('change', 'input[type="file"]', function(e) {
@@ -126,17 +126,17 @@
     });
 
     function inputTag(selectedTag){
-      var selectedTags = $(':hidden[name="tags[]"]').map(function() {
+      var selectedTags = $(':hidden[name="review_tag_names[]"]').map(function() {
         return $(this).val();
       }).get();
       //選択したタグがすでに選択されているか判定
       if($.inArray(selectedTag, selectedTags) >= 0){
         if(document.getElementsByClassName('alert-warning').length == 0){
-          //エラーメッセージがすでにあるか一応判定（jqueryでDOM判定は遅いそうなのでgetElementsByClassNameを使用  
-          $('.tags').append('<div class="alert alert-warning">' + selectedTag + 'はすでに登録されています</div>');  
+          //エラーメッセージがすでにあるか一応判定（jqueryでDOM判定は遅いそうなのでgetElementsByClassNameを使用
+          $('.tags').append('<div class="alert alert-warning">' + selectedTag + 'はすでに登録されています</div>');
         }
       }else{
-        $('.tags').append('<span class="badge badge-pill badge-default">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="tags[]" type="hidden" value="' + selectedTag + '">' +'</span>');
+        $('.tags').append('<span class="badge badge-pill badge-default">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="review_tag_names[]" type="hidden" value="' + selectedTag + '">' +'</span>');
       }
     }
   </script>
