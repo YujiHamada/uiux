@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
 use App\ScoreHistory;
 use App\Review;
+use App\ReviewComment;
+use App\ReviewEvaluation;
+use App\CommentEvaluation;
 use App\ReviewTag;
 use App\Tag;
 use Config;
@@ -35,29 +38,80 @@ class AppServiceProvider extends ServiceProvider
 
         // Reviewレコードが新規作成された場合
         Review::created(function ($review) {
-          $scoreHistoryKey = 'r' . $review->id . 'u' .$review->user_id;
+          $scoreHistoryKey = 'review' . $review->id . 'user' .$review->user_id;
       		ScoreHistory::create([
       						'key' => $scoreHistoryKey,
       						'user_id' => $review->user_id,
       						'score' => Config::get('const.SCORE_REVIEW')
-      		]);
+                ]);
 
-          // summary_scoresテーブルの作成
-          SummaryScore::summaryScores();
-          // 対象userテーブルのscoreカラムを更新
-          SummaryScore::updateUserScore($review->user_id);
+          $this->updateSummaryAndUserScore($review->user_id);
         });
-
         // Reviewレコードが削除された場合
         Review::deleted(function ($review) {
-          $scoreHistoryKey = 'r' . $review->id . 'u' .$review->user_id;
+          $scoreHistoryKey = 'review' . $review->id . 'user' .$review->user_id;
       		ScoreHistory::where('key', $scoreHistoryKey)->delete();
 
-          // summary_scoresテーブルの作成
-          SummaryScore::summaryScores();
-          // 対象userテーブルのscoreカラムを更新
-          SummaryScore::updateUserScore($review->user_id);
+          $this->updateSummaryAndUserScore($review->user_id);
+        });
 
+
+        // ReviewCommentレコードが新規作成された場合
+        ReviewComment::created(function ($reviewComment) {
+          $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+      		ScoreHistory::create([
+      						'key' => $scoreHistoryKey,
+      						'user_id' => $reviewComment->user_id,
+      						'score' => Config::get('const.SCORE_COMMENT')
+                ]);
+
+          $this->updateSummaryAndUserScore($reviewComment->user_id);
+        });
+        // ReviewCommentレコードが削除された場合
+        ReviewComment::deleted(function ($reviewComment) {
+          $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+      		ScoreHistory::where('key', $scoreHistoryKey)->delete();
+
+          $this->updateSummaryAndUserScore($reviewComment->user_id);
+        });
+
+
+        // ReviewEvaluationレコードが新規作成された場合
+        ReviewEvaluation::created(function ($reviewEvaluation) {
+          $scoreHistoryKey = 'rEvaluation' . $reviewEvaluation->review_id . 'user' .$reviewEvaluation->user_id;
+      		ScoreHistory::create([
+      						'key' => $scoreHistoryKey,
+      						'user_id' => $reviewEvaluation->user_id,
+      						'score' => Config::get('const.SCORE_REVIEW_EVALUATION')
+                ]);
+
+          $this->updateSummaryAndUserScore($reviewEvaluation->user_id);
+        });
+        // ReviewEvaluationレコードが削除された場合
+        ReviewEvaluation::deleted(function ($reviewEvaluation) {
+          $scoreHistoryKey = 'rEvaluation' . $reviewEvaluation->review_id . 'user' .$reviewEvaluation->user_id;
+      		ScoreHistory::where('key', $scoreHistoryKey)->delete();
+
+          $this->updateSummaryAndUserScore($reviewEvaluation->user_id);
+        });
+
+        // CommentEvaluationレコードが新規作成された場合
+        CommentEvaluation::created(function ($commentEvaluation) {
+          $scoreHistoryKey = 'cEvaluation' . $commentEvaluation->comment_id . 'user' .$commentEvaluation->user_id;
+      		ScoreHistory::create([
+      						'key' => $scoreHistoryKey,
+      						'user_id' => $commentEvaluation->user_id,
+      						'score' => Config::get('const.SCORE_COMMENT_EVALUATION')
+                ]);
+
+          $this->updateSummaryAndUserScore($commentEvaluation->user_id);
+        });
+        // CommentEvaluationレコードが削除された場合
+        CommentEvaluation::deleted(function ($commentEvaluation) {
+          $scoreHistoryKey = 'cEvaluation' . $commentEvaluation->comment_id . 'user' .$commentEvaluation->user_id;
+      		ScoreHistory::where('key', $scoreHistoryKey)->delete();
+
+          $this->updateSummaryAndUserScore($commentEvaluation->user_id);
         });
 
 
@@ -77,6 +131,14 @@ class AppServiceProvider extends ServiceProvider
          // テーブルがない場合エラーが出るのでcatch。
          // （php artisan migrate:refresh対策）
        }
+    }
+
+    // summary_scoresテーブルの再作成と、usersテーブルのscoreカラムを更新する。
+    private function updateSummaryAndUserScore($userId) {
+      // summary_scoresテーブルの作成
+      SummaryScore::summaryScores();
+      // 対象userテーブルのscoreカラムを更新
+      SummaryScore::updateUserScore($userId);
     }
 
     /**
