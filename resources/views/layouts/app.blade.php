@@ -183,10 +183,10 @@
               <div class="col-3 py-2 px-3">
                 <ul class="text-white">
                   <li>
-                    利用規約
+                    <a class="text-white" href="/legal">利用規約</a>
                   </li>
                   <li>
-                    プライバシーボリシー
+                    <a class="text-white" href="/privacy">プライバシーボリシー</a>
                   </li>
                   <li>
                     その他1
