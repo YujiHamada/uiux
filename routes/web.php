@@ -19,6 +19,8 @@ Route::get('/timeline', 'HomeController@index');
 Route::get('/about', 'HomeController@showAbout');
 Route::get('/contact', 'HomeController@showContact');
 Route::post('/contact', 'HomeController@sendContact');
+Route::get('/legal', 'HomeController@showLegal');
+Route::get('/privacy', 'HomeController@showPrivacy');
 
 
 // ReviewController

@@ -4,7 +4,9 @@
 // Variables
 @import "variables";
 
-
+body{
+  font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS P Gothic", Verdana, sans-serif;
+}
 
 h5.comment-header{
   margin-top: 50px;
@@ -170,4 +172,50 @@ $yy-line-height: 1rem * 1.5;
 }
 .yy-review-kind{
   cursor: pointer;
+}
+
+.yy-legal h1, .yy-privacy h1, .yy-about h1 {
+  margin-bottom:30px;
+  margin-top:30px;
+}
+
+.yy-legal h2, .yy-privacy h2, .yy-about h2 {
+  font-size: 16px;
+}
+
+.yy-about h2 {
+  font-weight:bold;
+}
+
+.yy-privacy h3 {
+  font-weight: bold;
+  font-size: 100%;
+}
+
+.yy-about h3 {
+    padding-left: 16px;
+    border-left: 4px solid #ddd;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.yy-legal p, .yy-legal ol, .yy-privacy p, .yy-privacy ol, .yy-about p, .yy-about ul {
+  font-size: 12px;
+}
+
+.yy-privacy ol {
+  list-style-type: none;
+}
+
+.yy-privacy ol>li {
+  counter-increment: cnt;
+}
+
+.yy-privacy ol>li:before {
+  content: "(" counter(cnt) ") ";
+}
+
+.yy-emphasis {
+    background-color: #ffdb5d;
+    font-weight: bold;
 }
