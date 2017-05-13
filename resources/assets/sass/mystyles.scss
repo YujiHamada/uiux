@@ -203,6 +203,10 @@ $yy-line-height: 1rem * 1.5;
   font-size: 12px;
 }
 
+.yy-legal p, .yy-privacy p, .yy-about p {
+  margin-bottom: 0.5rem;
+}
+
 .yy-privacy ol {
   list-style-type: none;
 }
