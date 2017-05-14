@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Tag;
+use App\ReviewEvaluation;
 
 class ReviewRequestController extends Controller
 {
@@ -14,24 +15,30 @@ class ReviewRequestController extends Controller
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
         //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        // $agree = Review_Agree::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
+        $evaluation = ReviewEvaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
 
-        return view('review.request.show', compact('review'));
+        return view('review.request.show', compact('review', 'evaluation'));
     }
 
-    public function create() {
+    public function create($reviewId = null) {
+
+      if(!empty($reviewId)){
+          $review = Review::findOrFail($reviewId);
+      }
     	$tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
+      //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
       $tagNames = '"' .implode('","',$tagNames->all()) . '"';
-    	return view('review.request.create',compact('tagNames'));
+
+    	return view('review.request.create',compact('tagNames', 'review'));
     }
 
     public function store(\App\Http\Requests\StoreReviewRequest $request){
 
+      $userId = Auth::user()->id;
   	  $description = $request->input('description');
       $title = $request->input('title');
       $url = $request->input('url');
       $file = $request->file('uiImage');
-      $userId = Auth::user()->id;
 
 
       $file = $request->file('uiImage');

@@ -2,8 +2,12 @@
 
 @section('content')
   <div class="col mx-3">
+    @if(isset($review))
+      <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>｜
+    @endif
+
     <h1>レビュー依頼する</h1>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/request') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/request/store') }}" enctype="multipart/form-data">
     	{{ csrf_field() }}
     	タイトル：
       <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
@@ -32,7 +36,7 @@
         @if(isset($review))
           @foreach($review->reviewTag as $reviewTag)
             <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
-            <input name="review_tag_names[]" type="hidden" value="{{$reviewTag->tag->name}}">
+            <input name="review_tag_names[]" type="hidden" value="{{ $reviewTag->tag->name }}">
           @endforeach
         @endif
       </div>

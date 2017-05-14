@@ -32,6 +32,12 @@
     <p>依頼詳細：{{ $review->description }}</p>
     <span>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</span>
 
+    @if(Auth::user()->id == $review->user_id)
+      <a href="/request/edit/{{$review->id}}">【編集】</a>
+    @endif
+
+    @include('review.subs.review-evaluation')
+
     @foreach($review->reviewTag as $reviewTag)
       <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
     @endforeach
@@ -44,42 +50,74 @@
 @section('foot')
   @parent
   <script>
-  // ボタン連打対策
-  $(function () {
-    $('form').submit(function () {
-      $(this).find(':submit').prop('disabled', true);
+    // ボタン連打対策
+    $(function () {
+      $('form').submit(function () {
+        $(this).find(':submit').prop('disabled', true);
+      });
     });
-  });
 
-  // 賛成・反対のボタン押下時イベント。Ajax。
-  $('.agree').on('click',function(){
-    var userID = {{Auth::user()->id}};
-    var reviewID = {{$review->id}};
-    var agree = $(this).val();
-    $.ajax({
-      url: "/review/agree",
-      type:'POST',
-      dataType: 'json',
-      data : {
-        user_id : userID,
-        review_id : reviewID,
-        agree : agree
+    // 賛成・反対のボタン押下時イベント。Ajax。
+    $('.yy-review-evaluation').on('click',function(){
+      var userId = {{Auth::user()->id}};
+      var reviewId = {{$review->id}};
+      var evaluation = $(this).val();
+      $.ajax({
+        url: "/review/evaluate",
+        type:'POST',
+        dataType: 'json',
+        data : {
+          user_id : userId,
+          review_id : reviewId,
+          evaluation : evaluation
+          },
+        success: function(data) {
+          $('.yy-review-evaluation').toggleClass('clicked');
+          if(data.isDeleted){
+            $('#yy-agree').text('賛成');
+            $('#yy-disagree').text('反対');
+          }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
+            $('#yy-agree').text('賛成済');
+          }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
+            $('#yy-disagree').text('反対済');
+          }
         },
-      success: function(data) {
-        $('.agree').toggleClass('clicked');
-        if(data.isDeleted){
-          $('#agree').text('賛成');
-          $('#disagree').text('反対');
-        }else if(data.isAgree == {{Config::get('enum.agree.AGREE')}}){
-          $('#agree').text('賛成済');
-        }else if(data.isAgree == {{Config::get('enum.agree.DISAGREE')}}){
-          $('#disagree').text('反対済');
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+          alert('賛成・反対の送信に失敗しました');
         }
-      },
-      error: function(XMLHttpRequest, textStatus, errorThrown){
-        alert('賛成・反対の送信に失敗しました');
-      }
+      });
     });
-  });
+
+    $('.yy-comment-evaluation').on('click',function(){
+      var userID = {{Auth::user()->id}};
+      var commentId = $(this).data('comment-id');
+      var evaluation = $(this).val();
+      $.ajax({
+        url: "/review/comment/evaluate",
+        type:'POST',
+        dataType: 'json',
+        data : {
+          user_id : userId,
+          comment_id : commentId,
+          evaluation : evaluation
+          },
+        success: function(data) {
+          console.log('#yy-comment-agree-' + data.commentId);
+          $('#yy-comment-agree-' + data.commentId).toggleClass('clicked');
+          $('#yy-comment-disagree-' + data.commentId).toggleClass('clicked');
+          if(data.isDeleted){
+            $('#yy-comment-agree-' + data.commentId).text('賛成');
+            $('#yy-comment-disagree-' + data.commentId).text('反対');
+          }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
+            $('#yy-comment-agree-' + data.commentId).text('賛成済');
+          }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
+            $('#yy-comment-disagree-' + data.commentId).text('反対済');
+          }
+        },
+        error: function(XMLHttpRequest, textStatus, errorThrown){
+          alert('賛成・反対の送信に失敗しました');
+        }
+      });
+    });
   </script>
 @endsection

@@ -120,7 +120,7 @@
                     <small>
                       サービス、プロダクトのUXについてレビュー評価しよう！
                     </small>
-                    <a href="{{ url('/review/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビューする</a>
+                    <a href="{{ url('/post/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビューする</a>
                   </div>
                 </div>
 

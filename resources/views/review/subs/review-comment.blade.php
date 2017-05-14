@@ -7,7 +7,7 @@
       </div>
       <div class="commented-user">
         @if($reviewComment->user->id == Auth::user()->id)
-          <form action="{{ action('ReviewController@destroyComment') }}" method="post" accept-charset="utf-8">
+          <form action="{{ action('ReviewController@deleteComment') }}" method="post" accept-charset="utf-8">
             {{ csrf_field() }}
             <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
             <input type="hidden" name="reviewId" value="{{$review->id}}">
