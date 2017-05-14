@@ -109,6 +109,16 @@ class HomeController extends Controller
         return view('home.contact');
     }
 
+    //利用規約ページの表示
+    public function showLegal(){
+        return view('home.legal');
+    }
+
+    //プライバシーポリシーの表示
+    public function showPrivacy(){
+        return view('home.privacy');
+    }
+
     // お問い合わせのページを表示 & お問い合わせ内容のメール送信
     public function sendContact(\App\Http\Requests\ContactRequest $request) {
       $name = $request->name;
