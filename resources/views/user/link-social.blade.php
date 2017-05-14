@@ -3,15 +3,10 @@
 @section('content')
   <div class="col mx-3">
 
+    @include('subs.flash-message-success')
+
     <h4>ソーシャル連携</h4>
-    @if (session('flash_message'))
-      <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {{ session('flash_message') }}
-      </div>
-    @endif
+    
     <p>
       他サイトとの連携は以下から管理してください。連携すると簡単にログインができるようになります。
     </p>

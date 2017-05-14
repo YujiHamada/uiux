@@ -21,45 +21,53 @@ class ReviewRequestController extends Controller
 
     public function create() {
     	$tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
-        $tagNames = '"' .implode('","',$tagNames->all()) . '"';
+      $tagNames = '"' .implode('","',$tagNames->all()) . '"';
     	return view('review.request.create',compact('tagNames'));
     }
 
     public function store(\App\Http\Requests\StoreReviewRequest $request){
-    	$description = $request->input('description');
-        $title = $request->input('title');
-        $url = $request->input('url');
-        $file = $request->file('uiImage');
 
+  	  $description = $request->input('description');
+      $title = $request->input('title');
+      $url = $request->input('url');
+      $file = $request->file('uiImage');
+      $userId = Auth::user()->id;
+
+
+      $file = $request->file('uiImage');
+      if($file) {
+        $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
+        $file->move(\Config::get('const.IMAGE_FILE_DIRECTORY'), $fileName);
+      } else {
+        $fileName = null;
+      }
+
+      $url = $request->input('url');
+      if(!empty($url)){
         $parseUrl = parse_url($url);
-        $domain = "";
-        if(isset($parseUrl['host'])){
-            $domain = $parseUrl['host'];
-        }
+        $domain = $parseUrl['host'];
+      } else {
+        $url = null;
+        $domain = null;
+      }
 
-        $fileName;
-        if($file){
-            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-            $file->move(\Config::get('const.TEMPORARY_IMAGE_FILE_DIRECTORY'), $fileName);
-        }
+      $review = Review::create([
+                    'user_id' => $userId,
+                    'type' => null,
+                    'title' => $title,
+                    'description' => $description,
+                    'url' => $url,
+                    'image_name' => $fileName,
+                    'domain' => $domain,
+                    'is_request' => true
+                  ]);
 
-        $user_id = Auth::user()->id;
+      // タグが設定されている場合は保存処理を行う。
+      $reviewTagNames = $request->input('review_tag_names');
+      if(!is_null($reviewTagNames)) {
+        Tag::insertReviewTag($reviewTagNames, $review->id);
+      }
 
-        $reviewRequest = new Review;
-        $reviewRequest->title = $title;
-        $reviewRequest->description = $description;
-        if(isset($fileName)){
-            $review->image_name = $fileName;
-        }
-        $reviewRequest->url = $url;
-        $reviewRequest->domain = $domain;
-        $reviewRequest->user_id = $user_id;
-        $reviewRequest->is_request = true;
-
-        $reviewRequest->save();
-
-        Tag::insertReviewTag($request->input('review_tag_names'), $reviewRequest->id);
-
-        return redirect('/')->with('flash_message', 'レビュー依頼が完了しました');
+      return redirect('/')->with('flash_message', 'レビュー依頼が完了しました');
     }
 }

@@ -80,7 +80,7 @@ class UserController extends Controller
 
     $following = $user->getFollowing();
 
-    return view('user.showfollow', compact('user', 'following'));
+    return view('user.show-follow', compact('user', 'following'));
   }
 
   // フォロワーの一覧を表示する
@@ -88,7 +88,7 @@ class UserController extends Controller
     $user = User::where('name', $name)->first();
 
     $followers = $user->getFollowers();
-    return view('user.showfollow', compact('user', 'followers'));
+    return view('user.show-follow', compact('user', 'followers'));
   }
 
   // ソーシャル連携画面を表示する

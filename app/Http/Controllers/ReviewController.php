@@ -2,148 +2,57 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Input;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Support\Facades\Auth;
-
-use App\Review;
-use App\Tag;
-use App\ReviewTag;
-use App\SummaryTag;
-use App\SummaryScore;
-use App\ReviewEvaluation;
+use App\ReviewComment;
+use App\CommentEvaluation;
 
 class ReviewController extends Controller
 {
-    // public $temporaryImageFileDirectory = 'images/temporary/review_image/';
-    // public $imageFileDirectory = 'images/review_image/';
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct(){
-        $this->middleware('auth');
+    public function storeComment(\App\Http\Requests\StoreReviewComment $request) {
+
+      $reviewId = $request->input('reviewId');
+      $comment = $request->input('comment');
+      $userId = $request->input('userId');
+
+      ReviewComment::create([
+              'review_id' => $reviewId,
+              'user_id' => $userId,
+              'comment' => $comment
+            ]);
+
+    	return redirect('/review/' . $reviewId)->with('flash_message', '投稿が完了しました');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    //表示用
-    public function show($reviewId){
-        $review = Review::findOrFail($reviewId);
-        //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        $evaluation = ReviewEvaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
-
-        return view('review.show', compact('review', 'evaluation'));
+    public function destroyComment(Request $request) {
+    	$reviewComment = ReviewComment::where('id', $request->input('commentId'))->delete();
+    	return redirect('/review/' . $request->input('reviewId'))->with('flash_message', 'コメントの削除が完了しました');
     }
 
-    //投稿用
-    public function create(Request $request,$reviewId = null) {
-        $review;
-        if(!empty($reviewId)){
-            $review = Review::findOrFail($reviewId);
-        }
-        $tags = Tag::take(10)->get();
-        $tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
-        //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
-        $tagNames = '"' .implode('","',$tagNames->all()) . '"';
+    public function evaluateComment(Request $request) {
+        $commentEvaluation = CommentEvaluation::where('comment_id', $request->comment_id)->where('user_id', $request->user_id)->first();
 
-        return view('review.create',compact('tags', 'tagNames', 'review', 'reviewId'));
-    }
-
-    //投稿完了画面表示用
-    public function store(\App\Http\Requests\StoreReviewPost $request){
-        //リクエストから値の取得
-
-        $reviewId = $request->input('reviewId');
-        $description = $request->input('description');
-        $title = $request->input('title');
-        $file = $request->file('uiImage');
-        $url = $request->input('url');
-        $type = $request->input('type');
-
-        $parseUrl = parse_url($url);
-        $domain = "";
-        if(isset($parseUrl['host'])){
-            $domain = $parseUrl['host'];
-        }
-
-        $user = Auth::user();
-        $user_id = $user->id;
-
-        $fileName;
-        if($file){
-            $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-            $file->move(\Config::get('const.IMAGE_FILE_DIRECTORY'), $fileName);
-        }
-
-        //DB保存用データの作成・保存
-        $review;
-        if(!empty($reviewId)){
-            $review = Review::find($reviewId);
-        }else{
-            $review = new Review;
-        }
-        $review->title = $title;
-        $review->description = $description;
-        if(isset($fileName)){
-            $review->image_name = $fileName;
-        }
-        $review->url = $url;
-        $review->domain = $domain;
-        $review->type = $type;
-        $review->user_id = $user_id;
-
-        $review->save();
-
-        Tag::insertReviewTag($request->input('review_tag_names'), $review->id);
-
-        return redirect('/')->with('flash_message', '投稿が完了しました');
-    }
-
-    public function evaluate(Request $request){
-
-        $reviewEvaluation = ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
-
-        if(!empty($reviewEvaluation)){
+        if(!empty($commentEvaluation)){
             //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-            ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->delete();
+            CommentEvaluation::where('comment_id', $request->comment_id)->where('user_id', $request->user_id)->delete();
             return response()->json([
-                'isDeleted' => true
+                'isDeleted' => true,
+                'commentId' => $request->comment_id
             ]);
         }else{
             //まだ未評価の場合、評価を保存する。
             $evaluation = $request->evaluation;
 
-            $reviewEvaluation = new ReviewEvaluation;
-            $reviewEvaluation->user_id = $request->user_id;
-            $reviewEvaluation->review_id = $request->review_id;
-            $reviewEvaluation->is_agree = $evaluation;
+            $commentEvaluation = new CommentEvaluation;
+            $commentEvaluation->user_id = $request->user_id;
+            $commentEvaluation->comment_id = $request->comment_id;
+            $commentEvaluation->is_agree = $evaluation;
 
-            $reviewEvaluation->save();
+            $commentEvaluation->save();
 
             return response()->json([
-                'evaluation' => $evaluation
+                'evaluation' => $evaluation,
+                'commentId' => $request->comment_id
             ]);
         }
-    }
-
-    public function delete($id){
-        Review::destroy($id);
-        return redirect('/')->with('flash_message', 'レビューの削除が完了しました');
-    }
-
-    public function report($id){
-        $review = Review::findOrFail($id);
-        $review->is_kaizened = true;
-        $review->save();
-        return redirect('/')->with('flash_message', 'レビューの改善報告が完了しました');
     }
 }

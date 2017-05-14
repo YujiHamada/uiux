@@ -20,26 +20,24 @@ Route::get('/about', 'HomeController@showAbout');
 Route::get('/contact', 'HomeController@showContact');
 Route::post('/contact', 'HomeController@sendContact');
 
+//ReviewContrller
+Route::post('/review/store', 'ReviewController@storeComment');
+Route::post('/review/destroy', 'ReviewController@destroyComment');
+Route::post('/review/comment/evaluate', 'ReviewController@evaluateComment'); // Ajax
 
-// ReviewController
-Route::get('/review/create', 'ReviewController@create');
-Route::get('/review/edit/{review}', 'ReviewController@create');
-Route::post('/review', 'ReviewController@store');
-Route::get('/review/{review}', 'ReviewController@show');
-Route::post('/review/evaluate', 'ReviewController@evaluate'); // Ajax
-Route::get('/review/delete/{review}', 'ReviewController@delete');
-Route::get('/review/report/kaizen/{review}', 'ReviewController@report');
-
-//ReviewCommentContrller
-Route::post('/review/store', 'ReviewCommentController@store');
-Route::post('/review/destroy', 'ReviewCommentController@destroy');
-Route::post('/review/comment/evaluate', 'ReviewCommentController@evaluate'); // Ajax
+// ReviewPostController
+Route::get('/review/create', 'ReviewPostController@create');
+Route::get('/post/edit/{review}', 'ReviewPostController@create');
+Route::post('/post', 'ReviewPostController@store');
+Route::get('/review/{review}', 'ReviewPostController@show');
+Route::post('/review/evaluate', 'ReviewPostController@evaluate'); // Ajax
+Route::get('/review/delete/{review}', 'ReviewPostController@delete');
+Route::get('/review/report/kaizen/{review}', 'ReviewPostController@report');
 
 //ReviewRequestController
 Route::get('/request/create', 'ReviewRequestController@create');
-Route::post('/request/create', 'ReviewRequestController@confirm');
 Route::get('/review/request/{review}', 'ReviewRequestController@show');
-Route::post('/review/request', 'ReviewRequestController@store');
+Route::post('/request', 'ReviewRequestController@store');
 
 // UserController
 Route::get('/confirm/{token}', 'UserController@getConfirm');

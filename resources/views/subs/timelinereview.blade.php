@@ -1,11 +1,6 @@
 <div class="mb-3 p-3 yy-bg-white yy-outline">
 
   <div class="row mx-0">
-    {{-- <div class="col-sm-2 px-0">
-      <p class="m-0 mb-2"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
-      <p class="m-0 mb-2"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
-      <p class="m-0 mb-2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
-    </div> --}}
 
     <div class="col-9 p-0 d-flex flex-column">
       <div class="d-flex justify-content-between">
