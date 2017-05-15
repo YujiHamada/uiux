@@ -28,12 +28,12 @@
     @if($review->image_name)
      <img src="{{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }}" alt="">
     @endif
-    <h4>レビュー依頼タイトル：{{ $review->title }}</h4>
-    <p>依頼詳細：{{ $review->description }}</p>
+    <h4>タイトル：{{ $review->title }}</h4>
+    <p>詳細：{{ $review->description }}</p>
     <span>{{\App\Libs\Util::agoDateWriting($review->created_at)}}</span>
 
     @if(Auth::user()->id == $review->user_id)
-      <a href="/request/edit/{{$review->id}}">【編集】</a>
+      <a href="/post/edit/{{ $review->id }}">【編集】</a>
     @endif
 
     @include('review.subs.review-evaluation')
@@ -89,7 +89,7 @@
     });
 
     $('.yy-comment-evaluation').on('click',function(){
-      var userID = {{Auth::user()->id}};
+      var userId = {{Auth::user()->id}};
       var commentId = $(this).data('comment-id');
       var evaluation = $(this).val();
       $.ajax({

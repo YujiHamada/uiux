@@ -2,25 +2,29 @@
 
 @section('content')
   <div class="col mx-3">
+    @if(isset($review))
+      <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>｜
+    @endif
+
     <h1>レビュー依頼する</h1>
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/review/request') }}" enctype="multipart/form-data">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/request/store') }}" enctype="multipart/form-data">
     	{{ csrf_field() }}
     	タイトル：
-      <input id="title" type="text" class="form-control" name="title" value="{{ old('title') }}" required autofocus>
+      <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
     	詳細：
       @if ($errors->has('title'))
         <span class="help-block">
           <strong>{{ $errors->first('title') }}</strong>
         </span>
       @endif
-        <textarea id="description" type="text" class="form-control" name="description">{{ old('description') }}</textarea>
+      <textarea id="description" type="text" class="form-control" name="description">{{ old('description', isset($review->description) ? $review->description : '') }}</textarea>
       @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
         </span>
       @endif
       URL：
-      <input id="url" type="text" class="form-control" name="url" value="{{ old('url') }}">
+      <input id="url" type="text" class="form-control" name="url" value="{{ old('url', isset($review->url) ? $review->url : '') }}">
       @if ($errors->has('url'))
         <span class="help-block">
             <strong>{{ $errors->first('url') }}</strong>
@@ -29,6 +33,12 @@
       タグ：
       <div class="tags">
         <input type="text" id="tag">
+        @if(isset($review))
+          @foreach($review->reviewTag as $reviewTag)
+            <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
+            <input name="review_tag_names[]" type="hidden" value="{{ $reviewTag->tag->name }}">
+          @endforeach
+        @endif
       </div>
       @if ($errors->has('tags'))
         <span class="help-block">

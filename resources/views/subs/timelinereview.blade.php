@@ -1,15 +1,10 @@
 <div class="mb-3 p-3 yy-bg-white yy-outline">
 
   <div class="row mx-0">
-    {{-- <div class="col-sm-2 px-0">
-      <p class="m-0 mb-2"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
-      <p class="m-0 mb-2"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
-      <p class="m-0 mb-2"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
-    </div> --}}
 
     <div class="col-9 p-0 d-flex flex-column">
       <div class="d-flex justify-content-between">
-        <a class="yy-overflow-hidden" href="review/{{ !empty($review->is_request) ? 'request/' : '' }}{{ $review->id }}">
+        <a class="yy-overflow-hidden" href="{{ !empty($review->is_request) ? '/request/' : '/post/' }}{{ $review->id }}">
           <h5 class="yy-word-wrap mb-1">{{ $review->title }}</h5>
         </a>
         @if(Config::get('enum.type.GOOD_UX') == $review->type)

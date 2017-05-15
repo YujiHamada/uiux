@@ -3,14 +3,7 @@
 @section('content')
   <div class="col mx-3 px-0">
 
-    @if (session('flash_message'))
-      <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        {{ session('flash_message') }}
-      </div>
-    @endif
+    @include('subs.flash-message-success')
 
     @if(!empty($searchWords))
       <h3>{{$searchWords}}の検索結果 {{$reviews->total()}}件</h3>

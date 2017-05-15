@@ -2,12 +2,12 @@
 
 @section('content')
   <div class="col mx-3">
-  @if(isset($review))
-    <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>｜
-    <a href="/review/report/kaizen/{{ $review->id }}">このUXが改善されたことを報告する</a>
-  @endif
-
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('review') }}" enctype="multipart/form-data">
+    @if(isset($review))
+      <a href="/review/delete/{{ $review->id }}" onclick="return deleteConfirm();">このレビューを削除</a>｜
+      <a href="/post/report/kaizen/{{ $review->id }}">このUXが改善されたことを報告する</a>
+    @endif
+    <h1>レビューする</h1>
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('/post/store') }}" enctype="multipart/form-data">
     	{{ csrf_field() }}
     	タイトル：
       <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
@@ -17,7 +17,7 @@
           <strong>{{ $errors->first('title') }}</strong>
         </span>
       @endif
-        <textarea id="description" type="text" class="form-control" name="description">{{ old('description', isset($review->description) ? $review->description : '') }}</textarea>
+      <textarea id="description" type="text" class="form-control" name="description">{{ old('description', isset($review->description) ? $review->description : '') }}</textarea>
       @if ($errors->has('description'))
         <span class="help-block">
             <strong>{{ $errors->first('description') }}</strong>
@@ -36,7 +36,7 @@
         @if(isset($review))
           @foreach($review->reviewTag as $reviewTag)
             <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
-            <input name="review_tag_names[]" type="hidden" value="{{$reviewTag->tag->name}}">
+            <input name="review_tag_names[]" type="hidden" value="{{ $reviewTag->tag->name }}">
           @endforeach
         @endif
       </div>
@@ -60,16 +60,8 @@
             <strong>{{ $errors->first('type') }}</strong>
         </span>
       @endif
-      <div>
-        @if(old('tags'))
-          @foreach(old('tags') as $tag)
-            {{$tag}}
-          @endforeach
-        @endif
-      </div>
 
       <input type="file" name="uiImage" value="{{ old('uiImage') }}">
-      <input type="hidden" name="reviewId" value="{{$reviewId}}">
       <button type="submit" class="btn btn-primary">投稿</button>
     </form>
     <div class="preview">

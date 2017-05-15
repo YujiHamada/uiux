@@ -16,8 +16,6 @@ use Config;
 use App\SummaryTag;
 use App\SummaryScore;
 
-
-
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -28,13 +26,11 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
       try{
-
         // 以下、グローバル変数定義と同意
         $summaryTags = DB::table('summary_tags')->get();
         View::share('summaryTags', $summaryTags);
         $summaryScores = DB::table('summary_scores')->get();
         View::share('summaryScores', $summaryScores);
-
 
         // Reviewレコードが新規作成された場合
         Review::created(function ($review) {

@@ -8,6 +8,7 @@ use Auth;
 class ReviewComment extends Model
 {
     protected $table = 'review_comments';
+    protected $fillable = ['review_id', 'user_id', 'comment'];
 
     public function user(){
     	return $this->hasOne('App\User', 'id', 'user_id');

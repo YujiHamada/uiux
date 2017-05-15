@@ -13,14 +13,14 @@
 
         {{-- フォロー中のユーザを表示 --}}
         @foreach($following as $follow)
-          @include('subs.followlist')
+          @include('user.subs.followlist')
         @endforeach
 
       @elseif(isset($followers))
 
         {{-- フォロワーを表示 --}}
         @foreach($followers as $follow)
-          @include('subs.followlist')
+          @include('subs.subs.followlist')
         @endforeach
 
       @endif
