@@ -3,19 +3,11 @@
   <div class="row mx-0">
 
     <div class="col-9 p-0 d-flex flex-column">
-      <div class="d-flex justify-content-between">
+      <div class="d-flex justify-content-between mb-2">
         <a class="yy-overflow-hidden" href="{{ !empty($review->is_request) ? '/request/' : '/post/' }}{{ $review->id }}">
-          <h5 class="yy-word-wrap mb-1">{{ $review->title }}</h5>
+          <h5 class="yy-word-wrap m-0">{{ $review->title }}</h5>
         </a>
-        @if(Config::get('enum.type.GOOD_UX') == $review->type)
-          <span class="badge badge-success mb-1" style="vertical-align: middle;">GOOD UX!!</span>
-        @elseif(Config::get('enum.type.KAIZEN_UX') == $review->type)
-          <span class="badge badge-danger mb-1">KAIZEN UX</span>
-        @elseif(Config::get('enum.type.OPINION') == $review->type)
-          {{-- <p><span class="badge badge-default">OPINION</span></p> --}}
-        @elseif(!empty($review->is_request))
-          <span class="badge badge-danger mb-1">レビュー依頼</span>
-        @endif
+        @include('review.subs.review-type')
       </div>
 
       <p class="yy-review-word-wrap text-justify m-0 mb-auto">{{ $review->description }}</p>
@@ -27,8 +19,12 @@
       </div>
     </div>
     @if($review->image_name)
-      <div class="col-3 p-0 text-right">
+      <div class="col-3 p-0">
         <span class="yy-review-img d-block ml-auto" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></span>
+      </div>
+    @else
+      <div class="col-3 p-0">
+        <span class="yy-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
       </div>
     @endif
   </div>

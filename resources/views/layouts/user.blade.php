@@ -58,7 +58,7 @@
               <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@edit') }}">プロフィールを編集</a>
             </li>
             <li class="nav-item yy-outline-bottom">
-              <a class="nav-link yy-bg-sidebar" href="#">パスワードを設定</a>
+              <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@resetPassword') }}">パスワードを設定</a>
             </li>
             <li class="nav-item yy-outline-bottom">
               <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@showLinkSocial') }}">ソーシャル連携</a>

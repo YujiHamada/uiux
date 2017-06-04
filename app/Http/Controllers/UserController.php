@@ -74,6 +74,12 @@ class UserController extends Controller
     return response()->json($response);
   }
 
+  public function resetPassword() {
+
+    return view('user.reset-password');
+  }
+
+
   // フォローしているユーザの一覧を表示する
   public function showFollowing($name) {
     $user = User::where('name', $name)->first();

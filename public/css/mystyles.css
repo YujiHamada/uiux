@@ -33,6 +33,11 @@ h5.comment-header {
   vertical-align: middle;
 }
 
+.yy-preview-size {
+  width: 150px;
+  height: 150px;
+}
+
 .yy-review-img {
   display: inline-block;
   background-position: center center;
@@ -67,6 +72,12 @@ h5.comment-header {
 
 .yy-overflow-hidden {
   overflow: hidden;
+}
+
+.yy-clicked {
+  filter: alpha(opacity=65);
+  box-shadow: none;
+  opacity: .65;
 }
 
 .yy-word-wrap {

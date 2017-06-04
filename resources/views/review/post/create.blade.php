@@ -47,13 +47,30 @@
       @endif
 
       <label class="radio-inline">
-        <input type="radio" name="type" value="{{ Config::get('enum.type.GOOD_UX') }}" @if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.GOOD_UX')) checked @endif>Good UX
+        <input type="radio" name="type" value="{{ Config::get('enum.type.GOOD_UX') }}"
+          @if(isset($review->type))
+            @if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.GOOD_UX'))
+               checked
+            @endif
+          @else
+            {{-- 作成初期段階ではGood UXを初期選択しておく --}}
+             checked
+          @endif>
+          Good UX
       </label>
       <label class="radio-inline">
-        <input type="radio" name="type" value="{{ Config::get('enum.type.KAIZEN_UX') }}"@if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.KAIZEN_UX')) checked @endif>KAIZEN UX
+        <input type="radio" name="type" value="{{ Config::get('enum.type.KAIZEN_UX') }}"
+          @if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.KAIZEN_UX'))
+             checked
+          @endif>
+          KAIZEN UX
       </label>
       <label class="radio-inline">
-        <input type="radio" name="type" value="{{ Config::get('enum.type.OPINION') }}"@if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.OPINION')) checked @endif>OPINION
+        <input type="radio" name="type" value="{{ Config::get('enum.type.OPINION') }}"
+          @if(old('type', isset($review->type) ? $review->type : '') == Config::get('enum.type.OPINION'))
+             checked
+          @endif>
+          OPINION
       </label>
       @if ($errors->has('type'))
         <span class="help-block">

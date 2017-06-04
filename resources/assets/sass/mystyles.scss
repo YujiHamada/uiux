@@ -8,22 +8,6 @@ body{
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS P Gothic", Verdana, sans-serif;
 }
 
-h5.comment-header{
-  margin-top: 50px;
-}
-
-.comment{
-  border-bottom: 1px solid #aaa;
-}
-
-.comment-textarea{
-  width: 100%;
-}
-
-.commented-user{
-  text-align: right;
-}
-
 ///////////////////////////////
 // 変数定義
 //////////////////////////////
@@ -50,6 +34,11 @@ $yy-line-height: 1rem * 1.5;
 .yy-vertical-align-middle {
   display: table-cell;
   vertical-align: middle;
+}
+
+.yy-preview-size {
+  width: 150px;
+  height: 150px;
 }
 
 .yy-review-img {
@@ -86,6 +75,14 @@ $yy-line-height: 1rem * 1.5;
 
 .yy-overflow-hidden {
   overflow: hidden;
+}
+
+.yy-clicked {
+  // bootstrapのdisabledとほぼ同じ。カーソルにnot-allowedをつけない版
+  filter: alpha(opacity=65);
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  opacity: .65;
 }
 
 .yy-word-wrap {
