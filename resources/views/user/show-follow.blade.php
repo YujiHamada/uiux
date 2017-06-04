@@ -20,7 +20,7 @@
 
         {{-- フォロワーを表示 --}}
         @foreach($followers as $follow)
-          @include('subs.subs.followlist')
+          @include('user.subs.followlist')
         @endforeach
 
       @endif
