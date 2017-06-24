@@ -36,7 +36,7 @@ class ReviewController extends Controller
     $reviewId = $request->input('reviewId');
     $commentId = $request->input('commentId');
 
-  	$reviewComment = ReviewComment::where('id', $commentId)->delete();
+  	$reviewComment = ReviewComment::where('id', $commentId)->first()->delete();
 
     // postかrequestかにより、戻る画面を振り分ける
     if(Review::find($reviewId)->is_request) {
@@ -52,7 +52,8 @@ class ReviewController extends Controller
 
     if(!empty($reviewEvaluation)){
       //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-      ReviewEvaluation::destroy($reviewEvaluation->id);
+      ReviewEvaluation::where('id', $reviewEvaluation->id)->first()->delete();
+
       return response()->json([
           'isDeleted' => true
       ]);
@@ -78,7 +79,8 @@ class ReviewController extends Controller
 
     if(!empty($commentEvaluation)){
       //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-      CommentEvaluation::destroy($commentEvaluation->id);
+      CommentEvaluation::where('id', $commentEvaluation->id)->first()->delete();
+
       return response()->json([
           'isDeleted' => true,
           'commentId' => $request->comment_id
@@ -102,7 +104,8 @@ class ReviewController extends Controller
   }
 
   public function delete($reviewId){
-    Review::destroy($reviewId);
+    Review::where('id', $reviewId)->first()->delete();
+
     return redirect('/')->with('flash_message', '削除が完了しました');
   }
 }
