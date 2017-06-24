@@ -67,13 +67,15 @@ class SocialController extends Controller
     // 未ログイン
     // ユーザ登録済：認証してログイン
     // ユーザ未登録：ユーザ登録画面へ遷移
+
     $user = DB::table('users')
                 ->join('social_providers', 'users.id', '=', 'social_providers.user_id')
                 ->where('social_providers.social_uid', '=', $socialUser->id)
                 ->where('social_providers.social', '=', $provider)
                 ->first();
+
     if($user) {
-      Auth::loginUsingId($user->id, true);
+      Auth::loginUsingId($user->user_id, true);
       return redirect($this->redirectTo);
     }
 
