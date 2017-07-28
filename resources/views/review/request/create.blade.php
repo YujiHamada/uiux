@@ -31,20 +31,7 @@
         </span>
       @endif
       タグ：
-      <div class="tags">
-        <input type="text" id="tag">
-        @if(isset($review))
-          @foreach($review->reviewTag as $reviewTag)
-            <span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span>
-            <input name="review_tag_names[]" type="hidden" value="{{ $reviewTag->tag->name }}">
-          @endforeach
-        @endif
-      </div>
-      @if ($errors->has('tags'))
-        <span class="help-block">
-            <strong>{{ $errors->first('tags') }}</strong>
-        </span>
-      @endif
+      @include('review.subs.review-tag')
 
       <input type="file" name="uiImage" value="{{ old('uiImage') }}">
       <button type="submit" class="btn btn-primary">投稿</button>
