@@ -99,12 +99,12 @@
         success: function(data) {
           $('.yy-review-evaluation').toggleClass('yy-clicked');
           if(data.isDeleted){
-            $('#yy-agree').text('賛成');
-            $('#yy-disagree').text('反対');
+            $('#yy-agree').text('レビューに賛成');
+            $('#yy-disagree').text('レビューに反対');
           }else if(data.evaluation == {{Config::get('enum.evaluation.AGREE')}}){
-            $('#yy-agree').text('賛成済');
+            $('#yy-agree').text('レビューに賛成済');
           }else if(data.evaluation == {{Config::get('enum.evaluation.DISAGREE')}}){
-            $('#yy-disagree').text('反対済');
+            $('#yy-disagree').text('レビューに反対済');
           }
         },
         error: function(XMLHttpRequest, textStatus, errorThrown){

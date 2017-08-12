@@ -26,7 +26,7 @@ class ReviewComment extends Model
   		return $this->evaluations()->selectRaw('count(*) as count')->where('is_agree','1')->groupBy('is_agree');
   	}
 
-	public function disagreeCount() {
+	  public function disagreeCount() {
   		return $this->evaluations()->selectRaw('count(*) as count')->where('is_agree','0')->groupBy('is_agree');
   	}
 }

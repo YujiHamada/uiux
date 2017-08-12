@@ -17,12 +17,12 @@
           @else
             <button id="yy-comment-agree-{{$reviewComment->id}}"
               class="yy-comment-evaluation btn btn-primary btn-sm {{ isset($reviewComment->evaluation) ? ' yy-clicked' : '' }}"
-              type="button" value="{{Config::get('enum.evaluation.AGREE')}}" data-comment-id="{{$reviewComment->id}}">
+              type="button" value="{{Config::get('enum.evaluation.AGREE')}}" data-comment-id="{{$reviewComment->id}}" data-comment-user-id="{{$reviewComment->user_id}}">
               {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 1) ? 'イイネ済' : 'イイネ' }}
             </button>
             <button id="yy-comment-disagree-{{$reviewComment->id}}"
               class="yy-comment-evaluation btn btn-danger btn-sm {{isset($reviewComment->evaluation) ? ' yy-clicked' : ''}}"
-              type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}" data-comment-id="{{$reviewComment->id}}">
+              type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}" data-comment-id="{{$reviewComment->id}}" data-comment-user-id="{{$reviewComment->user_id}}">
               {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 0) ? 'ワルイネ済' : 'ワルイネ' }}
             </button>
           @endif
