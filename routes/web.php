@@ -21,6 +21,7 @@ Route::get( '/contact', 'HomeController@showContact');
 Route::post('/contact', 'HomeController@sendContact');
 Route::get( '/legal', 'HomeController@showLegal');
 Route::get( '/privacy', 'HomeController@showPrivacy');
+Route::post( '/notification/read', 'HomeController@notificationReadAt');
 
 //ReviewContrller
 Route::get( '/review/delete/{review}', 'ReviewController@delete');

@@ -8,6 +8,7 @@ use App\Review;
 use App\ReviewEvaluations;
 use App\ReviewTag;
 use App\Tag;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactInformation;
 
@@ -109,13 +110,13 @@ class HomeController extends Controller
         return view('home.contact');
     }
 
-    //利用規約ページの表示
-    public function showLegal(){
+    // 利用規約ページの表示
+    public function showLegal() {
         return view('home.legal');
     }
 
-    //プライバシーポリシーの表示
-    public function showPrivacy(){
+    // プライバシーポリシーの表示
+    public function showPrivacy() {
         return view('home.privacy');
     }
 
@@ -130,6 +131,17 @@ class HomeController extends Controller
       Mail::to("info.yyux@gmail.com")->send(new ContactInformation($name, $email, $url, $contact));
 
       return redirect('/')->with('flash_message', '問い合わせを受け付けました。');
+    }
+
+    // 通知の既読処理
+    public function notificationReadAt(Request $request) {
+        $userId = $request->input('userId');
+        $user = User::find($userId);
+
+        $user->unreadNotifications->markAsRead();
+
+        // jQueryのajaxはJSON形式の文字列を返却しないとerror扱いになるので特に意味のないJSON文字列を返している
+        return '{"status":"success"}';
     }
 
 }

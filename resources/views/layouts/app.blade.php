@@ -51,6 +51,49 @@
                       <a class="nav-link" href="#">Link</a>
                     </li>
                   </ul>
+                  <div class="btn-group">
+                    <!-- bootstrapのspacingが効かない？ -->
+                    <a data-toggle="dropdown" href="#" style="margin:auto 5px;">
+                      <i class="fa fa-globe fa-2x yy-notifications-icon" aria-hidden="true"></i>
+                        <span class="badge badge-danger yy-unreadnotification-count" style="position: relative;left: -10px; @if(count(Auth::user()->unreadNotifications) == 0) visibility:hidden @endif">
+                          {{ count(Auth::user()->unreadNotifications) }}
+                        </span>
+                    </a>
+                    <div class="dropdown-menu yy-notifications">
+                      @if(Auth::check())
+                        <div class="ml-3">
+                          お知らせ一覧
+                        </div>
+                        <div class="dropdown-divider"></div>
+                        @forelse(Auth::user()->notifications->take(10) as $key => $notification)
+                          <div>
+                            <a class="dropdown-item" href="{{ $notification->data['url'] }}" style="width: 400px;">
+                              <div class="row">
+                                <div class="col-1 pl-0">
+                                  <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset(App\User::find($notification->notifier_id)->avatar_image_path) }})"></span>
+                                </div>
+                                @if(!isset($notification->read_at))
+                                  <div class="col-1 yy-unreadnotification-mark">
+                                    ●
+                                  </div>
+                                @endif
+                                <div class="col">
+                                  <span style="white-space: normal;">{{ $notification->data['message'] }}</span>
+                                </div>
+                              </div>
+                            </a>
+                          </div>
+                          @if(count(Auth::user()->notifications) != $key + 1)
+                            <div class="dropdown-divider"></div>
+                          @endif
+                        @empty
+                          通知はまだありません
+                        @endforelse
+                      @else
+                        <a href="/login">yyuiuxに登録しよう！</a>
+                      @endif
+                    </div>
+                  </div>
                   <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
                     <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
                     <button class="btn btn-outline-success" type="submit">Search</button>
@@ -252,6 +295,28 @@
     <script src="/js/cropper.js"></script>
     <script src="/js/croppermain.js"></script>
     <script src="/js/myscripts.js"></script>
+    <script>
+    @if(Auth::user())
+      // 通知アイコンをクリックで通知テーブルに既読をつける
+      $('.yy-notifications-icon').on('click',function(){
+        var userId = {{Auth::user()->id}};
+        $.ajax({
+          url: "/notification/read",
+          type:'POST',
+          dataType: 'json',
+          data : {
+            userId : userId
+          },
+          success: function(data) {
+            $('.yy-unreadnotification-count').css('visibility', 'hidden');
+          },
+          error: function(XMLHttpRequest, textStatus, errorThrown){
+
+          }
+        });
+      });
+      @endif
+    </script>
   @show
 </body>
 </html>

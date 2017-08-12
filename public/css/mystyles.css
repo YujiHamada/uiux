@@ -200,4 +200,14 @@ body {
   font-weight: bold;
 }
 
+.yy-notifications {
+  font-size: 80%;
+}
+
+.yy-unreadnotification-mark {
+  margin: auto;
+  color: red;
+  font-size: 10%;
+}
+
 /*# sourceMappingURL=mystyles.css.map */

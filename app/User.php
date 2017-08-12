@@ -8,7 +8,7 @@ use App\User;
 use App\Follow;
 use Auth;
 use Carbon\Carbon;
-
+use App\Notifications\HeaderNotification;
 
 class User extends Authenticatable
 {
@@ -90,6 +90,12 @@ class User extends Authenticatable
     // ユーザ確認されているか確認
     public function isConfirmed() {
         return ! empty($this->confirmed_at);
+    }
+
+    // 引数で受け取ったユーザーIDのユーザーに通知を送る
+    public static function notifyByUserId($userId, $notification) {
+      $user = User::find($userId);
+      $user->notify(new HeaderNotification($notification));
     }
 
 

@@ -8,23 +8,36 @@ use App\ReviewComment;
 use App\CommentEvaluation;
 use App\Review;
 use App\ReviewEvaluation;
+use App\User;
+use App\Notifications\HeaderNotification;
 
 class ReviewController extends Controller
 {
   public function storeComment(\App\Http\Requests\StoreReviewComment $request) {
 
     $reviewId = $request->input('reviewId');
-    $comment = $request->input('comment');
+    $commentText = $request->input('comment');
     $userId = $request->input('userId');
 
-    ReviewComment::create([
+    $comment = ReviewComment::create([
             'review_id' => $reviewId,
             'user_id' => $userId,
-            'comment' => $comment
+            'comment' => $commentText
           ]);
 
+    $review = Review::find($reviewId);
+
+    // 自分のレビューでなければ通知を出す
+    if(Auth::id() != $review->user_id){
+        $notification['url'] = '/post/' . $review->id;
+        $notification['message'] = Auth::user()->name . "さんがレビュー「" . $review->title . "」にコメントをしました！";
+        $notification['type'] = 'COMMENT_REVIEW';
+        $notification['type_id'] = $comment->id;
+        User::notifyByUserId($review->user_id, $notification);
+    }
+
     // postかrequestかにより、戻る画面を振り分ける
-    if(Review::find($reviewId)->is_request) {
+    if($review->is_request) {
       return redirect('/request/' . $reviewId)->with('flash_message', '投稿が完了しました');
     } else {
       return redirect('/post/' . $reviewId)->with('flash_message', '投稿が完了しました');
@@ -48,58 +61,79 @@ class ReviewController extends Controller
 
   public function evaluateReview(Request $request) {
 
-    $reviewEvaluation = ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::user()->id)->first();
+    $reviewEvaluation = ReviewEvaluation::where('review_id', $request->review_id)->where('user_id', Auth::id())->first();
+    $review = Review::find($request->review_id);
 
     if(!empty($reviewEvaluation)){
-      //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-      ReviewEvaluation::where('id', $reviewEvaluation->id)->first()->delete();
+        //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
+        ReviewEvaluation::where('id', $reviewEvaluation->id)->first()->delete();
 
-      return response()->json([
-          'isDeleted' => true
-      ]);
+        HeaderNotification::delete($review->user_id, 'EVALUATE_REVIEW', $reviewEvaluation->id);
+
+        return response()->json([
+            'isDeleted' => true
+        ]);
     }else{
-      // まだ未評価の場合、評価を保存する。
-      $evaluation = $request->evaluation;  // AGREE:'1' or DISAGREEE:'0'
+        // まだ未評価の場合、評価を保存する。
+        $evaluation = $request->evaluation;  // AGREE:'1' or DISAGREEE:'0'
 
-      $reviewEvaluation = new ReviewEvaluation;
-      $reviewEvaluation->user_id = $request->user_id;
-      $reviewEvaluation->review_id = $request->review_id;
-      $reviewEvaluation->is_agree = $evaluation;
+        $reviewEvaluation = new ReviewEvaluation;
+        $reviewEvaluation->user_id = $request->user_id;
+        $reviewEvaluation->review_id = $request->review_id;
+        $reviewEvaluation->is_agree = $evaluation;
 
-      $reviewEvaluation->save();
+        $reviewEvaluation->save();
 
-      return response()->json([
+        // 通知
+        $notification['url'] = '/post/' . $review->id;
+        $notification['message'] = Auth::user()->name . "さんがレビュー「" . $review->title ."」に評価をしました！";
+        $notification['type'] = 'EVALUATE_REVIEW';
+        $notification['type_id'] = $reviewEvaluation->id;
+        User::notifyByUserId($review->user_id, $notification);
+
+        return response()->json([
           'evaluation' => $evaluation
-      ]);
+        ]);
     }
   }
 
   public function evaluateComment(Request $request) {
-    $commentEvaluation = CommentEvaluation::where('comment_id', $request->comment_id)->where('user_id', $request->user_id)->first();
+    $commentEvaluation = CommentEvaluation::where('comment_id', $request->comment_id)->where('user_id', Auth::id())->first();
 
     if(!empty($commentEvaluation)){
-      //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
-      CommentEvaluation::where('id', $commentEvaluation->id)->first()->delete();
+        //すでにレビューに対する評価があったらその評価を削除して削除フラグを返却する
+        CommentEvaluation::where('id', $commentEvaluation->id)->first()->delete();
 
-      return response()->json([
+        HeaderNotification::delete($commentEvaluation->user_id, 'EVALUATE_REVIEW_COMMENT', $commentEvaluation->id);
+
+        return response()->json([
           'isDeleted' => true,
           'commentId' => $request->comment_id
-      ]);
+        ]);
     }else{
-      //まだ未評価の場合、評価を保存する。
-      $evaluation = $request->evaluation;
 
-      $commentEvaluation = new CommentEvaluation;
-      $commentEvaluation->user_id = $request->user_id;
-      $commentEvaluation->comment_id = $request->comment_id;
-      $commentEvaluation->is_agree = $evaluation;
+        //まだ未評価の場合、評価を保存する。
+        $evaluation = $request->evaluation;
 
-      $commentEvaluation->save();
+        $commentEvaluation = new CommentEvaluation;
+        $commentEvaluation->user_id = Auth::id();
+        $commentEvaluation->comment_id = $request->comment_id;
+        $commentEvaluation->is_agree = $evaluation;
 
-      return response()->json([
+        $commentEvaluation->save();
+
+        // 通知
+        $notification['url'] = '/post/' . $request->reviewId;
+        $notification['message'] = "コメントが評価されました";
+        $notification['type'] = 'EVALUATE_REVIEW_COMMENT';
+        $notification['type_id'] = $commentEvaluation->id;
+        User::notifyByUserId($request->user_id, $notification);
+
+
+        return response()->json([
           'evaluation' => $evaluation,
           'commentId' => $request->comment_id
-      ]);
+        ]);
     }
   }
 
