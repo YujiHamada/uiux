@@ -21,11 +21,8 @@ Route::get( '/contact', 'HomeController@showContact');
 Route::post('/contact', 'HomeController@sendContact');
 Route::get( '/legal', 'HomeController@showLegal');
 Route::get( '/privacy', 'HomeController@showPrivacy');
-<<<<<<< HEAD
-Route::post('/settings/crop', 'HomeController@crop'); // Ajax
-=======
 Route::post( '/notification/read', 'HomeController@notificationReadAt');
->>>>>>> master
+Route::post('/settings/crop', 'HomeController@crop'); // Ajax
 
 //ReviewContrller
 Route::get( '/review/delete/{review}', 'ReviewController@delete');
