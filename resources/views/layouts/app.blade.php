@@ -55,9 +55,11 @@
                     <!-- bootstrapのspacingが効かない？ -->
                     <a data-toggle="dropdown" href="#" style="margin:auto 5px;">
                       <i class="fa fa-globe fa-2x yy-notifications-icon" aria-hidden="true"></i>
+                      @if(Auth::user())
                         <span class="badge badge-danger yy-unreadnotification-count" style="position: relative;left: -10px; @if(count(Auth::user()->unreadNotifications) == 0) visibility:hidden @endif">
                           {{ count(Auth::user()->unreadNotifications) }}
                         </span>
+                      @endif
                     </a>
                     <div class="dropdown-menu yy-notifications">
                       @if(Auth::check())

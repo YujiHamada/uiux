@@ -128,7 +128,7 @@ class HomeController extends Controller
       $contact = $request->contact;
 
       // お問い合わせ内容を開発者メールに送信する。
-      Mail::to("info.yyux@gmail.com")->send(new ContactInformation($name, $email, $url, $contact));
+      Mail::to(\Config::get('const.ADMIN_MAIL'))->send(new ContactInformation($name, $email, $url, $contact));
 
       return redirect('/')->with('flash_message', '問い合わせを受け付けました。');
     }

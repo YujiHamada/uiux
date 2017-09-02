@@ -9,6 +9,8 @@ use App\User;
 use Auth;
 use App\Libs\CropAvatar;
 use App\SocialProvider;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Leave;
 
 class UserController extends Controller
 {
@@ -144,6 +146,18 @@ class UserController extends Controller
 
       \Session::flash('flash_message', '新しいメールアドレス '. $user->email .' を確認しました');
       return redirect('/');
+  }
+
+  public function leave() {
+    return view('user.leave');
+  }
+
+  public function left(Request $request) {
+    $input = $request->all();
+    Mail::to(\Config::get('const.ADMIN_MAIL'))->send(new Leave($input['reasons'], $input['otherReasons']));
+    User::leave();
+
+    return redirect('/')->with('flash_message', 'yyUXから退会しました。ご利用ありがとうございました。');
   }
 
 }

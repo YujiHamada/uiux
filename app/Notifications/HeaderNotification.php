@@ -68,6 +68,9 @@ class HeaderNotification extends Notification
     // タイプとタイプIDから通知を削除する
     public static function delete($userId, $type, $typeId){
         $user = User::find($userId);
+        if(!isset($user)){
+            return;
+        }
         $notifications = $user->notifications->where('notifier_id', Auth::id());
         foreach($notifications as $notification){
             if($notification->data['type'] == $type && $notification->data['type_id'] == $typeId){
