@@ -1,14 +1,12 @@
 @extends('layouts.user')
 
 @section('content')
-  <div class="col mx-3">
-    <div id="crop-avatar">
+<div class="col mx-3">
+    @include('subs.flash-message-success')
 
-      @include('subs.flash-message-success')
+    <h4>プロフィールを編集</h4>
 
-      <h4>プロフィールを編集</h4>
-
-      <form method="post" action="{{ action('UserController@store') }}" enctype="multipart/form-data">
+    <form method="post" action="{{ action('UserController@store') }}" enctype="multipart/form-data">
         {{ csrf_field() }}
 
         <input type="hidden" name="avatar_image_path" class="avatar-image-path" value="{{ Auth::user()->avatar_image_path }}">
@@ -44,16 +42,14 @@
         </div>
         <button type="submit" class="btn btn-primary">変更を保存</button>
 
-      </form>
-
-      @include('subs.cropper')
-
-    </div>
-  </div>
+    </form>
+</div>
 @endsection
 
 @section('foot')
   @parent
+  <script src="/js/cropper.js"></script>
+  <script src="/js/croppermain.js"></script>
   <script>
   </script>
 @endsection

@@ -45,6 +45,7 @@
   @parent
 
   @include('review.js.autocomplete-tag-form')
+  @include('review.js.input-image-file')
   @include('review.js.enter-tag-form')
   @include('review.js.remove-tag')
   @include('review.js.input-tag')
