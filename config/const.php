@@ -11,4 +11,5 @@ return array(
     'SCORE_COMMENT' => 30,
     'SCORE_REVIEW_EVALUATION' => 15,
     'SCORE_COMMENT_EVALUATION' => 5,
+    'ADMIN_MAIL' => 'info.yyux@gmail.com'
 );

@@ -66,6 +66,9 @@
             <li class="nav-item yy-outline-bottom">
               <a class="nav-link yy-bg-sidebar" href="#">通知</a>
             </li>
+            <li class="nav-item yy-outline-bottom">
+              <a class="nav-link yy-bg-sidebar" href="{{ Auth::user()->name }}/leave">退会する</a>
+            </li>
           </ul>
         </nav>
       </div>
