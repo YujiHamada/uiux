@@ -17,9 +17,6 @@
 
   function CropAvatar($element) {
     this.$container = $element;
-
-    this.$avatarImagePath = this.$container.find('.avatar-image-path'); // usersテーブルに設定するパス
-
     this.$avatarView = this.$container.find('.add-review-image');
     this.$reviewImages = this.$container.find('.review-images');
 
@@ -82,8 +79,8 @@
     },
 
     initPreview: function () {
-    //   var url = this.$avatar.attr('src');
-    //   var avatarImagePath = this.$avatarImagePath.val();
+      var url;
+      var avatarImagePath;
       //
     //   this.$avatarPreview.html('<img src="' + url + '">');
     },
@@ -309,15 +306,21 @@
     },
 
     cropDone: function () {
-      this.$avatarForm.get(0).reset();
-    //   this.$avatar.attr('src', this.url);
-      this.$avatarImagePath.val(this.avatarImagePath);
+        this.$avatarForm.get(0).reset();
 
+        this.$reviewImages.append([
+            '<div class="review-image">',
+                '<input type="hidden" name="avatar_image_path" class="avatar-image-path" value="' + this.avatarImagePath + '">',
+                '<div class="col-3 p-0 d-inline-block">',
+                    '<span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span>',
+                '</div>',
+            '</div>'
+        ].join(''));
 
-      this.$reviewImages.append('<div class="col-3 p-0 d-inline-block"><span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span></div>');
+        // this.$reviewImages.append('<div class="col-3 p-0 d-inline-block"><span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span></div>');
 
-      this.stopCropper();
-      this.$avatarModal.modal('hide');
+        this.stopCropper();
+        this.$avatarModal.modal('hide');
     },
 
     alert: function (msg) {

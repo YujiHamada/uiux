@@ -69,7 +69,9 @@
             <label class="col-12 col-form-label p-0">レビュー画像</label>
 
             {{-- 追加された写真が格納されていくdiv --}}
-            <input type="hidden" name="avatar_image_path" class="avatar-image-path" value="">
+            
+
+
             <div class="review-images">
             </div>
 
