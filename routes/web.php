@@ -22,6 +22,7 @@ Route::post('/contact', 'HomeController@sendContact');
 Route::get( '/legal', 'HomeController@showLegal');
 Route::get( '/privacy', 'HomeController@showPrivacy');
 Route::post( '/notification/read', 'HomeController@notificationReadAt');
+Route::post('/settings/crop', 'HomeController@crop'); // Ajax
 
 //ReviewContrller
 Route::get( '/review/delete/{review}', 'ReviewController@delete');
@@ -51,7 +52,7 @@ Route::post('/settings/edit', 'UserController@store');
 Route::get( '/settings/password', 'UserController@resetPassword');
 Route::get( '/settings/link', 'UserController@showLinkSocial');
 Route::get( '/settings/link/{provider}', 'UserController@unlinkSocial');
-Route::post('/settings/crop', 'UserController@crop'); // Ajax
+
 
 Route::post('/{username}/follow', 'UserController@follow');
 Route::get( '/{username}/following', 'UserController@showFollowing');

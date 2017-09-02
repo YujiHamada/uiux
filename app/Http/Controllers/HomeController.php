@@ -11,6 +11,10 @@ use App\Tag;
 use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\ContactInformation;
+use App\Libs\CropAvatar;
+use Illuminate\Support\Facades\Input;
+
+
 
 
 
@@ -133,6 +137,7 @@ class HomeController extends Controller
       return redirect('/')->with('flash_message', '問い合わせを受け付けました。');
     }
 
+
     // 通知の既読処理
     public function notificationReadAt(Request $request) {
         $userId = $request->input('userId');
@@ -142,6 +147,23 @@ class HomeController extends Controller
 
         // jQueryのajaxはJSON形式の文字列を返却しないとerror扱いになるので特に意味のないJSON文字列を返している
         return '{"status":"success"}';
+    }
+
+    public function crop(Request $request) {
+      $crop = new CropAvatar(
+        Input::has('avatar_src') ? $request->input('avatar_src') : null,
+        Input::has('avatar_data') ? $request->input('avatar_data') : null,
+        Input::hasFile('avatar_file') ? $_FILES['avatar_file'] : null
+      );
+
+      $response = array(
+        'state'  => 200,
+        'message' => $crop->getMsg(),
+        'result' => $crop->getResult(), // ドメイン付きファイルパス
+        'avatarImagePath' => $crop->getAvatarImagePath() // ドメイン無しファイルパス
+      );
+
+      return response()->json($response);
     }
 
 }
