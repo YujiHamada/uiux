@@ -6,13 +6,17 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use App\User;
 use App\Follow;
+use App\SocialProvider;
 use Auth;
 use Carbon\Carbon;
+use App\Notifications\HeaderNotification;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -37,6 +41,7 @@ class User extends Authenticatable
     protected $dates = [
         'confirmed_at',
         'confirmation_sent_at',
+        'deleted_at',
     ];
 
     // フォローしているユーザを取得する
@@ -90,6 +95,23 @@ class User extends Authenticatable
     // ユーザ確認されているか確認
     public function isConfirmed() {
         return ! empty($this->confirmed_at);
+    }
+
+    // 引数で受け取ったユーザーIDのユーザーに通知を送る
+    public static function notifyByUserId($userId, $notification) {
+      $user = User::find($userId);
+      if(isset($user)){
+          $user->notify(new HeaderNotification($notification));
+      }
+    }
+
+    public static function leave(){
+      $user = Auth::user();
+      User::where('id', $user->id)->update(['is_deleted' => 1]);
+      SocialProvider::where('user_id', $user->id)->delete();
+      Auth::logout();
+
+      $user->delete();
     }
 
 

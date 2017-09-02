@@ -7,7 +7,7 @@
           <p>{{$reviewComment->comment}}</p>
         </div>
         <div class="py-2">
-          @if($reviewComment->user->id == Auth::user()->id)
+          @if($reviewComment->user_id == Auth::user()->id)
             <form action="{{ action('ReviewController@deleteComment') }}" method="post" accept-charset="utf-8" class="d-inline">
               {{ csrf_field() }}
               <input type="hidden" name="commentId" value="{{$reviewComment->id}}">
@@ -17,12 +17,12 @@
           @else
             <button id="yy-comment-agree-{{$reviewComment->id}}"
               class="yy-comment-evaluation btn btn-primary btn-sm {{ isset($reviewComment->evaluation) ? ' yy-clicked' : '' }}"
-              type="button" value="{{Config::get('enum.evaluation.AGREE')}}" data-comment-id="{{$reviewComment->id}}">
+              type="button" value="{{Config::get('enum.evaluation.AGREE')}}" data-comment-id="{{$reviewComment->id}}" data-comment-user-id="{{$reviewComment->user_id}}">
               {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 1) ? 'イイネ済' : 'イイネ' }}
             </button>
             <button id="yy-comment-disagree-{{$reviewComment->id}}"
               class="yy-comment-evaluation btn btn-danger btn-sm {{isset($reviewComment->evaluation) ? ' yy-clicked' : ''}}"
-              type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}" data-comment-id="{{$reviewComment->id}}">
+              type="button" value="{{Config::get('enum.evaluation.DISAGREE')}}" data-comment-id="{{$reviewComment->id}}" data-comment-user-id="{{$reviewComment->user_id}}">
               {{ (isset($reviewComment->evaluation) && $reviewComment->evaluation->is_agree == 0) ? 'ワルイネ済' : 'ワルイネ' }}
             </button>
           @endif
@@ -31,8 +31,12 @@
         </div>
         <div class="d-flex justify-content-between">
           <div class="d-inline-block">
-            <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset($reviewComment->user->avatar_image_path) }})"></span>
-            <a class ="yy-fontsize-09" href="{{ action('UserController@show', ['username' => $reviewComment->user->name]) }}" title="">{{ $reviewComment->user->name }}</a>
+            <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $review->user->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
+            @if(isset($review->user))
+              <a class="yy-fontsize-09" href="{{ action('UserController@show', ['username' => $review->user->name or '退会済みユーザー']) }}" title="">{{ $review->user->name }}</a>
+            @else
+              <span class ="yy-fontsize-09">{{ '退会済みユーザー' }}</span>
+            @endif
           </div>
           <span>投稿時間：{{\App\Libs\Util::agoDateWriting($reviewComment->created_at)}}</span>
         </div>

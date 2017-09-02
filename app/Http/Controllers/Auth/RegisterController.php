@@ -104,7 +104,7 @@ class RegisterController extends Controller
     private function sendConfirmMail(User $user)
     {
         // 開発の都合上、宛先をinfo.yyuxにしておく
-        Mail::to("info.yyux@gmail.com")->send(new UserConfirmation($user));
+        Mail::to(\Config::get('const.ADMIN_MAIL'))->send(new UserConfirmation($user));
         // Mail::to($user->email)->send(new UserConfirmation($user));
     }
 

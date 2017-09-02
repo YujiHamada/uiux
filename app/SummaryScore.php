@@ -20,10 +20,14 @@ class SummaryScore extends Model
 
       DB::table('summary_scores')->delete();
 
-      // score_hisotriesテーブルからトップ10のスコアを集計する
+      // score_hisotriesテーブルからトップ10のスコアを集計する。削除済みユーザーは除外
       $topTenScores = DB::table('score_histories')
+                      ->join('users', function ($join) {
+                          $join->on('score_histories.user_id', '=', 'users.id')
+                               ->where('users.is_deleted', 0);
+                      })
                       ->groupBy('user_id')
-                      ->select(DB::raw('user_id, sum(score) as user_score'))
+                      ->select(DB::raw('user_id, sum(score_histories.score) as user_score'))
                       ->orderBy('user_score', 'desc')
                       ->get(10);
 
