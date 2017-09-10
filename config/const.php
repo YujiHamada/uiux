@@ -11,5 +11,6 @@ return array(
     'SCORE_COMMENT' => 30,
     'SCORE_REVIEW_EVALUATION' => 15,
     'SCORE_COMMENT_EVALUATION' => 5,
-    'ADMIN_MAIL' => 'info.yyux@gmail.com'
+    'ADMIN_MAIL' => 'info.yyux@gmail.com',
+    'REVIEW_URL_IMAGES_DIRECTORY' => 'images/review_url_images/',
 );

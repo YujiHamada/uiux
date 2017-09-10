@@ -210,4 +210,40 @@ body {
   font-size: 10%;
 }
 
+.yy-review-url-image {
+  max-height: 64px;
+  max-width: 64px;
+}
+
+.yy-review-url-title {
+  font-weight: bold;
+  font-size: 13px;
+}
+
+.yy-review-url-description {
+  font-weight: lighter;
+  font-size: 11px;
+}
+
+.yy-review-url-ogp {
+  border: solid 1px #e6ecf0;
+  border-radius: 4px;
+  padding: 10px;
+}
+
+a.yy-review-url-link {
+  text-decoration: none;
+  color: black;
+}
+
+a.yy-review-url-link:hover {
+  text-decoration: underline;
+  color: black;
+}
+
+span.yy-review-domain {
+  font-size: 6px;
+  color: #00afcc;
+}
+
 /*# sourceMappingURL=mystyles.css.map */
