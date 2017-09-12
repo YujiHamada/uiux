@@ -11,6 +11,7 @@ class CreateReviewImagesTable extends Migration
             $table->increments('id');
             $table->integer('review_id')->unsigned();
             $table->string('image_name')->nullable();
+            $table->timestamps();
 
             // 制約
             $table->foreign('review_id')->references('id')->on('reviews')

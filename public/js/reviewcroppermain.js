@@ -309,9 +309,9 @@
         this.$avatarForm.get(0).reset();
 
         this.$reviewImages.append([
-            '<div class="review-image">',
-                '<input type="hidden" name="avatar_image_path" class="avatar-image-path" value="' + this.avatarImagePath + '">',
-                '<div class="col-3 p-0 d-inline-block">',
+            '<div class="review-image d-inline-block pr-3">',
+                '<input type="hidden" name="review_images[]" value="' + this.avatarImagePath + '">',
+                '<div class="col-3 p-0">',
                     '<span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span>',
                 '</div>',
             '</div>'
