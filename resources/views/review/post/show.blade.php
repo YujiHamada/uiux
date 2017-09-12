@@ -44,24 +44,39 @@
         </div>
       </div>
 
-      <div class="">
-        <div class="py-3">
-          @include('review.subs.review-evaluation')
-        </div>
-
-        <p>{{ $review->description }}</p>
-
-        @if($review->image_name)
-          <div class="col-3 p-0">
-            <span class="yy-review-img d-block" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></span>
-          </div>
-        @endif
-
-        @if(Auth::user()->id == $review->user_id)
-          <a href="/post/edit/{{ $review->id }}">【編集】</a>
-        @endif
-
+      <div class="py-3">
+        @include('review.subs.review-evaluation')
       </div>
+
+      <p>{{ $review->description }}</p>
+
+      @if($review->image_name)
+        <div class="col-3 p-0">
+          <span class="yy-review-img d-block" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></span>
+        </div>
+      @endif
+
+      @if(Auth::user()->id == $review->user_id)
+        <a href="/post/edit/{{ $review->id }}">【編集】</a>
+      @endif
+
+      @if(!empty($review->url) && !empty($review->url_title))
+        <a class="yy-review-url-link" href="{{ $review->url }}" target="_blank">
+          <div class="yy-review-url-ogp">
+            <div class="media">
+              @if(!empty($review->url_image))
+                <img class="yy-review-url-image d-flex align-self-center mr-3" src="{{ asset(Config::get('const.REVIEW_URL_IMAGES_DIRECTORY') . $review->url_image) }}" alt="Generic placeholder image">
+              @endif
+              <div class="media-body">
+                <h5 class="yy-review-url-title mt-0 mb-1">{{ $review->url_title }}</h5>
+                <p class="yy-review-url-description mb-1">{{ $review->url_description }}</p>
+              </div>
+            </div>
+            <span class="yy-review-domain">{{ !empty($review->domain) ? $review->domain : $review->url}}</span>
+          </div>
+        </a>
+      @endif
+
     </div>
     @include('review.subs.review-comment')
 

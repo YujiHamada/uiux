@@ -36,4 +36,17 @@ class SocialRequest extends FormRequest
           'email' => 'required|email|max:255|unique:users,NULL,is_deleted,email,is_deleted,0',
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => '名前が入力されていません',
+            'name.max' => '名前は255文字以下で入力してください',
+            'name.unique' =>' すでに使われている名前です',
+            'email.required' => 'Nameが入力されていません',
+            'email.max' => 'メールアドレスは255文字以下で入力してください',
+            'email.unique' =>' すでに使われているメールアドレスです',
+            'email.email' => 'メールアドレスの形式で入力してください',
+        ];
+    }
 }

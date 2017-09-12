@@ -2,10 +2,8 @@
 namespace App\Libs;
 use Carbon\Carbon;
 
-class Util
-{
-    public static function agoDateWriting($date)
-    {
+class Util {
+    public static function agoDateWriting($date) {
         switch (true) {
         	case ($date->diffInSeconds(Carbon::now()) < 60):
         		return $date->diffInSeconds(Carbon::now()) . '秒前';
@@ -21,5 +19,32 @@ class Util
         		return $date;
         }
 
+    }
+
+    public static function compressImage($source, $destination, $quality) {
+
+        $info = getimagesize($source);
+        $image;
+        $e;
+
+        if ($info['mime'] == 'image/jpeg') {
+            $image = imagecreatefromjpeg($source);
+            $e = '.jpg';
+            imagejpeg($image, $destination . $e, $quality);
+        }
+
+        elseif ($info['mime'] == 'image/gif') {
+            $image = imagecreatefromgif($source);
+            $e = '.gif';
+            imagegif($image, $destination . $e, $quality);
+        }
+
+        elseif ($info['mime'] == 'image/png') {
+            $image = imagecreatefrompng($source);
+            $e = '.png';
+            imagepng($image, $destination . $e, $quality);
+        }
+
+        return $e;
     }
 }

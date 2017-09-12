@@ -16,6 +16,7 @@ use App\ReviewTag;
 use App\SummaryTag;
 use App\SummaryScore;
 use App\ReviewEvaluation;
+use App\Libs\Scraping;
 
 class ReviewPostController extends Controller
 {
@@ -71,6 +72,8 @@ class ReviewPostController extends Controller
         $domain = null;
       }
 
+      $og = Scraping::ogp($url);
+
       $review = Review::create([
                     'user_id' => $userId,
                     'type' => $type,
@@ -79,7 +82,10 @@ class ReviewPostController extends Controller
                     'url' => $url,
                     'image_name' => $fileName,
                     'domain' => $domain,
-                    'is_request' => false
+                    'is_request' => false,
+                    'url_title' => $og['title'],
+                    'url_description' => $og['description'],
+                    'url_image' => $og['fileName'],
                   ]);
 
       // タグが設定されている場合は保存処理を行う。

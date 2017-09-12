@@ -41,6 +41,9 @@ class ReviewsTableSeeder extends Seeder
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
           'image_name' => $imageNames[$i],
+          'url_title' => '',
+          'url_description' => '',
+          'url_image' => '',
           'created_at' => $date,
           'updated_at' => $date
         ]);
@@ -57,6 +60,9 @@ class ReviewsTableSeeder extends Seeder
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
           'image_name' => $imageNames[$i],
+          'url_title' => '',
+          'url_description' => '',
+          'url_image' => '',
           'created_at' => $date,
           'updated_at' => $date
         ]);
@@ -74,6 +80,9 @@ class ReviewsTableSeeder extends Seeder
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
           'image_name' => $imageNames[$i],
+          'url_title' => '',
+          'url_description' => '',
+          'url_image' => '',
           'created_at' => $date,
           'updated_at' => $date
         ]);
@@ -90,6 +99,9 @@ class ReviewsTableSeeder extends Seeder
           'url' => $urlYYUIUX,
           'domain' => $domainYYUIUX,
           'image_name' => $imageNames[$i],
+          'url_title' => '',
+          'url_description' => '',
+          'url_image' => '',
           'created_at' => $date,
           'updated_at' => $date
         ]);

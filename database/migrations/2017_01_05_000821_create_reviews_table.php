@@ -18,6 +18,9 @@ class CreateReviewsTable extends Migration {
       $table->string('domain')->nullable();
       $table->tinyInteger('is_request')->default(false);
       $table->tinyInteger('is_kaizened')->default(false);
+      $table->string('url_title', 100);
+      $table->string('url_description', 500);
+      $table->string('url_image', 400);
       $table->softDeletes();
       $table->timestamps();
 
