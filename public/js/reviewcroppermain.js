@@ -311,6 +311,9 @@
         this.$reviewImages.append([
             '<div class="review-image d-inline-block pr-3">',
                 '<input type="hidden" name="review_images[]" value="' + this.avatarImagePath + '">',
+                '<div class="text-right">',
+                    '<i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>',
+                '</div>',
                 '<div class="col-3 p-0">',
                     '<span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span>',
                 '</div>',
