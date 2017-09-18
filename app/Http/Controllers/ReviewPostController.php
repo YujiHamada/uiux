@@ -15,7 +15,6 @@ use App\Tag;
 use App\ReviewTag;
 use App\ReviewImage;
 use App\SummaryTag;
-use App\SummaryScore;
 use App\ReviewEvaluation;
 use App\Libs\Scraping;
 
@@ -37,43 +36,32 @@ class ReviewPostController extends Controller
 
     //投稿用
     public function create($reviewId = null) {
+        if(!empty($reviewId)){
+            $review = Review::findOrFail($reviewId);
+        }
+        $tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
+        //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
+        $tagNames = '"' .implode('","',$tagNames->all()) . '"';
 
-      if(!empty($reviewId)){
-          $review = Review::findOrFail($reviewId);
-      }
-      $tagNames = DB::table('tags')->where('is_master', 1)->orderBy('name', 'asc')->pluck('name');
-      //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
-      $tagNames = '"' .implode('","',$tagNames->all()) . '"';
-
-      return view('review.post.create',compact('tagNames', 'review'));
+        return view('review.post.create',compact('tagNames', 'review'));
     }
 
     //投稿完了画面表示用
     public function store(\App\Http\Requests\StoreReviewPost $request){
+        $userId = Auth::user()->id;
+        $description = $request->input('description');
+        $title = $request->input('title');
+        $type = $request->input('type');
 
-      $userId = Auth::user()->id;
-      $description = $request->input('description');
-      $title = $request->input('title');
-      $type = $request->input('type');
-
-      $file = $request->file('uiImage');
-      if($file) {
-        $fileName = md5($file->getClientOriginalName()) . '.' .$file->getClientOriginalExtension();
-        $file->move(\Config::get('const.IMAGE_FILE_DIRECTORY'), $fileName);
-      } else {
-        $fileName = null;
-      }
-
-      $url = $request->input('url');
-      if(!empty($url)){
-        $parseUrl = parse_url($url);
-        $domain = $parseUrl['host'];
-      } else {
-        $url = null;
-        $domain = null;
-      }
-
-      $og = Scraping::ogp($url);
+        $url = $request->input('url');
+        if(!empty($url)){
+            $parseUrl = parse_url($url);
+            $domain = $parseUrl['host'];
+        } else {
+            $url = null;
+            $domain = null;
+        }
+        $og = Scraping::ogp($url);
 
         $reviewId = $request->input('review_id');
         if($reviewId) {
@@ -98,7 +86,7 @@ class ReviewPostController extends Controller
                             'title' => $title,
                             'description' => $description,
                             'url' => $url,
-                            'image_name' => $fileName,
+                            'image_name' => null,
                             'domain' => $domain,
                             'is_request' => false,
                             'url_title' => $og['title'],
@@ -116,13 +104,13 @@ class ReviewPostController extends Controller
             }
         }
 
-      // タグが設定されている場合は保存処理を行う。
-      $reviewTagNames = $request->input('review_tag_names');
-      if(!is_null($reviewTagNames)) {
-        Tag::insertReviewTag($reviewTagNames, $review->id);
-      }
+        // タグが設定されている場合は保存処理を行う。
+        $reviewTagNames = $request->input('review_tag_names');
+        if(!is_null($reviewTagNames)) {
+            Tag::insertReviewTag($reviewTagNames, $review->id);
+        }
 
-      return redirect('/')->with('flash_message', '投稿が完了しました');
+        return redirect('/')->with('flash_message', '投稿が完了しました');
     }
 
     public function report($id){
