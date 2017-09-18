@@ -11,28 +11,32 @@
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/post/store') }}" enctype="multipart/form-data">
         	{{ csrf_field() }}
             <input type="hidden" name="review_id" value="{{isset($review) ? $review->id : ''}}">
-        	タイトル：
+
+            <label class="col-12 col-form-label p-0">タイトル：</label>
             <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
-        	詳細：
             @if ($errors->has('title'))
-            <span class="help-block">
-              <strong>{{ $errors->first('title') }}</strong>
-            </span>
+                <span class="help-block">
+                  <strong>{{ $errors->first('title') }}</strong>
+                </span>
             @endif
+
+            <label class="col-12 col-form-label p-0">詳細：</label>
             <textarea id="description" type="text" class="form-control" name="description">{{ old('description', isset($review->description) ? $review->description : '') }}</textarea>
             @if ($errors->has('description'))
-            <span class="help-block">
-                <strong>{{ $errors->first('description') }}</strong>
-            </span>
+                <span class="help-block">
+                    <strong>{{ $errors->first('description') }}</strong>
+                </span>
             @endif
-            URL：
+
+            <label class="col-12 col-form-label p-0">URL：</label>
             <input id="url" type="text" class="form-control" name="url" value="{{ old('url', isset($review->url) ? $review->url : '') }}">
             @if ($errors->has('url'))
-            <span class="help-block">
-                <strong>{{ $errors->first('url') }}</strong>
-            </span>
+                <span class="help-block">
+                    <strong>{{ $errors->first('url') }}</strong>
+                </span>
             @endif
-            タグ：
+
+            <label class="col-12 col-form-label p-0">タグ：</label>
             @include('review.subs.review-tag')
 
             <label class="radio-inline">
@@ -68,37 +72,7 @@
             @endif
 
             <label class="col-12 col-form-label p-0">レビュー画像</label>
-
-            {{-- 追加された写真が格納されていくdiv --}}
-
-
-
-            <div class="review-images">
-                @foreach( old('review_images', isset($review) ? $review->reviewImages : []) as $reviewImage )
-                    @if($reviewImage)
-                        {{-- 一度作成したreviewの編集の場合 --}}
-                        <div class="review-image d-inline-block pr-3">
-                            <input type="hidden" name="review_images[]" value="{{$reviewImage->image_name}}">
-                            <div class="col-3 p-0">
-                                <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
-                            </div>
-                        </div>
-                    @else
-                        {{-- reviewを新規に作成する場合 --}}
-                        <div class="review-image d-inline-block pr-3">
-                            <input type="hidden" name="review_images[]" value="{{$reviewImage}}">
-                            <div class="col-3 p-0">
-                                <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage) }} )"></span>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            </div>
-
-            <div class="add-review-image">
-                <a class="my-2 btn btn-outline-primary"><i class="fa fa-camera" aria-hidden="true"></i> 写真を追加する</a>
-            </div>
-
+            @include('review.subs.review-image')
 
             <button type="submit" class="btn btn-primary">投稿</button>
 
