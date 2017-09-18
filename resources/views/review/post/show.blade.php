@@ -60,6 +60,26 @@
         <a href="/post/edit/{{ $review->id }}">【編集】</a>
       @endif
 
+
+        {{-- @if($review->image_name)
+          <div class="col-3 p-0">
+            <span class="yy-review-img d-block" style="background-image: url({{ asset(Config::get('const.IMAGE_FILE_DIRECTORY') . $review->image_name) }})"></span>
+          </div>
+        @endif --}}
+
+        <div class="review-images">
+            @foreach( $review->reviewImages as $reviewImage )
+
+                <div class="review-image d-inline-block pr-3">
+                    <input type="hidden" name="review_images[]" value="{{$reviewImage->image_name}}">
+                    <div class="col-3 p-0">
+                        <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
+                    </div>
+                </div>
+
+            @endforeach
+        </div>
+
       @if(!empty($review->url) && !empty($review->url_title))
         <a class="yy-review-url-link" href="{{ $review->url }}" target="_blank">
           <div class="yy-review-url-ogp">

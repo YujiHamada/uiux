@@ -51,7 +51,7 @@ class UserController extends Controller
     $str = preg_replace('/[\n\r\t]/', ' ', $str); // 改行、タブをスペースへ
     $str = preg_replace('/\s(?=\s)/', ' ', $str); // 複数スペースを一つへ
     $user->biography = $str;
-    $user->avatar_image_path = $request->input('avatar_image_path');
+    $user->avatar_image_path = '/' . $request->input('avatar_image_path');
     $user->save();
 
     return redirect('/settings/edit')->with('flash_message', '保存しました。');

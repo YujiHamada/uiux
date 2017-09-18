@@ -10,6 +10,7 @@
         <h1>レビューする</h1>
         <form class="form-horizontal" role="form" method="POST" action="{{ url('/post/store') }}" enctype="multipart/form-data">
         	{{ csrf_field() }}
+            <input type="hidden" name="review_id" value="{{isset($review) ? $review->id : ''}}">
         	タイトル：
             <input id="title" type="text" class="form-control" name="title" value="{{ old('title', isset($review->title) ? $review->title : '') }}" required autofocus>
         	詳細：
@@ -69,10 +70,29 @@
             <label class="col-12 col-form-label p-0">レビュー画像</label>
 
             {{-- 追加された写真が格納されていくdiv --}}
-            
+
 
 
             <div class="review-images">
+                @foreach( old('review_images', isset($review) ? $review->reviewImages : []) as $reviewImage )
+                    @if($reviewImage)
+                        {{-- 一度作成したreviewの編集の場合 --}}
+                        <div class="review-image d-inline-block pr-3">
+                            <input type="hidden" name="review_images[]" value="{{$reviewImage->image_name}}">
+                            <div class="col-3 p-0">
+                                <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
+                            </div>
+                        </div>
+                    @else
+                        {{-- reviewを新規に作成する場合 --}}
+                        <div class="review-image d-inline-block pr-3">
+                            <input type="hidden" name="review_images[]" value="{{$reviewImage}}">
+                            <div class="col-3 p-0">
+                                <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage) }} )"></span>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
 
             <div class="add-review-image">

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Review;
 use App\Tag;
 use App\ReviewTag;
+use App\ReviewImage;
 use App\SummaryTag;
 use App\SummaryScore;
 use App\ReviewEvaluation;
@@ -74,19 +75,46 @@ class ReviewPostController extends Controller
 
       $og = Scraping::ogp($url);
 
-      $review = Review::create([
-                    'user_id' => $userId,
-                    'type' => $type,
-                    'title' => $title,
-                    'description' => $description,
-                    'url' => $url,
-                    'image_name' => $fileName,
-                    'domain' => $domain,
-                    'is_request' => false,
-                    'url_title' => $og['title'],
-                    'url_description' => $og['description'],
-                    'url_image' => $og['fileName'],
-                  ]);
+        $reviewId = $request->input('review_id');
+        if($reviewId) {
+            // 編集の場合
+            $review = Review::findOrFail($reviewId);
+            $review->user_id = $userId;
+            $review->type = $type;
+            $review->title = $title;
+            $review->description = $description;
+            $review->url = $url;
+            $review->domain = $domain;
+            $review->is_request = false;
+            $review->url_title = $og['title'];
+            $review->url_description = $og['description'];
+            $review->url_image = $og['fileName'];
+            $review->save();
+        } else {
+            //新規作成の場合
+            $review = Review::create([
+                            'user_id' => $userId,
+                            'type' => $type,
+                            'title' => $title,
+                            'description' => $description,
+                            'url' => $url,
+                            'image_name' => $fileName,
+                            'domain' => $domain,
+                            'is_request' => false,
+                            'url_title' => $og['title'],
+                            'url_description' => $og['description'],
+                            'url_image' => $og['fileName'],
+                        ]);
+        }
+
+        // 複数の写真投稿
+        $reviewImages = $request->input('review_images');
+        if(!empty($reviewImages)) {
+            foreach($reviewImages as $reviewImage) {
+                ReviewImage::where('review_id', $reviewId)->delete();
+                ReviewImage::firstOrCreate(['review_id' => $review->id, 'image_name' => $reviewImage]);
+            }
+        }
 
       // タグが設定されている場合は保存処理を行う。
       $reviewTagNames = $request->input('review_tag_names');
