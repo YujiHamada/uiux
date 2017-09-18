@@ -1,5 +1,7 @@
 【コマンドライン系】
 
+  ◆更新
+    php artisan yyux:refresh --all
   ◆データベース更新
     データベースをリフレッシュし、全データベースシードを実行
     php artisan migrate:refresh --seed

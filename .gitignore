@@ -9,8 +9,10 @@ Homestead.yaml
 /public/images/user_images/*
 /public/images/temporary/review_images/*
 /public/images/temporary/user_images/*
+/public/images/review_url_images/*
 !/public/images/review_images/myimages/
 !/public/images/review_images/myimages/*
 !/public/images/user_images/myimages/
 !/public/images/user_images/myimages/*
+
 !.gitkeep

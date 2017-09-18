@@ -17,6 +17,7 @@ use App\ReviewImage;
 use App\SummaryTag;
 use App\SummaryScore;
 use App\ReviewEvaluation;
+use App\Libs\Scraping;
 
 class ReviewPostController extends Controller
 {
@@ -72,6 +73,8 @@ class ReviewPostController extends Controller
         $domain = null;
       }
 
+      $og = Scraping::ogp($url);
+
         $reviewId = $request->input('review_id');
         if($reviewId) {
             // 編集の場合
@@ -83,6 +86,9 @@ class ReviewPostController extends Controller
             $review->url = $url;
             $review->domain = $domain;
             $review->is_request = false;
+            $review->url_title = $og['title'];
+            $review->url_description = $og['description'];
+            $review->url_image = $og['fileName'];
             $review->save();
         } else {
             //新規作成の場合
@@ -94,18 +100,21 @@ class ReviewPostController extends Controller
                             'url' => $url,
                             'image_name' => $fileName,
                             'domain' => $domain,
-                            'is_request' => false
+                            'is_request' => false,
+                            'url_title' => $og['title'],
+                            'url_description' => $og['description'],
+                            'url_image' => $og['fileName'],
                         ]);
         }
 
         // 複数の写真投稿
         $reviewImages = $request->input('review_images');
-        foreach($reviewImages as $reviewImage) {
-            ReviewImage::where('review_id', $reviewId)->delete();
-            ReviewImage::firstOrCreate(['review_id' => $review->id, 'image_name' => $reviewImage]);
+        if(!empty($reviewImages)) {
+            foreach($reviewImages as $reviewImage) {
+                ReviewImage::where('review_id', $reviewId)->delete();
+                ReviewImage::firstOrCreate(['review_id' => $review->id, 'image_name' => $reviewImage]);
+            }
         }
-
-
 
       // タグが設定されている場合は保存処理を行う。
       $reviewTagNames = $request->input('review_tag_names');
