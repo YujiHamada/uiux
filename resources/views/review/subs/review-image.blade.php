@@ -1,9 +1,12 @@
 <div class="review-images">
     @foreach( old('review_images', isset($review) ? $review->reviewImages : []) as $reviewImage )
-        @if($reviewImage)
+        @if(isset($reviewImage->image_name))
             {{-- 一度作成したreviewの編集の場合 --}}
             <div class="review-image d-inline-block pr-3">
                 <input type="hidden" name="review_images[]" value="{{$reviewImage->image_name}}">
+                <div class="text-right">
+                    <i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>
+                </div>
                 <div class="col-3 p-0">
                     <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
                 </div>
@@ -12,6 +15,9 @@
             {{-- reviewを新規に作成する場合 --}}
             <div class="review-image d-inline-block pr-3">
                 <input type="hidden" name="review_images[]" value="{{$reviewImage}}">
+                <div class="text-right">
+                    <i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>
+                </div>
                 <div class="col-3 p-0">
                     <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage) }} )"></span>
                 </div>

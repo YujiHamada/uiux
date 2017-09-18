@@ -32,7 +32,7 @@
     <div class="col p-0">
       <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $review->user->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
       @if(isset($review->user))
-        <a class="yy-fontsize-09" href="{{ action('UserController@show', ['username' => $review->user->name or '退会済みユーザー']) }}" title="">{{ $review->user->name }}</a>
+        <a class="yy-fontsize-09" href="{{ action('UserController@show', ['username' => isset($review->user->name) ? $review->user->name : '退会済みユーザー']) }}" title="">{{ $review->user->name }}</a>
       @else
         <span class ="yy-fontsize-09">{{ '退会済みユーザー' }}</span>
       @endif
