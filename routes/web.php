@@ -58,7 +58,7 @@ Route::post('/{username}/follow', 'UserController@follow');
 Route::get( '/{username}/following', 'UserController@showFollowing');
 Route::get( '/{username}/followers', 'UserController@showFollowers');
 Route::get( '/{username}/leave', 'UserController@leave');
-Route::post( '/left', 'UserController@left');
+Route::post('/left', 'UserController@left');
 
 
 //SocialController

@@ -14,32 +14,36 @@
             <div class="yy-outline-bottom pb-3">
 
                 <div class="row mx-0 d-flex justify-content-between mb-3">
-                  <div class="col px-0">
-                    <h3 class="m-0">{{ $review->title }}</h3>
-                  </div>
-                  <div>
-                    @include('review.subs.review-type')
-                  </div>
+                    <div class="col px-0">
+                        <h3 class="m-0">{{ $review->title }}</h3>
+                    </div>
+                    <div>
+                        @include('review.subs.review-type')
+                    </div>
                 </div>
                 <div class="mt-1">
-                  <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
-                  <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
-                  <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
+                    <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
+                    <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
+                    <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
                 </div>
                 {{-- ユーザ情報 --}}
                 @include('review.subs.show-review-user')
             </div>
 
-            <div class="py-3">
-                @include('review.subs.review-evaluation')
-            </div>
+            @if(Auth::check())
+                <div class="py-3">
+                    @include('review.subs.review-evaluation')
+                </div>
+            @endif
 
             {{-- 詳細 --}}
             <p>{{ $review->description }}</p>
 
             {{-- 編集ボタン --}}
-            @if(Auth::user()->id == $review->user_id)
-                <a href="/post/edit/{{ $review->id }}">【編集】</a>
+            @if(Auth::check())
+                @if(Auth::user()->id == $review->user_id)
+                    <a href="/post/edit/{{ $review->id }}">【編集】</a>
+                @endif
             @endif
 
             {{-- レビュー画像 --}}
@@ -67,7 +71,7 @@
 
         // 賛成・反対のボタン押下時イベント。Ajax。
         $('.yy-review-evaluation').on('click',function(){
-            var userId = {{Auth::user()->id}};
+            var userId = {{ Auth::check() ? Auth::user()->id : '' }};
             var reviewId = {{$review->id}};
             var evaluation = $(this).val();
             $.ajax({

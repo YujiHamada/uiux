@@ -2,6 +2,8 @@
 
 namespace App;
 use App\User;
+use Auth;
+
 
 
 use Illuminate\Database\Eloquent\Model;
@@ -28,7 +30,6 @@ class Review extends Model
 		return $this->hasMany('App\ReviewImage');
 	}
 
-
 	public function agree() {
 		return $this->hasMany('App\ReviewEvaluation', 'review_id', 'id');
 	}
@@ -47,6 +48,11 @@ class Review extends Model
 
 	public function commentsCount() {
 	  return $this->hasMany('App\ReviewComment', 'review_id', 'id')->selectRaw('count(*) as count');
-}
+	}
+
+	// 該当のレビュー(this)に対して、自分が評価しているかを確認するために用いるメソッド
+	public function myEvaluation() {
+	  return $this->hasOne('App\ReviewEvaluation', 'review_id', 'id')->where('user_id', Auth::user()->id);
+	}
 
 }

@@ -22,16 +22,13 @@ class ReviewPostController extends Controller
 {
 
     public function __construct(){
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['show']]);
     }
 
     //表示用
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        $evaluation = ReviewEvaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
-
-        return view('review.post.show', compact('review', 'evaluation'));
+        return view('review.post.show', compact('review'));
     }
 
     //投稿用

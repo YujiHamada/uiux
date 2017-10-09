@@ -15,12 +15,13 @@ use App\Libs\Scraping;
 class ReviewRequestController extends Controller
 {
 
+    public function __construct(){
+        $this->middleware('auth', ['except' => ['show']]);
+    }
+
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        //賛成・反対を取得。存在しなくても存在しないということをview側で必要なので必ず渡す
-        $evaluation = ReviewEvaluation::where('review_id', $reviewId)->where('user_id', Auth::user()->id)->first();
-
-        return view('review.request.show', compact('review', 'evaluation'));
+        return view('review.request.show', compact('review'));
     }
 
     public function create($reviewId = null) {

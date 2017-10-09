@@ -36,7 +36,7 @@
           <label class="col-12 col-form-label">プロフィール画像</label>
           <div class="col-9 offset-3">
             <div class="ml-0 avatar-view" title="Change the avatar">
-              <img src="{{ asset(old('avatar_image_path') !== null ? old('avatar_image_path') : Auth::user()->avatar_image_path) }}" alt="Avatar">
+              <img src="{{ old('avatar_image_path') !== null ? old('avatar_image_path') : ( isset(Auth::user()->avatar_image_path) ? Auth::user()->avatar_image_path : '/images/app_images/yyuxlogo_black.png' ) }}" alt="Avatar">
             </div>
           </div>
         </div>

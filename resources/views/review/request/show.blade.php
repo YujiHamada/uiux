@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('head')
-      @parent
-      <meta name="csrf-token" content="{{ csrf_token() }}">
+    @parent
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 @endsection
 
 @section('content')
@@ -30,16 +30,20 @@
                 @include('review.subs.show-review-user')
             </div>
 
-            <div class="py-3">
-                @include('review.subs.review-evaluation')
-            </div>
+            @if(Auth::check())
+                <div class="py-3">
+                    @include('review.subs.review-evaluation')
+                </div>
+            @endif
 
             {{-- 詳細 --}}
             <p>{{ $review->description }}</p>
 
             {{-- 編集ボタン --}}
-            @if(Auth::user()->id == $review->user_id)
-                <a href="/request/edit/{{ $review->id }}">【編集】</a>
+            @if(Auth::check())
+                @if(Auth::user()->id == $review->user_id)
+                    <a href="/request/edit/{{ $review->id }}">【編集】</a>
+                @endif
             @endif
 
             {{-- レビュー画像 --}}
@@ -66,7 +70,7 @@
 
         // 賛成・反対のボタン押下時イベント。Ajax。
         $('.yy-review-evaluation').on('click',function(){
-            var userId = {{Auth::user()->id}};
+            var userId = {{ Auth::check() ? Auth::user()->id : ''}};
             var reviewId = {{$review->id}};
             var evaluation = $(this).val();
             $.ajax({
@@ -96,7 +100,7 @@
         });
 
         $('.yy-comment-evaluation').on('click',function(){
-            var userId = {{Auth::user()->id}};
+            var userId = $(this).data('comment-user-id');
             var commentId = $(this).data('comment-id');
             var evaluation = $(this).val();
             $.ajax({
