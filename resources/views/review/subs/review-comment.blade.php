@@ -33,9 +33,9 @@
                 </div>
                 <div class="d-flex justify-content-between">
                     <div class="d-inline-block">
-                        <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $review->user->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
-                        @if(isset($review->user))
-                            <a class="yy-fontsize-09" href="{{ action('UserController@show', ['username' => isset($review->user->name) ? $review->user->name : '退会済みユーザー']) }}" title="">{{ $review->user->name }}</a>
+                        <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $reviewComment->user->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
+                        @if(isset($reviewComment->user))
+                            <a class="yy-fontsize-09" href="{{ action('UserController@show', ['username' => isset($reviewComment->user->name) ? $reviewComment->user->name : '退会済みユーザー']) }}" title="">{{ $reviewComment->user->name }}</a>
                         @else
                             <span class ="yy-fontsize-09">{{ '退会済みユーザー' }}</span>
                         @endif

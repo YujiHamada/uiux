@@ -12,7 +12,7 @@ class ScoreHistory extends Model
     public $timestamps = true;
 
     protected $fillable = [
-        'key', 'user_id', 'score'
+        'key', 'user_id', 'score', 'score_type'
     ];
 
 

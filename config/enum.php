@@ -6,9 +6,16 @@ return array(
                 'GOOD_UX' => '1',
                 'OPINION' => '2'
     		),
-    	   'evaluation' =>
-           array(
+    	   	'evaluation' =>
+           	array(
                 'DISAGREE' => '0',
                 'AGREE' => '1'
-    		)
+    		),
+			'score_type' =>
+			array(
+				'REVIEW' => '1',
+				'COMMENT' => '2',
+				'REVIEW_EVALUATION' => '3',
+				'COMMENT_EVALUATION' => '4'
+			)
     );
