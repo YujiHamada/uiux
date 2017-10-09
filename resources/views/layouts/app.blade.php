@@ -204,7 +204,7 @@
                                         @foreach($summaryScores as $score)
                                             <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
                                                 <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
-                                                    <span class="yy-avatar-thumbnail-img" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
+                                                    <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $score->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
                                                     <small>{{ $score->user_name }}</small>
                                                 </a>
                                                 <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>

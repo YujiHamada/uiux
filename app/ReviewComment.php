@@ -14,7 +14,9 @@ class ReviewComment extends Model
     	return $this->hasOne('App\User', 'id', 'user_id');
     }
 
-    public function evaluation(){
+    // 該当のコメント(this)に対して、自分がコメントしているかを確認するために用いるメソッド
+    // イイネ・ワルイネボタンの活性非活性を制御する際に利用
+    public function myEvaluation(){
     	return $this->hasOne('App\CommentEvaluation', 'comment_id', 'id')->where('user_id', Auth::user()->id);
     }
 
