@@ -37,6 +37,7 @@ class AppServiceProvider extends ServiceProvider
                 $scoreHistoryKey = 'review' . $review->id . 'user' .$review->user_id;
                 ScoreHistory::create([
       						'key' => $scoreHistoryKey,
+                            'review_id' => $review->id,
       						'user_id' => $review->user_id,
       						'score' => Config::get('const.SCORE_REVIEW'),
                             'score_type' => Config::get('enum.score_type.REVIEW')
@@ -55,22 +56,36 @@ class AppServiceProvider extends ServiceProvider
 
             // ReviewCommentレコードが新規作成された場合
             ReviewComment::created(function ($reviewComment) {
-                $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
-  		        ScoreHistory::create([
-      						'key' => $scoreHistoryKey,
-      						'user_id' => $reviewComment->user_id,
-      						'score' => Config::get('const.SCORE_COMMENT'),
-                            'score_type' => Config::get('enum.score_type.COMMENT')
-                        ]);
 
-                $this->updateSummaryAndUserScore($reviewComment->user_id);
+                $hasScoreHistory = ScoreHistory::where('review_id', $reviewComment->review_id)
+                                                ->where('user_id', $reviewComment->user_id)->exists();
+
+                // 1件のレビューに対し、ユーザ毎に、1件目の場合のみスコアアップ
+                if(!$hasScoreHistory) {
+                    $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+      		        ScoreHistory::create([
+          						'key' => $scoreHistoryKey,
+                                'review_id' => $reviewComment->review_id,
+          						'user_id' => $reviewComment->user_id,
+          						'score' => Config::get('const.SCORE_COMMENT'),
+                                'score_type' => Config::get('enum.score_type.COMMENT')
+                            ]);
+
+                    $this->updateSummaryAndUserScore($reviewComment->user_id);
+                }
             });
             // ReviewCommentレコードが削除された場合
             ReviewComment::deleted(function ($reviewComment) {
-                $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
-  		        ScoreHistory::where('key', $scoreHistoryKey)->delete();
+                $hasReviewComment = ReviewComment::where('review_id', $reviewComment->review_id)
+                                                ->where('user_id', $reviewComment->user_id)->exists();
 
-                $this->updateSummaryAndUserScore($reviewComment->user_id);
+                // 1件のレビューに対し、ユーザ毎に、0件目の場合のみスコアダウン
+                if(!$hasReviewComment) {
+                    $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+      		        ScoreHistory::where('key', $scoreHistoryKey)->delete();
+
+                    $this->updateSummaryAndUserScore($reviewComment->user_id);
+                }
             });
 
 
@@ -79,6 +94,7 @@ class AppServiceProvider extends ServiceProvider
                 $scoreHistoryKey = 'rEvaluation' . $reviewEvaluation->id . 'user' .$reviewEvaluation->user_id;
   		        ScoreHistory::create([
       						'key' => $scoreHistoryKey,
+                            'review_id' => $reviewEvaluation->review_id,
       						'user_id' => $reviewEvaluation->user_id,
       						'score' => Config::get('const.SCORE_REVIEW_EVALUATION'),
                             'score_type' => Config::get('enum.score_type.REVIEW_EVALUATION')
@@ -99,6 +115,7 @@ class AppServiceProvider extends ServiceProvider
                 $scoreHistoryKey = 'cEvaluation' . $commentEvaluation->id . 'user' .$commentEvaluation->user_id;
   		        ScoreHistory::create([
       						'key' => $scoreHistoryKey,
+                            'review_id' => $commentEvaluation->review_id,
       						'user_id' => $commentEvaluation->user_id,
       						'score' => Config::get('const.SCORE_COMMENT_EVALUATION'),
                             'score_type' => Config::get('enum.score_type.COMMENT_EVALUATION')

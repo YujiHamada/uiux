@@ -102,6 +102,7 @@
 
         $('.yy-comment-evaluation').on('click',function(){
             var userId = $(this).data('comment-user-id');
+            var reviewId = $(this).data('comment-review-id');
             var commentId = $(this).data('comment-id');
             var evaluation = $(this).val();
             $.ajax({
@@ -110,6 +111,7 @@
                 dataType: 'json',
                 data : {
                     user_id : userId,
+                    review_id : reviewId,
                     comment_id : commentId,
                     evaluation : evaluation,
                     reviewId : {{$review->id}}

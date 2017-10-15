@@ -10,6 +10,7 @@ class CommentEvaluations extends Migration {
     Schema::create('comment_evaluations', function (Blueprint $table) {
       $table->increments('id');
       $table->integer('comment_id')->unsigned();
+      $table->integer('review_id')->unsigned();
       $table->integer('user_id')->unsigned();
       $table->integer('is_agree')->unsigned();
       $table->timestamps();

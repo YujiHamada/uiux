@@ -116,8 +116,9 @@ class ReviewController extends Controller
         $evaluation = $request->evaluation;
 
         $commentEvaluation = new CommentEvaluation;
-        $commentEvaluation->user_id = Auth::id();
         $commentEvaluation->comment_id = $request->comment_id;
+        $commentEvaluation->review_id = $request->review_id;
+        $commentEvaluation->user_id = Auth::id();
         $commentEvaluation->is_agree = $evaluation;
 
         $commentEvaluation->save();
