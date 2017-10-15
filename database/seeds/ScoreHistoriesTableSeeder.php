@@ -19,6 +19,7 @@ class ScoreHistoriesTableSeeder extends Seeder
         // 値は適当
         DB::table('score_histories')->insert([
           'key' => $scoreHistoryKey,
+          'review_id' => $review->id,
           'user_id' => $review->user_id,
           'score' => 5,
           'score_type' => 1
