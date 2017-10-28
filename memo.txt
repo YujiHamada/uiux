@@ -118,3 +118,11 @@
   docker exec -it laradock_workspace_1 bash
   docker-compose up -d nginx mysql phpmyadmin
   scp -rF ssh.config vagrant@default:/var/www/laradock/uiux .
+
+【5.3→5.4】
+composer selfupdate
+composer update
+php artisan view:clear
+php artisan route:clear
+【5.4→5.5】
+php artisan cache:clear
