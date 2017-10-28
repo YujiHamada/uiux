@@ -120,3 +120,8 @@
 ・createのold対応ができていない。新規作成と編集用の区分けがうまくない。
 ・タイムラインに、写真の一つ目を表示する。
 ・スラッシュありで保存する。
+
+【laradock】
+  docker exec -it laradock_workspace_1 bash
+  docker-compose up -d nginx mysql phpmyadmin
+  scp -rF ssh.config vagrant@default:/var/www/laradock/uiux .
