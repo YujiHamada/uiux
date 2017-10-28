@@ -36,27 +36,27 @@ return [
     ],
 
     'twitter' => [
-        'client_id'     => 'MrdQ6QOEI7mYT5Gm9DbaqFxoH',
-        'client_secret' => '31waOHOEai1CYslgdqB5mZXfvha5T8oeY4sxppcusl0V177I5s',
-        'redirect'      => 'http://uiux.com/login/callback/twitter',
+        'client_id'     => '5TfdZ1TCP0pucnkG3MmZmYvlg',
+        'client_secret' => '8V4Kg15hD9pQ0hNgn6SXRELqvfYx1o5mgXhrQMeDVirE1zCeOA',
+        'redirect'      => 'http://yyux.jp/login/callback/twitter',
     ],
 
     'facebook' => [
         'client_id'     => '1106808152774436',
         'client_secret' => '1d3e517fece96baff6c688252cdb9291',
-        'redirect'      => 'http://uiux.com/login/callback/facebook',
+        'redirect'      => 'http://yyux.jp/login/callback/facebook',
     ],
 
     'google' => [
-        'client_id'     => '242343756819-tr69or56vs3qf15mfddgot3kq6rvosnl.apps.googleusercontent.com',
-        'client_secret' => 'y2er4THlouZvr5VfxuMxKlco',
-        'redirect'      => 'http://uiux.com/login/callback/google',
+        'client_id'     => '539410671293-un7kv7bi8fgis1ovkdrj8biv7nmvkl9e.apps.googleusercontent.com',
+        'client_secret' => 'tH8lcPh2AM4TpbgRkhB2VTf5',
+        'redirect'      => 'http://yyux.jp/login/callback/google',
     ],
 
     'github' => [
         'client_id'     => '501d8249ec8fe5c2461f',
         'client_secret' => 'e956456db93648161446a61b4ecfc17455a611f5',
-        'redirect'      => 'http://uiux.com/login/callback/github',
+        'redirect'      => 'http://yyux.jp/login/callback/github',
     ],
 
 
