@@ -199,7 +199,12 @@
 
                                     <ul class="nav nav-pills flex-column">
                                         <li class="nav-item yy-outline-bottom">
-                                            <p class="nav-link yy-bg-test text-white my-0" >スコアランキング</p>
+                                            <p class="nav-link yy-bg-test text-white my-0" >
+                                                今月のランキング
+                                                <a class="text-white yy-fontsize-09" href="/ranking">
+                                                    (もっと見る)
+                                                </a>
+                                            </p>
                                         </li>
                                         @foreach($summaryScores as $score)
                                             <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">

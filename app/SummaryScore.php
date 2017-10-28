@@ -22,6 +22,7 @@ class SummaryScore extends Model
 
         // score_hisotriesテーブルからトップ10のスコアを集計する。削除済みユーザーは除外
         $topTenScores = DB::table('score_histories')
+                        ->whereMonth('score_histories.created_at', '=', (date('n')))
                         ->join('users', function ($join) {
                             $join->on('score_histories.user_id', '=', 'users.id')
                                 ->where('users.is_deleted', 0);
