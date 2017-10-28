@@ -56,36 +56,22 @@ class AppServiceProvider extends ServiceProvider
 
             // ReviewCommentレコードが新規作成された場合
             ReviewComment::created(function ($reviewComment) {
+                $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+  		        ScoreHistory::create([
+      						'key' => $scoreHistoryKey,
+      						'user_id' => $reviewComment->user_id,
+      						'score' => Config::get('const.SCORE_COMMENT'),
+                            'score_type' => Config::get('enum.score_type.COMMENT')
+                        ]);
 
-                $hasScoreHistory = ScoreHistory::where('review_id', $reviewComment->review_id)
-                                                ->where('user_id', $reviewComment->user_id)->exists();
-
-                // 1件のレビューに対し、ユーザ毎に、1件目の場合のみスコアアップ
-                if(!$hasScoreHistory) {
-                    $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
-      		        ScoreHistory::create([
-          						'key' => $scoreHistoryKey,
-                                'review_id' => $reviewComment->review_id,
-          						'user_id' => $reviewComment->user_id,
-          						'score' => Config::get('const.SCORE_COMMENT'),
-                                'score_type' => Config::get('enum.score_type.COMMENT')
-                            ]);
-
-                    $this->updateSummaryAndUserScore($reviewComment->user_id);
-                }
+                $this->updateSummaryAndUserScore($reviewComment->user_id);
             });
             // ReviewCommentレコードが削除された場合
             ReviewComment::deleted(function ($reviewComment) {
-                $hasReviewComment = ReviewComment::where('review_id', $reviewComment->review_id)
-                                                ->where('user_id', $reviewComment->user_id)->exists();
+                $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
+  		        ScoreHistory::where('key', $scoreHistoryKey)->delete();
 
-                // 1件のレビューに対し、ユーザ毎に、0件目の場合のみスコアダウン
-                if(!$hasReviewComment) {
-                    $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
-      		        ScoreHistory::where('key', $scoreHistoryKey)->delete();
-
-                    $this->updateSummaryAndUserScore($reviewComment->user_id);
-                }
+                $this->updateSummaryAndUserScore($reviewComment->user_id);
             });
 
 

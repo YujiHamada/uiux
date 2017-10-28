@@ -124,6 +124,24 @@ class HomeController extends Controller
         return view('home.privacy');
     }
 
+    // ランキングの表示
+    public function showRanking() {
+        $lastMonthScores = DB::table('score_histories')
+                        ->whereMonth('score_histories.created_at', '=', (date('n') - 1))
+                        ->join('users', function ($join) {
+                            $join->on('score_histories.user_id', '=', 'users.id')
+                                ->where('users.is_deleted', 0);
+                            })
+                        ->groupBy('score_histories.user_id', 'users.name', 'users.avatar_image_path')
+                        ->select(DB::raw('score_histories.user_id, users.name, users.avatar_image_path, sum(score_histories.score) as user_score'))
+                        ->orderBy('user_score', 'desc')
+                        ->get(10);
+
+        // dd($lastMonthScores);
+
+        return view('home.ranking', compact('lastMonthScores'));
+    }
+
     // お問い合わせのページを表示 & お問い合わせ内容のメール送信
     public function sendContact(\App\Http\Requests\ContactRequest $request) {
       $name = $request->name;

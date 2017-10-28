@@ -21,6 +21,7 @@ Route::get( '/contact', 'HomeController@showContact');
 Route::post('/contact', 'HomeController@sendContact');
 Route::get( '/legal', 'HomeController@showLegal');
 Route::get( '/privacy', 'HomeController@showPrivacy');
+Route::get( '/ranking', 'HomeController@showRanking');
 Route::post( '/notification/read', 'HomeController@notificationReadAt');
 Route::post('/settings/crop', 'HomeController@crop'); // Ajax
 
