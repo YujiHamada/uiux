@@ -37,7 +37,7 @@
                 <span class ="yy-fontsize-09">{{ '退会済みユーザー' }}</span>
             @endif
             @foreach($review->reviewTag as $reviewTag)
-                <a href="/timeline?tagId={{ $reviewTag->tag->id }}"><span class="badge badge-pill badge-default">{{ $reviewTag->tag->name }}</span></a>
+                <a href="/timeline?tagId={{ $reviewTag->tag->id }}"><span class="badge badge-pill badge-secondary">{{ $reviewTag->tag->name }}</span></a>
             @endforeach
         </div>
         <div class="col-3 p-0 text-right">

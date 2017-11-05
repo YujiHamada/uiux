@@ -14,11 +14,17 @@ $panel-default-border: $laravel-border-color;
 $panel-inner-border: $laravel-border-color;
 
 // Brands
-$brand-primary: #3097D1;
-$brand-info: #8eb4cb;
-$brand-success: #2ab27b;
-$brand-warning: #cbb956;
-$brand-danger:  #bf5329;
+// $brand-primary: #00afcc;
+$primary: #00afcc;
+// $primary: red;
+
+
+// $brand-success: #3cb37a;
+$success: #3cb37a;
+
+// $brand-danger: #FF7F8F;
+$danger: #FF7F8F;
+
 
 // Typography
 $font-family-sans-serif: "Raleway", sans-serif;
@@ -34,7 +40,9 @@ $btn-default-color: $text-color;
 
 // Inputs
 $input-border: lighten($text-color, 40%);
-$input-border-focus: lighten($brand-primary, 25%);
+// $input-border-focus: lighten($brand-primary, 25%);
+$input-border-focus: lighten($primary, 25%);
+
 $input-color-placeholder: lighten($text-color, 30%);
 
 // Panels

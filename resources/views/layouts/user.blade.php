@@ -52,7 +52,7 @@
         @if(Auth::check())
             @if($user->name == Auth::user()->name)
                 <div class="mt-3">
-                    <nav class="bg-faded">
+                    <nav class="bg-light">
                         <ul class="nav nav-pills flex-column">
                             <li class="nav-item yy-outline-bottom">
                                 <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@show', Auth::user()->name) }}">アクティビィ</a>

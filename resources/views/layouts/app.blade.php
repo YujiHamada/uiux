@@ -36,9 +36,9 @@
     <header>
     @section('navigationBar')
 
-        <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top yy-bg-midnightblue">
+        <nav class="navbar navbar-expand-md navbar-inverse fixed-top yy-bg-midnightblue">
             <div class="container col-8 px-0">
-                <a class="navbar-brand" href="/">
+                <a class="navbar-brand text-white" href="/">
                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
                     yyUX
                 </a>
@@ -110,7 +110,7 @@
                     @else
                         <span class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-expanded="false">
                                 {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
@@ -190,7 +190,7 @@
                                         @foreach($summaryTags as $tag)
                                         <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
                                             <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/timeline?tagId={{ $tag->tag_id }}">
-                                                <span class="badge badge-pill badge-default">{{ $tag->tag_name }}</span>
+                                                <span class="badge badge-pill badge-secondary">{{ $tag->tag_name }}</span>
                                             </a>
                                             <p class="d-inline-block m-0">{{ $tag->count }}<small>タグ</small></p>
                                         </li>
@@ -230,7 +230,7 @@
     <footer class="footer">
     @section('footer')
         <div class="container-fluid">
-            <div class="row justify-content-center bg-inverse">
+            <div class="row justify-content-center bg-dark">
                 <div class="col-8 m-0 p-0">
                     <div class="row mx-0 p-0 mt-3">
                         <div class="col-3 py-2 px-3">
@@ -300,7 +300,7 @@
     <!-- Scripts -->
     @section('foot')
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script>
+        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> --}}
         <script src="/js/app.js"></script>
         <script src="/js/myscripts.js"></script>
         <script>

@@ -58,6 +58,7 @@
   「require('./bootstrap');」によりコンパイル対象となる。
 
 【bootstrap4の便利なクラス】
+"bootstrap": "~4.0.0-beta",
   ◆display系
     .d-block .d-inline .d-inline-block
   ◆色系
@@ -115,8 +116,21 @@
   上記設定をすることで通知を特定できるようにする。
 
 【laradock】
-  docker exec -it laradock_workspace_1 bash
-  docker-compose up -d nginx mysql phpmyadmin
+  ◆vagrantの起動とssh
+  vagrant up
+  vagrant ssh
+
+  ◆各種サーバーの起動
+  @vagrant  cd /var/www/laradock
+  @vagrant  docker-compose up -d nginx mysql phpmyadmin
+
+  ◆db更新など
+  @vagrant  cd /var/www/laradock
+  @vagrant  docker exec -it laradock_workspace_1 bash
+  @docker   cd /var/www/yyux/laradock/uiux
+  @docker   php artisan yyux:refresh --all
+
+
   scp -rF ssh.config vagrant@default:/var/www/laradock/uiux .
 
 【5.3→5.4】
