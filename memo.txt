@@ -140,3 +140,15 @@ php artisan view:clear
 php artisan route:clear
 【5.4→5.5】
 php artisan cache:clear
+
+【envoy】
+  タスクランナー
+  envoy deployAllで「git pull origin master」「php artisan migrate」「composer update」が実行される。
+  タスクを実行したい時はEnvoy.blade.phpに追加する。タスクははそれぞれひとつのタスクを記述して、タスクをまとめて行いたい場合はstoryにtaskをまとめて記載すればOK
+  タスク単体で実行も可能 例：envoy git
+  他のタスクは随時追懐してほしいです。
+
+  実行は今のところdocker内で実行する。できればローカルまたはubuntu上でやりたいけど難しそう…
+  composer updateでenvoyをインストール後は恐らく、envoyコマンドがnot foundとなるので
+  export PATH=/var/www/yyux/laradock/uiux/vendor/laravel/envoy:$PATH
+  で実行パスを通しておく
