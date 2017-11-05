@@ -10,7 +10,7 @@
         $('.tags').append('<div class="alert alert-warning">' + selectedTag + 'はすでに登録されています</div>');
       }
     }else{
-      $('.tags').append('<span class="badge badge-pill badge-default">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="review_tag_names[]" type="hidden" value="' + selectedTag + '">' +'</span>');
+      $('.tags').append('<span class="badge badge-pill badge-secondary">' + selectedTag + '<span class="removeTag"> ✕</span>'+ '<input name="review_tag_names[]" type="hidden" value="' + selectedTag + '">' +'</span>');
     }
   }
 </script>
