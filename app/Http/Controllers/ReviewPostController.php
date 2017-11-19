@@ -28,7 +28,8 @@ class ReviewPostController extends Controller
     //表示用
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        return view('review.post.show', compact('review'));
+        $title = 'yyUX | ' . $review->title;
+        return view('review.post.show', compact('review', 'title'));
     }
 
     //投稿用
@@ -40,7 +41,9 @@ class ReviewPostController extends Controller
         //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
         $tagNames = '"' .implode('","',$tagNames->all()) . '"';
 
-        return view('review.post.create',compact('tagNames', 'review'));
+        $title = 'レビュー投稿画面' . \Config::get('const.SITE_TITLE_TEMPLATE');
+
+        return view('review.post.create',compact('tagNames', 'review', 'title'));
     }
 
     //投稿完了画面表示用

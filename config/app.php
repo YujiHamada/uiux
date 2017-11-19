@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'yyUX | より良い サービス プロダクト へ',
+    'name' => 'yyUX | UXレビューでより良いサービス・プロダクトへ',
 
     /*
     |--------------------------------------------------------------------------

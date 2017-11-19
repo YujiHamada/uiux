@@ -130,7 +130,9 @@
   @docker   cd /var/www/yyux/laradock/uiux
   @docker   php artisan yyux:refresh --all
 
-
+  @docker   docker exec -it laradock_workspace_1 bash
+  @docker   docker exec -it laradock_nginx_1 bash
+  @docker   docker-compose up -d nginx mysql phpmyadmin
   scp -rF ssh.config vagrant@default:/var/www/laradock/uiux .
 
 【5.3→5.4】

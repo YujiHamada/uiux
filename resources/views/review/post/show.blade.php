@@ -15,7 +15,7 @@
 
                 <div class="row mx-0 d-flex justify-content-between mb-3">
                     <div class="col px-0">
-                        <h3 class="m-0">{{ $review->title }}</h3>
+                        <h1 class="m-0">{{ $review->title }}</h1>
                     </div>
                     <div>
                         @include('review.subs.review-type')
@@ -52,7 +52,8 @@
             {{-- 参照URL --}}
             @include('review.subs.show-review-url')
 
-
+            {{-- SNSシェアボタン --}}
+            @include('review.subs.sns-share')
         </div>
         @include('review.subs.review-comment')
 

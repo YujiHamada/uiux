@@ -9,7 +9,20 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link rel="icon" type="image/x-icon" href="{{ asset('images/app_images/yyuxlogo_black.ico') }}">
-    <title>{{ config('app.name') }}</title>
+    <title>{{ $title or config('app.name') }}</title>
+    <meta name="description" content="{{ Config::get('const.SITE_DESCRIPTION') }}"/>
+    <meta name="keywords" content="{{ Config::get('const.SITE_KEYWORD') }}"/>
+
+    <!-- ogp -->
+    <meta property="og:title" content="{{ $title or config('app.name') }}"/>
+    <meta property="og:type" content="{{ $ogType or 'website' }}"/>
+    <meta property="og:url" content="{{ url()->current() }}"/>
+    <meta property="og:image" content="{{ isset($ogImage) ? $ogImage : asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }}"/>
+    <meta property="og:site_name" content="{{ config('app.name') }}}"/>
+    <meta property="og:description" content="{{ Config::get('const.SITE_DESCRIPTION') }}"/>
+
+    <meta name="twitter:card" content="{{ Config::get('const.TWITTER_CARD') }}"/>
+    <meta name="twitter:site" content="{{ Config::get('const.TWITTER_ID') }}">
 
     <!-- Styles -->
     @section('head')
@@ -46,11 +59,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                    </ul>
+                    <div class="mr-auto"></div>
                     <div class="btn-group">
                     <!-- bootstrapのspacingが効かない？ -->
                     <a data-toggle="dropdown" href="#" style="margin:auto 5px;">
@@ -209,7 +218,7 @@
                                         @foreach($summaryScores as $score)
                                             <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
                                                 <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
-                                                    <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ $score->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
+                                                    <span class="yy-avatar-thumbnail-img" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
                                                     <small>{{ $score->user_name }}</small>
                                                 </a>
                                                 <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>
