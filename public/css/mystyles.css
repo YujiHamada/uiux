@@ -249,4 +249,9 @@ span.yy-review-domain {
   color: #00afcc;
 }
 
+.yy-post-annotation {
+  color: red;
+  font-size: 10px;
+}
+
 /*# sourceMappingURL=mystyles.css.map */
