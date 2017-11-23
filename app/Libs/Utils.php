@@ -21,7 +21,7 @@ class Util {
 
     }
 
-    public static function compressImage($source, $destination, $quality) {
+    public static function compressImage($source, $destination) {
 
         $info = getimagesize($source);
         $image;
@@ -30,19 +30,19 @@ class Util {
         if ($info['mime'] == 'image/jpeg') {
             $image = imagecreatefromjpeg($source);
             $e = '.jpg';
-            imagejpeg($image, $destination . $e, $quality);
+            imagejpeg($image, $destination . $e);
         }
 
         elseif ($info['mime'] == 'image/gif') {
             $image = imagecreatefromgif($source);
             $e = '.gif';
-            imagegif($image, $destination . $e, $quality);
+            imagegif($image, $destination . $e);
         }
 
         elseif ($info['mime'] == 'image/png') {
             $image = imagecreatefrompng($source);
             $e = '.png';
-            imagepng($image, $destination . $e, $quality);
+            imagepng($image, $destination . $e);
         }
 
         return $e;
