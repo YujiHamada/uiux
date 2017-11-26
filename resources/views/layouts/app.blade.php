@@ -49,8 +49,8 @@
     <header>
     @section('navigationBar')
 
-        <nav class="navbar navbar-expand-md navbar-inverse fixed-top yy-bg-midnightblue">
-            <div class="container col-8 px-0">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top yy-bg-midnightblue">
+            <div class="container">
                 <a class="navbar-brand text-white" href="/">
                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
                     yyUX
@@ -149,10 +149,10 @@
     <!-- ナビゲーションバー以下 -->
     <main class="mb-auto">
         <div id="crop-avatar">
-            <div class="container-fluid my-3">
+            <div class="container my-3">
                 <div class="row justify-content-center">
-                    <div class="col-8">
-                        <div class="row justify-content-center">
+                    <div class="">
+                        <div class="row">
                             <!-- 左サイドバー -->
                             @section('leftSideBar')
 
@@ -162,7 +162,7 @@
                             @show
                             <!-- 右サイドバー -->
                             @section('rightSideBar')
-                                <nav class="col-3 px-0 mx-3">
+                                <nav class="col-lg-3 px-0 mx-3">
 
                                     <div class="yy-outline mb-3">
                                         <div class="bg-primary text-white px-3 py-2">
@@ -236,13 +236,13 @@
 
     </main>
     <!-- フッター -->
-    <footer class="footer">
+    <footer class="footer bg-dark">
     @section('footer')
-        <div class="container-fluid">
+        <div class="container">
             <div class="row justify-content-center bg-dark">
-                <div class="col-8 m-0 p-0">
+                <div class="col-12 m-0 p-0">
                     <div class="row mx-0 p-0 mt-3">
-                        <div class="col-3 py-2 px-3">
+                        <div class="col-md-6 py-2 px-3">
                             <ul class="text-white">
                                 <li>
                                     <a class="text-white" href="/legal">利用規約</a>
@@ -251,19 +251,6 @@
                                     <a class="text-white" href="/privacy">プライバシーボリシー</a>
                                 </li>
                                 <li>
-                                    その他1
-                                </li>
-                                <li>
-                                    その他1
-                                </li>
-                                <li>
-                                    その他3
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="col-3 py-2 px-3">
-                            <ul class="text-white">
-                                <li>
                                     よくある質問
                                 </li>
                                 <li>
@@ -271,7 +258,7 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-6 py-2 px-3 text-white d-flex align-items-center">
+                        <div class="col-md-6 py-2 px-3 text-white d-flex align-items-center">
                             <div class="d-block">
                                 <h1 class="pb-2">
                                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 3.5rem;" class="mr-2" />
@@ -289,7 +276,7 @@
                                 <span class="px-3">|</span>
                                 <p class="d-inline">
                                     <a class="text-white" href="https://twitter.com/yyUX_info?lang=ja" target="_blank">
-                                        <span class="fa fa-twitter"></span>Twitter (@yyUX_info)
+                                        <span class="fa fa-twitter"></span>@yyUX_info
                                     </a>
                                 </p>
                             </div>
@@ -297,7 +284,7 @@
                     </div>
 
                 </div>
-                <div class="col-8 py-2 px-3">
+                <div class="col-12 py-2 px-3">
                     <p class="m-0 text-white text-center">
                         Copyright© 2017 yyUX All Rights Reserved.
                     </p>

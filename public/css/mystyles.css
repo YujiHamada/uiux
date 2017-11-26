@@ -133,6 +133,7 @@ h1 {
 }
 
 .yy-bg-body {
+  background: -webkit-linear-gradient(right, #f0f8ff, white 3%, white 97%, #f0f8ff);
   background: linear-gradient(to left, #f0f8ff, white 3%, white 97%, #f0f8ff);
 }
 
