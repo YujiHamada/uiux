@@ -6,7 +6,7 @@
       <img class="mx-auto d-block" src="/images/app_images/yyuxlogo_black.png" alt="yyUXネコ">
       <h1 class="text-center">yyUXについて</h1>
       <div class="mt-5">
-        <h2>yyUXは<span class="yy-emphasis">世の中のすべてのUXを良くしたい</span>と願っています。このサイトはそのための<span class="yy-emphasis">議論の場を提供</span>します</h2>
+        <h2 id="aboutyyux">yyUXは<span class="yy-emphasis">世の中のすべてのUXを良くしたい</span>と願っています。このサイトはそのための<span class="yy-emphasis">議論の場を提供</span>します</h2>
         <p>WEBサイト・アプリ・様々な商品を使用していて、使いづらいなと感じることはありませんか？またサービス自体は良いのに、サービスではない別の部分で損をしていると感じるものはありませんでしたか？</p>
         <p>またサービス全体を通して素晴らしい体験を経験したことはありませんか？</p>
         <p>私たちはyyUXを通して、世の中のUXを改善、そして素晴らしい体験を広めたいと考えています。</p>
@@ -14,7 +14,7 @@
       </div>
 
       <div class="mt-5">
-        <h2>yyUXでは<span class="yy-emphasis">レビューの種類を大きく３つ</span>に分けています</h2>
+        <h2 id="yyAboutReviewType">yyUXでは<span class="yy-emphasis">レビューの種類を大きく３つ</span>に分けています</h2>
         <h3 class="good_ux">GOOD UX</h3>
         <p>「GOOD UX」では素晴らしいUXに対するレビューです。何が優れていたのか、何を持って良いと感じたかを明確にすることで、他サイト等に活かすことができます。</p>
         <p>また誰かが素晴らしいと思っていてもそうではないと感じることはあると思います。どうすればさらに良くなるか、議論を深めましょう。</p>

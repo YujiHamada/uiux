@@ -21,7 +21,7 @@ class Scraping
                     if($image){
                         $d =date("YmdHis");
                         $fileName = $d . '_' . md5($imageUrl);
-                        $e = Util::compressImage($imageUrl, \Config::get('const.REVIEW_URL_IMAGES_DIRECTORY') . $fileName, 60);
+                        $e = Util::compressImage($imageUrl, \Config::get('const.REVIEW_URL_IMAGES_DIRECTORY') . $fileName);
                         $fileName = $fileName . $e;
                     }
                 }

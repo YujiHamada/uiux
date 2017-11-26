@@ -21,7 +21,7 @@ class Util {
 
     }
 
-    public static function compressImage($source, $destination, $quality) {
+    public static function compressImage($source, $destination) {
 
         $info = getimagesize($source);
         $image;
@@ -30,21 +30,33 @@ class Util {
         if ($info['mime'] == 'image/jpeg') {
             $image = imagecreatefromjpeg($source);
             $e = '.jpg';
-            imagejpeg($image, $destination . $e, $quality);
+            imagejpeg($image, $destination . $e);
         }
 
         elseif ($info['mime'] == 'image/gif') {
             $image = imagecreatefromgif($source);
             $e = '.gif';
-            imagegif($image, $destination . $e, $quality);
+            imagegif($image, $destination . $e);
         }
 
         elseif ($info['mime'] == 'image/png') {
             $image = imagecreatefrompng($source);
             $e = '.png';
-            imagepng($image, $destination . $e, $quality);
+            imagepng($image, $destination . $e);
         }
 
         return $e;
+    }
+
+    public static function postTypeHashTag($type) {
+        if (\Config::get('enum.type.GOOD_UX') == $type) {
+            return \Config::get('const.GOOD_UX_HASH_TAG');
+        } elseif (\Config::get('enum.type.KAIZEN_UX') == $type) {
+            return \Config::get('const.KAIZEN_UX_HASH_TAG');
+        } elseif (\Config::get('enum.type.OPINION') == $type) {
+            return \Config::get('const.OPINION_UX_HASH_TAG');
+        }else {
+            return \Config::get('const.REQUEST_REVIEW_UX_HASH_TAG');
+        }
     }
 }

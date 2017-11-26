@@ -7,6 +7,7 @@
 
 @section('content')
     <div class="col mx-3 px-0">
+                <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="{{ $review->title }}" data-via="info_yyUX" data-hashtags="ux yyux" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
         @include('subs.flash-message-success')
 
@@ -15,7 +16,7 @@
 
                 <div class="row mx-0 d-flex justify-content-between mb-3">
                     <div class="col px-0">
-                        <h3 class="m-0">{{ $review->title }}</h3>
+                        <h1 class="m-0">{{ $review->title }}</h1>
                     </div>
                     <div>
                         @include('review.subs.review-type')
@@ -51,6 +52,9 @@
 
             {{-- 参照URL --}}
             @include('review.subs.show-review-url')
+
+            {{-- SNSシェアボタン --}}
+            @include('review.subs.sns-share')
 
         </div>
         @include('review.subs.review-comment')

@@ -12,7 +12,7 @@ return [
     | any other location as required by the application or its packages.
     */
 
-    'name' => 'yyUX | より良い サービス プロダクト へ',
+    'name' => 'yyUX | UXレビューでより良いサービス・プロダクトへ',
 
     /*
     |--------------------------------------------------------------------------
@@ -120,7 +120,9 @@ return [
     |
     */
 
-    'log' => env('APP_LOG', 'single'),
+    'log' => env('APP_LOG', 'daily'),
+
+    'log_max_files' => 30,
 
     'log_level' => env('APP_LOG_LEVEL', 'error'),
 

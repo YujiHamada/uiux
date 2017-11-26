@@ -32,7 +32,9 @@ class ReviewRequestController extends Controller
         //タグをjquery autocompleteで使えるよう"hoge", "hoge"の形にする
         $tagNames = '"' .implode('","',$tagNames->all()) . '"';
 
-        return view('review.request.create',compact('tagNames', 'review'));
+        $title = 'レビュー依頼投稿画面' . \Config::get('const.SITE_TITLE_TEMPLATE');
+
+        return view('review.request.create',compact('tagNames', 'review', 'title'));
     }
 
     public function store(\App\Http\Requests\StoreReviewRequest $request){

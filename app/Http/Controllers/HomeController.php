@@ -106,22 +106,26 @@ class HomeController extends Controller
 
     // このサイトについてのページを表示
     public function showAbout() {
-        return view('home.about');
+        $title = 'yyUXについて' . \Config::get('const.SITE_TITLE_TEMPLATE');
+        return view('home.about', compact('title'));
     }
 
     // お問い合わせのページを表示
     public function showContact() {
-        return view('home.contact');
+        $title = 'お問い合わせ' . \Config::get('const.SITE_TITLE_TEMPLATE');
+        return view('home.contact', compact('title'));
     }
 
     // 利用規約ページの表示
     public function showLegal() {
-        return view('home.legal');
+        $title = '利用規約' . \Config::get('const.SITE_TITLE_TEMPLATE');
+        return view('home.legal', compact('title'));
     }
 
     // プライバシーポリシーの表示
     public function showPrivacy() {
-        return view('home.privacy');
+        $title = 'プライバシーポリシー' . \Config::get('const.SITE_TITLE_TEMPLATE');
+        return view('home.privacy', compact('title'));
     }
 
     // ランキングの表示
@@ -138,8 +142,9 @@ class HomeController extends Controller
                         ->get(10);
 
         // dd($lastMonthScores);
+        $title = 'yyUX | スコアランキング';
 
-        return view('home.ranking', compact('lastMonthScores'));
+        return view('home.ranking', compact('lastMonthScores', 'title'));
     }
 
     // お問い合わせのページを表示 & お問い合わせ内容のメール送信

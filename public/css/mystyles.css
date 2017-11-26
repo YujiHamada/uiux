@@ -4,6 +4,10 @@ body {
   font-family: "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS P Gothic", Verdana, sans-serif;
 }
 
+h1 {
+  font-size: 1.5rem;
+}
+
 .yy-fontsize-09 {
   font-size: 0.9rem;
 }
@@ -129,7 +133,6 @@ body {
 }
 
 .yy-bg-body {
-  background: -webkit-linear-gradient(right, #f0f8ff, white 3%, white 97%, #f0f8ff);
   background: linear-gradient(to left, #f0f8ff, white 3%, white 97%, #f0f8ff);
 }
 
@@ -244,6 +247,11 @@ a.yy-review-url-link:hover {
 span.yy-review-domain {
   font-size: 6px;
   color: #00afcc;
+}
+
+.yy-post-annotation {
+  color: red;
+  font-size: 10px;
 }
 
 /*# sourceMappingURL=mystyles.css.map */

@@ -1,5 +1,5 @@
 <div class="tags">
-    <input type="text" id="tag">
+    <input class="form-control" type="text" id="tag">
     @foreach( old('review_tag_names', isset($review) ? $review->reviewTag : []) as $reviewTag )
         @if(isset($reviewTag->tag))
             {{-- 一度作成したreviewの編集の場合 --}}
