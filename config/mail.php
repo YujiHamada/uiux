@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp17.gmoserver.jp'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => 'info.yyux@gmail.com',
+        'address' => 'info@yyux.jp',
         'name' => 'yyUX開発者',
     ],
 
