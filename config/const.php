@@ -17,7 +17,7 @@ return array(
     'SITE_TITLE_TEMPLATE' => ' | yyUX',
     'SITE_DESCRIPTION' => 'UXレビューサイト。WEBサイト・アプリ・あらゆるサービスをレビューして世の中のUXを改善を目指しています。時サービスのレビュー依頼をすることで、サービスの改善につなげることも可能です。',
     'SITE_KEYWORD' => 'ux, ui, uiux',
-    'ADMIN_MAIL' => 'info.yyux@gmail.com',
+    'ADMIN_MAIL' => 'info@yyux.jp',
     'REVIEW_URL_IMAGES_DIRECTORY' => 'images/review_url_images/',
     'TWITTER_ID' => '@yyUX_info',
     'TWITTER_CARD' => 'summary',
