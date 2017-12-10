@@ -315,12 +315,12 @@
                     '<i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>',
                 '</div>',
                 '<div class="col-3 p-0">',
-                    '<span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span>',
+                    '<span class="yy-img-size d-block" style="background-image: url(' + this.url + ')"></span>',
                 '</div>',
             '</div>'
         ].join(''));
 
-        // this.$reviewImages.append('<div class="col-3 p-0 d-inline-block"><span class="yy-review-img d-block" style="background-image: url(' + this.url + ')"></span></div>');
+        // this.$reviewImages.append('<div class="col-3 p-0 d-inline-block"><span class="yy-timeline-review-img d-block" style="background-image: url(' + this.url + ')"></span></div>');
 
         this.stopCropper();
         this.$avatarModal.modal('hide');

@@ -3,8 +3,8 @@
 <!-- Main Content -->
 @section('content')
 <div class="container">
-  <div class="row">
-    <div class="col-8 col-offset-2">
+  <div class="row justify-content-center">
+    <div class="col">
 
       @include('subs.password-reset')
 

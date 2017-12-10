@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('leftSideBar')
-    <div id="user-left-side-bar" class="col-3 px-0">
+    <div id="user-left-side-bar" class="col-lg-3 px-0">
 
         {{-- 変数$userに値が設定されていない場合、
         変数$userにログイン中のユーザを設定する。 --}}
@@ -70,7 +70,8 @@
                                 <a class="nav-link yy-bg-sidebar" href="#">通知</a>
                             </li>
                             <li class="nav-item yy-outline-bottom">
-                                <a class="nav-link yy-bg-sidebar" href="{{ Auth::user()->name }}/leave">退会する</a>
+                                {{-- <a class="nav-link yy-bg-sidebar" href="{{ Auth::user()->name }}/leave">退会する</a> --}}
+                                <a class="nav-link yy-bg-sidebar" href="{{ action('UserController@leave', Auth::user()->name) }}">退会する</a>
                             </li>
                         </ul>
                     </nav>

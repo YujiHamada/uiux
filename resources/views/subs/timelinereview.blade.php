@@ -20,11 +20,11 @@
         </div>
         @if(!$review->reviewImages->isEmpty())
             <div class="col-3 p-0">
-                <span class="yy-review-img d-block ml-auto" style="background-image: url({{ asset($review->reviewImages->first()->image_name) }})"></span>
+                <span class="yy-timeline-review-img d-block ml-auto" style="background-image: url({{ asset($review->reviewImages->first()->image_name) }})"></span>
             </div>
         @else
             <div class="col-3 p-0">
-                <span class="yy-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
+                <span class="yy-timeline-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
             </div>
         @endif
     </div>

@@ -1,17 +1,17 @@
 @extends('layouts.user')
 
 @section('content')
-  <div class="col mx-3">
+  <div class="col mx-3 my-3">
 
     @include('subs.flash-message-success')
 
-    <h4>ソーシャル連携</h4>
-    
+    <h4 class="my-3">ソーシャル連携</h4>
+
     <p>
       他サイトとの連携は以下から管理してください。連携すると簡単にログインができるようになります。
     </p>
     <div class="row justify-content-center">
-      <div class="col-6 p-2">
+      <div class="col-md-6 p-2">
         <div class="yy-outline p-3">
           <h5 class="yy-outline-bottom pb-3 mb-3">
             Twitter連携
@@ -36,7 +36,7 @@
           @endif
         </div>
       </div>
-      <div class="col-6 p-2">
+      <div class="col-md-6 p-2">
         <div class="yy-outline p-3">
           <h5 class="yy-outline-bottom pb-3 mb-3">
             Facebook連携
@@ -61,7 +61,7 @@
           @endif
         </div>
       </div>
-      <div class="col-6 p-2">
+      <div class="col-md-6 p-2">
         <div class="yy-outline p-3">
           <h5 class="yy-outline-bottom pb-3 mb-3">
             Google連携
@@ -86,7 +86,7 @@
           @endif
         </div>
       </div>
-      <div class="col-6 p-2">
+      <div class="col-md-6 p-2">
         <div class="yy-outline p-3">
           <h5 class="yy-outline-bottom pb-3 mb-3">
             Github連携
