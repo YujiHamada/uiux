@@ -21,18 +21,32 @@ h1 {
   vertical-align: middle;
 }
 
-.yy-preview-size {
-  width: 150px;
-  height: 150px;
+.yy-img-size {
+  width: 128px;
+  height: 128px;
 }
 
-.yy-review-img {
+.yy-timeline-review-img {
   display: inline-block;
   background-position: center center;
   background-repeat: no-repeat;
-  width: 150px;
-  height: 150px;
+  width: 50px;
+  height: 50px;
   background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .yy-timeline-review-img {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (min-width: 992px) {
+  .yy-timeline-review-img {
+    width: 150px;
+    height: 150px;
+  }
 }
 
 .yy-avatar-img {
@@ -40,8 +54,8 @@ h1 {
   background-position: center center;
   background-repeat: no-repeat;
   margin: 5px;
-  width: 220px;
-  height: 220px;
+  width: 200px;
+  height: 200px;
   background-size: cover;
   border: 3px solid #fff;
   border-radius: 5px;
@@ -133,7 +147,6 @@ h1 {
 }
 
 .yy-bg-body {
-  background: -webkit-linear-gradient(right, #f0f8ff, white 3%, white 97%, #f0f8ff);
   background: linear-gradient(to left, #f0f8ff, white 3%, white 97%, #f0f8ff);
 }
 
@@ -150,7 +163,7 @@ h1 {
   background-color: #f0f8ff !important;
 }
 
-.yy-review-kind {
+.yy-pointer {
   cursor: pointer;
 }
 

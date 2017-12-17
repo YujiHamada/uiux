@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-  <div class="col mx-3">
+  <div class="col mx-3 my-3">
 
     @include('subs.password-reset')
 

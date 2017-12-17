@@ -40,15 +40,12 @@
 
             <!-- Crop and preview -->
             <div class="row">
-              <div class="col-9">
+              <div class="col-12">
                 <div class="avatar-wrapper"></div>
               </div>
-              <div class="col-3 d-flex justify-content-end">
-                <div class="avatar-preview yy-preview-size mx-0"></div>
-                {{-- <div class="avatar-preview preview-lg"></div> --}}
-                {{-- <div class="avatar-preview preview-md"></div> --}}
-                {{-- <div class="avatar-preview preview-sm"></div> --}}
-              </div>
+              {{-- <div class="col-3 d-flex justify-content-end">
+                <div class="avatar-preview yy-img-size mx-0"></div>
+              </div> --}}
             </div>
 
             {{-- <div class="row avatar-btns">

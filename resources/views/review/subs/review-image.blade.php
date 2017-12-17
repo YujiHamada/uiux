@@ -8,7 +8,7 @@
                     <i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>
                 </div>
                 <div class="col-3 p-0">
-                    <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
+                    <span class="yy-img-size d-block" style="background-image: url( {{ asset($reviewImage->image_name) }} )"></span>
                 </div>
             </div>
         @else
@@ -19,12 +19,12 @@
                     <i class="removeImage fa fa-times yy-fontsize-09" aria-hidden="true">削除</i>
                 </div>
                 <div class="col-3 p-0">
-                    <span class="yy-review-img d-block" style="background-image: url( {{ asset($reviewImage) }} )"></span>
+                    <span class="yy-img-size d-block" style="background-image: url( {{ asset($reviewImage) }} )"></span>
                 </div>
             </div>
         @endif
     @endforeach
 </div>
 <div class="add-review-image">
-    <a class="my-2 btn btn-outline-primary"><i class="fa fa-camera" aria-hidden="true"></i> 写真を追加する</a>
+    <button class="my-2 btn btn-outline-primary"><i class="fa fa-camera" aria-hidden="true"></i> 写真を追加する</button>
 </div>

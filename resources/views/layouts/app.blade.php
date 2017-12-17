@@ -109,7 +109,7 @@
 
                     <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
                         <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
-                        <button class="btn btn-outline-success" type="submit">Search</button>
+                        <button class="yy-pointer btn btn-outline-success" type="submit">Search</button>
                     </form>
                     <!-- ログイン / ユーザネーム -->
                     <ul class="navbar-nav form-inline mx-2">
@@ -151,8 +151,6 @@
         <div id="crop-avatar">
             <div class="container my-3">
                 <div class="row justify-content-center">
-                    <div class="">
-                        <div class="row">
                             <!-- 左サイドバー -->
                             @section('leftSideBar')
 
@@ -165,7 +163,7 @@
                                 <nav class="col-lg-3 px-0 mx-3">
 
                                     <div class="yy-outline mb-3">
-                                        <div class="bg-primary text-white px-3 py-2">
+                                        <div class="yy-bg-test text-white px-3 py-2">
                                             <p class="m-0">
                                                 投稿する
                                             </p>
@@ -179,7 +177,7 @@
                                     </div>
 
                                     <div class="yy-outline mb-3">
-                                        <div class="bg-primary text-white px-3 py-2">
+                                        <div class="yy-bg-test text-white px-3 py-2">
                                             <p class="m-0">
                                                 依頼する
                                             </p>
@@ -227,8 +225,6 @@
                                     </ul>
                                 </nav>
                             @show
-                        </div>
-                    </div>
                 </div>
             </div>
             @include('subs.cropper')
@@ -267,13 +263,13 @@
                                 <p class="d-inline">
                                     <a class="text-white" href="/about">yyUXについて</a>
                                 </p>
-                                <span class="px-3">|</span>
+                                <span class="px-1">|</span>
                                 <p class="d-inline">
                                     <a class="text-white" href="http://yyux.hatenablog.com/" target="_blank">
                                         公式ブログ
                                     </a>
                                 </p>
-                                <span class="px-3">|</span>
+                                <span class="px-1">|</span>
                                 <p class="d-inline">
                                     <a class="text-white" href="https://twitter.com/yyUX_info?lang=ja" target="_blank">
                                         <span class="fa fa-twitter"></span>@yyUX_info

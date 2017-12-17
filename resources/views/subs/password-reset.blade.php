@@ -1,4 +1,4 @@
-<h4>パスワード再設定</h4>
+<h4 class="my-3">パスワード再設定</h4>
 
 @if (session('status'))
     <div class="alert alert-success">
@@ -25,7 +25,7 @@
     @endif
   </div>
 
-  <button type="submit" class="btn btn-primary">
+  <button type="submit" class="yy-pointer mt-2 btn btn-primary btn-block">
     送信する
   </button>
 
