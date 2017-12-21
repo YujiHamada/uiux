@@ -159,6 +159,11 @@
     <main class="mb-auto">
         <div id="crop-avatar">
             <div class="container my-3">
+                @if(Request::url() == Request::root())
+                    <div class="jumbotron yy-introduce">
+                      <h1>yyUXはUX（ユーザー体験）レビューサイトです！<br>みんなでyy（ワイワイ）レビューして世の中のUXを良くしていきましょう！</h1>
+                    </div>
+                @endif
                 <div class="row justify-content-center">
                             <!-- 左サイドバー -->
                             @section('leftSideBar')
