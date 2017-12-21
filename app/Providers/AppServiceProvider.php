@@ -59,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
                 $scoreHistoryKey = 'comment' . $reviewComment->id . 'user' .$reviewComment->user_id;
   		        ScoreHistory::create([
       						'key' => $scoreHistoryKey,
+                  'review_id' => $reviewComment->review_id,
       						'user_id' => $reviewComment->user_id,
       						'score' => Config::get('const.SCORE_COMMENT'),
                             'score_type' => Config::get('enum.score_type.COMMENT')
