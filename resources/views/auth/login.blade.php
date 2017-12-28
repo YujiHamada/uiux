@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('content')
-  <div class="col">
+  <div class="col-md">
       <div class="panel panel-default">
           <div class="panel-heading"><h1>ログイン</h1></div>
           <div class="panel-body">
@@ -37,7 +37,7 @@
                   </div>
 
                   <div class="form-group">
-                      <div class="col-md-6 col-md-offset-4">
+                      <div class="col">
                           <div class="checkbox">
                               <label>
                                   <input type="checkbox" name="remember"> 次回から自動でログインする
@@ -47,11 +47,10 @@
                   </div>
 
                   <div class="form-group">
-                      <div class="col-md-8 col-md-offset-4">
+                      <div class="col">
                           <button type="submit" class="btn btn-primary">
                               ログイン
                           </button>
-
                           <a class="btn btn-link" href="{{ url('/password/reset') }}">
                               パスワードを忘れた方はこちら
                           </a>
@@ -61,18 +60,5 @@
           </div>
       </div>
   </div>
-  <div class="col">
-    <a class="btn btn-block btn-social btn-twitter"  href="login/twitter">
-        <span class="fa fa-twitter"></span> Twitterでログイン
-    </a>
-    <a class="btn btn-block btn-social btn-facebook" href="login/facebook">
-        <span class="fa fa-facebook"></span> Facebookでログイン
-    </a>
-    <a class="btn btn-block btn-social btn-google"  href="login/google">
-        <span class="fa fa-google"></span> Googleでログイン
-    </a>
-    <a class="btn btn-block btn-social btn-github"  href="login/github">
-        <span class="fa fa-github"></span> Githubでログイン
-    </a>
-  </div>
+  @include('auth.subs.social-login')
 @endsection

@@ -25,6 +25,8 @@
         @endif
     @endforeach
 </div>
-<div class="add-review-image">
-    <button class="my-2 btn btn-outline-primary"><i class="fa fa-camera" aria-hidden="true"></i> 写真を追加する</button>
+<div>
+    <div class="my-2 add-review-image d-inline-block">
+        <button type="button" class="btn btn-outline-primary"><i class="fa fa-camera" aria-hidden="true"></i> 写真を追加する</button>
+    </div>
 </div>
