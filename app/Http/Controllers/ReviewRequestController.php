@@ -21,7 +21,10 @@ class ReviewRequestController extends Controller
 
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
-        return view('review.request.show', compact('review'));
+        if(isset($review->reviewImages[0]->image_name)){
+            $ogImage = $review->reviewImages[0]->image_name;
+        }
+        return view('review.request.show', compact('review', 'ogImage'));
     }
 
     public function create($reviewId = null) {
