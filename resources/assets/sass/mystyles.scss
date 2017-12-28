@@ -302,3 +302,10 @@ span.yy-review-domain {
   color:red;
   font-size:10px;
 }
+
+// boostrap4のbugでdoropdown-menu-rightが正常に動かないので上書き。
+// 参考：https://stackoverflow.com/questions/43867258/bootstrap-4-navbar-dropdown-menu-right
+.dropdown-menu-right {
+    right: 0;
+    left: auto;
+}
