@@ -62,7 +62,7 @@
             <div class="container d-flex">
                 <a class="navbar-brand text-white mr-auto" href="/">
                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
-                    yyUX
+                    yyUX（β版）
                 </a>
                 {{-- <div class="ml-auto"></div> --}}
 
