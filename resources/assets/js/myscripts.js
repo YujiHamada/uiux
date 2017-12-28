@@ -8,6 +8,6 @@ $(function() {
 });
 $(function () {
     $('form').submit(function () {
-        $(this).find('.non-double-click').attr('disabled', 'disabled');
+        $(this).find('.yy-non-double-click').attr('disabled', 'disabled');
     });
 });

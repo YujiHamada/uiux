@@ -26,7 +26,7 @@
     <meta property="og:title" content="{{ $title or config('app.name') }}"/>
     <meta property="og:type" content="{{ $ogType or 'website' }}"/>
     <meta property="og:url" content="{{ url()->current() }}"/>
-    <meta property="og:image" content="{{ isset($ogImage) ? $ogImage : asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }}"/>
+    <meta property="og:image" content="{{ isset($ogImage) ? asset($ogImage) : asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }}"/>
     <meta property="og:site_name" content="{{ config('app.name') }}}"/>
     <meta property="og:description" content="{{ Config::get('const.SITE_DESCRIPTION') }}"/>
 
@@ -62,7 +62,7 @@
             <div class="container d-flex">
                 <a class="navbar-brand text-white mr-auto" href="/">
                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
-                    yyUX
+                    yyUX（β版）
                 </a>
                 {{-- <div class="ml-auto"></div> --}}
 

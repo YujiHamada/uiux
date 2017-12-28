@@ -29,7 +29,12 @@ class ReviewPostController extends Controller
     public function show($reviewId){
         $review = Review::findOrFail($reviewId);
         $title = 'yyUX | ' . $review->title;
-        return view('review.post.show', compact('review', 'title'));
+
+        if(isset($review->reviewImages[0]->image_name)){
+            $ogImage = $review->reviewImages[0]->image_name;
+        }
+
+        return view('review.post.show', compact('review', 'title', 'ogImage'));
     }
 
     //投稿用

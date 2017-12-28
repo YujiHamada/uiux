@@ -66,7 +66,7 @@
             //押されたボタンからフィードの種類（good or bad）の取得
             $('input[name="feed"]').val($(this).data('feed'));
             //値のないinputは削除（URLがごちゃごちゃするため）
-            $('input[value=""]').remove();
+            $('input[value=""]:not(input[name=searchWords])').remove();
             $(this).parents('form').attr('action', $(this).data('action'));
             $(this).parents('form').submit();
         });
