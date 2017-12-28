@@ -13,4 +13,8 @@
             <span class="yy-review-domain">{{ !empty($review->domain) ? $review->domain : $review->url}}</span>
         </div>
     </a>
+@elseif(!empty($review->url))
+    <a class="yy-review-url-link" href="{{ $review->url }}" target="_blank">
+        <h5 class="yy-review-url-title mt-0 mb-1">{{ $review->url }}</h5>
+    </a>
 @endif
