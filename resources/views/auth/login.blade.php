@@ -48,7 +48,7 @@
 
                   <div class="form-group">
                       <div class="col">
-                          <button type="submit" class="btn btn-primary">
+                          <button type="submit" class="btn btn-primary yy-non-double-click">
                               ログイン
                           </button>
                           <a class="btn btn-link" href="{{ url('/password/reset') }}">
