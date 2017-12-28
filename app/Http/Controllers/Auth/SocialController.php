@@ -79,8 +79,8 @@ class SocialController extends Controller
       return redirect($this->redirectTo);
     }
 
-    Session::set('social', $provider);
-    Session::set('socialUid', $socialUser->id);
+    Session::put('social', $provider);
+    Session::put('socialUid', $socialUser->id);
     $nickname = $socialUser->nickname;
     $email = $socialUser->email;
     $fromAvatar = ($provider == 'github') ? $socialUser->avatar : $socialUser->avatar_original;
