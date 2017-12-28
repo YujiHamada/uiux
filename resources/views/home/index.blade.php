@@ -3,7 +3,7 @@
 @section('content')
     <div class="col mx-3 px-0">
         <div class="bg-warning text-white px-3 mx-3 rounded mb-2">
-            <p class="p-0 m-0">yyUXは現在β版として運用しております。</p>
+            <p class="p-0 m-0">yyUXは現在β版として運用中です。</p>
         </div>
         @if(!Auth::user())
             <div class="bg-primary text-white p-3 mx-3 rounded mb-2">
