@@ -100,7 +100,7 @@
             @include('review.subs.review-image')
 
             <div class="text-center my-3">
-                <button type="button" class="yy-pointer btn btn-primary btn-block">投稿</button>
+                <button type="submit" class="yy-pointer btn btn-primary btn-block">投稿</button>
             </div>
 
         </form>
