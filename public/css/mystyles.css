@@ -268,4 +268,9 @@ span.yy-review-domain {
   font-size: 10px;
 }
 
+.dropdown-menu-right {
+  right: 0;
+  left: auto;
+}
+
 /*# sourceMappingURL=mystyles.css.map */

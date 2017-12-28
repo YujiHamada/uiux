@@ -59,98 +59,28 @@
     @section('navigationBar')
 
         <nav class="navbar navbar-expand-md navbar-dark fixed-top yy-bg-midnightblue">
-            <div class="container">
-                <a class="navbar-brand text-white" href="/">
+            <div class="container d-flex">
+                <a class="navbar-brand text-white mr-auto" href="/">
                     <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
                     yyUX
                 </a>
-                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <div class="mr-auto"></div>
-                    <div class="btn-group">
-                    <!-- bootstrapのspacingが効かない？ -->
-                    <a data-toggle="dropdown" href="#" style="margin:auto 5px;">
-                        <i class="fa fa-globe fa-2x yy-notifications-icon" aria-hidden="true"></i>
-                        @if(Auth::user())
-                        <span class="badge badge-danger yy-unreadnotification-count" style="position: relative;left: -10px; @if(count(Auth::user()->unreadNotifications) == 0) visibility:hidden @endif">
-                            {{ count(Auth::user()->unreadNotifications) }}
-                        </span>
-                        @endif
-                    </a>
-                        <div class="dropdown-menu yy-notifications">
-                            @if(Auth::check())
-                                <div class="ml-3">
-                                    お知らせ一覧
-                                </div>
-                                <div class="dropdown-divider"></div>
-                                @forelse(Auth::user()->notifications->take(10) as $key => $notification)
-                                    <div>
-                                        <a class="dropdown-item" href="{{ $notification->data['url'] }}" style="width: 400px;">
-                                            <div class="row">
-                                                <div class="col-1 pl-0">
-                                                    <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset(App\User::find($notification->notifier_id)->avatar_image_path) }})"></span>
-                                                </div>
-                                                @if(!isset($notification->read_at))
-                                                    <div class="col-1 yy-unreadnotification-mark">
-                                                        ●
-                                                    </div>
-                                                @endif
-                                                <div class="col">
-                                                    <span style="white-space: normal;">{{ $notification->data['message'] }}</span>
-                                                </div>
-                                            </div>
-                                        </a>
-                                    </div>
-                                    @if(count(Auth::user()->notifications) != $key + 1)
-                                        <div class="dropdown-divider"></div>
-                                    @endif
-                                @empty
-                                    通知はまだありません
-                                @endforelse
-                            @else
-                                <a href="/login">yyuiuxに登録しよう！</a>
-                            @endif
-                        </div>
-                    </div>
+                {{-- <div class="ml-auto"></div> --}}
 
+                <div class="d-flex align-items-center justify-content-end">
 
-                    <form class="form-inline my-0" method="GET" action="{{ url('/timeline') }}">
-                        <input class="form-control mr-2" type="text" placeholder="Search" value="{{ $searchWords or '' }}" name="searchWords" required>
-                        <button class="yy-pointer btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                    <!-- ログイン / ユーザネーム -->
-                    <ul class="navbar-nav form-inline mx-2">
-                    @if (Auth::guest())
-                        <li><a class="text-white" href="{{ url('/login') }}">ログイン</a></li>
-                        <li><span class="text-white" class="mx-2">/</span></li>
-                        <li><a class="text-white" href="{{ url('/register') }}">新規登録</a></li>
-                    @else
-                        <span class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle text-white" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="{{ action('UserController@show', Auth::user()->name) }}">
-                                        マイページ
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="{{ url('/logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                        ログアウト
-                                    </a>
-                                    <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">
-                                        {{ csrf_field() }}
-                                    </form>
-                                </li>
-                            </ul>
-                        </li>
+                    @include('layouts.subs.search')
+
+                    {{-- ゲストの場合は通知ボタンは表示しない --}}
+                    @if (!Auth::guest())
+                        @include('layouts.subs.notifications')
                     @endif
-                    </ul>
+
+                    @include('layouts.subs.user-etc')
                 </div>
+
+
+
+
             </div>
         </nav>
     @show
@@ -161,80 +91,80 @@
         <div id="crop-avatar">
             <div class="container my-3">
                 <div class="row justify-content-center">
-                            <!-- 左サイドバー -->
-                            @section('leftSideBar')
+                    <!-- 左サイドバー -->
+                    @section('leftSideBar')
 
-                            @show
-                            <!-- 中央メインコンテンツ -->
-                            @section('content')
-                            @show
-                            <!-- 右サイドバー -->
-                            @section('rightSideBar')
-                                <nav class="col-lg-3 px-0 mx-3">
+                    @show
+                    <!-- 中央メインコンテンツ -->
+                    @section('content')
+                    @show
+                    <!-- 右サイドバー -->
+                    @section('rightSideBar')
+                        <nav class="col-lg-3 px-0 mx-3">
 
-                                    <div class="yy-outline mb-3">
-                                        <div class="yy-bg-test text-white px-3 py-2">
-                                            <p class="m-0">
-                                                投稿する
-                                            </p>
-                                        </div>
-                                        <div class="px-3 py-2">
-                                            <small>
-                                                サービス、プロダクトのUXについてレビュー評価しよう！
-                                            </small>
-                                            <a href="{{ url('/post/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビューする</a>
-                                        </div>
-                                    </div>
+                            <div class="yy-outline mb-3">
+                                <div class="yy-bg-test text-white px-3 py-2">
+                                    <p class="m-0">
+                                        投稿する
+                                    </p>
+                                </div>
+                                <div class="px-3 py-2">
+                                    <small>
+                                        サービス、プロダクトのUXについてレビュー評価しよう！
+                                    </small>
+                                    <a href="{{ url('/post/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビューする</a>
+                                </div>
+                            </div>
 
-                                    <div class="yy-outline mb-3">
-                                        <div class="yy-bg-test text-white px-3 py-2">
-                                            <p class="m-0">
-                                                依頼する
-                                            </p>
-                                        </div>
-                                        <div class="px-3 py-2">
-                                            <small>
-                                                自分のサービス、プロダクトのレビューを依頼しよう！
-                                            </small>
-                                            <a href="{{ url('/request/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビュー依頼する</a>
-                                        </div>
-                                    </div>
+                            <div class="yy-outline mb-3">
+                                <div class="yy-bg-test text-white px-3 py-2">
+                                    <p class="m-0">
+                                        依頼する
+                                    </p>
+                                </div>
+                                <div class="px-3 py-2">
+                                    <small>
+                                        自分のサービス、プロダクトのレビューを依頼しよう！
+                                    </small>
+                                    <a href="{{ url('/request/create') }}" class="mt-2 btn btn-outline-primary d-block">UXレビュー依頼する</a>
+                                </div>
+                            </div>
 
-                                    <ul class="nav nav-pills flex-column mb-3">
-                                        <li class="nav-item yy-outline-bottom">
-                                            <p class="nav-link yy-bg-test text-white my-0" >トップタグ</p>
-                                        </li>
-                                        @foreach($summaryTags as $tag)
-                                        <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
-                                            <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/timeline?tagId={{ $tag->tag_id }}">
-                                                <span class="badge badge-pill badge-secondary">{{ $tag->tag_name }}</span>
-                                            </a>
-                                            <p class="d-inline-block m-0">{{ $tag->count }}<small>タグ</small></p>
-                                        </li>
-                                      @endforeach
-                                    </ul>
+                            <ul class="nav nav-pills flex-column mb-3">
+                                <li class="nav-item yy-outline-bottom">
+                                    <p class="nav-link yy-bg-test text-white my-0" >トップタグ</p>
+                                </li>
+                                @foreach($summaryTags as $tag)
+                                <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
+                                    <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/timeline?tagId={{ $tag->tag_id }}">
+                                        <span class="badge badge-pill badge-secondary">{{ $tag->tag_name }}</span>
+                                    </a>
+                                    <p class="d-inline-block m-0">{{ $tag->count }}<small>タグ</small></p>
+                                </li>
+                              @endforeach
+                            </ul>
 
-                                    <ul class="nav nav-pills flex-column">
-                                        <li class="nav-item yy-outline-bottom">
-                                            <p class="nav-link yy-bg-test text-white my-0" >
-                                                今月のランキング
-                                                <a class="text-white yy-fontsize-09" href="/ranking">
-                                                    (もっと見る)
-                                                </a>
-                                            </p>
-                                        </li>
-                                        @foreach($summaryScores as $score)
-                                            <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
-                                                <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
-                                                    <span class="yy-avatar-thumbnail-img" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
-                                                    <small>{{ $score->user_name }}</small>
-                                                </a>
-                                                <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>
-                                            </li>
-                                        @endforeach
-                                    </ul>
-                                </nav>
-                            @show
+                            <ul class="nav nav-pills flex-column">
+                                <li class="nav-item yy-outline-bottom">
+                                    <p class="nav-link yy-bg-test text-white my-0" >
+                                        今月のランキング
+                                        <a class="text-white yy-fontsize-09" href="/ranking">
+                                            (もっと見る)
+                                        </a>
+                                    </p>
+                                </li>
+                                @foreach($summaryScores as $score)
+                                    <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
+                                        <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
+                                            <span class="yy-avatar-thumbnail-img" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
+                                            <small>{{ $score->user_name }}</small>
+                                        </a>
+                                        <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        </nav>
+                    @show
                 </div>
             </div>
             @include('subs.cropper')
