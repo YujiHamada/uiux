@@ -99,8 +99,8 @@
             <label class="col-12 col-form-label px-0">レビュー参考画像</label>
             @include('review.subs.review-image')
 
-            <div class="text-center">
-                <button type="submit" class="yy-pointer my-3 btn btn-primary btn-block">投稿</button>
+            <div class="text-center my-3">
+                <button type="button" class="yy-pointer btn btn-primary btn-block">投稿</button>
             </div>
 
         </form>

@@ -123,8 +123,9 @@
                     <!-- ログイン / ユーザネーム -->
                     <ul class="navbar-nav form-inline mx-2">
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
-                        <li><a href="{{ url('/register') }}">Register</a></li>
+                        <li><a class="text-white" href="{{ url('/login') }}">ログイン</a></li>
+                        <li><span class="text-white" class="mx-2">/</span></li>
+                        <li><a class="text-white" href="{{ url('/register') }}">新規登録</a></li>
                     @else
                         <span class="yy-avatar-thumbnail-img mx-2" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
                         <li class="dropdown">
@@ -159,11 +160,6 @@
     <main class="mb-auto">
         <div id="crop-avatar">
             <div class="container my-3">
-                @if(Request::url() == Request::root())
-                    <div class="jumbotron yy-introduce">
-                      <h1>yyUXはUX（ユーザー体験）レビューサイトです！<br>みんなでyy（ワイワイ）レビューして世の中のUXを良くしていきましょう！</h1>
-                    </div>
-                @endif
                 <div class="row justify-content-center">
                             <!-- 左サイドバー -->
                             @section('leftSideBar')
@@ -285,8 +281,8 @@
                                 </p>
                                 <span class="px-1">|</span>
                                 <p class="d-inline">
-                                    <a class="text-white" href="https://twitter.com/yyUX_info?lang=ja" target="_blank">
-                                        <span class="fa fa-twitter"></span>@yyUX_info
+                                    <a class="text-white" href="https://twitter.com/info_yyUX?lang=ja" target="_blank">
+                                        <span class="fa fa-twitter"></span>@info_yyUX
                                     </a>
                                 </p>
                             </div>
