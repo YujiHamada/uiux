@@ -1,4 +1,4 @@
-<div class="mb-3 p-3 mx-3 yy-bg-white yy-outline">
+<div class="mb-3 p-3 yy-bg-white yy-outline">
 
     <div class="row mx-0">
 
