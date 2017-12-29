@@ -8,7 +8,7 @@
         </span>
         @endif
     </a>
-    <div class="dropdown-menu yy-notifications">
+    <div class="dropdown-menu dropdown-menu-right yy-notifications">
         @if(Auth::check())
             <div class="ml-3">
                 お知らせ一覧

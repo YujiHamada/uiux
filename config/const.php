@@ -8,15 +8,15 @@ return array(
     'APP_IMAGES_DIRECTORY' => 'images/app_images/',
     // PARAMETER
     'MASTERING_TAG_THRESHOLD' => 10,
-    'NUMBER_OF_REVIEWS_PER_PAGE' => 5,
+    'NUMBER_OF_REVIEWS_PER_PAGE' => 6,
     'SCORE_REVIEW' => 100,
     'SCORE_COMMENT' => 30,
     'SCORE_REVIEW_EVALUATION' => 15,
     'SCORE_COMMENT_EVALUATION' => 5,
     // SITE INFO
     'SITE_TITLE_TEMPLATE' => ' | yyUX',
-    'SITE_DESCRIPTION' => 'UXレビューサイト。WEBサイト・アプリ・あらゆるサービスをレビューして世の中のUXを改善を目指しています。時サービスのレビュー依頼をすることで、サービスの改善につなげることも可能です。',
-    'SITE_KEYWORD' => 'ux, ui, uiux',
+    'SITE_DESCRIPTION' => 'UXレビューサイト。レビューを通して、WEBサイト・プロダクト・あらゆるサービスのUX改善を目指しています。レビュー依頼機能もあり、サービスの改善につなげることも可能です。',
+    'SITE_KEYWORD' => 'ux, ui, uiux, レビュー, 使いやすい, 使いづらい',
     'ADMIN_MAIL' => 'info@yyux.jp',
     'REVIEW_URL_IMAGES_DIRECTORY' => 'images/review_url_images/',
     'TWITTER_ID' => '@yyUX_info',

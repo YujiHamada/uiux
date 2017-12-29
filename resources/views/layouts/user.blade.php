@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('leftSideBar')
-    <div id="user-left-side-bar" class="col-lg-3 px-0">
+    <div id="user-left-side-bar" class="col-lg-3 px-3">
 
         {{-- 変数$userに値が設定されていない場合、
         変数$userにログイン中のユーザを設定する。 --}}
