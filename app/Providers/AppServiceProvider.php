@@ -27,9 +27,9 @@ class AppServiceProvider extends ServiceProvider
     {
         try{
             // 以下、グローバル変数定義と同意
-            $summaryTags = DB::table('summary_tags')->get();
+            $summaryTags = DB::table('summary_tags')->orderBy('count', 'desc')->take(10)->get();
             View::share('summaryTags', $summaryTags);
-            $summaryScores = DB::table('summary_scores')->get();
+            $summaryScores = DB::table('summary_scores')->orderBy('score', 'desc')->take(10)->get();
             View::share('summaryScores', $summaryScores);
 
             // Reviewレコードが新規作成された場合

@@ -89,8 +89,8 @@
     <!-- ナビゲーションバー以下 -->
     <main class="mb-auto">
         <div id="crop-avatar">
-            <div class="container my-3">
-                <div class="row justify-content-center">
+            <div class="container my-3 px-0">
+                <div class="row justify-content-center mx-2">
                     <!-- 左サイドバー -->
                     @section('leftSideBar')
 
@@ -100,7 +100,7 @@
                     @show
                     <!-- 右サイドバー -->
                     @section('rightSideBar')
-                        <nav class="col-lg-3 px-0 mx-3">
+                        <nav class="col-lg-3 px-3">
 
                             <div class="yy-outline mb-3">
                                 <div class="yy-bg-test text-white px-3 py-2">

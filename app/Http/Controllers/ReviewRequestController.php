@@ -89,9 +89,9 @@ class ReviewRequestController extends Controller
 
         // 複数の写真投稿
         $reviewImages = $request->input('review_images');
+        ReviewImage::where('review_id', $reviewId)->delete();
         if(!empty($reviewImages)) {
             foreach($reviewImages as $reviewImage) {
-                ReviewImage::where('review_id', $reviewId)->delete();
                 ReviewImage::firstOrCreate(['review_id' => $review->id, 'image_name' => $reviewImage]);
             }
         }

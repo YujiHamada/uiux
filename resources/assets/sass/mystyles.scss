@@ -57,8 +57,12 @@ $yy-line-height: 1rem * 1.5;
 // cropperの画像をトリミングする際の、右側プレビューのサイズ
 // レビューの画像サイズ
 .yy-img-size {
-  width: 128px;
-  height: 128px;
+    display: inline-block;
+    background-position: center center;
+    background-repeat: no-repeat;
+    width: 128px;
+    height: 128px;
+    background-size: cover;
 }
 
 .yy-timeline-review-img {
@@ -75,6 +79,19 @@ $yy-line-height: 1rem * 1.5;
   @media (min-width: $breakpoint-lg) {
       width: 150px;
       height: 150px;
+  }
+}
+
+.yy-modal-img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+  @media (min-width: $breakpoint-md) {
+      width: 400px;
+      height: 400px;
   }
 }
 

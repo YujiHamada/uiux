@@ -22,8 +22,12 @@ h1 {
 }
 
 .yy-img-size {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
   width: 128px;
   height: 128px;
+  background-size: cover;
 }
 
 .yy-timeline-review-img {
@@ -46,6 +50,22 @@ h1 {
   .yy-timeline-review-img {
     width: 150px;
     height: 150px;
+  }
+}
+
+.yy-modal-img {
+  display: inline-block;
+  background-position: center center;
+  background-repeat: no-repeat;
+  width: 250px;
+  height: 250px;
+  background-size: cover;
+}
+
+@media (min-width: 768px) {
+  .yy-modal-img {
+    width: 400px;
+    height: 400px;
   }
 }
 
