@@ -34,6 +34,8 @@ class ReviewPostController extends Controller
             $ogImage = $review->reviewImages[0]->image_name;
         }
 
+        Review::updatePageView($reviewId);
+
         return view('review.post.show', compact('review', 'title', 'ogImage'));
     }
 

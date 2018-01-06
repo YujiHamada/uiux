@@ -55,4 +55,10 @@ class Review extends Model
 	  return $this->hasOne('App\ReviewEvaluation', 'review_id', 'id')->where('user_id', Auth::user()->id);
 	}
 
+	public static function updatePageView($id){
+		$currentURL = url()->current();
+        if($currentURL != session('lastURL')) {
+			\DB::table('reviews')->where('id', $id)->increment('page_view');
+		}
+	}
 }
