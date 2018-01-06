@@ -24,6 +24,9 @@ class ReviewRequestController extends Controller
         if(isset($review->reviewImages[0]->image_name)){
             $ogImage = $review->reviewImages[0]->image_name;
         }
+
+        Review::updatePageView($reviewId);
+
         return view('review.request.show', compact('review', 'ogImage'));
     }
 
