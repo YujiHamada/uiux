@@ -10,7 +10,8 @@
         "doctrine/dbal": "^2.5",
         "laravel/socialite": "~3.0",
         "electrolinux/phpquery": "^0.9.6",
-        "laravel/envoy": "~1.0"
+        "laravel/envoy": "~1.0",
+        "google/apiclient": "^2.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
