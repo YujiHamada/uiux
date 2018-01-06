@@ -1,7 +1,7 @@
 @extends('layouts.user')
 
 @section('content')
-  <div class="col mx-3 my-3 p-0">
+  <div class="col-12 col-lg-8 px-3">
 
     <h4 class="my-3">タイムライン</h4>
 

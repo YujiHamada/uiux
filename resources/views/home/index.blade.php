@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col px-3">
+    <div class="col-12 col-lg-9 px-3">
         <div class="bg-warning text-white px-3 rounded mb-2">
             <p class="p-0 m-0">yyUXは現在β版として運用中です。</p>
         </div>

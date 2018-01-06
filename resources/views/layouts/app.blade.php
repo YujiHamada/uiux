@@ -68,6 +68,8 @@
 
                 <div class="d-flex align-items-center justify-content-end">
 
+                    @include('layouts.subs.edit')
+
                     @include('layouts.subs.search')
 
                     {{-- ゲストの場合は通知ボタンは表示しない --}}
@@ -90,7 +92,7 @@
     <main class="mb-auto">
         <div id="crop-avatar">
             <div class="container my-3 px-0">
-                <div class="row justify-content-center mx-2">
+                <div class="row justify-content-center mx-0">
                     <!-- 左サイドバー -->
                     @section('leftSideBar')
 
@@ -100,7 +102,7 @@
                     @show
                     <!-- 右サイドバー -->
                     @section('rightSideBar')
-                        <nav class="col-lg-3 px-3">
+                        <nav class="col-12 col-lg-3 px-3">
 
                             <div class="yy-outline mb-3">
                                 <div class="yy-bg-test text-white px-3 py-2">

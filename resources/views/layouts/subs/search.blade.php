@@ -1,6 +1,6 @@
 <div class="btn-group mx-2">
     <a data-toggle="dropdown" href="#">
-        <i class="fa fa-search fa-2x text-white" aria-hidden="true"></i>
+        <i class="fa fa-search fa-2x text-success" aria-hidden="true"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-right">
         <form class="form-inline my-0 dropdown-item" method="GET" action="{{ url('/timeline') }}">
