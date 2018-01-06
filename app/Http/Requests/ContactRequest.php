@@ -26,8 +26,19 @@ class ContactRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => ['required', 'max:255'],
+          'name' => ['required', 'max:15'],
           'email' => ['required', 'email', 'max:255'],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'ユーザー名を入力してください',
+            'name.max' => '15文字以内で入力してください',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.max' => '255文字以内で入力してください',
+            'email.email' => 'メールアドレスの形式で入力してください',
         ];
     }
 }

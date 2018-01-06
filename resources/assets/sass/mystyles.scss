@@ -344,6 +344,90 @@ span.yy-review-domain {
   font-size:10px;
 }
 
+// .yy-tab-all {
+//     background-color: red;
+//     color: white;
+//     &:hover, &:active, &:focus{
+//         // background-color: blue;
+//         // color: black;
+//         background-color: blue !important;
+//         color: black !important;
+//     }
+// }
+
+$yy-opacity: 0.1;
+
+$color-all: rgba(0,175,204,1);
+$color-opacity-all: rgba(0,175,204,$yy-opacity);
+
+$color-good: rgba(60,179,122,1);
+$color-opacity-good: rgba(60,179,122,$yy-opacity);
+
+$color-bad: rgba(255,127,143,1);
+$color-opacity-bad: rgba(255,127,143,$yy-opacity);
+
+$color-opinion: rgba(215,196,71,1);
+$color-opacity-opinion: rgba(215,196,71,$yy-opacity);
+
+$color-request: rgba(113,69,151,1);
+$color-opacity-request: rgba(113,69,151,$yy-opacity);
+
+.nav-tabs {
+
+    // active時
+    .nav-link.active {
+        color: white;
+        &.yy-tab-all {
+            background-color: $color-all;
+        }
+        &.yy-tab-good {
+            background-color: $color-good;
+        }
+        &.yy-tab-bad {
+            background-color: $color-bad;
+        }
+        &.yy-tab-opinion {
+            background-color: $color-opinion;
+        }
+        &.yy-tab-request {
+            background-color: $color-request;
+        }
+    }
+    // inactive時
+    .nav-link.inactive {
+        color: $text-color;
+        border-top: 1px solid #ddd;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        // &.yy-tab-all {
+        //     background-color: $color-opacity-all;
+        // }
+        // &.yy-tab-good {
+        //     background-color: $color-opacity-good;
+        // }
+        // &.yy-tab-bad {
+        //     background-color: $color-opacity-bad;
+        // }
+        // &.yy-tab-opinion {
+        //     background-color: $color-opacity-opinion;
+        // }
+        // &.yy-tab-request {
+        //     background-color: $color-opacity-request;
+        // }
+    }
+
+}
+
+.yy-bg-color-request {
+    background-color: $color-request;
+}
+
+.yy-bg-color-opinion {
+    background-color: $color-opinion;
+}
+
+
+
 // boostrap4のbugでdoropdown-menu-rightが正常に動かないので上書き。
 // 参考：https://stackoverflow.com/questions/43867258/bootstrap-4-navbar-dropdown-menu-right
 .dropdown-menu-right {

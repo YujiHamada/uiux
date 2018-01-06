@@ -16,10 +16,6 @@ h2 {
   font-size: 0.9rem;
 }
 
-.yy-fontsize-h5 {
-  font-size: 1.25rem;
-}
-
 .yy-vertical-align-middle {
   display: table-cell;
   vertical-align: middle;
@@ -304,6 +300,45 @@ span.yy-review-domain {
 .yy-post-annotation {
   color: red;
   font-size: 10px;
+}
+
+.nav-tabs .nav-link.active {
+  color: white;
+}
+
+.nav-tabs .nav-link.active.yy-tab-all {
+  background-color: #00afcc;
+}
+
+.nav-tabs .nav-link.active.yy-tab-good {
+  background-color: #3cb37a;
+}
+
+.nav-tabs .nav-link.active.yy-tab-bad {
+  background-color: #ff7f8f;
+}
+
+.nav-tabs .nav-link.active.yy-tab-opinion {
+  background-color: #d7c447;
+}
+
+.nav-tabs .nav-link.active.yy-tab-request {
+  background-color: #714597;
+}
+
+.nav-tabs .nav-link.inactive {
+  color: #636b6f;
+  border-top: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+}
+
+.yy-bg-color-request {
+  background-color: #714597;
+}
+
+.yy-bg-color-opinion {
+  background-color: #d7c447;
 }
 
 .dropdown-menu-right {
