@@ -26,7 +26,7 @@ class UserEditRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => ['required', 'max:15', 'regex:/^[a-zA-Z0-9]+$/', Rule::unique('users')->ignore(Auth::user()->id)],
+          'name' => ['required', 'max:15', Rule::unique('users')->ignore(Auth::user()->id)],
           'email' => ['required', 'email', 'max:255', Rule::unique('users')->ignore(Auth::user()->id)],
           'biography' => ['max:200'],
         ];
@@ -37,7 +37,6 @@ class UserEditRequest extends FormRequest
         return [
             'name.required' => 'ユーザー名を入力してください',
             'name.max' => '15文字以内で入力してください',
-            'name.regex' => '半角英数字で入力してください',
             'email.required' => 'メールアドレスを入力してください',
             'email.email' => 'メールアドレスの形式で入力してください',
             'email.max' => '255文字以内で入力してください',
