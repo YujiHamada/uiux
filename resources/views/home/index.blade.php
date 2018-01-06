@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="col px-3">
+    <div class="col-12 col-lg-9 px-3">
         <div class="bg-warning text-white px-3 rounded mb-2">
             <p class="p-0 m-0">yyUXは現在β版として運用中です。</p>
         </div>
@@ -29,18 +29,29 @@
 
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <span class="yy-pointer nav-link {{ url()->current() === url('/') || app('request')->feed === 'ALL' || !isset(app('request')->feed) ? ' active' : '' }}" data-action="/timeline" data-feed="ALL">
+                    <span class="yy-pointer nav-link py-2 px-3 yy-tab-all {{ url()->current() === url('/') || app('request')->feed === 'ALL' || !isset(app('request')->feed) ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="ALL">
                         All
                     </span>
                 </li>
                 <li class="nav-item">
-                    <span class="yy-pointer nav-link {{ app('request')->feed === Config::get('enum.type.GOOD_UX') ? ' active' : '' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.GOOD_UX')}}">Good UX</span>
+                    <span class="yy-pointer nav-link p-2 yy-tab-good {{ app('request')->feed === Config::get('enum.type.GOOD_UX') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.GOOD_UX')}}">
+                        <i class="fa fa-thumbs-o-up mr-1" aria-hidden="true"></i>UX
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <span class="yy-pointer nav-link {{ app('request')->feed === Config::get('enum.type.KAIZEN_UX') ? ' active' : '' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.KAIZEN_UX')}}">KAIZEN UX</span>
+                    <span class="yy-pointer nav-link p-2 yy-tab-bad {{ app('request')->feed === Config::get('enum.type.KAIZEN_UX') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.KAIZEN_UX')}}">
+                        <i class="fa fa-thumbs-o-down mr-1" aria-hidden="true"></i>UX
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <span class="yy-pointer nav-link {{ app('request')->feed === 'request' ? ' active' : '' }}" data-action="/timeline" data-feed="request">レビュー依頼</span>
+                    <span class="yy-pointer nav-link p-2 yy-tab-opinion {{ app('request')->feed === Config::get('enum.type.OPINION') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.OPINION')}}">
+                        <i class="fa fa-comment-o mr-1" aria-hidden="true"></i>意見
+                    </span>
+                </li>
+                <li class="nav-item">
+                    <span class="yy-pointer nav-link p-2 yy-tab-request {{ app('request')->feed === 'request' ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="request">
+                        <i class="fa fa-hand-paper-o mr-1" aria-hidden="true"></i>依頼
+                    </span>
                 </li>
             </ul>
         </form>

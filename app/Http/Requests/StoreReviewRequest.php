@@ -33,7 +33,9 @@ class StoreReviewRequest extends FormRequest
     {
         return [
             'title.required' => 'タイトルを入力してください',
+            'title.max' => '50文字以内で入力してください',
             'description.required' => '詳細を入力してください',
+            'description.max' => '500文字以内で入力してください',
         ];
     }
 }

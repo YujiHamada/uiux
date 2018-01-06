@@ -63,25 +63,28 @@
         <nav class="navbar navbar-expand-md navbar-dark fixed-top yy-bg-midnightblue">
             <div class="container d-flex">
                 <a class="navbar-brand text-white mr-auto" href="/">
-                    <img src="{{ asset('images/app_images/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
+                    <img src="{{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . '/yyuxlogo_white.png') }}" style="height: 1.8rem;" class="mr-2" />
                     yyUX
                 </a>
                 {{-- <div class="ml-auto"></div> --}}
 
                 <div class="d-flex align-items-center justify-content-end">
 
+                    {{-- ゲストの場合、レビュー投稿機能は表示しない --}}
+                    @if (!Auth::guest())
+                        @include('layouts.subs.edit')
+                    @endif
+
+                    {{-- ゲストの場合でも、検索機能は表示する --}}
                     @include('layouts.subs.search')
 
-                    {{-- ゲストの場合は通知ボタンは表示しない --}}
+                    {{-- ゲストの場合、通知ボタンは表示しない --}}
                     @if (!Auth::guest())
                         @include('layouts.subs.notifications')
                     @endif
 
                     @include('layouts.subs.user-etc')
                 </div>
-
-
-
 
             </div>
         </nav>
@@ -92,7 +95,7 @@
     <main class="mb-auto">
         <div id="crop-avatar">
             <div class="container my-3 px-0">
-                <div class="row justify-content-center mx-2">
+                <div class="row justify-content-center mx-0">
                     <!-- 左サイドバー -->
                     @section('leftSideBar')
 
@@ -102,7 +105,7 @@
                     @show
                     <!-- 右サイドバー -->
                     @section('rightSideBar')
-                        <nav class="col-lg-3 px-3">
+                        <nav class="col-12 col-lg-3 px-3">
 
                             <div class="yy-outline mb-3">
                                 <div class="yy-bg-test text-white px-3 py-2">
@@ -158,7 +161,11 @@
                                 @foreach($summaryScores as $score)
                                     <li class="nav-item yy-outline-bottom d-flex justify-content-between px-3 py-2">
                                         <a class="d-inline-block nav-link yy-bg-sidebar p-0" href="/{{ $score->user_name }}">
-                                            <span class="yy-avatar-thumbnail-img" style="background-image: url({{ $score->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
+                                            @if(isset($score->avatar_image_path))
+                                                <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset($score->avatar_image_path) }})"></span>
+                                            @else
+                                                <span class="yy-avatar-thumbnail-img yy-vertical-align-middle" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_black.png') }})"></span>
+                                            @endif
                                             <small>{{ $score->user_name }}</small>
                                         </a>
                                         <p class="d-inline-block m-0"><small>スコア</small>{{ $score->score }}</p>

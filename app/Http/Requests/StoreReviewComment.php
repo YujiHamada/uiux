@@ -32,6 +32,7 @@ class StoreReviewComment extends FormRequest
     {
         return [
             'comment.required' => 'コメントを入力してください',
+            'comment.max' => '300文字以内で入力してください',
         ];
     }
 }

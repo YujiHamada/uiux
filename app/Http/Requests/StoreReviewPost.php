@@ -25,7 +25,7 @@ class StoreReviewPost extends FormRequest
     {
         return [
             'title' => 'required|max:50',
-            'description' => 'required|max:300',
+            'description' => 'required|max:500',
             'type' => 'required',
         ];
     }
@@ -34,7 +34,9 @@ class StoreReviewPost extends FormRequest
     {
         return [
             'title.required' => 'タイトルを入力してください',
+            'title.max' => '50文字以内で入力してください',
             'description.required' => '詳細を入力してください',
+            'description.max' => '500文字以内で入力してください',
             'type.required' => 'レビュータイプを選択してください',
         ];
     }

@@ -32,7 +32,7 @@ class SocialRequest extends FormRequest
     public function rules()
     {
         return [
-          'name' => 'required|max:255|unique:users,name,NULL,is_deleted,is_deleted,0',
+          'name' => 'required|max:15|unique:users,name,NULL,is_deleted,is_deleted,0',
           'email' => 'required|email|max:255|unique:users,NULL,is_deleted,email,is_deleted,0',
         ];
     }
@@ -40,11 +40,11 @@ class SocialRequest extends FormRequest
     public function messages()
     {
         return [
-            'name.required' => '名前が入力されていません',
-            'name.max' => '名前は255文字以下で入力してください',
-            'name.unique' =>' すでに使われている名前です',
-            'email.required' => 'Nameが入力されていません',
-            'email.max' => 'メールアドレスは255文字以下で入力してください',
+            'name.required' => 'ユーザー名を入力してください',
+            'name.max' => '15文字以内で入力してください',
+            'name.unique' =>' すでに使われているユーザー名です',
+            'email.required' => 'メールアドレスを入力してください',
+            'email.max' => '255文字以内で入力してください',
             'email.unique' =>' すでに使われているメールアドレスです',
             'email.email' => 'メールアドレスの形式で入力してください',
         ];

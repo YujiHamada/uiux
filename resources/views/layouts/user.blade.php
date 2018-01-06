@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('leftSideBar')
-    <div id="user-left-side-bar" class="col-lg-3 px-3">
+    <div id="user-left-side-bar" class="col-12 col-lg-4 px-3">
 
         {{-- 変数$userに値が設定されていない場合、
         変数$userにログイン中のユーザを設定する。 --}}
@@ -13,7 +13,11 @@
 
         <div class="yy-bg-white yy-outline py-3">
             <div class="mx-3">
-                <span class="yy-avatar-img mx-auto d-block" style="background-image: url({{ $user->avatar_image_path or '/images/app_images/yyuxlogo_black.png' }})"></span>
+                @if(isset($user->avatar_image_path))
+                    <span class="yy-avatar-img mx-auto d-block" style="background-image: url({{ asset($user->avatar_image_path) }})"></span>
+                @else
+                    <span class="yy-avatar-img mx-auto d-block" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_black.png') }})"></span>
+                @endif
             </div>
             <div class="mx-3">
                 <div>

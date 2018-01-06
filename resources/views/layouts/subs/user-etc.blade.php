@@ -5,7 +5,11 @@
 @else
     <div class="btn-group">
         <a href="#" class="fa fa-user-o fa-2x d-block d-md-none text-white" aria-hidden="true"  data-toggle="dropdown" role="button" aria-expanded="false"></a>
-        <span class="yy-avatar-thumbnail-img mx-2 d-none d-md-block" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
+        @if(isset(Auth::user()->avatar_image_path))
+            <span class="yy-avatar-thumbnail-img mx-2 d-none d-md-block" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
+        @else
+            <span class="yy-avatar-thumbnail-img mx-2 d-none d-md-block" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
+        @endif
         <a href="#" class="dropdown-toggle text-white d-none d-md-block" data-toggle="dropdown" role="button" aria-expanded="false">
             {{ Auth::user()->name }} <span class="caret"></span>
         </a>

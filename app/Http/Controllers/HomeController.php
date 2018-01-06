@@ -130,8 +130,9 @@ class HomeController extends Controller
 
     // ランキングの表示
     public function showRanking() {
+        $lastMonth = date('n') == 1 ? 12 : date('n') - 1;
         $lastMonthScores = DB::table('score_histories')
-                        ->whereMonth('score_histories.created_at', '=', (date('n') - 1))
+                        ->whereMonth('score_histories.created_at', '=', $lastMonth)
                         ->join('users', function ($join) {
                             $join->on('score_histories.user_id', '=', 'users.id')
                                 ->where('users.is_deleted', 0);
