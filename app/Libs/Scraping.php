@@ -7,7 +7,14 @@ class Scraping
 {
     public static function ogp($url){
         try{
-            $html = file_get_contents($url);
+            $ch = curl_init();
+
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_HEADER, false );
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+
+            $html =  curl_exec($ch);
             $dom = phpQuery::newDocument(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
 
             $imageUrl = "";
