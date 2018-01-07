@@ -37,6 +37,7 @@ class Scraping
 
             return array("fileName" => $fileName, 'title' => $title, 'description' => $description);
         }catch(\Exception $e){
+            report($e);
             // スクレイピング中にエラーが発生したら空の値を返す。スクレイピング自体は重要でないので、念のためこのような処理にしておく。不要なtry catchだったら削除する。
             return array("fileName" => '', 'title' => '', 'description' => '');
         }
