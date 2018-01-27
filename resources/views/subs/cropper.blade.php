@@ -64,7 +64,7 @@
                 </div>
               </div> --}}
               <div class="my-2">
-                <button type="submit" class="btn btn-primary btn-block avatar-save">Done</button>
+                <button type="submit" class="btn btn-primary btn-block avatar-save">完了</button>
               </div>
             </div>
 

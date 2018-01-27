@@ -2,8 +2,15 @@
 
     <div class="row mx-0">
         <div class="col-10 col-md-9 p-0 d-flex flex-column">
-            {{-- レビュータイプ --}}
-            @include('review.subs.review-type')
+
+            <div class="d-flex justify-content-between">
+                {{-- レビュータイプ --}}
+                @include('review.subs.review-type')
+
+                <div class="d-inline-block">
+                    <span class="">{{ $review->page_view }} PV</span>
+                </div>
+            </div>
 
             {{-- レビュータイトル --}}
             <a class="" href="{{ !empty($review->is_request) ? '/request/' : '/post/' }}{{ $review->id }}">

@@ -231,7 +231,7 @@
                 </div>
                 <div class="col-12 py-2 px-3">
                     <p class="m-0 text-white text-center">
-                        Copyright© 2017 yyUX All Rights Reserved.
+                        Copyright© 2017-2018 yyUX
                     </p>
                 </div>
             </div>

@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="col-12 col-lg-9 px-3">
-        <div class="bg-warning text-white px-3 rounded mb-2">
-            <p class="p-0 m-0">yyUXは現在β版として運用中です。</p>
-        </div>
         @if(!Auth::user())
             <div class="bg-primary text-white px-3 rounded mb-2">
                 <h1 class="pb-2 m-0">yyUXはUX(ユーザー体験)レビューサイトです！</h1>
