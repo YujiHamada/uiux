@@ -1,4 +1,4 @@
-<div class="">
+<div class="d-inline-block">
     @if(Config::get('enum.type.GOOD_UX') == $review->type)
       <span class="badge badge-success text-white p-1">GOOD UX!!</span>
     @elseif(Config::get('enum.type.KAIZEN_UX') == $review->type)

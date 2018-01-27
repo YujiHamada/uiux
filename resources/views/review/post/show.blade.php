@@ -7,6 +7,14 @@
 
 @section('content')
     <div class="col mx-3 px-0">
+        <div class="d-flex flex-row-reverse">
+            {{-- 編集ボタン --}}
+            @if(Auth::check())
+                @if(Auth::user()->id == $review->user_id)
+                    <a href="/request/edit/{{ $review->id }}">【編集】</a>
+                @endif
+            @endif
+        </div>
 
         @include('subs.flash-message-success')
 
@@ -21,10 +29,15 @@
                         @include('review.subs.review-type')
                     </div>
                 </div>
-                <div class="mt-1">
-                    <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
-                    <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
-                    <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
+                <div class="mt-1 d-flex justify-content-between my-2">
+                    <div class="d-inline-block">
+                        <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
+                        <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
+                        <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
+                    </div>
+                    <div class="d-inline-block">
+                        <span class="">{{ $review->page_view }} PV</span>
+                    </div>
                 </div>
                 {{-- ユーザ情報 --}}
                 @include('review.subs.show-review-user')
@@ -38,13 +51,6 @@
 
             {{-- 詳細 --}}
             <p>{{ $review->description }}</p>
-
-            {{-- 編集ボタン --}}
-            @if(Auth::check())
-                @if(Auth::user()->id == $review->user_id)
-                    <a href="/post/edit/{{ $review->id }}">【編集】</a>
-                @endif
-            @endif
 
             {{-- レビュー画像 --}}
             @include('review.subs.show-review-image')

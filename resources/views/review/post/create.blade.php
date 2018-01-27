@@ -115,6 +115,7 @@
 
   @include('review.js.autocomplete-tag-form')
   @include('review.js.enter-tag-form')
+  @include('review.js.press-tag-btn')
   @include('review.js.remove-tag')
   @include('review.js.remove-image')
   @include('review.js.input-tag')

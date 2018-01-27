@@ -1,5 +1,11 @@
 <div class="tags">
-    <input class="form-control" type="text" id="tag">
+    <div>
+        <input class="form-control d-inline-block w-75" type="text" id="tag">
+        <button id="tag-btn" class="yy-review-evaluation text-white btn btn-primary" type="button">
+            追加
+        </button>
+    </div>
+
     @foreach( old('review_tag_names', isset($review) ? $review->reviewTag : []) as $reviewTag )
         @if(isset($reviewTag->tag))
             {{-- 一度作成したreviewの編集の場合 --}}
@@ -17,6 +23,7 @@
             </span>
         @endif
     @endforeach
+
 </div>
 
 @if ($errors->has('tags'))
