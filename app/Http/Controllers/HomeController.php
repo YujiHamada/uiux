@@ -190,4 +190,9 @@ class HomeController extends Controller
       return response()->json($response);
     }
 
+    // 500エラー対策のため一時的に作成、すぐ削除する
+    public function e500() {
+        abort(500);
+    }
+
 }

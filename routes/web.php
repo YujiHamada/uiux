@@ -24,6 +24,7 @@ Route::get( '/privacy', 'HomeController@showPrivacy');
 Route::get( '/ranking', 'HomeController@showRanking');
 Route::post( '/notification/read', 'HomeController@notificationReadAt');
 Route::post('/settings/crop', 'HomeController@crop'); // Ajax
+Route::get('/e/500', 'HomeController@e500'); //テストのため作成、すぐ削除する
 
 //ReviewContrller
 Route::get( '/review/delete/{review}', 'ReviewController@delete');
