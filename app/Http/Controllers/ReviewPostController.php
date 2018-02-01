@@ -32,6 +32,8 @@ class ReviewPostController extends Controller
 
         if(isset($review->reviewImages[0]->image_name)){
             $ogImage = $review->reviewImages[0]->image_name;
+        }elseif(!empty($review->url_image)) {
+            $ogImage = \Config::get('const.REVIEW_URL_IMAGES_DIRECTORY') .  $review->url_image;
         }
 
         Review::updatePageView($reviewId);
