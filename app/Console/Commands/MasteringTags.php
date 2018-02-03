@@ -57,7 +57,7 @@ class MasteringTags extends Command
                                     ->groupBy('tag_id')
                                     ->get();
 
-        $masteringtagIds = array();
+        $masteringTagIds = array();
         //マスターへの閾値を超えたタグはマスターとして設定
         foreach($notmasteredTagIds as $notmastedTagId){
             if($notmastedTagId->tag_count > \Config::get('const.MASTERING_TAG_THRESHOLD')){
