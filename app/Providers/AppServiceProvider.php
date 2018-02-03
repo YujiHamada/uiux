@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
+use Illuminate\Support\Facades\Blade;
 use App\ScoreHistory;
 use App\Review;
 use App\ReviewComment;
@@ -129,6 +130,15 @@ class AppServiceProvider extends ServiceProvider
             ReviewTag::deleted(function ($reviewTag) {
                 // summary_tabsテーブルの作成
                 SummaryTag::summaryTags();
+            });
+
+            Blade::directive('loadLocalCSS', function($filePath) {
+                $path = base_path() . "/public" . $filePath;
+                return "<link rel=\"stylesheet\" href=\"" . $filePath . "?date=" . "<?php echo \File::lastModified(\"" . $path . "\") ?>" . "\">";
+            });
+            Blade::directive('loadLocalJS', function($filePath) {
+                $path = base_path() . "/public" . $filePath;
+                return "<script src=\"" . $filePath . "?date=" . "<?php echo \File::lastModified(\"" . $path . "\") ?>" . "\"></script>";
             });
 
         } catch (\Exception $e) {

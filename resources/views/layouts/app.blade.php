@@ -39,12 +39,12 @@
 
     <!-- Styles -->
     @section('head')
-        <link rel="stylesheet" href="/css/app.css">
-        <link rel="stylesheet" href="/css/bootstrap-social.css"/>
+        @loadLocalCSS(/css/app.css)
+        @loadLocalCSS(/css/bootstrap-social.css)
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
-        <link rel="stylesheet" href="/css/cropper.css">
-        <link rel="stylesheet" href="/css/croppermain.css">
-        <link rel="stylesheet" href="/css/mystyles.css">
+        @loadLocalCSS(/css/cropper.css)
+        @loadLocalCSS(/css/croppermain.css)
+        @loadLocalCSS(/css/mystyles.css)
     @show
 
     <!-- Scripts -->
@@ -242,10 +242,8 @@
     </footer>
     <!-- Scripts -->
     @section('foot')
-        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"></script> --}}
-        <script src="/js/app.js"></script>
-        <script src="/js/myscripts.js"></script>
+        @loadLocalJS(/js/app.js);
+        @loadLocalJS(/js/myscripts.js);
         <script>
             @if(Auth::user())
                 // 通知アイコンをクリックで通知テーブルに既読をつける
