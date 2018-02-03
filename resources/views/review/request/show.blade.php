@@ -50,7 +50,7 @@
             @endif
 
             {{-- 詳細 --}}
-            <p>{{ $review->description }}</p>
+            <p>{!! nl2br($review->description) !!}</p>
 
             {{-- 編集ボタン --}}
             @if(Auth::check())
