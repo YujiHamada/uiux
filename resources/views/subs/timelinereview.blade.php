@@ -47,8 +47,10 @@
                         </div>
                     </div>
                 </div>
+            @elseif(!empty($review->url_image))
+                <span class="yy-timeline-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url( {{ asset(Config::get('const.REVIEW_URL_IMAGES_DIRECTORY') . $review->url_image) }})"></span>
             @else
-                <span class="yy-timeline-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url({{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
+                <span class="yy-timeline-review-img d-block ml-auto yy-bg-powderblue" style="background-image: url( {{ asset(Config::get('const.APP_IMAGES_DIRECTORY') . 'yyuxlogo_white.png') }})"></span>
             @endif
         </div>
     </div>

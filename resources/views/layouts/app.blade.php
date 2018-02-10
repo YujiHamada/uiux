@@ -16,6 +16,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
     @endif
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -37,11 +39,11 @@
 
     <!-- Styles -->
     @section('head')
-        <link rel="stylesheet" href="/css/app.css">
-        <link rel="stylesheet" href="/css/bootstrap-social.css"/>
-        <link rel="stylesheet" href="/css/cropper.css">
-        <link rel="stylesheet" href="/css/croppermain.css">
-        <link rel="stylesheet" href="/css/mystyles.css">
+        @loadLocalCSS(/css/app.css)
+        @loadLocalCSS(/css/bootstrap-social.css)
+        @loadLocalCSS(/css/cropper.css)
+        @loadLocalCSS(/css/croppermain.css)
+        @loadLocalCSS(/css/mystyles.css)
     @show
 
     <!-- Scripts -->
@@ -241,8 +243,8 @@
     <!-- Scripts -->
     @section('foot')
         <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
-        <script src="/js/app.js"></script>
-        <script src="/js/myscripts.js"></script>
+        @loadLocalJS(/js/app.js);
+        @loadLocalJS(/js/myscripts.js);
         <script>
             @if(Auth::user())
                 // 通知アイコンをクリックで通知テーブルに既読をつける

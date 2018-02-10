@@ -76,7 +76,7 @@
   @include('review.js.remove-image')
   @include('review.js.input-tag')
   @include('review.js.delete-review-confirm')
-  <script src="/js/cropper.js"></script>
-  <script src="/js/reviewcroppermain.js"></script>
+  @loadLocalJS(/js/cropper.js);
+  @loadLocalJS(/js/reviewcroppermain.js);
 
 @endsection

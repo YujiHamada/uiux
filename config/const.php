@@ -7,7 +7,7 @@ return array(
     'USER_IMAGES_DIRECTORY' => 'images/user_images/',
     'APP_IMAGES_DIRECTORY' => 'images/app_images/',
     // PARAMETER
-    'MASTERING_TAG_THRESHOLD' => 10,
+    'MASTERING_TAG_THRESHOLD' => 5,
     'NUMBER_OF_REVIEWS_PER_PAGE' => 6,
     'SCORE_REVIEW' => 100,
     'SCORE_COMMENT' => 30,
