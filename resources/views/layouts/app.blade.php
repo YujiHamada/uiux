@@ -50,7 +50,7 @@
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token(), ]) !!}
     </script>
-    <script defer src="/js/fontawesome-all.min.js"></script>
+    @loadLocalJS(/js/fontawesome-all.min.js)
 </head>
 
 <body class="yy-body yy-bg-body d-flex flex-column">
