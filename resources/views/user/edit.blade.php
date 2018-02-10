@@ -58,8 +58,8 @@
 
 @section('foot')
   @parent
-  <script src="/js/cropper.js"></script>
-  <script src="/js/croppermain.js"></script>
+  @loadLocalJS(/js/cropper.js);
+  @loadLocalJS(/js/croppermain.js);
   <script>
   </script>
 @endsection

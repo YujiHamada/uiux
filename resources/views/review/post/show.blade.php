@@ -50,7 +50,7 @@
             @endif
 
             {{-- 詳細 --}}
-            <p>{{ $review->description }}</p>
+            <p>{!! nl2br($review->description) !!}</p>
 
             {{-- レビュー画像 --}}
             @include('review.subs.show-review-image')

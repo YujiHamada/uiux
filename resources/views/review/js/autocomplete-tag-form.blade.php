@@ -1,5 +1,5 @@
 <link rel="stylesheet" type="text/css" href="/css/jquery-ui.min.css">
-<script src="/js/jquery-ui.min.js"></script>
+@loadLocalJS(/js/jquery-ui.min.js)
 <script>
   $(function(){
     // autocompleteで使用する値候補
