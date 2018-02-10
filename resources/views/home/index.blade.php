@@ -32,22 +32,22 @@
                 </li>
                 <li class="nav-item">
                     <span class="yy-pointer nav-link p-2 yy-tab-good {{ app('request')->feed === Config::get('enum.type.GOOD_UX') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.GOOD_UX')}}">
-                        <i class="fa fa-thumbs-o-up mr-1" aria-hidden="true"></i>UX
+                        <i class="far fa-thumbs-up"></i>UX
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="yy-pointer nav-link p-2 yy-tab-bad {{ app('request')->feed === Config::get('enum.type.KAIZEN_UX') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.KAIZEN_UX')}}">
-                        <i class="fa fa-thumbs-o-down mr-1" aria-hidden="true"></i>UX
+                        <i class="far fa-thumbs-down"></i>UX
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="yy-pointer nav-link p-2 yy-tab-opinion {{ app('request')->feed === Config::get('enum.type.OPINION') ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="{{Config::get('enum.type.OPINION')}}">
-                        <i class="fa fa-comment-o mr-1" aria-hidden="true"></i>意見
+                        <i class="far fa-comment"></i>意見
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="yy-pointer nav-link p-2 yy-tab-request {{ app('request')->feed === 'request' ? ' active' : ' inactive' }}" data-action="/timeline" data-feed="request">
-                        <i class="fa fa-hand-paper-o mr-1" aria-hidden="true"></i>依頼
+                        <i class="far fa-hand-paper"></i>依頼
                     </span>
                 </li>
             </ul>

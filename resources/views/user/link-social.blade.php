@@ -21,7 +21,7 @@
           </p>
           <div class="py-3">
             <a class="btn btn-block btn-social btn-twitter {{ $socials->contains('twitter') ? 'disabled' : '' }}" href="/login/twitter">
-                <span class="fa fa-twitter"></span> Sign in with Twitter
+                <i class="fab fa-twitter m-1"></i> Twitterでログイン
             </a>
           </div>
           @if($socials->contains('twitter'))
@@ -46,7 +46,7 @@
           </p>
           <div class="py-3">
             <a class="btn btn-block btn-social btn-facebook {{ $socials->contains('facebook') ? 'disabled' : '' }}" href="/login/facebook">
-              <span class="fa fa-facebook"></span> Sign in with Facebook
+              <i class="fab fa-facebook m-1"></i> Facebookでログイン
             </a>
           </div>
           @if($socials->contains('facebook'))
@@ -71,7 +71,7 @@
           </p>
           <div class="py-3">
             <a class="btn btn-block btn-social btn-google {{ $socials->contains('google') ? 'disabled' : '' }}" href="/login/google">
-              <span class="fa fa-google"></span> Sign in with Google
+              <i class="fab fa-google m-1"></i> Googleでログイン
             </a>
           </div>
           @if($socials->contains('google'))
@@ -96,7 +96,7 @@
           </p>
           <div class="py-3">
             <a class="btn btn-block btn-social btn-github {{ $socials->contains('github') ? 'disabled' : '' }}" href="/login/github">
-              <span class="fa fa-github"></span> Sign in with Github
+              <i class="fab fa-github m-1"></i> Githubでログイン
             </a>
           </div>
           @if($socials->contains('github'))

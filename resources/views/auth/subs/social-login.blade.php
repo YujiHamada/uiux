@@ -1,14 +1,14 @@
 <div class="col-md">
     <a class="btn btn-block btn-social btn-twitter"  href="login/twitter">
-        <span class="fa fa-twitter"></span> Twitterでログイン
+        <i class="fab fa-twitter m-1"></i> Twitterでログイン
     </a>
     <a class="btn btn-block btn-social btn-facebook" href="login/facebook">
-        <span class="fa fa-facebook"></span> Facebookでログイン
+        <i class="fab fa-facebook m-1"></i> Facebookでログイン
     </a>
     <a class="btn btn-block btn-social btn-google"  href="login/google">
-        <span class="fa fa-google"></span> Googleでログイン
+        <i class="fab fa-google m-1"></i> Googleでログイン
     </a>
     <a class="btn btn-block btn-social btn-github"  href="login/github">
-        <span class="fa fa-github"></span> Githubでログイン
+        <i class="fab fa-github m-1"></i> Githubでログイン
     </a>
 </div>

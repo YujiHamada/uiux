@@ -22,9 +22,9 @@
 
             {{-- コメント数、いいね数、わるいね数 --}}
             <div class="my-2">
-                <p class="m-0 d-inline"><i class="fa fa-commenting-o" aria-hidden="true"></i> ： {{ $review->commentsCount()->count() }}</p>
-                <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i> ： {{ $review->agreeCount()->count() }}</p>
-                <p class="m-0 d-inline ml-3"><i class="fa fa-thumbs-o-down" aria-hidden="true"></i> ： {{ $review->disagreeCount()->count() }}</p>
+                <p class="m-0 d-inline"><i class="far fa-comment-alt"></i> ： {{ $review->commentsCount()->count() }}</p>
+                <p class="m-0 d-inline ml-3"><i class="far fa-thumbs-up"></i> ： {{ $review->agreeCount()->count() }}</p>
+                <p class="m-0 d-inline ml-3"><i class="far fa-thumbs-down"></i> ： {{ $review->disagreeCount()->count() }}</p>
             </div>
         </div>
 
