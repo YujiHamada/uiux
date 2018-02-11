@@ -1,7 +1,7 @@
 <div class="btn-group mx-2">
     <!-- bootstrapのspacingが効かない？ -->
     <a data-toggle="dropdown" href="#">
-        <i class="fa fa-bell-o fa-2x yy-notifications-icon text-warning" aria-hidden="true"></i>
+        <i class="far fa-bell fa-2x yy-notifications-icon text-warning"></i>
         @if(Auth::user())
         <span class="badge badge-danger yy-unreadnotification-count" style="position: relative;left: -10px; @if(count(Auth::user()->unreadNotifications) == 0) visibility:hidden @endif">
             {{ count(Auth::user()->unreadNotifications) }}

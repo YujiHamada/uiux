@@ -115,6 +115,17 @@
   必要な場合とは、イイね・ワルいねのように連打可能なもののように、同じ通知が何件も行かせないようにする必要が有ることを指す。
   上記設定をすることで通知を特定できるようにする。
 
+【開発環境のpackage化と反映】
+    ①vagrant haltした状態でvagrant package（package.boxができる）
+    ②vagrant box add yyux package.box --force
+    ③vagrant init yyux
+    ④Vagrantファイルが作られるので中身を編集。
+        config.vm.network "private_network", ip: "192.168.33.10"
+        config.vm.synced_folder "/Applications/MAMP/htdocs/uiux", "/var/www/laradock/uiux"
+    ⑤vagnrat up
+    （注意）.vagrantが残っていると環境の同期がうまくいかない場合があるので、環境構築側で.vagrantがある場合は消しておいた方がよいかも
+
+
 【laradock】
   ◆vagrantの起動とssh
   vagrant up
@@ -126,6 +137,7 @@
 
   ◆db更新など
   @vagrant  cd /var/www/laradock
+
   @vagrant  docker exec -it laradock_workspace_1 bash
   @docker   cd /var/www/yyux/laradock/uiux
   @docker   php artisan yyux:refresh --all
@@ -135,13 +147,6 @@
   @docker   docker-compose up -d nginx mysql phpmyadmin
   scp -rF ssh.config vagrant@default:/var/www/laradock/uiux .
 
-【5.3→5.4】
-composer selfupdate
-composer update
-php artisan view:clear
-php artisan route:clear
-【5.4→5.5】
-php artisan cache:clear
 
 【envoy】
   タスクランナー
@@ -154,3 +159,16 @@ php artisan cache:clear
   composer updateでenvoyをインストール後は恐らく、envoyコマンドがnot foundとなるので
   export PATH=/var/www/yyux/laradock/uiux/vendor/laravel/envoy:$PATH
   で実行パスを通しておく
+
+
+【exif_imagetypeが無いって言われる問題】
+    ①vagrant up
+    ②vagrant ssh
+    ③cd /var/www/laradock
+    ④docker-compose up -d nginx mysql phpmyadmin
+    ⑤docker exec -it laradock_workspace_1 bash
+    ⑥vi /etc/php/7.1/cli/php.ini
+    ⑦ファイル内に以下を追記する
+        extension=php_mbstring.dll
+        extension=php_exif.dll
+    ⑧dockerをdownしてup

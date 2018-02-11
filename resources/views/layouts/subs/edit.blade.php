@@ -1,6 +1,6 @@
 <div class="btn-group mx-2">
     <a data-toggle="dropdown" href="#">
-        <i class="fa fa-pencil-square-o fa-2x text-primary" aria-hidden="true"></i>
+        <i class="fas fa-edit fa-2x text-primary"></i>
     </a>
     <div class="dropdown-menu dropdown-menu-right m-0 p-0">
         <div class="yy-bg-test text-white px-3 py-2">

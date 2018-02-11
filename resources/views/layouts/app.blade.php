@@ -41,7 +41,6 @@
     @section('head')
         @loadLocalCSS(/css/app.css)
         @loadLocalCSS(/css/bootstrap-social.css)
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
         @loadLocalCSS(/css/cropper.css)
         @loadLocalCSS(/css/croppermain.css)
         @loadLocalCSS(/css/mystyles.css)
@@ -51,6 +50,7 @@
     <script>
         window.Laravel = {!! json_encode(['csrfToken' => csrf_token(), ]) !!}
     </script>
+    @loadLocalJS(/js/fontawesome-all.min.js)
 </head>
 
 <body class="yy-body yy-bg-body d-flex flex-column">
@@ -223,7 +223,7 @@
                                 <span class="px-1">|</span>
                                 <p class="d-inline">
                                     <a class="text-white" href="https://twitter.com/info_yyUX?lang=ja" target="_blank">
-                                        <span class="fa fa-twitter"></span>@info_yyUX
+                                        <i class="fab fa-twitter"></i>@info_yyUX
                                     </a>
                                 </p>
                             </div>
@@ -242,6 +242,7 @@
     </footer>
     <!-- Scripts -->
     @section('foot')
+        <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>
         @loadLocalJS(/js/app.js);
         @loadLocalJS(/js/myscripts.js);
         <script>
