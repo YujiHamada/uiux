@@ -11,7 +11,7 @@
             {{-- 編集ボタン --}}
             @if(Auth::check())
                 @if(Auth::user()->id == $review->user_id)
-                    <a href="/request/edit/{{ $review->id }}">【編集】</a>
+                    <a href="/post/edit/{{ $review->id }}">【編集】</a>
                 @endif
             @endif
         </div>
