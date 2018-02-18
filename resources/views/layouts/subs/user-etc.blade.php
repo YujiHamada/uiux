@@ -4,7 +4,7 @@
     <a class="text-white" href="{{ url('/register') }}">新規登録</a>
 @else
     <div class="btn-group">
-        <a href="#" class="fa fa-user-o fa-2x d-block d-md-none text-white" aria-hidden="true"  data-toggle="dropdown" role="button" aria-expanded="false"></a>
+        <a href="#" class="far fa-user fa-2x d-block d-md-none text-white" aria-hidden="true"  data-toggle="dropdown" role="button" aria-expanded="false"></a>
         @if(isset(Auth::user()->avatar_image_path))
             <span class="yy-avatar-thumbnail-img mx-2 d-none d-md-block" style="background-image: url({{ asset(Auth::user()->avatar_image_path) }})"></span>
         @else
