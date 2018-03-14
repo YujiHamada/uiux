@@ -248,7 +248,7 @@
         <script>
             @if(Auth::user())
                 // 通知アイコンをクリックで通知テーブルに既読をつける
-                $('.yy-notifications-icon').on('click',function(){
+                $('a.yy-notifications-icon').on('click',function(){
                     var userId = {{Auth::user()->id}};
                     $.ajax({
                         url: "/notification/read",
