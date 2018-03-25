@@ -14,7 +14,8 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         Commands\MasteringTags::class,
-        Commands\Refresh::class
+        Commands\Refresh::class,
+        Commands\GetRecentlyReviewRanking::class,
     ];
 
     /**

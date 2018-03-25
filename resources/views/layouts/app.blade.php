@@ -139,6 +139,24 @@
 
                             <ul class="nav nav-pills flex-column mb-3">
                                 <li class="nav-item yy-outline-bottom">
+                                    <p class="nav-link yy-bg-test text-white my-0" >よく読まれているレビュー</p>
+                                </li>
+                                <ol class="pl-4">
+                                    @foreach($pvRankings as $pvRanking)
+                                        <li>
+                                            <a href="/post/{{ $pvRanking->review->id }}"><span class="pv-ranking-title">{{ $pvRanking->review->title }}</span></a>
+                                        </li>
+                                    @endforeach
+                                </ol>
+                          </ul>
+                            <style type="text/css" media="screen">
+                                .pv-ranking-title{
+                                    font-size: 75%;
+                                }
+                            </style>
+
+                            <ul class="nav nav-pills flex-column mb-3">
+                                <li class="nav-item yy-outline-bottom">
                                     <p class="nav-link yy-bg-test text-white my-0" >トップタグ</p>
                                 </li>
                                 @foreach($summaryTags as $tag)
