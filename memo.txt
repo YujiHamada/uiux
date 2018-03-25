@@ -172,3 +172,9 @@
         extension=php_mbstring.dll
         extension=php_exif.dll
     ⑧dockerをdownしてup
+
+【cron】
+  * 2 * * * /usr/local/bin/aws s3 cp /tmp/backup.`date +\%Y\%m\%d`.sql s3://yyux.backup/mysqldump/ > /var/log/cron.log 2>&1
+  * 2 * * * /usr/local/bin/aws s3 cp /tmp/images.`date +\%Y\%m\%d`.tar.gz s3://yyux.backup/images/
+  * 1 * * * docker exec -i laradock_mysql_1 mysqldump -uhamada -phamada --databases uiux --skip-comments > /tmp/backup.`date +\%Y\%m\%d`.sql
+  * 1 * * * cd /var/www/laradock/uiux/public/;tar cvzf /tmp/images.`date +\%Y\%m\%d`.tar.gz images
