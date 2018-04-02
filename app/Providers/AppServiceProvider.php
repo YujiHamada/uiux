@@ -16,6 +16,7 @@ use App\Tag;
 use Config;
 use App\SummaryTag;
 use App\SummaryScore;
+use App\PageViewRanking;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -32,6 +33,8 @@ class AppServiceProvider extends ServiceProvider
             View::share('summaryTags', $summaryTags);
             $summaryScores = DB::table('summary_scores')->orderBy('score', 'desc')->take(10)->get();
             View::share('summaryScores', $summaryScores);
+            $pvRankings = PageViewRanking::orderBy('page_views', 'desc')->take(10)->get();
+            View::share('pvRankings', $pvRankings);
 
             // Reviewレコードが新規作成された場合
             Review::created(function ($review) {
